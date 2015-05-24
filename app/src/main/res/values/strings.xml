@@ -10,5 +10,7 @@
     <string name="selected_place">Last Selected Place:</string>
     <string name="clear_text">Clear Text</string>
     <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
+    <string name="title_activity_scanner_activity">scanner_activity</string>
+    <string name="title_activity_gcm_activity">gcm_activity</string>
 
 </resources>

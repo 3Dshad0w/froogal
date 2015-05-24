@@ -130,6 +130,16 @@ public class MapsActivity extends ActionBarActivity implements GoogleApiClient.O
             }
         },3000 );
 
+        // Debug Building
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(MapsActivity.this, scanner_activity.class);
+                startActivity(i);
+                finish();
+            }
+        },10000 );
+
         // Card flip animation
         if (savedInstanceState == null) {
             getFragmentManager()
