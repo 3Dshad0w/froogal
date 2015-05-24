@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="froogalcolor">#284a79</color>
+    <color name="main_color_500">@color/material_purple_500</color>
+</resources>
