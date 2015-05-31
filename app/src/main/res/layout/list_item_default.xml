@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    android:background="@drawable/selector_background_empty" >
+
+
+    <co.froogal.froogal.font.RobotoTextView
+        android:id="@+id/name"
+        style="@style/TextViewAppearance.Caption1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="0dp"
+        android:textColor="@color/main_color_grey_700"
+        android:textSize="16sp" />
+
+    <co.froogal.froogal.font.RobotoTextView
+        android:id="@+id/cost"
+        style="@style/TextViewAppearance.Caption1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Rs.200"
+        android:paddingLeft="0dp"
+        android:textColor="@color/main_color_grey_700"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

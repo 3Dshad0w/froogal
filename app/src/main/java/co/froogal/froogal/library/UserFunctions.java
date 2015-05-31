@@ -1,0 +1,111 @@
+package co.froogal.froogal.library;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+import android.content.Context;
+import android.util.Log;
+
+
+public class UserFunctions {
+
+    private JSONParser jsonParser;
+
+    //URL of the PHP API
+    private static String loginURL = "http://froogal.in/files/login.php";
+    private static String registerURL = "http://froogal.in/files/signup.php";
+    private static String forpassURL = "http://froogal.in/files/forgotpass.php";
+    private static String chgpassURL = "http://froogal.in/files/changepass.php";
+
+
+    private static String login_tag = "login";
+    private static String register_tag = "register";
+    private static String forpass_tag = "forpass";
+    private static String chgpass_tag = "chgpass";
+
+
+    // constructor
+    public UserFunctions(){
+        jsonParser = new JSONParser();
+    }
+
+    /**
+     * Function to Login
+     **/
+
+    public JSONObject loginUser(String email, String password){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", login_tag));
+        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("password", password));
+        JSONObject json = jsonParser.makeHttpRequest(loginURL,"POST", params);
+        Log.d("infunction", json.toString());
+        return json;
+    }
+
+    /**
+     * Function to change password
+     **/
+
+    public JSONObject chgPass(String newpas, String email){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", chgpass_tag));
+
+        params.add(new BasicNameValuePair("newpas", newpas));
+        params.add(new BasicNameValuePair("email", email));
+        JSONObject json = jsonParser.makeHttpRequest(chgpassURL, "POST", params);
+        Log.d("inchgpassfunction", json.toString());
+        return json;
+    }
+
+
+
+
+
+    /**
+     * Function to reset the password
+     **/
+
+    public JSONObject forPass(String forgotpassword){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", forpass_tag));
+        params.add(new BasicNameValuePair("forgotpassword", forgotpassword));
+        JSONObject json = jsonParser.makeHttpRequest(forpassURL, "POST", params);
+        Log.d("inforpassfunction", json.toString());
+        return json;
+    }
+
+
+
+
+
+
+     /**
+      * Function to  Register
+      **/
+    public JSONObject registerUser(String fname, String lname, String email, String mobile, String password){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("fname", fname));
+        params.add(new BasicNameValuePair("lname", lname));
+        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("mobile", mobile));
+        params.add(new BasicNameValuePair("password", password));
+        JSONObject json = jsonParser.makeHttpRequest(registerURL,"POST", params);
+        Log.d("infunctionreg", json.toString());
+        return json;
+    }
+
+
+    /**
+     * Function to logout user
+     * Resets the temporary data stored in SQLite Database
+     * */
+
+}
+

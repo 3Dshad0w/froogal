@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#2F2F2F"
+    android:gravity="center_vertical" >
+
+<co.froogal.froogal.font.RobotoTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/textSeparator"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_color_500"
+    android:gravity="center_vertical"
+    android:minHeight="48dp"
+    android:paddingLeft="72dp"
+    android:textColor="@android:color/white"
+    android:textSize="26sp"
+    app:typeface="robotoRegular" />
+</LinearLayout><!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/layout/list_header.xml -->
