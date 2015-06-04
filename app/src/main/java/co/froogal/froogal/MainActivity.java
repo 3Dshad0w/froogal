@@ -139,6 +139,16 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Handler for testing purposes - to be removed later
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(MainActivity.this, gcm_activity.class);
+                startActivity(i);
+                finish();
+            }
+        },3000 );
+
         // Updating values from shared preferences
         if(ConnectionDetector.locationCheck(getApplicationContext())) {
 

@@ -110,5 +110,6 @@
     <string name="skip">SKIP</string>
     <string name="raised">RAISED</string>
     <string name="flat">FLAT</string>
+    <string name="title_activity_gcm_activity">gcm_activity</string>
 
 </resources>

@@ -771,6 +771,7 @@ available. Please contact the developer for assistance.</string>
     <eat-comment/>
     <string name="thicker_and_darker_version">Thicker and darker version of Material design</string>
     <string name="thiner_and_lighter_version">Thiner and lighter version of Material design</string>
+    <string name="title_activity_gcm_activity">gcm_activity</string>
     <string name="typography1">Typography I</string>
     <string name="typography2">Typography II</string>
     <string name="typography3">Typography III</string>

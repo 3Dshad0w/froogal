@@ -19,6 +19,7 @@ public class UserFunctions {
     private static String registerURL = "http://froogal.in/files/signup.php";
     private static String forpassURL = "http://froogal.in/files/forgotpass.php";
     private static String chgpassURL = "http://froogal.in/files/changepass.php";
+    private static String gcm_testingURL = "http://ec2-52-10-172-112.us-west-2.compute.amazonaws.com";
 
 
     private static String login_tag = "login";
@@ -32,6 +33,19 @@ public class UserFunctions {
         jsonParser = new JSONParser();
     }
 
+    /**
+     * Function to test gcm
+     */
+
+    public JSONObject gcmtest(String alpha){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("alpha", alpha));
+        JSONObject json = jsonParser.makeHttpRequest(gcm_testingURL,"POST", params);
+//        Log.d("infunction", json.toString());
+  //      return json;
+        return json;
+    }
     /**
      * Function to Login
      **/
