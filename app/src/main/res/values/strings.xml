@@ -42,6 +42,14 @@
     <string name="drawer_icon_git_hub">&#xe808;</string>
     <string name="drawer_icon_instagram">&#xe80c;</string>
 
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server or subscribing to the PubSub topic. Please try
+        running the sample again.</string>
+
+
     <!-- Navigation Drawer icon titles -->
     <string name="drawer_title_splash_screens">Splash Screens</string>
     <string name="drawer_title_progress_bars">Progress Bars</string>
