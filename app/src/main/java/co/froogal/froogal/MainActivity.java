@@ -665,6 +665,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     private void setUpMap() {
 
+
+        latitude = "0.0";
+        longitude = "0.0";
         currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.getUiSettings().setZoomControlsEnabled(true);
