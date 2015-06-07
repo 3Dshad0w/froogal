@@ -76,6 +76,7 @@ import co.froogal.froogal.fragment.locationMapViewFragment;
 import co.froogal.froogal.library.GMapV2Direction;
 import co.froogal.froogal.model.DrawerItem;
 import co.froogal.froogal.util.ImageUtil;
+import co.froogal.froogal.util.basic_utils;
 
 import static co.froogal.froogal.LoginActivity.MyPREFERENCES;
 
@@ -132,6 +133,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     private Handler mHandler;
 
+    basic_utils bu;
 
 
 	@Override
@@ -147,13 +149,16 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 startActivity(i);
                 finish();
             }
-        },3000 );
+        }, 3000);
+
+        // Basic utils object
+        bu = new basic_utils(getApplicationContext());
 
         // Updating values from shared preferences
-        if(ConnectionDetector.locationCheck(getApplicationContext())) {
+        if(bu.location_check()) {
 
-            latitude = ConnectionDetector.getDefaults("latitude", getApplicationContext());
-            longitude = ConnectionDetector.getDefaults("longitude", getApplicationContext());
+            latitude = bu.get_defaults("latitude");
+            longitude = bu.get_defaults("longitude");
             Log.d(TAG,"Location Updated from shared preference");
 
         }
@@ -481,8 +486,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             longitude = String.valueOf(currentLocation.getLongitude());
 
             //Updating shared prefecerences
-            ConnectionDetector.setDefaults("latitude",String.valueOf(currentLocation.getLatitude()),getApplicationContext());
-            ConnectionDetector.setDefaults("longitude",String.valueOf(currentLocation.getLongitude()),getApplicationContext());
+            bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
+            bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
             updatecurrentmarker();
             startLocationUpdates();
@@ -508,8 +513,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         Log.d(TAG, "Location changed to " + latitude + " " + longitude);
 
         //Updating shared preferences
-        ConnectionDetector.setDefaults("latitude", String.valueOf(currentLocation.getLatitude()), getApplicationContext());
-        ConnectionDetector.setDefaults("longitude", String.valueOf(currentLocation.getLongitude()), getApplicationContext());
+        bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
+        bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
     }
 

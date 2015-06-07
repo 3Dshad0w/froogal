@@ -59,7 +59,6 @@ public class LoginActivity extends Activity {
     // flag for Internet connection status
     Boolean isInternetPresent = false;
     // Connection detector class
-    ConnectionDetector cd;
 
     @Override
     protected void onResume() {

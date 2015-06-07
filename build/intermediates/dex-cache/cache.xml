@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-ac59e533983566646976f64a59da5a0f57334c30.jar" />
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-4559f983047dcb1b8fbc2e8d753378eed6fe778c.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/libs/listviewanimations_lib-core-slh_3.1.0.jar"
@@ -16,46 +16,11 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-core-slh_3.1.0-a41b404d8e4c3ebfd08322b714e57348c0d4ec61.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-06bf19c18a99974dfe76c9b35a47cba19dd6f8e9.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-4559f983047dcb1b8fbc2e8d753378eed6fe778c.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d405025c600055237c171a0bbabaa49d69696573">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d47a81a01786c054918201fb2ea428a9290a399c.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-88c0a30f9c87f24bfa8bf15a24a8bbb5123da0dc.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-5708a2f058f43de00420b52306cb5ffc6aac3cea.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-95f7ef7fb6871f0422008f6ac37e8c3ed85c6454.jar" />
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-ac59e533983566646976f64a59da5a0f57334c30.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
@@ -65,18 +30,18 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-b65476222cc5843b3b0fce8e98a1f312b65f43b5.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a78183f30e769a98ab4820794f597763088d3065">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-2819f4649f94cf3db19980ca92ff5eebdcb17b28.jar" />
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-5708a2f058f43de00420b52306cb5ffc6aac3cea.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/.gradle/caches/modules-2/files-2.1/com.flaviofaria/kenburnsview/1.0.5/58cecc918f04423f77dd1853c40c72fb3fb1c71a/kenburnsview-1.0.5.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="58cecc918f04423f77dd1853c40c72fb3fb1c71a">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/kenburnsview-1.0.5-203e680bdc0633849613c513f4d252d21ed9b462.jar" />
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-06bf19c18a99974dfe76c9b35a47cba19dd6f8e9.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/jars/classes.jar"
@@ -86,6 +51,20 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-c18de1680a16fe5df34606a08c90ad846e9a1959.jar" />
     </item>
     <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-88c0a30f9c87f24bfa8bf15a24a8bbb5123da0dc.jar" />
+    </item>
+    <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-95f7ef7fb6871f0422008f6ac37e8c3ed85c6454.jar" />
+    </item>
+    <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -93,18 +72,18 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-ef36fa270360682c0a7a0e2e345377272cfd5bf8.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d734f858aaa6017b875419b56d3f3974219a48e0.jar" />
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d47a81a01786c054918201fb2ea428a9290a399c.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-064f28a4c1480e90b1b1783de8fb2ad54119bbff.jar" />
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-2819f4649f94cf3db19980ca92ff5eebdcb17b28.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
@@ -114,6 +93,13 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-b23f4283600e7ddbb30c6d8eb014ba7becbb9333.jar" />
     </item>
     <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d734f858aaa6017b875419b56d3f3974219a48e0.jar" />
+    </item>
+    <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/libs/nineoldandroids-2.4.0.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -121,18 +107,11 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/nineoldandroids-2.4.0-de8634fc8c1b592804b54d36cbfc9da562261f3f.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/.gradle/caches/modules-2/files-2.1/com.flaviofaria/kenburnsview/1.0.5/58cecc918f04423f77dd1853c40c72fb3fb1c71a/kenburnsview-1.0.5.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-e03cb890f8e91cb966f40900207e8ec144f48fb3.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.3/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-64b65627543e1398d247423caadfc9f938ad26bc.jar" />
+        sha1="58cecc918f04423f77dd1853c40c72fb3fb1c71a">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/kenburnsview-1.0.5-203e680bdc0633849613c513f4d252d21ed9b462.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
@@ -142,6 +121,27 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d8501d3cdf1e252c614fef160ffb1666a00f7002.jar" />
     </item>
     <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-064f28a4c1480e90b1b1783de8fb2ad54119bbff.jar" />
+    </item>
+    <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.3/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-64b65627543e1398d247423caadfc9f938ad26bc.jar" />
+    </item>
+    <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-e03cb890f8e91cb966f40900207e8ec144f48fb3.jar" />
+    </item>
+    <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -149,18 +149,18 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-9b77bfa46351b2292634646f08917f0e860a78e7.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.jpardogo.materialtabstrip/library/1.0.6/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="15ebf37e2dc7047e993afdfb308610e171bcea1b">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-995dda45739bd0ab21fb7ba09532e13cd42a7fb8.jar" />
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-5df2eb6a882381008feec8835e3e660154aa15c9.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-5856187276556a3e8887fa0ae881622e9ca36a06.jar" />
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-f51373c698be0f73ef0927738e46850f6054c908.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
@@ -170,11 +170,11 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-0b424c8de3c8139dc9fb5ca3da3a422cbfbe1c1f.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-f51373c698be0f73ef0927738e46850f6054c908.jar" />
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d7133b089fa5a7871586d7573108f3deb2426ae3.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
@@ -191,25 +191,11 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-core_3.1.0-4b39a1d32fb61053d5774c23901fc96debeb010f.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-5df2eb6a882381008feec8835e3e660154aa15c9.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-2576ea69d27b75a6e365641c62bbfd40371698f4.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-cdea8091cad1cc3fa1674a15d42b2cf46efb50e2.jar" />
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-5856187276556a3e8887fa0ae881622e9ca36a06.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
@@ -226,18 +212,11 @@
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-manipulation_3.1.0-da622e36388ff325dab8d35b9a775dca887caa57.jar" />
     </item>
     <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jar="/home/rohitsakala/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-d7133b089fa5a7871586d7573108f3deb2426ae3.jar" />
-    </item>
-    <item
-        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
-        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-457bb7e88d9deb7d65638b9702884d0990c77828.jar" />
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-cdea8091cad1cc3fa1674a15d42b2cf46efb50e2.jar" />
     </item>
     <item
         jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/libs/universal-image-loader-1.9.3.jar"
@@ -245,6 +224,27 @@
         revision="22.0.1"
         sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
         <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.3-270383e1344dc13290bb6330246a6c36e214b7e6.jar" />
+    </item>
+    <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.jpardogo.materialtabstrip/library/1.0.6/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="15ebf37e2dc7047e993afdfb308610e171bcea1b">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-995dda45739bd0ab21fb7ba09532e13cd42a7fb8.jar" />
+    </item>
+    <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-2576ea69d27b75a6e365641c62bbfd40371698f4.jar" />
+    </item>
+    <item
+        jar="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-457bb7e88d9deb7d65638b9702884d0990c77828.jar" />
     </item>
 
 </items>

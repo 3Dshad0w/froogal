@@ -32,15 +32,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.view.FloatLabeledEditText;
+import co.froogal.froogal.services.registration_intent_service;
 
 
 public class gcm_activity extends ActionBarActivity {
 
     // GCM Variables
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "GCM Activity";
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-    String SENDER_ID = "719438270023";
     GoogleCloudMessaging gcm;
 
     // UI Variables
@@ -82,7 +81,7 @@ public class gcm_activity extends ActionBarActivity {
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, RegistrationIntentService.class);
+            Intent intent = new Intent(this, registration_intent_service.class);
             startService(intent);
         }
     }
@@ -123,6 +122,8 @@ public class gcm_activity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -158,7 +159,7 @@ public class gcm_activity extends ActionBarActivity {
                     if (gcm == null) {
                         gcm = GoogleCloudMessaging.getInstance(context);
                     }
-                    regid = gcm.register(SENDER_ID);
+                    regid = gcm.register(getString(R.string.sender_id));
                     msg = "Device registered, registration ID=" + regid;
 
                     // You should send the registration ID to your server over HTTP, so it

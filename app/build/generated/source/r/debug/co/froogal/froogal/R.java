@@ -3391,21 +3391,22 @@ containing a value of this type.
         public static final int raised=0x7f06009a;
         public static final int register=0x7f06009b;
         public static final int registering_message=0x7f06009c;
-        public static final int skip=0x7f06009d;
-        public static final int store_picture_message=0x7f06009e;
-        public static final int store_picture_title=0x7f06009f;
-        public static final int thicker_and_darker_version=0x7f0600a0;
-        public static final int thiner_and_lighter_version=0x7f0600a1;
-        public static final int title_activity_gcm_activity=0x7f0600a2;
-        public static final int token_error_message=0x7f0600a3;
-        public static final int typography1=0x7f0600a4;
-        public static final int typography2=0x7f0600a5;
-        public static final int typography3=0x7f0600a6;
-        public static final int undo_deletion=0x7f0600a7;
-        public static final int username=0x7f0600a8;
-        public static final int usernameHint=0x7f0600a9;
+        public static final int sender_id=0x7f06009d;
+        public static final int skip=0x7f06009e;
+        public static final int store_picture_message=0x7f06009f;
+        public static final int store_picture_title=0x7f0600a0;
+        public static final int thicker_and_darker_version=0x7f0600a1;
+        public static final int thiner_and_lighter_version=0x7f0600a2;
+        public static final int title_activity_gcm_activity=0x7f0600a3;
+        public static final int token_error_message=0x7f0600a4;
+        public static final int typography1=0x7f0600a5;
+        public static final int typography2=0x7f0600a6;
+        public static final int typography3=0x7f0600a7;
+        public static final int undo_deletion=0x7f0600a8;
+        public static final int username=0x7f0600a9;
+        public static final int usernameHint=0x7f0600aa;
         public static final int wallet_buy_button_place_holder=0x7f060037;
-        public static final int welcome=0x7f0600aa;
+        public static final int welcome=0x7f0600ab;
     }
     public static final class style {
         public static final int ActionBarOverlay_Transparent=0x7f08006b;

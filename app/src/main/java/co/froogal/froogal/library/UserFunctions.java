@@ -12,6 +12,7 @@ import android.util.Log;
 
 public class UserFunctions {
 
+    private static final String TAG = "UserFunctions";
     private JSONParser jsonParser;
 
     //URL of the PHP API
@@ -20,6 +21,7 @@ public class UserFunctions {
     private static String forpassURL = "http://froogal.in/files/forgotpass.php";
     private static String chgpassURL = "http://froogal.in/files/changepass.php";
     private static String gcm_testingURL = "http://ec2-52-10-172-112.us-west-2.compute.amazonaws.com";
+    private static String save_token_in_server_URL = "http://froogal.in/files/save_token_to_server.php";
 
 
     private static String login_tag = "login";
@@ -37,15 +39,30 @@ public class UserFunctions {
      * Function to test gcm
      */
 
+    public JSONObject save_token_in_server(String token){
+        // Building Parameters
+        Log.d(TAG, "save_token_in_server");
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        Log.d(TAG,"Token : " + token);
+        JSONObject json = jsonParser.makeHttpRequest(save_token_in_server_URL,"POST", params);
+        Log.d(TAG,"Json Response : " + json);
+        return json;
+    }
+
+
+    /**
+     * Function to test gcm
+     */
+
     public JSONObject gcmtest(String alpha){
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("alpha", alpha));
         JSONObject json = jsonParser.makeHttpRequest(gcm_testingURL,"POST", params);
-//        Log.d("infunction", json.toString());
-  //      return json;
         return json;
     }
+
     /**
      * Function to Login
      **/

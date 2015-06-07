@@ -808,6 +808,7 @@
     <string name="raised">RAISED</string>
     <string name="register">REGISTER</string>
     <string name="registering_message">Generating InstanceID token...</string>
+    <string name="sender_id">719438270023</string>
     <string name="skip">SKIP</string>
     <!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
     <eat-comment/>
