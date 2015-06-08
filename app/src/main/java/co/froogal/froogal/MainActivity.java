@@ -1,10 +1,7 @@
 package co.froogal.froogal;
 
-import android.app.ProgressDialog;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,8 +17,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -38,7 +33,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -59,25 +53,18 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-
 import org.w3c.dom.Document;
-
 import co.froogal.froogal.adapter.PlaceAutocompleteAdapter;
 import co.froogal.froogal.fragment.locationListViewFragment;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import co.froogal.froogal.adapter.DrawerAdapter;
-import co.froogal.froogal.fragment.locationMapViewFragment;
 import co.froogal.froogal.library.GMapV2Direction;
 import co.froogal.froogal.model.DrawerItem;
 import co.froogal.froogal.util.ImageUtil;
 import co.froogal.froogal.util.basic_utils;
-
 import static co.froogal.froogal.LoginActivity.MyPREFERENCES;
 
 public class MainActivity extends ActionBarActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
@@ -90,6 +77,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(8.06890, 68.03215), new LatLng(35.674520, 97.40238));
     Marker currentmarker;
     public boolean updateposition = false;
+    public boolean currentmarkerupdate = true;
 
     //.Location variables
     protected GoogleApiClient googleapiclientlocation;
@@ -99,6 +87,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     protected LocationRequest locationrequest;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    private LatLng destination;
 
     //Fragment variables
     protected boolean fragmentback = false;
@@ -136,20 +125,20 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     basic_utils bu;
 
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //Handler for testing purposes - to be removed later
-        new Handler().postDelayed(new Runnable() {
+      /*  new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent i = new Intent(MainActivity.this, gcm_activity.class);
                 startActivity(i);
                 finish();
             }
-        }, 3000);
+        }, 3000);*/
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
@@ -246,13 +235,13 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         View headerView = null;
 
-            headerView = prepareHeaderView(R.layout.header_navigation_drawer_2,
-                    "http://pengaja.com/uiapptemplate/avatars/0.jpg");
+        headerView = prepareHeaderView(R.layout.header_navigation_drawer_2,
+                "http://pengaja.com/uiapptemplate/avatars/0.jpg");
 
 
         BaseAdapter adapter = new DrawerAdapter(this, mDrawerItems, isFirstType);
 
-        mDrawerList.addHeaderView(headerView);//Add header before adapter (for pre-KitKat)
+        mDrawerList.addHeaderView(headerView);
         mDrawerList.setAdapter(adapter);
     }
 
@@ -297,27 +286,27 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         DrawerItem.DRAWER_ITEM_TAG_INSTAGRAM));
     }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		//boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		//menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-		return super.onPrepareOptionsMenu(menu);
-	}
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
 
-		}
-		// Handle action buttons
+        }
+        // Handle action buttons
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -332,7 +321,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             startActivity(login);
             finish();
         }
-		if (id == R.id.action_changePassword){
+        if (id == R.id.action_changePassword){
             Intent chgpass = new Intent(getApplicationContext(), ChangePasswordActivity.class);
 
             startActivity(chgpass);
@@ -396,9 +385,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             }
         }
 
-			return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
 
-	}
+    }
 
 
     protected synchronized void buildGoogleApiClient() {
@@ -501,17 +490,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     @Override
     public void onLocationChanged(Location location) {
 
-        //Updating marker
-        if(currentmarker != null)
-        {
-            currentmarker.remove();
-        }
         currentLocation = location;
         latitude = String.valueOf(currentLocation.getLatitude());
         longitude = String.valueOf(currentLocation.getLongitude());
-        updatecurrentmarker();
         Log.d(TAG, "Location changed to " + latitude + " " + longitude);
-
+        updatecurrentmarker();
         //Updating shared preferences
         bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
         bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
@@ -533,12 +516,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     }
 
-
-    ///////////////////////////////////////////////////////////////
-
-
-
-
     private AdapterView.OnItemClickListener autocompleteclicklistener = new AdapterView.OnItemClickListener() {
 
         @Override
@@ -552,7 +529,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         public void onResult(PlaceBuffer places) {
                             if (places.getStatus().isSuccess()) {
                                 final Place myPlace = places.get(0);
-                                Log.i("Places AutoComplete", "Place found: " + myPlace.getLatLng());
+                                destination = myPlace.getLatLng();
+                                Log.d(TAG, "Place found: " + myPlace.getLatLng());
+                                findDirections(Double.parseDouble(latitude), Double.parseDouble(longitude), destination.latitude, destination.longitude, GMapV2Direction.MODE_DRIVING);
                             }
                             places.release();
                         }
@@ -560,12 +539,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                     .getPlaceById(googleapiclientplaces, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
-            Toast.makeText(getApplicationContext(), "Clicked: " + item.description,
-                    Toast.LENGTH_SHORT).show();
-            findDirections(Double.parseDouble(latitude),Double.parseDouble(longitude),12.9667, 77.5667, GMapV2Direction.MODE_DRIVING);
-
-            Log.d("Place Autocomplete",item.placeId.toString());
-            Log.i("Place Autocomplete", "Called getPlaceById to get Place details for " + item.placeId);
         }
     };
 
@@ -574,31 +547,16 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         @Override
         public void onResult(PlaceBuffer places) {
             if (!places.getStatus().isSuccess()) {
-                Log.e("Place Autocomplete", "Place query did not complete. Error: " + places.getStatus().toString());
                 places.release();
                 return;
             }
-            final Place place = places.get(0);
-            Log.i("Place Autocomplete", "Place details received: " + place.getName());
             places.release();
         }
     };
 
-    private static Spanned formatPlaceDetails(Resources res, CharSequence name, String id, CharSequence address, CharSequence phoneNumber, Uri websiteUri) {
-        Log.e("Place Autocomplete", res.getString(R.string.place_details, name, id, address, phoneNumber,
-                websiteUri));
-        return Html.fromHtml(res.getString(R.string.place_details, name, id, address, phoneNumber,
-                websiteUri));
-    }
-
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
-        Log.e("Places Autocomplete", "onConnectionFailed: ConnectionResult.getErrorCode() = "
-                + connectionResult.getErrorCode());
-        Toast.makeText(this,
-                "Could not connect to Google API Client: Error " + connectionResult.getErrorCode(),
-                Toast.LENGTH_SHORT).show();
+        showToast("Could not connect to Google API Client: Error ");
     }
 
 
@@ -624,10 +582,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     }
 
-
-
-
-
     private void flipCard() {
 
         if (fragmentback) {
@@ -644,7 +598,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 .replace(R.id.content_frame, locationListViewFragment.newInstance())
                 .addToBackStack(null)
                 .commit();
-
 
     }
 
@@ -670,31 +623,41 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     private void setUpMap() {
 
-
-        latitude = "0.0";
-        longitude = "0.0";
-        currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        map.getUiSettings().setZoomControlsEnabled(true);
-        map.getUiSettings().setMyLocationButtonEnabled(true);
-        map.getUiSettings().setMapToolbarEnabled(true);
+        map.setMyLocationEnabled(true);
+        map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                currentmarkerupdate = true;
+                updatecurrentmarker();
+                return true;
+
+            }
+        });
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
                 .zoom(15)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
 
     }
 
     private void updatecurrentmarker()
     {
-        if(updateposition) {
-            currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
-                    .zoom(map.getCameraPosition().zoom)
-                    .build();
-            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        if(currentmarkerupdate) {
+            if (currentmarker != null) {
+                currentmarker.remove();
+            }
+            if (updateposition) {
+                currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+                        .zoom(map.getCameraPosition().zoom)
+                        .build();
+                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                currentmarkerupdate = false;
+            }
         }
     }
 
@@ -706,7 +669,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         map.put(GetDirectionsAsyncTask.DESTINATION_LAT, String.valueOf(toPositionDoubleLat));
         map.put(GetDirectionsAsyncTask.DESTINATION_LONG, String.valueOf(toPositionDoubleLong));
         map.put(GetDirectionsAsyncTask.DIRECTIONS_MODE, mode);
-
         GetDirectionsAsyncTask asyncTask = new GetDirectionsAsyncTask();
         asyncTask.execute(map);
     }
@@ -730,9 +692,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         public static final String DESTINATION_LAT = "destination_lat";
         public static final String DESTINATION_LONG = "destination_long";
         public static final String DIRECTIONS_MODE = "directions_mode";
-        private android.app.ActionBar activity;
         private Exception exception;
-        private ProgressDialog progressDialog;
 
         public GetDirectionsAsyncTask()
         {
@@ -741,22 +701,18 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         public void onPreExecute()
         {
-            progressDialog = new ProgressDialog(getApplicationContext());
-            progressDialog.setMessage("Calculating directions");
-//            progressDialog.show();
         }
 
         @Override
         public void onPostExecute(ArrayList result)
         {
-            progressDialog.dismiss();
             if (exception == null)
             {
                 handleGetDirectionsResult(result);
             }
             else
             {
-                processException();
+                showToast("Please try after some time !");
             }
         }
 
@@ -779,37 +735,19 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 return null;
             }
         }
-
-        private void processException()
-        {
-            Log.d("sfds","sfs");
-            //1 Toast.makeText(activity, activity.getString(R.string.error_when_retrieving_data), 3000).show();
-        }
     }
-
-
-
-
-
-
-    /////////////////////////////////////////////////////////////////
-
-
 
     private class DrawerItemClickListener implements
             ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            selectItem(position /*, mDrawerItems.get(position - 1).getTag()*/);
+            selectItem(position);
         }
     }
 
     private void selectItem(int position/*, int drawerTag*/) {
-        // minus 1 because we have header that has 0 position
         if (position < 1) {
-            //Fragment fragment = locationMapViewFragment.newInstance();
-            //commitFragment(fragment);//because we have header, we skip clicking on it
             return;
         }
         String drawerTitle = getString(mDrawerItems.get(position - 1).getTitle());
@@ -838,9 +776,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     }
 
     public void commitFragment(Fragment fragment) {
-        //Using Handler class to avoid lagging while
-        //committing fragment in same time as closing
-        //navigation drawer
         mHandler.post(new CommitFragmentRunnable(fragment));
     }
     @Override
@@ -865,9 +800,5 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-
-
-
 
 }
