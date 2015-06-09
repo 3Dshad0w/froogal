@@ -44,7 +44,7 @@ public class DrawerAdapter extends BaseAdapter {
 		final ViewHolder holder;
 		if (convertView == null) {
 			if (mIsFirstType) {
-				convertView = mInflater.inflate(R.layout.list_view_item_navigation_drawer_1, parent, false);
+				convertView = mInflater.inflate(R.layout.list_view_item_navigation_drawer, parent, false);
 			}
 			holder = new ViewHolder();
 			holder.icon = (TextView) convertView.findViewById(R.id.icon); // holder.icon object is null if mIsFirstType is set to false
@@ -56,8 +56,7 @@ public class DrawerAdapter extends BaseAdapter {
 		
 		DrawerItem item = mDrawerItems.get(position);
 		
-		if (mIsFirstType) {	//We chose to set icon that exists in list_view_item_navigation_drawer_1.xml
-			holder.icon.setText(item.getIcon());
+		if (mIsFirstType) {	//We chose to set icon that exists in list_view_item_navigation_drawer.xml		holder.icon.setText(item.getIcon());
 		}
 		holder.title.setText(item.getTitle());
 		

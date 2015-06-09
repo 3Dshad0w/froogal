@@ -5,4 +5,4 @@
     android:duration="1200"
     android:startOffset="500"
     android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
-<!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/anim/translate_top_to_center.xml -->
+<!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/anim/translate_top_to_center.xml -->

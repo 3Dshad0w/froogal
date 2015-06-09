@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="theme_color">@color/main_color_500</color>
     <color name="bkg_card">#f9fafa</color>
 
     

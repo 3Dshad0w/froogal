@@ -37,4 +37,4 @@
         android:text="@string/welcome"
         android:textColor="@color/cpb_white" />
 
-</RelativeLayout><!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/layout/activity_splash_screen.xml -->
+</RelativeLayout><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/activity_splash_screen.xml -->

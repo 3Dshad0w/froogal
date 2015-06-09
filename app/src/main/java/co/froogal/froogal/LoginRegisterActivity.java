@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import co.froogal.froogal.font.RobotoTextView;
-import co.froogal.froogal.view.kbv.KenBurnsView;
 
 /**
  * Created by akhil on 22/5/15.
@@ -19,7 +19,7 @@ public class LoginRegisterActivity extends Activity{
 
     RobotoTextView loginButton;
     RobotoTextView registerButton;
-    private KenBurnsView mKenBurns;
+    private ImageView mImageView;
     SharedPreferences sharedpreferences;
 
     @Override
@@ -43,10 +43,10 @@ public class LoginRegisterActivity extends Activity{
         setContentView(R.layout.activity_login_register);
 
 
-        mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_image_background);
+        mImageView = (ImageView) findViewById(R.id.image_background);
         loginButton = (RobotoTextView) findViewById(R.id.LoginButton);
         registerButton = (RobotoTextView) findViewById(R.id.RegisterButton);
-        mKenBurns.setImageResource(R.drawable.splash_screen_background);
+        mImageView.setImageResource(R.drawable.splash_screen_background);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

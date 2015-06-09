@@ -47,4 +47,4 @@
             android:id="@+id/textView" android:layout_below="@+id/logout" android:layout_alignParentRight="true"
             android:textSize="18dp" android:textColor="#000000" android:textAlignment="center"/>
 
-</RelativeLayout><!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/layout/main.xml -->
+</RelativeLayout><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/main.xml -->

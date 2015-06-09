@@ -6,4 +6,4 @@
     <item android:drawable="@color/main_color_300" android:state_pressed="true"/>
     <item android:drawable="@android:color/transparent"/>
 
-</selector><!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/drawable/selector_background_full.xml -->
+</selector><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/drawable/selector_background_full.xml -->

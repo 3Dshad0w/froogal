@@ -235,7 +235,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         View headerView = null;
 
-        headerView = prepareHeaderView(R.layout.header_navigation_drawer_2,
+        headerView = prepareHeaderView(R.layout.header_navigation_drawer,
                 "http://pengaja.com/uiapptemplate/avatars/0.jpg");
 
 

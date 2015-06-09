@@ -5,4 +5,4 @@
     <item android:state_activated="true" android:color="@android:color/white"/>
     <item android:color="@color/main_color_grey_700"/>
 
-</selector><!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/drawable-mdpi/selector_text_empty.xml -->
+</selector><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/drawable-mdpi/selector_text_empty.xml -->

@@ -34,4 +34,4 @@
         android:title="action_smooth_zero"
         android:orderInCategory="100"
         app:showAsAction="never" />
-</menu><!-- From: file:/home/rohitsakala/AndroidStudioProjects/froogal/app/src/main/res/menu/grid_options.xml -->
+</menu><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/menu/grid_options.xml -->
