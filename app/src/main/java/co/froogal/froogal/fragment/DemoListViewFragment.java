@@ -247,11 +247,6 @@ public class DemoListViewFragment extends ListViewFragment {
 
             Log.d("MenuFlashing", json.toString());
 
-            try {
-                return json.getJSONObject("menu");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
             return json;
         }
 
@@ -259,6 +254,59 @@ public class DemoListViewFragment extends ListViewFragment {
         protected void onPostExecute(JSONObject json) {
 
             List<GroupItem> menu = new ArrayList<GroupItem>();
+            int i = 0, j = 0;
+            JSONObject menuJson = null;
+            try {
+                menuJson = json.getJSONObject("menu");
+                Log.d("menuJson", menuJson.toString());
+                int noOfCategories = menuJson.length();
+
+                for (i = 0 ; i< noOfCategories; i++){
+                    JSONObject categoryJson = null;
+                    GroupItem item = new GroupItem();
+                    try {
+                        categoryJson = menuJson.getJSONObject("'"+ i +"'");
+                        item.title = categoryJson.getString("name") +" status: " +categoryJson.getString("status");
+                        Log.d("categoryJson", categoryJson.toString());
+                        JSONObject itemsJson = null;
+                        itemsJson = categoryJson.getJSONObject("items");
+                        Log.d("itemSSJson", itemsJson.toString());
+                        int noOfitems = itemsJson.length();
+
+                        for(j = 0 ;j < noOfitems ; j++){
+
+                            JSONObject itemJson = null;
+                            itemJson = itemsJson.getJSONObject("'"+ j +"'");
+                            Log.d("itemJson", itemJson.toString());
+                            ChildItem child = new ChildItem();
+                            child.title = itemJson.getString("name") + "(size : " + itemJson.getString("size_value") + ")" ;
+                            child.price = itemJson.getString("price");
+                            child.rating = itemJson.getString("rating");
+                            child.description = "Description: " + itemJson.getString("description") + "orderedTimes: " + itemJson.getString("orderedTimes");
+                            item.items.add(child);
+
+
+                        }
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    menu.add(item);
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+/*
 
             Iterator<String> iterator = json.keys();
             while(iterator.hasNext()){
@@ -281,7 +329,7 @@ public class DemoListViewFragment extends ListViewFragment {
 
                         if(jsonArrprice.length() != 1) {
 
-                            for (int i = 0; i < jsonArrprice.length(); i++) {
+                            for (i = 0; i < jsonArrprice.length(); i++) {
 
                                 ChildItem child = new ChildItem();
                                 child.title = menuKey + "(size : " + jsonArrsize.getString(i) + ")" ;
@@ -314,7 +362,7 @@ public class DemoListViewFragment extends ListViewFragment {
 
             }
 
-
+*/
 
 
             adapter = new ExampleAdapter(getActivity());
