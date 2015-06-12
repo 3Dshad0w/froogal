@@ -28,6 +28,7 @@ import java.net.URL;
 
 import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.view.FloatLabeledEditText;
 
 
@@ -72,6 +73,7 @@ public class LoginActivity extends Activity {
             }
         }
         super.onResume();
+
     }
 
 
@@ -210,6 +212,9 @@ public class LoginActivity extends Activity {
                         editor.putString("fname", json.getJSONObject("user").getString("fname"));
                         editor.putString("lname", json.getJSONObject("user").getString("lname"));
                         editor.putString("mobile", json.getJSONObject("user").getString("mobile"));
+                        editor.putString("unique_id", json.getJSONObject("user").getString("unique_id"));
+                        editor.putString("uid", json.getJSONObject("user").getString("uid"));
+
 
                         editor.commit();
                         Log.d("preference", sharedpreferences.getString("fname", "user"));

@@ -1,32 +1,14 @@
 package co.froogal.froogal;
 
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.widget.ImageView;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import co.froogal.froogal.fragment.DemoListViewFragment;
-import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
-import co.froogal.froogal.util.ImageUtil;
-import co.froogal.froogal.view.FloatLabeledEditText;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
-
 import co.froogal.froogal.fragment.DemoRecyclerViewFragment;
 
 
@@ -89,6 +71,11 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void initValues() {
         int tabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
         mMinHeaderHeight = getResources().getDimensionPixelSize(R.dimen.min_header_height);
@@ -103,6 +90,13 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         outState.putFloat(IMAGE_TRANSLATION_Y, mTopImage.getTranslationY());
         outState.putFloat(HEADER_TRANSLATION_Y, mHeader.getTranslationY());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+
     }
 
     @Override

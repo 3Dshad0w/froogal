@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
+import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.services.registration_intent_service;
 
