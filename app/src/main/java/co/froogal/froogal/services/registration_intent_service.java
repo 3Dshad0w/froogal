@@ -66,6 +66,7 @@ public class registration_intent_service extends IntentService {
                     }
                     else
                     {
+                        Log.d("status code", status_code);
                         bu.set_defaults("gcm_sent_to_server", "false");
                     }
                 }

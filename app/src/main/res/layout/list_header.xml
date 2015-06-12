@@ -17,5 +17,5 @@
     android:paddingLeft="72dp"
     android:textColor="@android:color/white"
     android:textSize="26sp"
-    app:typeface="robotoRegular" />
+    app:typeface="robotoLight" />
 </LinearLayout>
