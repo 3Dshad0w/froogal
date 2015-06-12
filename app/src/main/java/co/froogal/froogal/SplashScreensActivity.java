@@ -200,6 +200,7 @@ public class SplashScreensActivity extends Activity {
         alertDialog.setButton2("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                finish();
             }
         });
         alertDialog.show();
