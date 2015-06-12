@@ -70,7 +70,7 @@ import static co.froogal.froogal.LoginActivity.MyPREFERENCES;
 public class MainActivity extends ActionBarActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
 
     //tag
-    public static String TAG = "Maps Activity";
+    public static String TAG = "MainActivity";
 
     // Map variables
     private GoogleMap map;
@@ -531,7 +531,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                                 final Place myPlace = places.get(0);
                                 destination = myPlace.getLatLng();
                                 Log.d(TAG, "Place found: " + myPlace.getLatLng());
-                                findDirections(Double.parseDouble(latitude), Double.parseDouble(longitude), destination.latitude, destination.longitude, GMapV2Direction.MODE_DRIVING);
+                                update_marker_to_specified(destination.latitude, destination.longitude);
+                          //      To be put in another activity afterwards
+                          //      findDirections(Double.parseDouble(latitude), Double.parseDouble(longitude), destination.latitude, destination.longitude, GMapV2Direction.MODE_DRIVING);
                             }
                             places.release();
                         }
@@ -541,6 +543,21 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
         }
     };
+    
+    // Updating marker to serached place by user
+    public void update_marker_to_specified(Double deslatitude,Double deslongitude)
+    {
+        if (currentmarker != null) {
+            currentmarker.remove();
+        }
+        currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(deslatitude, deslongitude)).title("Marker"));
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+            .target(new LatLng(deslatitude, deslongitude))
+            .zoom(map.getCameraPosition().zoom)
+            .build();
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+    }
 
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
 
