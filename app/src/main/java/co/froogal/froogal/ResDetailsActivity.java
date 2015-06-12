@@ -1,12 +1,29 @@
 package co.froogal.froogal;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import co.froogal.froogal.fragment.DemoListViewFragment;
+import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
+import co.froogal.froogal.util.ImageUtil;
+import co.froogal.froogal.view.FloatLabeledEditText;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
 
@@ -30,13 +47,46 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);
 
+       /* ImageView call = (ImageView) findViewById(R.id.call);
+        ImageView directions = (ImageView) findViewById(R.id.directions);
+        ImageView rating = (ImageView) findViewById(R.id.rating);
+        ImageView favourite = (ImageView) findViewById(R.id.favourite);
+
+        Uri calluri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                getResources().getResourcePackageName(android.R.drawable.sym_action_call) + '/' +
+                getResources().getResourceTypeName(android.R.drawable.sym_action_call) + '/' +
+                getResources().getResourceEntryName(android.R.drawable.sym_action_call) );
+
+        Uri directionsuri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                getResources().getResourcePackageName(android.R.drawable.ic_menu_directions) + '/' +
+                getResources().getResourceTypeName(android.R.drawable.ic_menu_directions) + '/' +
+                getResources().getResourceEntryName(android.R.drawable.ic_menu_directions) );
+        Uri rateuri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                getResources().getResourcePackageName(android.R.drawable.star_on) + '/' +
+                getResources().getResourceTypeName(android.R.drawable.star_on) + '/' +
+                getResources().getResourceEntryName(android.R.drawable.star_on) );
+        Uri favuri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                getResources().getResourcePackageName(android.R.drawable.presence_away) + '/' +
+                getResources().getResourceTypeName(android.R.drawable.presence_away) + '/' +
+                getResources().getResourceEntryName(android.R.drawable.presence_away) );
+
+        ImageUtil.displayRoundImage(call, String.valueOf(calluri), null);
+        ImageUtil.displayRoundImage(directions, String.valueOf(directionsuri), null);
+        ImageUtil.displayRoundImage(rating, String.valueOf(rateuri), null);
+        ImageUtil.displayRoundImage(favourite, String.valueOf(favuri), null);
+        */
         if (savedInstanceState != null) {
             mTopImage.setTranslationY(savedInstanceState.getFloat(IMAGE_TRANSLATION_Y));
             mHeader.setTranslationY(savedInstanceState.getFloat(HEADER_TRANSLATION_Y));
         }
 
         setupAdapter();
+
+
+
+
     }
+
 
     @Override
     protected void initValues() {
@@ -114,7 +164,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
                     break;
 
                 case 3:
-                    fragment = DemoRecyclerViewFragment.newInstance(3);
+                    fragment = DemoListViewFragment.newInstance(3);
                     break;
 
                 default:

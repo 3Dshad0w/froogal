@@ -61,11 +61,13 @@ public class registration_intent_service extends IntentService {
                 json = uf.save_token_in_server(token);
                 if (json.getString("success") != null) {
                     String status_code = json.getString("success");
-                    if (status_code.toString() == "1") {
+                    if (status_code.equals("1")) {
+                        Log.d(TAG,"Pakka");
                         bu.set_defaults("gcm_sent_to_server", "true");
                     }
                     else
                     {
+                        Log.d("status code", status_code);
                         bu.set_defaults("gcm_sent_to_server", "false");
                     }
                 }

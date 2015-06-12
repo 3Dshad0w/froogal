@@ -132,11 +132,17 @@ public class UserFunctions {
         return json;
     }
 
+    public JSONObject getMenu(String s) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("resid", s));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getmenu.php","GET", params);
+        Log.d("infunctionreg", json.toString());
+        return json;
 
-    /**
-     * Function to logout user
-     * Resets the temporary data stored in SQLite Database
-     * */
+    }
+
+
 
 }
 
