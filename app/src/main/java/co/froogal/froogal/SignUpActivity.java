@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.services.location_service;
 
 /**
  * Created by akhil on 10/3/15.
@@ -185,6 +188,16 @@ public class SignUpActivity extends Activity {
 
         });
     }
+
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+
+    }
+
+
     /**
      * Async Task to check whether internet connection is working
      **/

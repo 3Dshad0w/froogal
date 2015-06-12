@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import co.froogal.froogal.font.RobotoTextView;
+import co.froogal.froogal.services.location_service;
 
 /**
  * Created by akhil on 22/5/15.

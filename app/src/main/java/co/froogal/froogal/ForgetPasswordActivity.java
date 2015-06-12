@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.services.location_service;
 
 
 /**
@@ -156,6 +157,12 @@ public class ForgetPasswordActivity extends Activity {
                 alert.setText("Error in Network Connection");
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
 

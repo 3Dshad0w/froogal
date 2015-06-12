@@ -1,11 +1,13 @@
 package co.froogal.froogal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
+import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
@@ -39,6 +41,11 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void initValues() {
         int tabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
         mMinHeaderHeight = getResources().getDimensionPixelSize(R.dimen.min_header_height);
@@ -53,6 +60,13 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         outState.putFloat(IMAGE_TRANSLATION_Y, mTopImage.getTranslationY());
         outState.putFloat(HEADER_TRANSLATION_Y, mHeader.getTranslationY());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+
     }
 
     @Override

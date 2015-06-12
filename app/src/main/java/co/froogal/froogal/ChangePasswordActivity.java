@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.services.location_service;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,6 +128,13 @@ public class ChangePasswordActivity extends Activity {
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
 
     private class ProcessRegister extends AsyncTask<String, String, JSONObject> {
 

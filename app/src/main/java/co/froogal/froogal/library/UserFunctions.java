@@ -6,8 +6,9 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-import android.content.Context;
 import android.util.Log;
+
+import co.froogal.froogal.util.basic_utils;
 
 
 public class UserFunctions {
@@ -15,14 +16,15 @@ public class UserFunctions {
     private static final String TAG = "UserFunctions";
     private JSONParser jsonParser;
 
+
     //URL of the PHP API
     private static String loginURL = "http://froogal.in/files/login.php";
     private static String registerURL = "http://froogal.in/files/signup.php";
     private static String forpassURL = "http://froogal.in/files/forgotpass.php";
     private static String chgpassURL = "http://froogal.in/files/changepass.php";
     private static String gcm_testingURL = "http://ec2-52-10-172-112.us-west-2.compute.amazonaws.com";
-    private static String save_token_in_server_URL = "http://froogal.in/files/save_token_to_server.php";
-
+    private static String save_token_to_server_URL = "http://froogal.in/files/save_token_to_server.php";
+    private static String save_location_to_server_URL = "http://froogal.in/files/save_location_to_server.php";
 
     private static String login_tag = "login";
     private static String register_tag = "register";
@@ -36,16 +38,35 @@ public class UserFunctions {
     }
 
     /**
+     * Function to store location to server
+     */
+
+    public JSONObject save_location_to_server(String latitude,String longitude, String unique_id){
+        // Building Parameters
+        Log.d(TAG, "save_loction_in_server");
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("latitude", latitude));
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("unique_id", unique_id));
+        Log.d(TAG, "latitude : " + latitude);
+        Log.d(TAG,"longitude : " + longitude);
+        Log.d(TAG,"unique_id : " + unique_id);
+        JSONObject json = jsonParser.makeHttpRequest(save_location_to_server_URL,"POST", params);
+        Log.d(TAG,"Json Response : " + json);
+        return json;
+    }
+
+    /**
      * Function to test gcm
      */
 
-    public JSONObject save_token_in_server(String token){
+    public JSONObject save_token_to_server(String token){
         // Building Parameters
         Log.d(TAG, "save_token_in_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         Log.d(TAG,"Token : " + token);
-        JSONObject json = jsonParser.makeHttpRequest(save_token_in_server_URL,"POST", params);
+        JSONObject json = jsonParser.makeHttpRequest(save_token_to_server_URL,"POST", params);
         Log.d(TAG,"Json Response : " + json);
         return json;
     }

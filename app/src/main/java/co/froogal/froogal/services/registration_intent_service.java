@@ -58,10 +58,10 @@ public class registration_intent_service extends IntentService {
                 Log.d(TAG, "GCM Registration Token: " + token);
                 bu.set_defaults("gcm_token", token);
                 bu.set_defaults("IMEI",bu.get_imei());
-                json = uf.save_token_in_server(token);
+                json = uf.save_token_to_server(token);
                 if (json.getString("success") != null) {
                     String status_code = json.getString("success");
-                    if (status_code.toString() == "1") {
+                    if (status_code.equals("1")) {
                         bu.set_defaults("gcm_sent_to_server", "true");
                     }
                     else

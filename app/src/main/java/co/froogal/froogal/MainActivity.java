@@ -63,6 +63,7 @@ import java.util.Map;
 import co.froogal.froogal.adapter.DrawerAdapter;
 import co.froogal.froogal.library.GMapV2Direction;
 import co.froogal.froogal.model.DrawerItem;
+import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.ImageUtil;
 import co.froogal.froogal.util.basic_utils;
 import static co.froogal.froogal.LoginActivity.MyPREFERENCES;
@@ -88,6 +89,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private LatLng destination;
+    public Intent loc_service;
 
     //Fragment variables
     protected boolean fragmentback = false;
@@ -104,7 +106,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     //Places Autocomplete variables
     protected GoogleApiClient googleapiclientplaces;
-
 
     public static final String LEFT_MENU_OPTION = "co.froogal.froogal.MainActivity";
     public static final String LEFT_MENU_OPTION_1 = "Left Menu Option 1";
@@ -129,6 +130,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Starting location intent service
+        startService(new Intent(getBaseContext(), location_service.class));
 
         //Handler for testing purposes - to be removed later
       /*  new Handler().postDelayed(new Runnable() {
@@ -455,7 +459,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         if(googleapiclientplaces.isConnected()) {
             googleapiclientlocation.disconnect();
         }
-
+        startService(new Intent(getBaseContext(), location_service.class));
     }
 
     @Override
@@ -543,7 +547,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
         }
     };
-    
+
     // Updating marker to serached place by user
     public void update_marker_to_specified(Double deslatitude,Double deslongitude)
     {
@@ -556,7 +560,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             .zoom(map.getCameraPosition().zoom)
             .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
     }
 
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {

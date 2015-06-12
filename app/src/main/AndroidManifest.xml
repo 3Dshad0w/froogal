@@ -40,14 +40,16 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="co.froogal.froogal" />
             </intent-filter>
         </receiver>
         <!-- [END gcm_receiver] -->
 
+
         <!-- [START gcm_listener] -->
         <service
-            android:name="co.froogal.froogal.MyGcmListenerService"
+            android:name=".MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -57,16 +59,17 @@
         <!-- [START instanceId_listener] -->
         <service
             android:name=".services.MyInstanceIDListenerService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <!-- [END instanceId_listener] -->
         <service
-            android:name="co.froogal.froogal.services.registration_intent_service"
-            android:exported="false">
+            android:name=".services.registration_intent_service"
+            android:exported="false" >
         </service>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -118,6 +121,10 @@
             android:name=".gcm_activity"
             android:label="@string/title_activity_gcm_activity" >
         </activity>
+        <service
+            android:name=".services.location_service"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
