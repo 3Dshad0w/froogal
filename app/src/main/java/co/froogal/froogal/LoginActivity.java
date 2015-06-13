@@ -29,6 +29,7 @@ import java.net.URL;
 import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.services.location_service;
+import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.view.FloatLabeledEditText;
 
 
@@ -199,7 +200,7 @@ public class LoginActivity extends Activity {
 
                 if (json.getString(KEY_SUCCESS) != null) {
 
-                    Log.d("loginjsondown", json.toString());
+                    Log.d("loginjsondownhere", json.toString());
                     String res = json.getString(KEY_SUCCESS);
 
                     if(Integer.parseInt(res) == 1){
@@ -214,10 +215,13 @@ public class LoginActivity extends Activity {
                         editor.putString("mobile", json.getJSONObject("user").getString("mobile"));
                         editor.putString("unique_id", json.getJSONObject("user").getString("unique_id"));
                         editor.putString("uid", json.getJSONObject("user").getString("uid"));
+                        basic_utils bf = new basic_utils(getApplicationContext());
+                        bf.set_defaults("uid",json.getJSONObject("user").getString("uid"));
+
 
 
                         editor.commit();
-                        Log.d("preference", sharedpreferences.getString("fname", "user"));
+                        Log.d("preferenceUID", sharedpreferences.getString("uid", "xxx"));
                         Intent upanel = new Intent(getApplicationContext(), MainActivity.class);
                         upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         pDialog.dismiss();

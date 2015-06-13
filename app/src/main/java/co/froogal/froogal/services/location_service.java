@@ -20,6 +20,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,9 +51,10 @@ public class location_service extends Service implements GoogleApiClient.OnConne
 
     // server variables
     private JSONParser jsonParser;
-    private static String save_location_to_server_URL = "http://froogal.in/files/save_location_to_server.php";
+    private static String save_location_to_server_URL = "http://ec2-52-10-172-112.us-west-2.compute.amazonaws.com/";
     static InputStream is = null;
     static JSONObject jObj = null;
+    private JSONArray send_data = null;
     static String json = "";
     private List<NameValuePair> params;
 
@@ -130,7 +132,7 @@ public class location_service extends Service implements GoogleApiClient.OnConne
             latitude = String.valueOf(currentLocation.getLatitude());
             longitude = String.valueOf(currentLocation.getLongitude());
 
-            save_location_to_server(latitude,longitude,bf.get_defaults("unique_id"));
+            save_location_to_server(latitude,longitude,"8");
             startLocationUpdates();
         }
         else
@@ -145,7 +147,8 @@ public class location_service extends Service implements GoogleApiClient.OnConne
         currentLocation = location;
         latitude = String.valueOf(currentLocation.getLatitude());
         longitude = String.valueOf(currentLocation.getLongitude());
-        save_location_to_server(latitude,longitude,bf.get_defaults("unique_id"));
+        save_location_to_server(latitude,longitude, "8");
+
     }
 
     @Override
@@ -160,21 +163,21 @@ public class location_service extends Service implements GoogleApiClient.OnConne
         googleapiclient.connect();
     }
 
-    public void save_location_to_server(String latitude, String longitude, String unique_id)
+    public void save_location_to_server(String latitude, String longitude, String uid)
     {
         jsonParser = new JSONParser();
         params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("latitude", latitude));
         params.add(new BasicNameValuePair("longitude", longitude));
-        params.add(new BasicNameValuePair("unique_id", unique_id));
+        params.add(new BasicNameValuePair("uid", uid));
+
+        Log.d(TAG,params.toString());
 
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
                 try {
                     try {
-
-
                         DefaultHttpClient httpClient = new DefaultHttpClient();
                         HttpPost httpPost = new HttpPost(save_location_to_server_URL);
                         httpPost.setEntity(new UrlEncodedFormEntity(params));
@@ -213,6 +216,7 @@ public class location_service extends Service implements GoogleApiClient.OnConne
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+//                Log.d(TAG,jObj.toString());
             }
         });
 
