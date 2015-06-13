@@ -440,7 +440,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     protected void onResume() {
 
         super.onResume();
-        setUpMapIfNeeded();
         googleapiclientlocation.connect();
         googleapiclientplaces.connect();
         if (googleapiclientlocation.isConnected()) {
@@ -469,6 +468,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleapiclientlocation);
         }
         if(currentLocation != null) {
+
+            // Calling map
+            setUpMapIfNeeded();
 
             //Updating marker
             if(currentmarker != null)

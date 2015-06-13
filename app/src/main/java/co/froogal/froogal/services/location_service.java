@@ -132,7 +132,7 @@ public class location_service extends Service implements GoogleApiClient.OnConne
             latitude = String.valueOf(currentLocation.getLatitude());
             longitude = String.valueOf(currentLocation.getLongitude());
 
-            save_location_to_server(latitude,longitude,"8");
+            save_location_to_server(latitude,longitude,"9");
             startLocationUpdates();
         }
         else
@@ -147,7 +147,7 @@ public class location_service extends Service implements GoogleApiClient.OnConne
         currentLocation = location;
         latitude = String.valueOf(currentLocation.getLatitude());
         longitude = String.valueOf(currentLocation.getLongitude());
-        save_location_to_server(latitude,longitude, "8");
+        save_location_to_server(latitude,longitude, "9");
 
     }
 
