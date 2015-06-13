@@ -46,18 +46,65 @@ public class locationListViewFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        /*recList.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity().getBaseContext(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Toast.makeText(view.getContext(), "got you " + position, Toast.LENGTH_SHORT).show();
-                    }
-                })
-        );*/
 
-        RestaurantAdapter ca = new RestaurantAdapter(createList(30)){
+        RestaurantAdapter ca = new RestaurantAdapter(createList(30));
+        /*
+        * private class ProcessRestaurants extends AsyncTask<String, String, JSONObject> {
 
-        };
+
+        private ProgressDialog pDialog;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setTitle("Contacting Servers");
+            pDialog.setMessage("Getting Resources ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+
+            JSONObject json = userFunction.getRestaurants("1");
+
+            Log.d("RestaurantFlashing", json.toString());
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+
+            List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
+
+            JSONObject restaurantsJson = null;
+
+            restaurantsJson = json.getJSONObject("restaurants");
+                Log.d("restaurantsJson", restaurantsJson.toString());
+                int noOfRestaurants = restaurantsJson.length();
+                int i = 0;
+            for (i = 0 ; i < noOfRestaurants ; i++) {
+                JSONObject restaurantJson = null;
+                restaurantJson = restaurantsJson.getJSONObject("'"+ i +"'");
+
+            RestaurantInfo ci = new RestaurantInfo();
+            ci.resName = restaurantJson.getString("name");
+            ci.resAddress = restaurantJson.getString("address");
+
+            result.add(ci);
+
+        }
+
+        return result;
+        * */
         recList.setAdapter(ca);
         /**/
 
