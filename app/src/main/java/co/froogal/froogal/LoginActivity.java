@@ -8,12 +8,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -36,7 +43,7 @@ import co.froogal.froogal.view.FloatLabeledEditText;
 /**
  * Created by akhil on 10/3/15.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends ActionBarActivity {
 
     TextView btnLogin;
     TextView passreset;
@@ -71,12 +78,24 @@ public class LoginActivity extends Activity {
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
+/*        getActionBar().show();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+  */
+        SpannableString s = new SpannableString("Login");
+        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        s.setSpan(myfont, 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         inputEmail = (FloatLabeledEditText) findViewById(R.id.email);
         inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
         btnLogin = (TextView) findViewById(R.id.login);
         passreset = (TextView)findViewById(R.id.passres);
-        loginErrorMsg = (TextView) findViewById(R.id.loginErrorMsg);
 
 
         passreset.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +158,17 @@ public class LoginActivity extends Activity {
     }
 
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     private void clearErrors(){
@@ -216,6 +246,8 @@ public class LoginActivity extends Activity {
                     }else{
 
                         pDialog.dismiss();
+                        showAlertDialog(LoginActivity.this, "Error",
+                                "Incorrect username/password.", false);
                         loginErrorMsg.setText("Incorrect username/password");
                     }
                 }

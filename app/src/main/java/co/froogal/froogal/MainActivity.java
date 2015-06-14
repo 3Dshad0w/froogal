@@ -466,6 +466,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         }
         if(currentLocation != null) {
 
+            latitude = String.valueOf(currentLocation.getLatitude());
+            longitude = String.valueOf(currentLocation.getLongitude());
+
+            //Updating shared prefecerences
+            bu.set_defaults("latitude", latitude);
+            bu.set_defaults("longitude", longitude);
+
+
             // Calling map
             setUpMapIfNeeded();
 
@@ -474,12 +482,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             {
                 currentmarker.remove();
             }
-            latitude = String.valueOf(currentLocation.getLatitude());
-            longitude = String.valueOf(currentLocation.getLongitude());
 
-            //Updating shared prefecerences
-            bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
-            bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
             updatecurrentmarker();
 //            startLocationUpdates();

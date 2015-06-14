@@ -62,24 +62,22 @@
             android:background="#ff232323">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/call"
                 android:layout_weight="1"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:src="@android:drawable/sym_action_call"
                 android:background="@drawable/round_border"
-                android:padding="8dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"/>
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2.5dp"
+                android:scaleType="center" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/directions"
                 android:layout_weight="1"
                 android:text="call"
@@ -88,16 +86,14 @@
                 android:focusableInTouchMode="false"
                 android:src="@android:drawable/ic_menu_directions"
                 android:background="@drawable/round_border"
-                android:padding="8dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp" />
+                android:layout_marginLeft="2.5dp"
+                android:layout_marginRight="2.5dp"
+                android:scaleType="center" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/rating"
                 android:layout_weight="1"
                 android:text="call"
@@ -106,31 +102,20 @@
                 android:focusableInTouchMode="false"
                 android:src="@android:drawable/star_on"
                 android:background="@drawable/round_border"
-                android:padding="10dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp" />
+                android:layout_marginLeft="2.5dp"
+                android:layout_marginRight="2.5dp"
+                android:scaleType="center" />
 
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/favourite"
-                android:layout_weight="1"
-                android:text="call"
-                android:textSize="8sp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:src="@android:drawable/presence_away"
-                android:background="@drawable/round_border"
-                android:padding="10dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageButton"
+                android:layout_marginLeft="2.5dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp" />
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="5dp" />
+
 
         </LinearLayout>
 

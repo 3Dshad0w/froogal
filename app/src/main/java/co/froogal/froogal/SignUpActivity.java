@@ -1,18 +1,26 @@
 package co.froogal.froogal;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,11 +39,12 @@ import java.net.URL;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.basic_utils;
+import co.froogal.froogal.view.FloatLabeledEditText;
 
 /**
  * Created by akhil on 10/3/15.
  */
-public class SignUpActivity extends Activity {
+public class SignUpActivity extends ActionBarActivity {
 
 
     /**
@@ -56,13 +65,12 @@ public class SignUpActivity extends Activity {
      * Defining layout items.
      **/
 
-    EditText inputFirstName;
-    EditText inputLastName;
-    EditText inputMobile;
-    EditText inputEmail;
-    EditText inputPassword;
-    Button btnRegister;
-    TextView registerErrorMsg;
+    FloatLabeledEditText inputFirstName;
+    FloatLabeledEditText inputLastName;
+    FloatLabeledEditText inputMobile;
+    FloatLabeledEditText inputEmail;
+    FloatLabeledEditText inputPassword;
+    TextView btnRegister;
     SharedPreferences sharedpreferences;
 
 
@@ -74,16 +82,23 @@ public class SignUpActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        SpannableString s = new SpannableString("Login");
+        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        s.setSpan(myfont, 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /**
          * Defining all layout items
          **/
-        inputFirstName = (EditText) findViewById(R.id.fname);
-        inputLastName = (EditText) findViewById(R.id.lname);
-        inputMobile = (EditText) findViewById(R.id.umobile);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.pword);
-        btnRegister = (Button) findViewById(R.id.register);
-        registerErrorMsg = (TextView) findViewById(R.id.register_error);
+        inputFirstName = (FloatLabeledEditText) findViewById(R.id.fname);
+        inputLastName = (FloatLabeledEditText) findViewById(R.id.lname);
+        inputMobile = (FloatLabeledEditText) findViewById(R.id.umobile);
+        inputEmail = (FloatLabeledEditText) findViewById(R.id.email);
+        inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
+        btnRegister = (TextView) findViewById(R.id.register);
 
 
 
@@ -91,15 +106,7 @@ public class SignUpActivity extends Activity {
  * Button which Switches back to the login screen on clicked
  **/
 
-        Button login = (Button) findViewById(R.id.bktologin);
-        login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
-                startActivityForResult(myIntent, 0);
-                finish();
-            }
 
-        });
 
         /**
          * Register Button click event.
@@ -192,6 +199,17 @@ public class SignUpActivity extends Activity {
 
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onResume() {
 
         super.onResume();
@@ -256,13 +274,35 @@ public class SignUpActivity extends Activity {
             }
             else{
                 nDialog.dismiss();
-                registerErrorMsg.setText("Error in Network Connection");
+                showAlertDialog(SignUpActivity.this, "No Internet Connection",
+                        "You don't have internet connection.", false);
             }
         }
     }
 
 
+    @SuppressWarnings("deprecation")
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
 
 
     private class ProcessRegister extends AsyncTask<String, String, JSONObject> {
@@ -276,8 +316,8 @@ public class SignUpActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            inputMobile = (EditText) findViewById(R.id.umobile);
-            inputPassword = (EditText) findViewById(R.id.pword);
+            inputMobile = (FloatLabeledEditText) findViewById(R.id.umobile);
+            inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
             fname = inputFirstName.getText().toString();
             lname = inputLastName.getText().toString();
             email = inputEmail.getText().toString();
@@ -310,7 +350,6 @@ public class SignUpActivity extends Activity {
              **/
             try {
                 if (json.getString(KEY_SUCCESS) != null) {
-                    registerErrorMsg.setText("");
                     Log.d("jsonhereinsignup", json.toString());
                     String res = json.getString(KEY_SUCCESS);
 
@@ -320,7 +359,6 @@ public class SignUpActivity extends Activity {
                         pDialog.setTitle("Getting Data");
                         pDialog.setMessage("Loading Info");
 
-                        registerErrorMsg.setText("Successfully Registered");
 
 
                         basic_utils bf = new basic_utils(getApplicationContext());
@@ -347,25 +385,30 @@ public class SignUpActivity extends Activity {
 
                     else if (Integer.parseInt(red) ==2){
                         pDialog.dismiss();
-                        registerErrorMsg.setText("User already exists");
-                    }
+                        showAlertDialog(SignUpActivity.this, "Error",
+                                "User already exists.", false);
+                        }
                     else if (Integer.parseInt(red) ==3){
                         pDialog.dismiss();
-                        registerErrorMsg.setText("Invalid Email id");
+                        showAlertDialog(SignUpActivity.this, "Error",
+                                "Invalid Email id.", false);
+
                     }
 
                     else {
                         pDialog.dismiss();
+                        showAlertDialog(SignUpActivity.this, "Error",
+                                "Error occured in registration.", false);
 
-                        registerErrorMsg.setText("Error occured in registration");
                     }
                 }
 
 
                 else{
                     pDialog.dismiss();
+                    showAlertDialog(SignUpActivity.this, "Error",
+                            "Error occured in registration.", false);
 
-                    registerErrorMsg.setText("Error occured in registration");
                 }
 
             } catch (JSONException e) {
