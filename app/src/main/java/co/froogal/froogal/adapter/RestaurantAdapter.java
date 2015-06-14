@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import co.froogal.froogal.ForgetPasswordActivity;
-import co.froogal.froogal.LoginRegisterActivity;
 import co.froogal.froogal.R;
 import co.froogal.froogal.ResDetailsActivity;
 import co.froogal.froogal.fragment.locationListViewFragment;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -14,6 +15,9 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import co.froogal.froogal.LoginActivity;
+import co.froogal.froogal.MainActivity;
 
 /**
  * Created by rohitsakala on 7/6/15.
@@ -50,11 +54,30 @@ public class basic_utils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(_context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
 
     }
 
+    public void clear_defaults(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public boolean login_check(){
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
+        if (preferences.contains("email"))
+        {
+            if(preferences.contains("password")){
+                return true;
+            }
+        }
+        return false;
+    }
     // Get values from shared preferences
+
     public String get_defaults(String key) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
