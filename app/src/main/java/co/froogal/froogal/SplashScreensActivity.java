@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.services.registration_intent_service;
@@ -27,7 +31,6 @@ public class SplashScreensActivity extends Activity {
 
 	// UI variables
 	ImageView mLogo;
-    private TextView welcomeText;
 
     // Boolean variables
     private Boolean check_all_proceed = false;
@@ -39,6 +42,8 @@ public class SplashScreensActivity extends Activity {
     // GCM variables
     public BroadcastReceiver gcm_registration_broadcast_receiver;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    RobotoTextView loginButton;
+    RobotoTextView registerButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +55,27 @@ public class SplashScreensActivity extends Activity {
         setContentView(R.layout.activity_splash_screen);
 
        	mLogo = (ImageView) findViewById(R.id.logo);
-		welcomeText = (TextView) findViewById(R.id.welcome_text);
+		loginButton = (RobotoTextView) findViewById(R.id.LoginButton);
+        registerButton = (RobotoTextView) findViewById(R.id.RegisterButton);
 
+        setAnimation();
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+
+                startActivity(login);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent register = new Intent(getApplicationContext(), SignUpActivity.class);
+
+                startActivity(register);
+            }
+        });
         // basic utils object
         bu = new basic_utils(getApplicationContext());
 
@@ -68,10 +92,18 @@ public class SplashScreensActivity extends Activity {
                     check_all_proceed = true;
                     if(timer_stop)
                     {
-                        Log.d(TAG,"Starting activity : LoginRegisterActivity");
-                        Intent openMainActivity = new Intent(SplashScreensActivity.this, LoginRegisterActivity.class);
-                        startActivity(openMainActivity);
-                        finish();
+                        if(bu.login_check()) {
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            finish();
+                        }
+                        else {
+                            animation2();
+                            animation3();
+                            animation4();
+                        }
+
                     }
                 }
             }
@@ -79,7 +111,7 @@ public class SplashScreensActivity extends Activity {
 
         start_timer();
         check_location_internet_playservices();
-        setAnimation();
+
 
 	}
 
@@ -133,40 +165,62 @@ public class SplashScreensActivity extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(check_all_proceed)
-                {
+                if (check_all_proceed) {
                     timer_stop = true;
-                    Log.d(TAG,"Starting activity : LoginRegisterActivity");
-                    Intent openMainActivity = new Intent(SplashScreensActivity.this, LoginRegisterActivity.class);
-                    startActivity(openMainActivity);
-                    finish();
-                }
-                else
-                {
+                    Log.d(TAG, "Starting activity : LoginRegisterActivity");
+
+                    if(bu.login_check()) {
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    }
+                    else {
+
+                        animation2();
+                        animation3();
+                        animation4();
+                    }
+
+                } else {
                     timer_stop = true;
                 }
             }
-        }, 3000);
+        }, 1500);
     }
 	
 	// Entire Animation code
 
 	private void setAnimation() {
-			animation2();
-            animation3();
+			animation1();
+            //animation3();
 
 	}
 
-    private void animation2() {
+    private void animation1() {
         ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(mLogo, "alpha", 0.0F, 1.0F);
+        alphaAnimation.setStartDelay(0);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.start();
+    }
+
+
+    private void animation2() {
+        mLogo.setAlpha(1.0F);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.translate_top_to_center);
+        mLogo.startAnimation(anim);
+    }
+
+    private void animation3() {
+        ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(loginButton, "alpha", 0.0F, 1.0F);
         alphaAnimation.setStartDelay(1000);
         alphaAnimation.setDuration(500);
         alphaAnimation.start();
     }
 
-    private void animation3() {
-        ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(welcomeText, "alpha", 0.0F, 1.0F);
-        alphaAnimation.setStartDelay(1700);
+    private void animation4() {
+        ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(registerButton, "alpha", 0.0F, 1.0F);
+        alphaAnimation.setStartDelay(1000);
         alphaAnimation.setDuration(500);
         alphaAnimation.start();
     }

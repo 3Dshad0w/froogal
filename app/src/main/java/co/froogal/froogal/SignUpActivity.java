@@ -30,6 +30,7 @@ import java.net.URL;
 
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.services.location_service;
+import co.froogal.froogal.util.basic_utils;
 
 /**
  * Created by akhil on 10/3/15.
@@ -310,7 +311,7 @@ public class SignUpActivity extends Activity {
             try {
                 if (json.getString(KEY_SUCCESS) != null) {
                     registerErrorMsg.setText("");
-                    Log.d("jsonhere", json.toString());
+                    Log.d("jsonhereinsignup", json.toString());
                     String res = json.getString(KEY_SUCCESS);
 
                     String red = json.getString(KEY_ERROR);
@@ -322,15 +323,14 @@ public class SignUpActivity extends Activity {
                         registerErrorMsg.setText("Successfully Registered");
 
 
-                        sharedpreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString("email", email);
-                        editor.putString("password", password);
-                        editor.putString("fname", fname);
-                        editor.putString("lname", lname);
-                        editor.putString("mobile", mobile);
+                        basic_utils bf = new basic_utils(getApplicationContext());
 
-                        editor.commit();
+                        bf.set_defaults("email", email);
+                        bf.set_defaults("password", password);
+                        bf.set_defaults("fname", fname);
+                        bf.set_defaults("lname", lname);
+                        bf.set_defaults("mobile", mobile);
+
 
                         Intent registered = new Intent(getApplicationContext(), MainActivity.class);
 

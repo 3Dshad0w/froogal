@@ -62,20 +62,7 @@ public class LoginActivity extends Activity {
     Boolean isInternetPresent = false;
     // Connection detector class
 
-    @Override
-    protected void onResume() {
-        sharedpreferences=getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        if (sharedpreferences.contains("email"))
-        {
-            if(sharedpreferences.contains("password")){
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-            }
-        }
-        super.onResume();
 
-    }
 
 
     @Override
@@ -206,22 +193,18 @@ public class LoginActivity extends Activity {
                     if(Integer.parseInt(res) == 1){
                         pDialog.setMessage("Loading User Space");
                         pDialog.setTitle("Getting Data");
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString("email", email);
-                        editor.putString("password", password);
-//                        Log.d("fname", json.getString("fname"));
-                        editor.putString("fname", json.getJSONObject("user").getString("fname"));
-                        editor.putString("lname", json.getJSONObject("user").getString("lname"));
-                        editor.putString("mobile", json.getJSONObject("user").getString("mobile"));
-                        editor.putString("unique_id", json.getJSONObject("user").getString("unique_id"));
-                        editor.putString("uid", json.getJSONObject("user").getString("uid"));
                         basic_utils bf = new basic_utils(getApplicationContext());
-                        bf.set_defaults("uid",json.getJSONObject("user").getString("uid"));
+
+                        bf.set_defaults("email", email);
+                        bf.set_defaults("password", password);
+//                        Log.d("fname", json.getString("fname"));
+                        bf.set_defaults("fname", json.getJSONObject("user").getString("fname"));
+                        bf.set_defaults("lname", json.getJSONObject("user").getString("lname"));
+                        bf.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
+                        bf.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
+                        bf.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
 
-
-                        editor.commit();
-                        Log.d("preferenceUID", sharedpreferences.getString("uid", "xxx"));
                         Intent upanel = new Intent(getApplicationContext(), MainActivity.class);
                         upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         pDialog.dismiss();

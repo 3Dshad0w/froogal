@@ -316,11 +316,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
 
-            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.clear();
-            editor.commit();
-            Intent login = new Intent(getApplicationContext(), LoginRegisterActivity.class);
+            basic_utils bf = new basic_utils(getApplicationContext());
+            bf.clear_defaults();
+            Intent login = new Intent(getApplicationContext(), SplashScreensActivity.class);
             login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(login);
             finish();
