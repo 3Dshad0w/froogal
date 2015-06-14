@@ -410,7 +410,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         locationrequest = new LocationRequest();
         locationrequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         locationrequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationrequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
 
     }
 
@@ -458,7 +458,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         if(googleapiclientplaces.isConnected()) {
             googleapiclientlocation.disconnect();
         }
-        startService(new Intent(getBaseContext(), location_service.class));
     }
 
     @Override
@@ -485,7 +484,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
             updatecurrentmarker();
-            startLocationUpdates();
+//            startLocationUpdates();
         }
         else
         {
