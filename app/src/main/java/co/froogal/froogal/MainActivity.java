@@ -408,7 +408,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         locationrequest = new LocationRequest();
         locationrequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         locationrequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        locationrequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
+        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
     }
 

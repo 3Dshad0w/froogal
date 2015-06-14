@@ -27,13 +27,12 @@
             android:layout_weight="1"
             android:layout_marginRight="5dp" />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:id="@+id/imageView5"
-            android:background="#ffff0010"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp" />
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <View
@@ -164,3 +163,5 @@
 
 
 </RelativeLayout>
+
+

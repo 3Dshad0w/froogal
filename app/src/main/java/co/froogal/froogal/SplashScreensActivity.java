@@ -19,6 +19,11 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+
 import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.basic_utils;
@@ -111,6 +116,7 @@ public class SplashScreensActivity extends Activity {
 
         start_timer();
         check_location_internet_playservices();
+        get_ip_address();
 
 
 	}
@@ -126,6 +132,24 @@ public class SplashScreensActivity extends Activity {
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(gcm_registration_broadcast_receiver);
         super.onPause();
+    }
+
+    // Ip Address Function
+    private void get_ip_address()
+    {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        bu.set_defaults("ip_address", inetAddress.getHostAddress().toString());
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            bu.set_defaults("ip_address","");
+        }
     }
 
     private boolean check_location_internet_playservices()
