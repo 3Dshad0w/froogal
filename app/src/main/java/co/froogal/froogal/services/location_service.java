@@ -31,11 +31,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import co.froogal.froogal.library.JSONParser;
-import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.util.basic_utils;
 
 public class location_service extends Service implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
@@ -111,7 +107,7 @@ public class location_service extends Service implements GoogleApiClient.OnConne
         locationrequest = new LocationRequest();
         locationrequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         locationrequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationrequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
     }
 
