@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -26,6 +25,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -57,7 +66,7 @@ import co.froogal.froogal.view.FloatLabeledEditText;
 public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     //tag
-    public static String TAG = "MainActivity";
+    public static String TAG = "LoginActivity";
 
     // Google+ Sign In Variables
     private static final int RC_SIGN_IN = 0;
@@ -79,9 +88,17 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
     String imei="";
     String registered_at = "";
     String registered_through = "google+";
+    String birthday = "";
     JSONObject json;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+
+    // Facebook Sign In Variables
+    CallbackManager callbackManager;
+    private LoginButton loginButton;
+    AccessToken token;
+    JSONObject picture_object;
+    JSONObject picture_data_object;
 
 
     // User Function Object
@@ -122,6 +139,104 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
+        // Facebook button and click
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile");
+        loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("user_birthday");
+
+        // TODO Publish permissions to be taken
+
+        // Facebook Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG,loginResult.toString());
+                token = AccessToken.getCurrentAccessToken();
+                // Retrieving user data
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        token,
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(
+                                    JSONObject object,
+                                    GraphResponse response) {
+                                try {
+                                    if(object.has("first_name")) {
+                                        first_name = object.getString("first_name");
+                                    }
+                                    if(object.has("last_name"))
+                                    {
+                                        last_name = object.getString("last_name");
+                                    }
+                                    if(object.has("picture")) {
+                                        picture_object = object.getJSONObject("picture");
+                                        if(picture_object.has("data"))
+                                        {
+                                            picture_data_object = picture_object.getJSONObject("data");
+                                            if(picture_data_object.has("url"))
+                                            {
+                                                image_url = picture_data_object.getString("url");
+                                            }
+                                        }
+                                    }
+                                    if(object.has("email")) {
+                                        email = object.getString("email");
+                                    }
+                                    ip_address = bu.get_defaults("ip_address");
+                                    TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                                    imei = telephonyManager.getDeviceId();
+                                    if(latitude != "" && longitude !=null) {
+
+                                        // To get city name
+                                        try {
+                                            Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
+                                            List<Address> addresses = gcd.getFromLocation(Double.valueOf(latitude), Double.valueOf(longitude), 1);
+                                            if (addresses.size() > 0) {
+                                                registered_at = addresses.get(0).getLocality();
+                                            }
+                                        } catch (Exception e) {
+                                            Log.d(TAG, "City Name Call Failed");
+                                        }
+                                    }
+                                    registered_through = "facebook";
+                                    if(object.has("birthday"))
+                                    {
+                                        birthday = object.getString("birthday");
+                                    }
+
+                                    // TODO firends list store after someone uses
+                                    new process_login_facebook().execute();
+                                }
+                                catch (Exception e)
+                                {
+                                    Log.d(TAG,e.toString());
+                                    show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                                }
+                            }
+                        });
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,first_name,last_name,friends,picture,email");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
 
         // Google+ Sign In Code
         google_api_client = new GoogleApiClient.Builder(this)
@@ -214,6 +329,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
         });
     }
 
+
     protected void createLocationRequest() {
 
         locationrequest = new LocationRequest();
@@ -260,53 +376,58 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
             bu.set_defaults("longitude",longitude);
 
         }
-        sign_in_clicked = false;
+        if(sign_in_clicked) {
 
-        // Retrieving additional information
+            // Retrieving additional information
 
-        if (Plus.PeopleApi.getCurrentPerson(google_api_client) != null) {
-            Person currentPerson = Plus.PeopleApi.getCurrentPerson(google_api_client);
+            if (Plus.PeopleApi.getCurrentPerson(google_api_client) != null) {
+                Person currentPerson = Plus.PeopleApi.getCurrentPerson(google_api_client);
 
-            // Code for extracting user data
+                // Code for extracting user data
 
-            if(currentPerson.hasName()) {
-                person_name = currentPerson.getName();
-                if (person_name.hasFamilyName()) {
-                    first_name = person_name.getFamilyName();
-                } else {
-                    first_name = person_name.getMiddleName();
+                if (currentPerson.hasName()) {
+                    person_name = currentPerson.getName();
+                    if (person_name.hasFamilyName()) {
+                        first_name = person_name.getFamilyName();
+                    } else {
+                        first_name = person_name.getMiddleName();
+                    }
+                    if (person_name.hasGivenName()) {
+                        last_name = person_name.getGivenName();
+                    }
                 }
-                if (person_name.hasGivenName()) {
-                    last_name = person_name.getGivenName();
-                }
-            }
-            ip_address = bu.get_defaults("ip_address");
-            if (currentPerson.hasImage()) {
-                person_image = currentPerson.getImage();
-                if (person_image.hasUrl()) {
-                    image_url = person_image.getUrl();
-                }
-            }
-            email = Plus.AccountApi.getAccountName(google_api_client);
-            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-            imei = telephonyManager.getDeviceId();
 
-            // To get city name
-            try {
-                Geocoder gcd = new Geocoder(this, Locale.getDefault());
-                List<Address> addresses = gcd.getFromLocation(Double.valueOf(latitude), Double.valueOf(longitude), 1);
-                if (addresses.size() > 0) {
-                    registered_at = addresses.get(0).getLocality();
+                // TODO see birthday
+                if (currentPerson.hasBirthday()) {
+                    birthday = currentPerson.getBirthday();
+                    Log.d(TAG, birthday);
                 }
-            }
-            catch (Exception e)
-            {
-                Log.d(TAG,"City Name Call Failed");
-            }
+                ip_address = bu.get_defaults("ip_address");
+                if (currentPerson.hasImage()) {
+                    person_image = currentPerson.getImage();
+                    if (person_image.hasUrl()) {
+                        image_url = person_image.getUrl();
+                    }
+                }
+                email = Plus.AccountApi.getAccountName(google_api_client);
+                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                imei = telephonyManager.getDeviceId();
 
-            // Store in database
-            new process_login_google().execute();
+                // To get city name
+                try {
+                    Geocoder gcd = new Geocoder(this, Locale.getDefault());
+                    List<Address> addresses = gcd.getFromLocation(Double.valueOf(latitude), Double.valueOf(longitude), 1);
+                    if (addresses.size() > 0) {
+                        registered_at = addresses.get(0).getLocality();
+                    }
+                } catch (Exception e) {
+                    Log.d(TAG, "City Name Call Failed");
+                }
 
+                // Store in database
+                new process_login_google().execute();
+
+            }
         }
 
     }
@@ -369,10 +490,12 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         if (requestCode == RC_SIGN_IN) {
             mIntentInProgress = false;
-            Log.d(TAG,"dsafas");
+            Log.d(TAG, "dsafas");
             if (!google_api_client.isConnecting()) {
                 google_api_client.connect();
             }
+        } else {
+            callbackManager.onActivityResult(requestCode,responseCode, intent);
         }
     }
 
@@ -397,7 +520,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
         @Override
         protected JSONObject doInBackground(String... args) {
 
-            json = uf.save_google_user_data_to_server(first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at);
+            json = uf.save_google_user_data_to_server(first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday);
             return json;
 
         }
@@ -423,8 +546,9 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
                         bu.set_defaults("registered_through", registered_through);
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", "");
+                        bu.set_defaults("birthday", birthday);
 
-                        // To be done later after akhil singh writes!!
+                        // TODO done later after akhil singh writes!!
 
                //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
                //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
@@ -442,7 +566,65 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
                     }
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+            }
+        }
+    }
+
+    // Facebook Process login
+
+    private class process_login_facebook extends AsyncTask<String, String, JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            json = uf.save_facebook_user_data_to_server(first_name, last_name, image_url, email, ip_address, imei, registered_through, latitude, longitude, registered_at, birthday);
+            return json;
+
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+
+                if (json.getString(KEY_SUCCESS) != null) {
+
+                    String res = json.getString(KEY_SUCCESS);
+                    if(Integer.parseInt(res) == 1){
+
+                        bu.set_defaults("email", email);
+                        bu.set_defaults("password", "");
+                        bu.set_defaults("fname", first_name);
+                        bu.set_defaults("lname", last_name);
+                        bu.set_defaults("image_url", image_url);
+                        bu.set_defaults("ip_address", ip_address);
+                        bu.set_defaults("registered_through", registered_through);
+                        bu.set_defaults("registered_at", registered_at);
+                        bu.set_defaults("mobile", "");
+                        bu.set_defaults("birthday", birthday);
+
+                        // TODO done later after akhil singh writes!!
+
+                        //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
+                        //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+
+                        show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                    }
+                }
+            } catch (JSONException e) {
+                show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
         }
     }
@@ -520,7 +702,7 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
                     }
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
         }
     }

@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import com.facebook.FacebookSdk;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -54,6 +56,9 @@ public class SplashScreensActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+
+        // Facebook call
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         // Remove ActionBar
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -133,6 +138,7 @@ public class SplashScreensActivity extends Activity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(gcm_registration_broadcast_receiver);
         super.onPause();
     }
+
 
     // Ip Address Function
     private void get_ip_address()

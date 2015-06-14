@@ -26,6 +26,7 @@ public class UserFunctions {
     private static String save_token_to_server_URL = "http://froogal.in/files/save_token_to_server.php";
     private static String save_location_to_server_URL = "http://froogal.in/files/save_location_to_server.php";
     private static String save_google_user_data_to_server_URL = "http://froogal.in/files/save_google_user_data_to_server.php";
+    private static String save_facebook_user_data_to_server_URL = "http://froogal.in/files/save_facebook_user_data_to_server.php";
 
 
     private static String login_tag = "login";
@@ -40,10 +41,10 @@ public class UserFunctions {
     }
 
     /**
-     * Function to store google+ user data to server
+     * Function to store facebook user data to server
      */
 
-    public JSONObject save_google_user_data_to_server(String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at){
+    public JSONObject save_facebook_user_data_to_server(String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -52,6 +53,34 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("ip_address", ip_address));
         params.add(new BasicNameValuePair("imei", imei));
+        params.add(new BasicNameValuePair("birthday", birthday));
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("latitude", latitude));
+        params.add(new BasicNameValuePair("registered_through", registered_through));
+        params.add(new BasicNameValuePair("registered_at", registered_at));
+        params.add(new BasicNameValuePair("image_url", image_url));
+        Log.d(TAG, "Params : " + params.toString());
+        JSONObject json = jsonParser.makeHttpRequest(save_facebook_user_data_to_server_URL,"POST", params);
+        Log.d(TAG,"Json Response : " + json);
+        return json;
+    }
+
+    /**
+     * Function to store google+ user data to server
+     */
+
+    public JSONObject save_google_user_data_to_server(String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
+        // Building Parameters
+        Log.d(TAG, "save_google_user_data_to_server");
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("first_name", first_name));
+        params.add(new BasicNameValuePair("last_name", last_name));
+        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("ip_address", ip_address));
+        params.add(new BasicNameValuePair("imei", imei));
+        params.add(new BasicNameValuePair("birthday", birthday));
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("latitude", latitude));
         params.add(new BasicNameValuePair("registered_through", registered_through));
         params.add(new BasicNameValuePair("registered_at", registered_at));
         params.add(new BasicNameValuePair("image_url", image_url));
