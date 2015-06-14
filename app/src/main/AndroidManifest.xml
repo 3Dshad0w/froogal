@@ -30,7 +30,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -84,7 +84,8 @@
 
         <activity
             android:name=".SplashScreensActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,35 +94,59 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/app_name" >
+            android:theme="@style/DefaultTheme"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="co.froogal.froogal.SplashScreensActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.froogal.froogal.SplashScreensActivity" />
         </activity>
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:theme="@style/DefaultTheme"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="co.froogal.froogal.SplashScreensActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.froogal.froogal.SplashScreensActivity" />
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="Froogal"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".ForgetPasswordActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ChangePasswordActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ResDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/TransparentTheme" >
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme"
+            android:parentActivityName="co.froogal.froogal.MainActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.froogal.froogal.MainActivity" />
         </activity>
         <activity
             android:name=".gcm_activity"
-            android:label="@string/title_activity_gcm_activity" >
+            android:label="@string/title_activity_gcm_activity"
+            android:screenOrientation="portrait">
         </activity>
         <service
             android:name=".services.location_service"

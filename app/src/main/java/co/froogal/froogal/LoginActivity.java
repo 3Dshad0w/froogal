@@ -8,35 +8,32 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.location.LocationRequest;
@@ -46,16 +43,10 @@ import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.library.UserFunctions;
-import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.view.FloatLabeledEditText;
 
@@ -63,7 +54,9 @@ import co.froogal.froogal.view.FloatLabeledEditText;
 /**
  * Created by akhil on 10/3/15.
  */
-public class LoginActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+public class LoginActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+
 
     //tag
     public static String TAG = "LoginActivity";
@@ -238,6 +231,15 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
             }
         });
 
+        SpannableString s = new SpannableString("Login");
+        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        s.setSpan(myfont, 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Google+ Sign In Code
         google_api_client = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -260,7 +262,6 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
         inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
         btnLogin = (TextView) findViewById(R.id.login);
         passreset = (TextView)findViewById(R.id.passres);
-        loginErrorMsg = (TextView) findViewById(R.id.loginErrorMsg);
 
         // Google+ Sign In onClick
         google_sign_in.setOnClickListener(new View.OnClickListener() {
@@ -345,9 +346,22 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
         super.onStart();
     }
 
+
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                // Respond to the action bar's Up/Home button
+                case android.R.id.home:
+                    NavUtils.navigateUpFromSameTask(this);
+                    return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+        @Override
     protected void onStop() {
         super.onStop();
+
 
         if (google_api_client.isConnected()) {
             google_api_client.disconnect();
@@ -698,6 +712,8 @@ public class LoginActivity extends Activity implements GoogleApiClient.Connectio
                     }else{
 
                         pDialog.dismiss();
+                        showAlertDialog(LoginActivity.this, "Error",
+                                "Incorrect username/password.", false);
                         loginErrorMsg.setText("Incorrect username/password");
                     }
                 }

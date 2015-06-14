@@ -1,9 +1,14 @@
 package co.froogal.froogal;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import co.froogal.froogal.fragment.DemoListViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
@@ -28,6 +33,15 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);
+        SpannableString s = new SpannableString("Restaurant Name");
+        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        s.setSpan(myfont, 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
        /* ImageView call = (ImageView) findViewById(R.id.call);
         ImageView directions = (ImageView) findViewById(R.id.directions);
@@ -68,6 +82,19 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     @Override

@@ -470,21 +470,19 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
             bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
-            //Updating marker
-            if(currentmarker != null)
-            {
-                currentmarker.remove();
-            }
             latitude = String.valueOf(currentLocation.getLatitude());
             longitude = String.valueOf(currentLocation.getLongitude());
 
             // Calling map
             setUpMapIfNeeded();
 
+            //Updating marker
+            if(currentmarker != null)
+            {
+                currentmarker.remove();
+            }
 
-            updatecurrentmarker();
-//            startLocationUpdates();
-        }
+         }
         else
         {
             buildGoogleApiClient();

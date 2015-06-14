@@ -229,7 +229,7 @@ public class SplashScreensActivity extends Activity {
 
     private void animation1() {
         ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(mLogo, "alpha", 0.0F, 1.0F);
-        alphaAnimation.setStartDelay(0);
+        alphaAnimation.setStartDelay(00);
         alphaAnimation.setDuration(1000);
         alphaAnimation.start();
     }
