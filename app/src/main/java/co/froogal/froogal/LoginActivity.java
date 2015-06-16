@@ -26,6 +26,14 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
@@ -73,7 +81,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     String ip_address="";
     String imei="";
     String registered_at = "";
-    String registered_through = "google+";
+    String registered_through = "g";
     String birthday = "";
     JSONObject json;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
@@ -136,7 +144,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
         // Facebook button and click
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.facebook_login);
         loginButton.setReadPermissions("public_profile");
         loginButton.setReadPermissions("user_friends");
         loginButton.setReadPermissions("email");
@@ -211,7 +219,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                             Log.d(TAG, "City Name Call Failed");
                                         }
                                     }
-                                    registered_through = "facebook";
+                                    registered_through = "f";
                                     if(object.has("birthday"))
                                     {
                                         birthday = object.getString("birthday");
@@ -237,7 +245,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
             @Override
             public void onCancel() {
-                Log.d(TAG,"CAncelled");
+                Log.d(TAG,"Cancelled");
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
 
@@ -274,7 +282,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         bu = new basic_utils(getApplicationContext());
 
         // UI registrations
-        google_sign_in = (com.google.android.gms.common.SignInButton)findViewById(R.id.sign_in_button);
+        google_sign_in = (com.google.android.gms.common.SignInButton)findViewById(R.id.google_login);
         inputEmail = (FloatLabeledEditText) findViewById(R.id.email);
         inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
         btnLogin = (TextView) findViewById(R.id.login);
@@ -284,7 +292,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         google_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.sign_in_button && !google_api_client.isConnecting()) {
+                if (v.getId() == R.id.google_login && !google_api_client.isConnecting()) {
                     sign_in_clicked = true;
                     google_api_client.connect();
                 }
@@ -455,6 +463,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     Log.d(TAG, "City Name Call Failed");
                 }
 
+                registered_at = "g";
                 // Store in database
                 new process_login_google().execute();
 

@@ -82,7 +82,7 @@ public class SignUpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        SpannableString s = new SpannableString("Login");
+        SpannableString s = new SpannableString("SignUp");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
 
         s.setSpan(myfont, 0, s.length(),
