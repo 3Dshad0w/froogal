@@ -94,6 +94,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     JSONObject picture_object;
     JSONObject picture_data_object;
     private ProgressDialog fbDialog;
+    String id = "";
 
 
     // User Function Object
@@ -202,6 +203,10 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     }
                                     if(object.has("email")) {
                                         email = object.getString("email");
+                                    }
+                                    if(object.has("id"))
+                                    {
+                                        id = object.getString("id");
                                     }
                                     ip_address = bu.get_defaults("ip_address");
                                     TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -624,7 +629,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         protected JSONObject doInBackground(String... args) {
 
             gcm_token = bu.get_defaults("gcm_token");
-            json = uf.save_facebook_user_data_to_server(gcm_token,first_name, last_name, image_url, email, ip_address, imei, registered_through, latitude, longitude, registered_at, birthday);
+            json = uf.save_facebook_user_data_to_server(id,gcm_token,first_name, last_name, image_url, email, ip_address, imei, registered_through, latitude, longitude, registered_at, birthday);
             return json;
 
         }
