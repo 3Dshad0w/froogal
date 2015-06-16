@@ -31,6 +31,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
@@ -92,6 +93,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     AccessToken token;
     JSONObject picture_object;
     JSONObject picture_data_object;
+    private ProgressDialog fbDialog;
 
 
     // User Function Object
@@ -99,6 +101,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
     // Basci utils Object
     basic_utils bu;
+    String gcm_token;
 
     TextView btnLogin;
     TextView passreset;
@@ -133,6 +136,12 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
+        bu = new basic_utils(this);
+
+        //Taking location from shared Preferences
+        latitude = bu.get_defaults("latitude");
+        longitude = bu.get_defaults("longitude");
+
         // Facebook button and click
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -147,7 +156,15 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG,loginResult.toString());
+
+                // Showing progress bar
+                fbDialog = new ProgressDialog(LoginActivity.this);
+                fbDialog.setTitle("Contacting Servers");
+                fbDialog.setMessage("Logging in ...");
+                fbDialog.setIndeterminate(false);
+                fbDialog.setCancelable(false);
+                fbDialog.show();
+
                 token = AccessToken.getCurrentAccessToken();
                 // Retrieving user data
 
@@ -159,6 +176,12 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     JSONObject object,
                                     GraphResponse response) {
                                 try {
+                                    Log.d(TAG,response.toString());
+
+                                    // Modifying progressbar
+                                    fbDialog.setMessage("Loading User Space");
+                                    fbDialog.setTitle("Getting Data");
+
                                     if(object.has("first_name")) {
                                         first_name = object.getString("first_name");
                                     }
@@ -183,7 +206,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     ip_address = bu.get_defaults("ip_address");
                                     TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                                     imei = telephonyManager.getDeviceId();
-                                    if(latitude != "" && longitude !=null) {
+                                    if(latitude != null && longitude !="") {
 
                                         // To get city name
                                         try {
@@ -222,12 +245,14 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
             @Override
             public void onCancel() {
-                // App code
+                Log.d(TAG,"CAncelled");
+                show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                Log.d(TAG,exception.toString());
             }
         });
 
@@ -534,7 +559,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         @Override
         protected JSONObject doInBackground(String... args) {
 
-            json = uf.save_google_user_data_to_server(first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday);
+            gcm_token = bu.get_defaults("gcm_token");
+            json = uf.save_google_user_data_to_server(gcm_token,first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday);
             return json;
 
         }
@@ -597,7 +623,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         @Override
         protected JSONObject doInBackground(String... args) {
 
-            json = uf.save_facebook_user_data_to_server(first_name, last_name, image_url, email, ip_address, imei, registered_through, latitude, longitude, registered_at, birthday);
+            gcm_token = bu.get_defaults("gcm_token");
+            json = uf.save_facebook_user_data_to_server(gcm_token,first_name, last_name, image_url, email, ip_address, imei, registered_through, latitude, longitude, registered_at, birthday);
             return json;
 
         }
@@ -626,6 +653,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
                         //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
                         //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
+
+                        fbDialog.dismiss();
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -671,7 +700,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
             UserFunctions userFunction = new UserFunctions();
             Log.d("loginjson", email+" "+password);
-            JSONObject json = userFunction.loginUser(email, password);
+
+            JSONObject json = userFunction.loginUser(gcm_token,email, password);
 
                 Log.d("keysuccess", json.toString());
 
@@ -684,7 +714,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
                 if (json.getString(KEY_SUCCESS) != null) {
 
-                    Log.d("loginjsondownhere", json.toString());
                     String res = json.getString(KEY_SUCCESS);
 
                     if(Integer.parseInt(res) == 1){

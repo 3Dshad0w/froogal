@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -18,8 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -31,10 +38,17 @@ import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.services.registration_intent_service;
 
-public class SplashScreensActivity extends Activity {
+public class SplashScreensActivity extends Activity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks{
 
     // Tag
     private static final String TAG = "SplashScreensActivity";
+
+    //Location Variables
+    protected GoogleApiClient googleapiclientlocation;
+    protected Location currentLocation;
+    protected LocationRequest locationrequest;
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
+    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
 
 	// UI variables
 	ImageView mLogo;
@@ -56,6 +70,9 @@ public class SplashScreensActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+
+        //Build location
+        buildGoogleApiClient();
 
         // Facebook call
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -93,7 +110,7 @@ public class SplashScreensActivity extends Activity {
         gcm_registration_broadcast_receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if(!bu.get_defaults("gcm_sent_to_server").equals("true"))
+                if(bu.get_defaults("gcm_token") == null)
                 {
                     show_alert_dialog_gcm(SplashScreensActivity.this,"GCM registration failed","Please try again later !");
                 }
@@ -126,6 +143,64 @@ public class SplashScreensActivity extends Activity {
 
 	}
 
+    protected synchronized void buildGoogleApiClient() {
+
+        googleapiclientlocation = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        createLocationRequest();
+
+    }
+
+    protected void createLocationRequest() {
+
+        locationrequest = new LocationRequest();
+        locationrequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        locationrequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+
+        if (currentLocation == null) {
+            currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleapiclientlocation);
+        }
+        if(currentLocation != null) {
+
+            //Updating shared prefecerences
+            bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
+            bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
+
+        }
+        else
+        {
+            buildGoogleApiClient();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+
+        googleapiclientlocation.connect();
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        googleapiclientlocation.connect();
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -135,10 +210,12 @@ public class SplashScreensActivity extends Activity {
 
     @Override
     protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(gcm_registration_broadcast_receiver);
         super.onPause();
+        if (googleapiclientlocation.isConnected()) {
+            googleapiclientlocation.disconnect();
+        }
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(gcm_registration_broadcast_receiver);
     }
-
 
     // Ip Address Function
     private void get_ip_address()

@@ -33,6 +33,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -317,6 +319,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         if (id == R.id.action_logout) {
 
             basic_utils bf = new basic_utils(getApplicationContext());
+            if(bf.get_defaults("registered_through").equals("facebook"))
+            {
+                LoginManager.getInstance().logOut();
+            }
             bf.clear_defaults();
             Intent login = new Intent(getApplicationContext(), SplashScreensActivity.class);
             login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

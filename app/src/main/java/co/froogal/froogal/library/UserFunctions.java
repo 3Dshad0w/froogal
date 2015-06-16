@@ -44,7 +44,7 @@ public class UserFunctions {
      * Function to store facebook user data to server
      */
 
-    public JSONObject save_facebook_user_data_to_server(String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
+    public JSONObject save_facebook_user_data_to_server(String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -59,6 +59,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("registered_through", registered_through));
         params.add(new BasicNameValuePair("registered_at", registered_at));
         params.add(new BasicNameValuePair("image_url", image_url));
+        params.add(new BasicNameValuePair("gcm_token", gcm_token));
         Log.d(TAG, "Params : " + params.toString());
         JSONObject json = jsonParser.makeHttpRequest(save_facebook_user_data_to_server_URL,"POST", params);
         Log.d(TAG,"Json Response : " + json);
@@ -69,7 +70,7 @@ public class UserFunctions {
      * Function to store google+ user data to server
      */
 
-    public JSONObject save_google_user_data_to_server(String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
+    public JSONObject save_google_user_data_to_server(String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -84,43 +85,9 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("registered_through", registered_through));
         params.add(new BasicNameValuePair("registered_at", registered_at));
         params.add(new BasicNameValuePair("image_url", image_url));
+        params.add(new BasicNameValuePair("gcm_token", gcm_token));
         Log.d(TAG, "Params : " + params.toString());
         JSONObject json = jsonParser.makeHttpRequest(save_google_user_data_to_server_URL,"POST", params);
-        Log.d(TAG,"Json Response : " + json);
-        return json;
-    }
-
-
-    /**
-     * Function to store location to server
-     */
-
-    public JSONObject save_location_to_server(String latitude,String longitude, String unique_id){
-        // Building Parameters
-        Log.d(TAG, "save_loction_in_server");
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("latitude", latitude));
-        params.add(new BasicNameValuePair("longitude", longitude));
-        params.add(new BasicNameValuePair("unique_id", unique_id));
-        Log.d(TAG, "latitude : " + latitude);
-        Log.d(TAG,"longitude : " + longitude);
-        Log.d(TAG,"unique_id : " + unique_id);
-        JSONObject json = jsonParser.makeHttpRequest(save_location_to_server_URL,"POST", params);
-        Log.d(TAG,"Json Response : " + json);
-        return json;
-    }
-
-    /**
-     * Function to test gcm
-     */
-
-    public JSONObject save_token_to_server(String token){
-        // Building Parameters
-        Log.d(TAG, "save_token_in_server");
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("token", token));
-        Log.d(TAG,"Token : " + token);
-        JSONObject json = jsonParser.makeHttpRequest(save_token_to_server_URL,"POST", params);
         Log.d(TAG,"Json Response : " + json);
         return json;
     }
@@ -142,12 +109,15 @@ public class UserFunctions {
      * Function to Login
      **/
 
-    public JSONObject loginUser(String email, String password){
+    // TODO add gcm_token into server after login
+
+    public JSONObject loginUser(String email, String password,String gcm_token){
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", login_tag));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair("gcm_token", gcm_token));
         JSONObject json = jsonParser.makeHttpRequest(loginURL,"POST", params);
         Log.d("infunction", json.toString());
         return json;
