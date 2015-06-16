@@ -44,7 +44,7 @@ public class UserFunctions {
      * Function to store facebook user data to server
      */
 
-    public JSONObject save_facebook_user_data_to_server(String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
+    public JSONObject save_facebook_user_data_to_server(String id,String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -60,6 +60,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("registered_at", registered_at));
         params.add(new BasicNameValuePair("image_url", image_url));
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
+        params.add(new BasicNameValuePair("facebook_id", id));
         Log.d(TAG, "Params : " + params.toString());
         JSONObject json = jsonParser.makeHttpRequest(save_facebook_user_data_to_server_URL,"POST", params);
         Log.d(TAG,"Json Response : " + json);
