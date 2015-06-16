@@ -78,5 +78,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
         }
     }
+
 }
 

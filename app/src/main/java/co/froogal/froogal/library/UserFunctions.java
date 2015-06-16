@@ -48,8 +48,8 @@ public class UserFunctions {
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("first_name", first_name));
-        params.add(new BasicNameValuePair("last_name", last_name));
+        params.add(new BasicNameValuePair("fname", first_name));
+        params.add(new BasicNameValuePair("lname", last_name));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("ip_address", ip_address));
         params.add(new BasicNameValuePair("imei", imei));
@@ -75,8 +75,8 @@ public class UserFunctions {
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("first_name", first_name));
-        params.add(new BasicNameValuePair("last_name", last_name));
+        params.add(new BasicNameValuePair("fname", first_name));
+        params.add(new BasicNameValuePair("lname", last_name));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("ip_address", ip_address));
         params.add(new BasicNameValuePair("imei", imei));
@@ -87,9 +87,36 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("registered_at", registered_at));
         params.add(new BasicNameValuePair("image_url", image_url));
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
+        params.add(new BasicNameValuePair("facebook_id", null));
         Log.d(TAG, "Params : " + params.toString());
         JSONObject json = jsonParser.makeHttpRequest(save_google_user_data_to_server_URL,"POST", params);
         Log.d(TAG,"Json Response : " + json);
+        return json;
+    }
+
+    /**
+     * Function to  Register
+     **/
+    public JSONObject registerUser(String fname, String lname, String email, String mobile, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("fname", fname));
+        params.add(new BasicNameValuePair("lname", lname));
+        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("mobile", mobile));
+        params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair("ip_address", ip_address));
+        params.add(new BasicNameValuePair("imei", imei));
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("latitude", latitude));
+        params.add(new BasicNameValuePair("registered_through", registered_through));
+        params.add(new BasicNameValuePair("registered_at", registered_at));
+        params.add(new BasicNameValuePair("image_url", image_url));
+        params.add(new BasicNameValuePair("gcm_token", gcm_token));
+        params.add(new BasicNameValuePair("facebook_id", null));
+        JSONObject json = jsonParser.makeHttpRequest(registerURL,"POST", params);
+        Log.d("infunctionreg", json.toString());
         return json;
     }
 
@@ -161,22 +188,6 @@ public class UserFunctions {
 
 
 
-     /**
-      * Function to  Register
-      **/
-    public JSONObject registerUser(String fname, String lname, String email, String mobile, String password){
-        // Building Parameters
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", register_tag));
-        params.add(new BasicNameValuePair("fname", fname));
-        params.add(new BasicNameValuePair("lname", lname));
-        params.add(new BasicNameValuePair("email", email));
-        params.add(new BasicNameValuePair("mobile", mobile));
-        params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.makeHttpRequest(registerURL,"POST", params);
-        Log.d("infunctionreg", json.toString());
-        return json;
-    }
 
     public JSONObject getMenu(String s) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();

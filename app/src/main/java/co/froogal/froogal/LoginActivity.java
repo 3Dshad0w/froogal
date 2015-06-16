@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,6 +23,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +48,9 @@ import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
 
@@ -139,6 +146,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
         bu = new basic_utils(this);
 
+        showHashKey(this);
         //Taking location from shared Preferences
         latitude = bu.get_defaults("latitude");
         longitude = bu.get_defaults("longitude");
@@ -211,7 +219,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     ip_address = bu.get_defaults("ip_address");
                                     TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                                     imei = telephonyManager.getDeviceId();
-                                    if(latitude != null && longitude !="") {
+                                    if(latitude != "" && longitude !="") {
 
                                         // To get city name
                                         try {
@@ -403,6 +411,20 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
        inputPassword.setError(null);
     }
 
+    public static void showHashKey(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    "co.froogal.froogal", PackageManager.GET_SIGNATURES); //Your            package name here
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
+        }
+    }
+
     @Override
     public void onConnected(Bundle bundle) {
 
@@ -468,7 +490,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     Log.d(TAG, "City Name Call Failed");
                 }
 
-                registered_at = "g";
+                registered_through = "g";
                 // Store in database
                 new process_login_google().execute();
 

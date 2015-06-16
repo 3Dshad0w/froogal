@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -35,6 +38,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
 
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.services.location_service;
@@ -72,6 +77,17 @@ public class SignUpActivity extends ActionBarActivity {
     FloatLabeledEditText inputPassword;
     TextView btnRegister;
     SharedPreferences sharedpreferences;
+    String first_name="";
+    String last_name="";
+    String image_url="";
+    String ip_address="";
+    String imei="";
+    String registered_at = "";
+    String registered_through = "s";
+    String latitude = "";
+    String longitude = "";
+    String gcm_token = "";
+    basic_utils bu;
 
 
     /**
@@ -337,7 +353,26 @@ public class SignUpActivity extends ActionBarActivity {
 
             UserFunctions userFunction = new UserFunctions();
             Log.d("upjson", fname+lname+email+mobile+password);
-            JSONObject json = userFunction.registerUser(fname, lname, email, mobile, password);
+            registered_through  ="s";
+            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+            imei = telephonyManager.getDeviceId();
+            if(latitude != "" && longitude != "") {
+
+                // To get city name
+                try {
+                    Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    List<Address> addresses = gcd.getFromLocation(Double.valueOf(latitude), Double.valueOf(longitude), 1);
+                    if (addresses.size() > 0) {
+                        registered_at = addresses.get(0).getLocality();
+                    }
+                } catch (Exception e) {
+                    Log.d("haha", "City Name Call Failed");
+                }
+            }
+            ip_address = bu.get_defaults("ip_address");
+            gcm_token = bu.get_defaults("gcm_token");
+            image_url = "";
+            JSONObject json = userFunction.registerUser(fname, lname, email, mobile, password, registered_at, registered_through, imei, ip_address, image_url, longitude, latitude, gcm_token);
             Log.d("json", json.toString());
             return json;
 
