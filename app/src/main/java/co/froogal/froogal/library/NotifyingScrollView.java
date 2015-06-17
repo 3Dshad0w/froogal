@@ -4,9 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
-/**
- * Created by desmond on 12/4/15.
- */
+
 public class NotifyingScrollView extends ScrollView {
 
     public interface OnScrollChangedListener {

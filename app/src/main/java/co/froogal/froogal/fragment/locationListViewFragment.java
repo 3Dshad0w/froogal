@@ -59,7 +59,7 @@ public class locationListViewFragment extends Fragment {
         ca = new RestaurantAdapter(list);
 
         recList.setAdapter(ca);
-       
+
         return rootView;
     }
 

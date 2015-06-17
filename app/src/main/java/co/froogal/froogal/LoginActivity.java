@@ -142,6 +142,15 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        SpannableString s = new SpannableString("Login");
+        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        s.setSpan(myfont, 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_login);
 
         bu = new basic_utils(this);
@@ -185,41 +194,37 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     JSONObject object,
                                     GraphResponse response) {
                                 try {
-                                    Log.d(TAG,response.toString());
+                                    Log.d(TAG, response.toString());
 
                                     // Modifying progressbar
                                     fbDialog.setMessage("Loading User Space");
                                     fbDialog.setTitle("Getting Data");
 
-                                    if(object.has("first_name")) {
+                                    if (object.has("first_name")) {
                                         first_name = object.getString("first_name");
                                     }
-                                    if(object.has("last_name"))
-                                    {
+                                    if (object.has("last_name")) {
                                         last_name = object.getString("last_name");
                                     }
-                                    if(object.has("picture")) {
+                                    if (object.has("picture")) {
                                         picture_object = object.getJSONObject("picture");
-                                        if(picture_object.has("data"))
-                                        {
+                                        if (picture_object.has("data")) {
                                             picture_data_object = picture_object.getJSONObject("data");
-                                            if(picture_data_object.has("url"))
-                                            {
+                                            if (picture_data_object.has("url")) {
                                                 image_url = picture_data_object.getString("url");
                                             }
                                         }
                                     }
-                                    if(object.has("email")) {
+                                    if (object.has("email")) {
                                         email = object.getString("email");
                                     }
-                                    if(object.has("id"))
-                                    {
+                                    if (object.has("id")) {
                                         id = object.getString("id");
                                     }
                                     ip_address = bu.get_defaults("ip_address");
-                                    TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                                    TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                                     imei = telephonyManager.getDeviceId();
-                                    if(latitude != "" && longitude !="") {
+                                    if (latitude != "" && longitude != "") {
 
                                         // To get city name
                                         try {
@@ -233,17 +238,14 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                         }
                                     }
                                     registered_through = "f";
-                                    if(object.has("birthday"))
-                                    {
+                                    if (object.has("birthday")) {
                                         birthday = object.getString("birthday");
                                     }
 
                                     // TODO firends list store after someone uses
                                     new process_login_facebook().execute();
-                                }
-                                catch (Exception e)
-                                {
-                                    Log.d(TAG,e.toString());
+                                } catch (Exception e) {
+                                    Log.d(TAG, e.toString());
                                     show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
                                 }
                             }
@@ -258,25 +260,17 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
             @Override
             public void onCancel() {
-                Log.d(TAG,"Cancelled");
+                Log.d(TAG, "Cancelled");
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
 
             @Override
             public void onError(FacebookException exception) {
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
-                Log.d(TAG,exception.toString());
+                Log.d(TAG, exception.toString());
             }
         });
 
-        SpannableString s = new SpannableString("Login");
-        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
-
-        s.setSpan(myfont, 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        getSupportActionBar().setTitle(s);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Google+ Sign In Code
         google_api_client = new GoogleApiClient.Builder(this)
