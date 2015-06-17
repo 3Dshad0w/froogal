@@ -20,66 +20,13 @@
 
         <include layout="@layout/header_placeholder"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/completeLayout">
 
-            <android.support.v7.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:cardCornerRadius="4dp"
-                android:id="@+id/imagesCard">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/imagesLayout">
-                <co.froogal.froogal.font.RobotoTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageTextView"
-                    android:text="Images:"
-                    android:textColor="@color/main_color_grey_700"
-                    android:padding="8dp"
-                    android:textSize="16sp"
-                    app:typeface="robotoLight" />
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:background="#c0c0c0"
-                    android:id="@+id/divider4"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"/>
-
-            <co.froogal.froogal.adapter.ExpandableHeightGridView
-                android:id="@+id/myId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:horizontalSpacing="2dp"
-                android:isScrollContainer="false"
-                android:numColumns="4"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="20dp" />
-
-            </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/descriptionLayout"
-                android:layout_below="@+id/imagesCard">
+                android:id="@+id/descriptionLayout">
 
 
 
@@ -91,20 +38,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:cardCornerRadius="4dp"
-                    android:id="@+id/tagsCard">
+                    android:id="@+id/RewardsCard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:id="@+id/tagsCardLayout">
+                        android:id="@+id/rewardsCardLayout">
 
                         <TextView
                             android:id="@+id/tagTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:text="Tags:"
+                            android:gravity="center_horizontal"
+                            android:text="REWARD:"
+                            android:textSize="20sp"
                             android:padding="8dp"
                             android:textColor="@android:color/black"/>
 
@@ -119,10 +67,12 @@
                         <TextView
                             android:id="@+id/TagsTextView"
                             android:layout_width="match_parent"
-                            android:layout_height="?attr/listPreferredItemHeight"
-                            android:text="Indian,Chinese,Japanese Cusines"
+                            android:layout_height="120dp"
+                            android:text="Get 10% of your total bill as reward points"
+                            android:textSize="20sp"
                             android:padding="8dp"
-                            android:textColor="@android:color/black"/>
+                            android:textColor="@android:color/black"
+                            android:gravity="center_vertical|center_horizontal" />
 
                     </LinearLayout>
 
@@ -136,39 +86,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:cardCornerRadius="4dp"
-                    android:id="@+id/addressCard">
+                    android:id="@+id/LoyaltyCard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:id="@+id/addressCardLayout">
+                        android:id="@+id/addressCardLayout"
+                        android:background="@color/cpb_red_dark">
 
 
-                    <TextView
-                        android:id="@+id/addressTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="Address:"
-                        android:padding="8dp"
-                        android:textColor="@android:color/black"/>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="2dp"
-                        android:background="#c0c0c0"
-                        android:id="@+id/divider2"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"/>
-
-                    <TextView
-                        android:id="@+id/AddressTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/listPreferredItemHeight"
-                        android:text="VIE Vindhya C4, IIT HYD"
-                        android:padding="8dp"
-                        android:textColor="@android:color/black"/>
+                        <TextView
+                            android:id="@+id/AddressTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:text="LOYALTY CARD"
+                            android:padding="8dp"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/white"
+                            android:gravity="center_vertical|center_horizontal" />
 
                     </LinearLayout>
 
@@ -183,23 +119,24 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:cardCornerRadius="4dp"
-                    android:id="@+id/contactCard">
+                    android:id="@+id/offerCard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:id="@+id/contactCardLayout">
+                        android:id="@+id/offerCardLayout">
 
 
                         <TextView
                             android:id="@+id/contactTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:text="Contact:"
+                            android:text="OFFER:"
+                            android:textSize="20sp"
                             android:padding="8dp"
-                            android:textColor="@android:color/black"/>
+                            android:textColor="@android:color/black"
+                            android:gravity="center_horizontal" />
 
                         <View
                             android:layout_width="fill_parent"
@@ -212,17 +149,18 @@
                         <TextView
                             android:id="@+id/ContactTextView"
                             android:layout_width="match_parent"
-                            android:layout_height="?attr/listPreferredItemHeight"
-                            android:text="8888888888, 9999999999"
+                            android:layout_height="120dp"
+                            android:text="Buy 1 biryani and get 2 cokes Free!"
+                            android:textSize="20sp"
                             android:padding="8dp"
-                            android:textColor="@android:color/black"/>
+                            android:textColor="@android:color/black"
+                            android:gravity="center_vertical|center_horizontal" />
 
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
             </LinearLayout>
-        </RelativeLayout>
-        </LinearLayout>
+    </LinearLayout>
 
 
 </co.froogal.froogal.library.NotifyingScrollView>
