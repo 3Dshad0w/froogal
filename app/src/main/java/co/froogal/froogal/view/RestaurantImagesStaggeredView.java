@@ -3,12 +3,10 @@ package co.froogal.froogal.view;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -24,7 +22,7 @@ import co.froogal.froogal.adapter.StaggeredAdapter;
 /**
  * Created by akhil on 17/6/15.
  */
-public class RestaurantImagesStaggeredView extends ActionBarActivity implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener {
+public class RestaurantImagesStaggeredView extends ActionBarActivity implements AbsListView.OnScrollListener {
     private static final String TAG = "StaggeredGridActivity";
     public static final String SAVED_DATA_KEY = "SAVED_DATA";
     private StaggeredGridView mGridView;
@@ -59,18 +57,9 @@ public class RestaurantImagesStaggeredView extends ActionBarActivity implements 
         }
         mGridView.setAdapter(mAdapter);
         mGridView.setOnScrollListener(this);
-        mGridView.setOnItemClickListener(this);
+
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -118,8 +107,5 @@ public class RestaurantImagesStaggeredView extends ActionBarActivity implements 
         listData.add("http://i59.tinypic.com/2igznfr.jpg");
         return listData;
     }
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-    }
+
 }
