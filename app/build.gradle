@@ -34,4 +34,5 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.0.6'
     compile files('libs/nineoldandroids-2.4.0.jar')
     compile 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.7.1'
+    
 }
