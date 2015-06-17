@@ -39,21 +39,21 @@ import co.froogal.froogal.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DemoListViewFragment extends ListViewFragment {
+public class MenuListViewFragment extends ListViewFragment {
 
-    public static final String TAG = DemoListViewFragment.class.getSimpleName();
+    public static final String TAG = MenuListViewFragment.class.getSimpleName();
     private ExampleAdapter adapter;
 
 
     public static Fragment newInstance(int position) {
-        DemoListViewFragment fragment = new DemoListViewFragment();
+        MenuListViewFragment fragment = new MenuListViewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_POSITION, position);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public DemoListViewFragment() {
+    public MenuListViewFragment() {
     }
 
     @Override

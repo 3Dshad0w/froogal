@@ -10,7 +10,9 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import co.froogal.froogal.fragment.DemoListViewFragment;
+
+import co.froogal.froogal.fragment.AboutScrollViewFragment;
+import co.froogal.froogal.fragment.MenuListViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
@@ -177,7 +179,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
                     break;
 
                 case 1:
-                    fragment = DemoRecyclerViewFragment.newInstance(1);
+                    fragment = AboutScrollViewFragment.newInstance(1);
                     break;
 
                 case 2:
@@ -185,7 +187,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
                     break;
 
                 case 3:
-                    fragment = DemoListViewFragment.newInstance(3);
+                    fragment = MenuListViewFragment.newInstance(3);
                     break;
 
                 default:

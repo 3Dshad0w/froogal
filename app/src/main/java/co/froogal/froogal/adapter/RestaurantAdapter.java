@@ -93,6 +93,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     }
 
+    public void updateList(List<RestaurantInfo> data) {
+        restaurantList = data;
+        notifyDataSetChanged();
+    }
 
 
 

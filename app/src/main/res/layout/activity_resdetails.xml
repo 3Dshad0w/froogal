@@ -59,11 +59,11 @@
             android:layout_height="@dimen/tab_height"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
-            android:background="#ff232323">
+            android:background="@color/main_color_500">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/call"
                 android:layout_weight="1"
                 android:focusable="false"
@@ -73,11 +73,12 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="2.5dp"
-                android:scaleType="center" />
+                android:scaleType="center"
+                android:clickable="true" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/directions"
                 android:layout_weight="1"
                 android:text="call"
@@ -89,11 +90,12 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="2.5dp"
                 android:layout_marginRight="2.5dp"
-                android:scaleType="center" />
+                android:scaleType="center"
+                android:clickable="true" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/rating"
                 android:layout_weight="1"
                 android:text="call"
@@ -105,7 +107,8 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="2.5dp"
                 android:layout_marginRight="2.5dp"
-                android:scaleType="center" />
+                android:scaleType="center"
+                android:clickable="true" />
 
             <ImageButton
                 android:layout_width="100dp"

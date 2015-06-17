@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,10 +23,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -31,7 +36,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
@@ -44,6 +48,9 @@ import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
 
@@ -81,7 +88,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     String ip_address="";
     String imei="";
     String registered_at = "";
-    String registered_through = "google+";
+    String registered_through = "g";
     String birthday = "";
     JSONObject json;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
@@ -135,17 +142,27 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        SpannableString s = new SpannableString("Login");
+        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        s.setSpan(myfont, 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_login);
 
         bu = new basic_utils(this);
 
+        showHashKey(this);
         //Taking location from shared Preferences
         latitude = bu.get_defaults("latitude");
         longitude = bu.get_defaults("longitude");
 
         // Facebook button and click
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.facebook_login);
         loginButton.setReadPermissions("public_profile");
         loginButton.setReadPermissions("user_friends");
         loginButton.setReadPermissions("email");
@@ -177,41 +194,37 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     JSONObject object,
                                     GraphResponse response) {
                                 try {
-                                    Log.d(TAG,response.toString());
+                                    Log.d(TAG, response.toString());
 
                                     // Modifying progressbar
                                     fbDialog.setMessage("Loading User Space");
                                     fbDialog.setTitle("Getting Data");
 
-                                    if(object.has("first_name")) {
+                                    if (object.has("first_name")) {
                                         first_name = object.getString("first_name");
                                     }
-                                    if(object.has("last_name"))
-                                    {
+                                    if (object.has("last_name")) {
                                         last_name = object.getString("last_name");
                                     }
-                                    if(object.has("picture")) {
+                                    if (object.has("picture")) {
                                         picture_object = object.getJSONObject("picture");
-                                        if(picture_object.has("data"))
-                                        {
+                                        if (picture_object.has("data")) {
                                             picture_data_object = picture_object.getJSONObject("data");
-                                            if(picture_data_object.has("url"))
-                                            {
+                                            if (picture_data_object.has("url")) {
                                                 image_url = picture_data_object.getString("url");
                                             }
                                         }
                                     }
-                                    if(object.has("email")) {
+                                    if (object.has("email")) {
                                         email = object.getString("email");
                                     }
-                                    if(object.has("id"))
-                                    {
+                                    if (object.has("id")) {
                                         id = object.getString("id");
                                     }
                                     ip_address = bu.get_defaults("ip_address");
-                                    TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                                    TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                                     imei = telephonyManager.getDeviceId();
-                                    if(latitude != null && longitude !="") {
+                                    if (latitude != "" && longitude != "") {
 
                                         // To get city name
                                         try {
@@ -224,18 +237,15 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                             Log.d(TAG, "City Name Call Failed");
                                         }
                                     }
-                                    registered_through = "facebook";
-                                    if(object.has("birthday"))
-                                    {
+                                    registered_through = "f";
+                                    if (object.has("birthday")) {
                                         birthday = object.getString("birthday");
                                     }
 
                                     // TODO firends list store after someone uses
                                     new process_login_facebook().execute();
-                                }
-                                catch (Exception e)
-                                {
-                                    Log.d(TAG,e.toString());
+                                } catch (Exception e) {
+                                    Log.d(TAG, e.toString());
                                     show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
                                 }
                             }
@@ -250,25 +260,17 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
             @Override
             public void onCancel() {
-                Log.d(TAG,"CAncelled");
+                Log.d(TAG, "Cancelled");
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
 
             @Override
             public void onError(FacebookException exception) {
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
-                Log.d(TAG,exception.toString());
+                Log.d(TAG, exception.toString());
             }
         });
 
-        SpannableString s = new SpannableString("Login");
-        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
-
-        s.setSpan(myfont, 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        getSupportActionBar().setTitle(s);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Google+ Sign In Code
         google_api_client = new GoogleApiClient.Builder(this)
@@ -287,7 +289,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         bu = new basic_utils(getApplicationContext());
 
         // UI registrations
-        google_sign_in = (com.google.android.gms.common.SignInButton)findViewById(R.id.sign_in_button);
+        google_sign_in = (com.google.android.gms.common.SignInButton)findViewById(R.id.google_login);
         inputEmail = (FloatLabeledEditText) findViewById(R.id.email);
         inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
         btnLogin = (TextView) findViewById(R.id.login);
@@ -297,7 +299,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         google_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.sign_in_button && !google_api_client.isConnecting()) {
+                if (v.getId() == R.id.google_login && !google_api_client.isConnecting()) {
                     sign_in_clicked = true;
                     google_api_client.connect();
                 }
@@ -403,6 +405,20 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
        inputPassword.setError(null);
     }
 
+    public static void showHashKey(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    "co.froogal.froogal", PackageManager.GET_SIGNATURES); //Your            package name here
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
+        }
+    }
+
     @Override
     public void onConnected(Bundle bundle) {
 
@@ -468,6 +484,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     Log.d(TAG, "City Name Call Failed");
                 }
 
+                registered_through = "g";
                 // Store in database
                 new process_login_google().execute();
 

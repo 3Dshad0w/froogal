@@ -3,14 +3,19 @@ package co.froogal.froogal.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +35,14 @@ public class locationListViewFragment extends Fragment {
     }
 
     private RecyclerView recList;
+    List<RestaurantInfo> list;
+    RestaurantAdapter ca;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,66 +55,10 @@ public class locationListViewFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        RestaurantAdapter ca = new RestaurantAdapter(createList(30));
-        /*
-        * private class ProcessRestaurants extends AsyncTask<String, String, JSONObject> {
+        list = createList(10);
+        ca = new RestaurantAdapter(list);
 
-
-        private ProgressDialog pDialog;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Getting Resources ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... args) {
-
-            UserFunctions userFunction = new UserFunctions();
-
-            JSONObject json = userFunction.getRestaurants("1");
-
-            Log.d("RestaurantFlashing", json.toString());
-
-            return json;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject json) {
-
-
-            List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
-
-            JSONObject restaurantsJson = null;
-
-            restaurantsJson = json.getJSONObject("restaurants");
-                Log.d("restaurantsJson", restaurantsJson.toString());
-                int noOfRestaurants = restaurantsJson.length();
-                int i = 0;
-            for (i = 0 ; i < noOfRestaurants ; i++) {
-                JSONObject restaurantJson = null;
-                restaurantJson = restaurantsJson.getJSONObject("'"+ i +"'");
-
-            RestaurantInfo ci = new RestaurantInfo();
-            ci.resName = restaurantJson.getString("name");
-            ci.resAddress = restaurantJson.getString("address");
-
-            result.add(ci);
-
-        }
-
-        return result;
-        * */
         recList.setAdapter(ca);
-        /**/
 
         return rootView;
     }
@@ -128,5 +80,37 @@ public class locationListViewFragment extends Fragment {
         return result;
     }
 
+    public void updateList(JSONObject json){
+
+        List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
+
+        JSONObject restaurantsJson = null;
+
+        //restaurantsJson = json.getJSONObject("restaurants");
+        restaurantsJson = json;
+
+        Log.d("restaurantsJson", restaurantsJson.toString());
+        int noOfRestaurants = restaurantsJson.length();
+        int i = 0;
+        for (i = 0 ; i < noOfRestaurants ; i++) {
+            JSONObject restaurantJson = null;
+            try {
+                restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
+
+            RestaurantInfo ci = new RestaurantInfo();
+            ci.resName = restaurantJson.getString("name");
+            ci.resAddress = restaurantJson.getString("address");
+            result.add(ci);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+        }
+
+        ca.updateList(result);
+    }
 
 }

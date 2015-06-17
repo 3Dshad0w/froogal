@@ -1,5 +1,6 @@
 package co.froogal.froogal;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -55,8 +56,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import co.froogal.froogal.adapter.PlaceAutocompleteAdapter;
+import co.froogal.froogal.adapter.RestaurantInfo;
 import co.froogal.froogal.fragment.locationListViewFragment;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +69,7 @@ import java.util.List;
 import java.util.Map;
 import co.froogal.froogal.adapter.DrawerAdapter;
 import co.froogal.froogal.library.GMapV2Direction;
+import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.model.DrawerItem;
 import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.ImageUtil;
@@ -124,7 +130,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     String username = "user";
 
     private Handler mHandler;
-
+    private JSONObject restaurantJson = null;
+    locationListViewFragment listFragment;
     basic_utils bu;
 
 
@@ -148,7 +155,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
-
+        listFragment = locationListViewFragment.newInstance();
         // Updating values from shared preferences
         if(bu.location_check()) {
 
@@ -157,6 +164,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             Log.d(TAG,"Location Updated from shared preference");
 
         }
+
+
 
         // Update position won't work for 3 seconds
         new Handler().postDelayed(new Runnable() {
@@ -242,7 +251,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         View headerView = null;
 
         headerView = prepareHeaderView(R.layout.header_navigation_drawer,
-                "http://pengaja.com/uiapptemplate/avatars/0.jpg");
+                bu.get_defaults("image_url"));
 
 
         BaseAdapter adapter = new DrawerAdapter(this, mDrawerItems, isFirstType);
@@ -256,14 +265,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         ImageView iv = (ImageView) headerView.findViewById(R.id.image);
         TextView tv = (TextView) headerView.findViewById(R.id.email);
         ImageUtil.displayRoundImage(iv, url, null);
-        sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-        if (sharedpreferences.contains("email")) {
-            if (sharedpreferences.contains("password")) {
-                username = sharedpreferences.getString("fname", "User");
-                Log.d("preferencehere", sharedpreferences.getString("fname", "user"));
-            }
-        }
-        tv.setText(username);
+
+        tv.setText(bu.get_defaults("fname"));
 
         return headerView;
     }
@@ -319,7 +322,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         if (id == R.id.action_logout) {
 
             basic_utils bf = new basic_utils(getApplicationContext());
-            if(bf.get_defaults("registered_through").equals("facebook"))
+            if(bf.get_defaults("registered_through").equals("f"))
             {
                 LoginManager.getInstance().logOut();
             }
@@ -397,6 +400,23 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     }
 
+    private void flipCard() {
+
+        if (fragmentback) {
+            getFragmentManager().popBackStack();
+            return;
+        }
+        fragmentback = true;
+
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(
+                        R.anim.card_flip_right_in, R.anim.card_flip_right_out,
+                        R.anim.card_flip_left_in, R.anim.card_flip_left_out)
+                .replace(R.id.content_frame, listFragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
 
     protected synchronized void buildGoogleApiClient() {
 
@@ -507,6 +527,53 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
         bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
+        new ProcessRestaurants();
+
+    }
+
+
+    private class ProcessRestaurants extends AsyncTask<String, String, JSONObject> {
+
+
+        private ProgressDialog pDialog;
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(getBaseContext());
+            pDialog.setTitle("Contacting Servers");
+            pDialog.setMessage("Getting Resources ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+
+            JSONObject json = null;//userFunction.getRestaurants(longitude, latitude);
+
+            Log.d("RestaurantFlashingLOL", json.toString());
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+            try {
+                listFragment.updateList(json.getJSONObject("restaurants"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     @Override
@@ -606,24 +673,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     }
 
-    private void flipCard() {
 
-        if (fragmentback) {
-            getFragmentManager().popBackStack();
-            return;
-        }
-        fragmentback = true;
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        getFragmentManager().beginTransaction()
-                .setCustomAnimations(
-                        R.anim.card_flip_right_in, R.anim.card_flip_right_out,
-                        R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-                .replace(R.id.content_frame, locationListViewFragment.newInstance())
-                .addToBackStack(null)
-                .commit();
-
-    }
 
     @Override
     protected void onPause() {
