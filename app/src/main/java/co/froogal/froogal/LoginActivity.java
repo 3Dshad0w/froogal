@@ -653,6 +653,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", "");
                         bu.set_defaults("birthday", birthday);
+                        bu.set_defaults("facebook_id",id);
 
                         // TODO done later after akhil singh writes!!
 

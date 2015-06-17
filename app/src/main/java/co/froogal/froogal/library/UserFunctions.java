@@ -46,7 +46,7 @@ public class UserFunctions {
 
     public JSONObject save_facebook_user_data_to_server(String id,String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
         // Building Parameters
-        Log.d(TAG, "save_google_user_data_to_server");
+        Log.d(TAG, "save_facebook_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("first_name", first_name));
         params.add(new BasicNameValuePair("last_name", last_name));
