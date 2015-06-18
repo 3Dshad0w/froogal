@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import co.froogal.froogal.fragment.AboutScrollViewFragment;
 import co.froogal.froogal.fragment.MenuListViewFragment;
+import co.froogal.froogal.fragment.OffersViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
@@ -175,7 +176,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
             Fragment fragment;
             switch (position) {
                 case 0:
-                    fragment = DemoRecyclerViewFragment.newInstance(0);
+                    fragment = OffersViewFragment.newInstance(0);
                     break;
 
                 case 1:
