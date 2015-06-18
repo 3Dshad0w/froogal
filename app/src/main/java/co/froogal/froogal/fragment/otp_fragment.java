@@ -82,15 +82,15 @@ public class otp_fragment extends Fragment {
 
     //UI elements
     private Button submit_button;
-    private EditText edit_Text;
+    public EditText edit_Text;
     TextView text_otp;
 
     //otp variables
     String number = "";
-    String otp = "";
-    int otp_got = 0;
+    long otp = 0;
+    long otp_got = 0;
     String name = "";
-    String result ="";
+    Boolean otp_sent = false;
 
     //basic utils object
     basic_utils bu;
@@ -104,6 +104,13 @@ public class otp_fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.provider.Telephony.SMS_RECEIVED");
+        filter.addCategory("co.froogal.froogal");
+        getActivity().registerReceiver(new SMSReceiver(), filter);
+
+
 
         View v = inflater.inflate(R.layout.fragment_otp_fragment, container, false);
 
@@ -137,11 +144,7 @@ public class otp_fragment extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit_Text.getText().length() >= 10)
-                {
-                    number = edit_Text.getText().toString();
                     send_otp();
-                }
             }
         });
         return v;
@@ -149,50 +152,70 @@ public class otp_fragment extends Fragment {
 
     private void send_otp()
     {
-        new process_otp().execute();
+        if(!otp_sent)
+        {
+            if(edit_Text.getText().length() >= 10) {
+                number = edit_Text.getText().toString();
+                new process_otp().execute();
+            }
+            else
+            {
+                // TODO
+                // Start animation
+            }
+        }
+        else
+        {
+            if(edit_Text.getText() != null)
+            {
+                try {
+                    otp_got = Integer.parseInt(edit_Text.getText().toString());
+                }
+                catch (NumberFormatException e) {
+                    Log.d(TAG,"Number Format exception");
+                }
+                if(otp_got == otp)
+                {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+                else
+                {
+                    Log.d(TAG,"4");
+                    // TODO
+                    // start animation buzz
+                }
+            }
+        }
     }
 
     public class SMSReceiver extends BroadcastReceiver {
 
-        // Get the object of SmsManager
-        final SmsManager sms = SmsManager.getDefault();
-
         public void onReceive(Context context, Intent intent)
         {
-
-
-            // Retrieves a map of extended data from the intent.
             final Bundle bundle = intent.getExtras();
-
             try {
-
                 if (bundle != null) {
-
                     final Object[] pdusObj = (Object[]) bundle.get("pdus");
-
                     for (int i = 0; i < pdusObj.length; i++) {
-
                         SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                         String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-
                         String senderNum = phoneNumber;
                         String message = currentMessage.getDisplayMessageBody();
-
-                        Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
-
-
-                        // Show Alert
-                        int duration = Toast.LENGTH_LONG;
-                        Toast toast = Toast.makeText(context,
-                                "senderNum: "+ senderNum + ", message: " + message, duration);
-                        toast.show();
-
-                    } // end for loop
-                } // bundle is null
-
+                        if(senderNum.equals("DM-FRUGAL"))
+                        {
+                            if(message.contains("Froogal."))
+                            {
+                                if(message.contains("OTP")) {
+                                    edit_Text.setText(String.valueOf(Integer.valueOf(message.substring(29,33))));
+                                }
+                            }
+                        }
+                    }
+                }
             } catch (Exception e) {
                 Log.e("SmsReceiver", "Exception smsReceiver" + e);
-
             }
         }
     }
@@ -223,7 +246,8 @@ public class otp_fragment extends Fragment {
             {
                 name = bu.get_defaults("lname");
             }
-            JSONObject json = userFunction.send_otp(String.valueOf((int)(Math.random() * 9000)+1000),number,name);
+            otp = (int)(Math.random() * 9000) + 1000;
+            JSONObject json = userFunction.send_otp(String.valueOf(otp),number,name);
             return json;
 
         }
@@ -241,62 +265,7 @@ public class otp_fragment extends Fragment {
 
                     if(res.contains("Your message is successfully sent to")){
 
-
-                        /*// Sending broadcast
-                        final String action = "android.provider.Telephony.SMS_RECEIVED";
-                        IntentFilter intentFilter = new IntentFilter(action);
-
-
-
-                        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(sms_otp, intentFilter);
-
-                        // broadcast reciever
-                        sms_otp = new BroadcastReceiver() {
-
-                            @Override
-                            public void onReceive(Context context, Intent intent) {
-
-                                final Bundle bundle = intent.getExtras();
-
-                                try {
-
-                                    if (bundle != null) {
-
-                                        final Object[] pdusObj = (Object[]) bundle.get("pdus");
-
-                                        for (int i = 0; i < pdusObj.length; i++) {
-
-                                            SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-                                            String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-
-                                            String senderNum = phoneNumber;
-                                            String message = currentMessage.getDisplayMessageBody();
-                                            if(senderNum.equals("DM-FRUGAL"))
-                                            {
-                                                if(message.contains("Froogal."))
-                                                {
-                                                    if(message.contains("OTP"))
-                                                    {
-                                                        otp_got = Integer.valueOf(message.substring(29,33));
-                                                        edit_Text.setText(otp_got);
-                                                        Log.d(TAG,"GIt into");
-
-                                                        // TODO
-                                                        //LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(sms_otp);
-
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                } catch (Exception e) {
-                                    Log.e("SmsReceiver", "Exception smsReceiver" +e);
-
-                                }
-                            }
-                        };*/
-
+                        otp_sent = true;
                         text_otp.setText("OTP");
                         edit_Text.setText("");
                         bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text());
@@ -350,7 +319,7 @@ public class otp_fragment extends Fragment {
         animator_otp_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.X, width, width/2 -310 );
 
         // Set the duration and interpolator for this animation
-        animator_otp_edittext.setDuration(2000);
+        animator_otp_edittext.setDuration(1000);
         animator_otp_edittext.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_edittext;
@@ -361,7 +330,7 @@ public class otp_fragment extends Fragment {
         animator_otp_button = ObjectAnimator.ofFloat(view_animate_button, View.X, width, width/2 - 220 );
 
         // Set the duration and interpolator for this animation
-        animator_otp_button.setDuration(2000);
+        animator_otp_button.setDuration(1000);
         animator_otp_button.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_button;
@@ -405,7 +374,7 @@ public class otp_fragment extends Fragment {
         animator_otp_text = ObjectAnimator.ofFloat(view_animate_text1, View.X,width,width/2 - 80);
 
         // Set the duration and interpolator for this animation
-        animator_otp_text.setDuration(2000);
+        animator_otp_text.setDuration(1000);
         animator_otp_text.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_text;

@@ -42,11 +42,6 @@
                 <category android:name="co.froogal.froogal" />
             </intent-filter>
         </receiver>
-        <receiver android:name="co.froogal.froogal.fragment.otp_fragment$SMSReceiver">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-            </intent-filter>
-        </receiver>
         <service
             android:name=".MyGcmListenerService"
             android:exported="false" >
