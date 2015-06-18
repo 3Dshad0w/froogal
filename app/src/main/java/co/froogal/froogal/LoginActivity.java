@@ -36,6 +36,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
@@ -234,7 +235,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                                 registered_at = addresses.get(0).getLocality();
                                             }
                                         } catch (Exception e) {
-                                            Log.d(TAG, "City Name Call Failed");
+                                            Log.d(TAG, e.toString());
                                         }
                                     }
                                     registered_through = "f";
@@ -456,11 +457,14 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         last_name = person_name.getGivenName();
                     }
                 }
+                if(currentPerson.hasId())
+                {
+                    id = currentPerson.getId();
+                }
 
                 // TODO see birthday
                 if (currentPerson.hasBirthday()) {
                     birthday = currentPerson.getBirthday();
-                    Log.d(TAG, birthday);
                 }
                 ip_address = bu.get_defaults("ip_address");
                 if (currentPerson.hasImage()) {
@@ -481,7 +485,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         registered_at = addresses.get(0).getLocality();
                     }
                 } catch (Exception e) {
-                    Log.d(TAG, "City Name Call Failed");
+                    Log.d(TAG, e.toString());
                 }
 
                 registered_through = "g";
@@ -582,7 +586,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         protected JSONObject doInBackground(String... args) {
 
             gcm_token = bu.get_defaults("gcm_token");
-            json = uf.save_google_user_data_to_server(gcm_token,first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday);
+            json = uf.save_google_user_data_to_server(id,gcm_token,first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday);
             return json;
 
         }
@@ -609,17 +613,26 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", "");
                         bu.set_defaults("birthday", birthday);
+                        bu.set_defaults("id", id);
 
                         // TODO done later after akhil singh writes!!
 
                //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
                //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         pDialog.dismiss();
-                        startActivity(intent);
-                        finish();
+                        if(bu.get_defaults("mobile") == "")
+                        {
+                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                     else{
 
@@ -679,10 +692,19 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
                         fbDialog.dismiss();
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        fbDialog.dismiss();
+                        if(bu.get_defaults("mobile") == "")
+                        {
+                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                     else{
 
@@ -774,6 +796,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
             }
         }
     }
+
+
     public void NetAsync(View view){
         // get Internet status
         //isInternetPresent = cd.isConnectingToInternet();

@@ -123,5 +123,9 @@
     <string name="raised">RAISED</string>
     <string name="flat">FLAT</string>
     <string name="title_activity_gcm_activity">gcm_activity</string>
+    <string name="title_activity_otp_activity">otp_activity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

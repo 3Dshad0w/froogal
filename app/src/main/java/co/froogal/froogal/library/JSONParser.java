@@ -87,9 +87,7 @@ public class JSONParser {
                 sb.append(line + "\n");
             }
             is.close();
-            Log.d("hereiam", sb.toString());
             json = sb.toString();
-            Log.i("tagconvertstr", "["+json+"]");
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result here1" + e.toString());
         }
@@ -99,14 +97,21 @@ public class JSONParser {
             jObj = new JSONObject(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
+            json = "{" + "'result'" + ":" + "'" + json + "'" + "}";
+            try {
+                jObj = new JSONObject(json);
+            }
+            catch (Exception e1)
+            {
+                Log.e("JSON Parser","Error parsing data" + e1.toString());
+            }
         }
 
         // return JSON String
         return jObj;
 
     }
-
-        }
+}
 
 
 

@@ -167,8 +167,6 @@ public class location_service extends Service implements GoogleApiClient.OnConne
         params.add(new BasicNameValuePair("longitude", longitude));
         params.add(new BasicNameValuePair("uid", uid));
 
-        Log.d(TAG,params.toString());
-
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
@@ -207,12 +205,11 @@ public class location_service extends Service implements GoogleApiClient.OnConne
                     try {
                         jObj = new JSONObject(json);
                     } catch (JSONException e) {
-                        Log.e("JSON Parser", "Error parsing data " + e.toString());
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-//                Log.d(TAG,jObj.toString());
             }
         });
 
