@@ -72,7 +72,7 @@ public class basic_utils {
         {
             if(preferences.contains("password")){
                 if(preferences.contains("mobile_verify")) {
-                    if (this.get_defaults("mobile_verify").equals("true")) {
+                    if (this.get_defaults("mobile_verify").toString().equals("true")) {
                         return true;
                     }
                 }

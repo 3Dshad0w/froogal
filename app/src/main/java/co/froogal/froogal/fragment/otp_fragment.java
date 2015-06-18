@@ -31,6 +31,7 @@ import co.froogal.froogal.LoginActivity;
 import co.froogal.froogal.MainActivity;
 import co.froogal.froogal.R;
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.otp_activity;
 import co.froogal.froogal.util.basic_utils;
 
 /**
@@ -84,6 +85,9 @@ public class otp_fragment extends Fragment {
     //basic utils object
     basic_utils bu;
 
+    //User Function
+    UserFunctions uf;
+
     // Receiver
     public BroadcastReceiver sms_otp;
 
@@ -116,6 +120,7 @@ public class otp_fragment extends Fragment {
         edit_Text = (EditText) v.findViewById(R.id.editText);
         text_otp = (TextView) v.findViewById(R.id.textView5);
         bu = new basic_utils(getActivity());
+        uf = new UserFunctions();
 
         // Select interpolator
         Interpolator interpolator_overshoot = new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.overshoot);
@@ -177,10 +182,9 @@ public class otp_fragment extends Fragment {
                 }
                 if(otp_got == otp)
                 {
-                    bu.set_defaults("mobile_verify","true");
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+                    bu.set_defaults("mobile_verify", "true");
+                    bu.set_defaults("mobile", number);
+                    new process_mobile().execute();
                 }
                 else
                 {
@@ -222,6 +226,57 @@ public class otp_fragment extends Fragment {
             } catch (Exception e) {
                 Log.e("SmsReceiver", "Exception smsReceiver" + e);
             }
+        }
+    }
+
+    private class process_mobile extends AsyncTask<String, String, JSONObject> {
+
+
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setTitle("Checking ");
+            pDialog.setMessage("Starting ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = userFunction.send_mobile_verification_status(number, "true");
+            return json;
+
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+            pDialog.dismiss();
+           // try {
+                // TODO akhil singh
+               // if (json.getString("success") != null) {
+               //     String res = json.getString("success");
+               //     if(Integer.parseInt(res) == 1){
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+
+               //     }
+               //     else{
+                //        show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+                //    }
+             //   }
+           // } catch (JSONException e) {
+           //     show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+           // }
         }
     }
 
