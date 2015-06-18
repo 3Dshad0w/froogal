@@ -586,7 +586,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         protected JSONObject doInBackground(String... args) {
 
             gcm_token = bu.get_defaults("gcm_token");
-            json = uf.save_google_user_data_to_server(id,gcm_token,first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday);
+            json = uf.save_google_user_data_to_server(gcm_token,first_name,last_name,image_url,email,ip_address,imei,registered_through,latitude,longitude,registered_at,birthday, id);
             return json;
 
         }
