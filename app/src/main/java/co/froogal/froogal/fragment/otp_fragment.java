@@ -69,6 +69,8 @@ public class otp_fragment extends Fragment {
     View view_animate_text1;
     AnimatorSet bouncer;
     AnimatorSet bouncer1;
+    AnimatorSet bouncer2;
+    AnimatorSet bouncer3;
     ObjectAnimator animator_edittext;
     ObjectAnimator animator_otp_edittext;
     ObjectAnimator animator_button;
@@ -76,6 +78,7 @@ public class otp_fragment extends Fragment {
     ObjectAnimator animator_text;
     ObjectAnimator animator_text1;
     ObjectAnimator animator_otp_text;
+    ObjectAnimator animator_buzz;
     Display display;
     int width;
     int height;
@@ -122,6 +125,8 @@ public class otp_fragment extends Fragment {
         display = getActivity().getWindowManager().getDefaultDisplay();
         bouncer = new AnimatorSet();
         bouncer1 = new AnimatorSet();
+        bouncer2 = new AnimatorSet();
+        bouncer3 = new AnimatorSet();
         submit_button = (Button) v.findViewById(R.id.button);
         edit_Text = (EditText) v.findViewById(R.id.editText);
         text_otp = (TextView) v.findViewById(R.id.textView5);
@@ -160,8 +165,10 @@ public class otp_fragment extends Fragment {
             }
             else
             {
-                // TODO
-                // Start animation
+                bouncer2.play(startAnimation_buzz1()).before(startAnimation_buzz2());
+                bouncer3.play(bouncer2).before(startAnimation_buzz3());
+                bouncer3.start();
+                edit_Text.setText("");
             }
         }
         else
@@ -182,9 +189,10 @@ public class otp_fragment extends Fragment {
                 }
                 else
                 {
-                    Log.d(TAG,"4");
-                    // TODO
-                    // start animation buzz
+                    bouncer2.play(startAnimation_buzz1()).before(startAnimation_buzz2());
+                    bouncer3.play(bouncer2).before(startAnimation_buzz3());
+                    bouncer3.start();
+                    edit_Text.setText("");
                 }
             }
         }
@@ -378,6 +386,39 @@ public class otp_fragment extends Fragment {
         animator_otp_text.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_text;
+    }
+
+    public ObjectAnimator startAnimation_buzz1() {
+
+        animator_buzz = ObjectAnimator.ofFloat(view_animate_edittext, View.X,view_animate_edittext.getX(),view_animate_edittext.getX() - 70);
+
+        // Set the duration and interpolator for this animation
+        animator_buzz.setDuration(80);
+        animator_buzz.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.linear));
+
+        return animator_buzz;
+    }
+
+    public ObjectAnimator startAnimation_buzz2() {
+
+        animator_buzz = ObjectAnimator.ofFloat(view_animate_edittext, View.X,view_animate_edittext.getX() - 70,view_animate_edittext.getX() + 70);
+
+        // Set the duration and interpolator for this animation
+        animator_buzz.setDuration(80);
+        animator_buzz.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.linear));
+
+        return animator_buzz;
+    }
+
+    public ObjectAnimator startAnimation_buzz3() {
+
+        animator_buzz = ObjectAnimator.ofFloat(view_animate_edittext, View.X,view_animate_edittext.getX() + 70,view_animate_edittext.getX());
+
+        // Set the duration and interpolator for this animation
+        animator_buzz.setDuration(80);
+        animator_buzz.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.linear));
+
+        return animator_buzz;
     }
 
 
