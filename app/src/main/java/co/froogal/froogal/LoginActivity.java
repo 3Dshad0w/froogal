@@ -621,14 +621,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
                         pDialog.dismiss();
-                        if(bu.get_defaults("mobile") == "")
-                        {
-                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else
-                        {
+                        if(bu.get_defaults("mobile") == "") {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
                             finish();

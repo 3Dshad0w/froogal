@@ -9,15 +9,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Path;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.text.Layout;
-import android.text.LoginFilter;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -27,26 +23,15 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import com.nhaarman.listviewanimations.util.AbsListViewWrapper;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.UTFDataFormatException;
-
+import co.froogal.froogal.LoginActivity;
 import co.froogal.froogal.MainActivity;
-import co.froogal.froogal.QuickstartPreferences;
 import co.froogal.froogal.R;
 import co.froogal.froogal.library.UserFunctions;
-import co.froogal.froogal.otp_activity;
 import co.froogal.froogal.util.basic_utils;
-import co.froogal.froogal.view.FloatLabeledEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,6 +79,7 @@ public class otp_fragment extends Fragment {
     long otp_got = 0;
     String name = "";
     Boolean otp_sent = false;
+    Cursor cursor;
 
     //basic utils object
     basic_utils bu;
@@ -108,14 +94,13 @@ public class otp_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
+        View v = inflater.inflate(R.layout.fragment_otp_fragment, container, false);
+
+        // Initialize receiver
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.provider.Telephony.SMS_RECEIVED");
         filter.addCategory("co.froogal.froogal");
         getActivity().registerReceiver(new SMSReceiver(), filter);
-
-
-
-        View v = inflater.inflate(R.layout.fragment_otp_fragment, container, false);
 
         // UI initialization
         view_animate_edittext = v.findViewById(R.id.editText);
@@ -142,6 +127,11 @@ public class otp_fragment extends Fragment {
         Log.d(TAG, "Width " + width);
 
         // Start animation
+        if(bu.get_defaults("mobile") != "")
+        {
+            text_otp.setText("OTP");
+            new process_otp();
+        }
         bouncer.play(startAnimation_edittext(interpolator_anti_overshoot)).with(startAnimation_button(interpolator_anti_overshoot)).before(startAnimation_text(interpolator_overshoot)).before(startAnimation_text1(interpolator_overshoot));
         bouncer.start();
 
@@ -149,7 +139,11 @@ public class otp_fragment extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    send_otp();
+                if(bu.get_defaults("mobile") != "")
+                {
+                    otp_sent = true;
+                }
+                send_otp();
             }
         });
         return v;
@@ -183,6 +177,7 @@ public class otp_fragment extends Fragment {
                 }
                 if(otp_got == otp)
                 {
+                    bu.set_defaults("mobile_verify","true");
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish();
@@ -216,7 +211,9 @@ public class otp_fragment extends Fragment {
                             if(message.contains("Froogal."))
                             {
                                 if(message.contains("OTP")) {
-                                    edit_Text.setText(String.valueOf(Integer.valueOf(message.substring(29,33))));
+                                    if(message.toString().contains(String.valueOf(otp))) {
+                                        edit_Text.setText(String.valueOf(otp));
+                                    }
                                 }
                             }
                         }
@@ -280,8 +277,18 @@ public class otp_fragment extends Fragment {
                         bouncer1.start();
 
                     }else{
-                        // Start animation for cycle
-                        Log.d(TAG,"Cycle animation");
+
+                        if(bu.get_defaults("mobile") != "") {
+                            show_alert_dialog_invalid(getActivity(),"Invalid Mobile Number", "Please check the number you have typed !");
+                        }
+                        else
+                        {
+                            bouncer2.play(startAnimation_buzz1()).before(startAnimation_buzz2());
+                            bouncer3.play(bouncer2).before(startAnimation_buzz3());
+                            bouncer3.start();
+                            edit_Text.setText("");
+
+                        }
 
                     }
                 }
@@ -302,6 +309,22 @@ public class otp_fragment extends Fragment {
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+            }
+        });
+        alertDialog.show();
+    }
+
+    @SuppressWarnings("deprecation")
+    public void show_alert_dialog_invalid(Context context, String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
                 getActivity().finish();
             }
         });
