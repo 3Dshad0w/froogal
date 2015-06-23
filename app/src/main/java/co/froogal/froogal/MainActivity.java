@@ -155,7 +155,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
-        listFragment = locationListViewFragment.newInstance();
+
+        new ProcessRestaurants().execute();
         // Updating values from shared preferences
         if(bu.location_check()) {
 
@@ -167,13 +168,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
 
 
-        // Update position won't work for 3 seconds
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateposition = true;
-            }
-        }, 3000);
+
 
         // Card flip animation
         if (savedInstanceState == null) {
@@ -243,8 +238,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     }
 
     private void setAdapter() {
-        String option = LEFT_MENU_OPTION_2;
-
 
         boolean isFirstType = true;
 
@@ -527,7 +520,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
         bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
-        new ProcessRestaurants();
+
 
     }
 
@@ -543,7 +536,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pDialog = new ProgressDialog(getBaseContext());
+            pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setTitle("Contacting Servers");
             pDialog.setMessage("Getting Resources ...");
             pDialog.setIndeterminate(false);
@@ -556,7 +549,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
             UserFunctions userFunction = new UserFunctions();
 
-            JSONObject json = null;//userFunction.getRestaurants(longitude, latitude);
+            //JSONObject json = null;//
+            JSONObject json = userFunction.getRestaurants(longitude, latitude);
 
             Log.d("RestaurantFlashingLOL", json.toString());
 
@@ -567,10 +561,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         protected void onPostExecute(JSONObject json) {
 
             try {
-                listFragment.updateList(json.getJSONObject("restaurants"));
+                listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+                //listFragment.updateList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            pDialog.dismiss();
 
         }
 

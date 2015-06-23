@@ -17,7 +17,7 @@ import co.froogal.froogal.fragment.OffersViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
-import co.froogal.froogal.fragment.DemoRecyclerViewFragment;
+import co.froogal.froogal.fragment.ReviewFragment;
 
 
 public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
@@ -184,7 +184,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
                     break;
 
                 case 2:
-                    fragment = DemoRecyclerViewFragment.newInstance(2);
+                    fragment = ReviewFragment.newInstance(2);
                     break;
 
                 case 3:

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,13 @@ import co.froogal.froogal.adapter.RestaurantInfo;
  */
 public class locationListViewFragment extends Fragment {
 
-    public static locationListViewFragment newInstance() {
-        return new locationListViewFragment();
+    public static locationListViewFragment newInstance(JSONObject restaurants) {
+        locationListViewFragment fragment = new locationListViewFragment();
+        // Supply index input as an argument.
+        Bundle args = new Bundle();
+        args.putString("values", restaurants.toString());
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private RecyclerView recList;
@@ -41,6 +47,7 @@ public class locationListViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -55,8 +62,17 @@ public class locationListViewFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        list = createList(10);
+        Bundle args = getArguments();
+        JSONObject resJson = null;
+         try {
+            resJson = new JSONObject(args.getString("values"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        list = createList(resJson);
         ca = new RestaurantAdapter(list);
+
 
         recList.setAdapter(ca);
 
@@ -65,15 +81,34 @@ public class locationListViewFragment extends Fragment {
 
 
 
-    private List<RestaurantInfo> createList(int size) {
+    private List<RestaurantInfo> createList(JSONObject json) {
+
 
         List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
-        for (int i=1; i <= size; i++) {
-            RestaurantInfo ci = new RestaurantInfo();
-            ci.resName = RestaurantInfo.RES_NAME + i;
-            ci.resAddress = RestaurantInfo.ADDRESS + i;
 
-            result.add(ci);
+        JSONObject restaurantsJson = null;
+
+        //restaurantsJson = json.getJSONObject("restaurants");
+        restaurantsJson = json;
+
+        Log.d("restaurantsJson", restaurantsJson.toString());
+        int noOfRestaurants = restaurantsJson.length();
+        int i = 0;
+        for (i = 0 ; i < noOfRestaurants ; i++) {
+            JSONObject restaurantJson = null;
+            try {
+                restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
+
+                RestaurantInfo ci = new RestaurantInfo();
+                ci.resName = restaurantJson.getString("name");
+                ci.resAddress = restaurantJson.getString("address");
+                result.add(ci);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
 
         }
 
@@ -110,7 +145,8 @@ public class locationListViewFragment extends Fragment {
 
         }
 
-        ca.updateList(result);
+        ca.updateData(result);
+
     }
 
 }

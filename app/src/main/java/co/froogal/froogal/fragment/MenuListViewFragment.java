@@ -64,7 +64,6 @@ public class MenuListViewFragment extends ListViewFragment {
 
         View view = inflater.inflate(R.layout.activity_expandable_list_view, container, false);
         mListView = (AnimatedExpandableListView) view.findViewById(R.id.list_view);
-
         View placeHolderView = inflater.inflate(R.layout.header_placeholder, mListView, false);
         mListView.addHeaderView(placeHolderView);
 
@@ -245,8 +244,6 @@ public class MenuListViewFragment extends ListViewFragment {
             Log.d("redmenu", "true");
             JSONObject json = userFunction.getMenu("1");
 
-            Log.d("MenuFlashing", json.toString());
-
             return json;
         }
 
@@ -269,25 +266,29 @@ public class MenuListViewFragment extends ListViewFragment {
                         item.title = categoryJson.getString("name") +" status: " +categoryJson.getString("status");
                         Log.d("categoryJson", categoryJson.toString());
                         JSONObject itemsJson = null;
-                        itemsJson = categoryJson.getJSONObject("items");
-                        Log.d("itemSSJson", itemsJson.toString());
-                        int noOfitems = itemsJson.length();
+                        try {
+                            itemsJson = categoryJson.getJSONObject("items");
+                            Log.d("itemSSJson", itemsJson.toString());
+                            int noOfitems = itemsJson.length();
 
-                        for(j = 0 ;j < noOfitems ; j++){
+                            for (j = 0; j < noOfitems; j++) {
 
-                            JSONObject itemJson = null;
-                            itemJson = itemsJson.getJSONObject("'"+ j +"'");
-                            Log.d("itemJson", itemJson.toString());
-                            ChildItem child = new ChildItem();
-                            child.title = itemJson.getString("name") + "(size : " + itemJson.getString("size_value") + ")" ;
-                            child.price = itemJson.getString("price");
-                            child.rating = itemJson.getString("rating");
-                            child.description = "Description: " + itemJson.getString("description") + "orderedTimes: " + itemJson.getString("orderedTimes");
-                            item.items.add(child);
+                                JSONObject itemJson = null;
+                                itemJson = itemsJson.getJSONObject("'" + j + "'");
+                                Log.d("itemJson", itemJson.toString());
+                                ChildItem child = new ChildItem();
+                                child.title = itemJson.getString("name") + "(size : " + itemJson.getString("size") + ")";
+                                child.price = itemJson.getString("price");
+                                child.rating = itemJson.getString("rating");
+                                child.description = "Description: " + itemJson.getString("description");
+                                item.items.add(child);
 
 
+                            }
                         }
-
+                        catch (JSONException e1){
+                            e1.printStackTrace();
+                        }
 
 
 

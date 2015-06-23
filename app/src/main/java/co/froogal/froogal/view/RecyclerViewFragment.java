@@ -2,9 +2,7 @@ package co.froogal.froogal.view;
 
 import android.support.v7.widget.RecyclerView;
 
-/**
- * Created by desmond on 1/6/15.
- */
+
 public abstract class RecyclerViewFragment extends ScrollTabHolderFragment {
 
     protected RecyclerView mRecyclerView;

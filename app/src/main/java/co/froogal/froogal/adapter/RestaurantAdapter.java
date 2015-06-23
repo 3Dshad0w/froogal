@@ -61,7 +61,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
                 v.getContext().startActivity(openMainActivity);
             }
         });
-        return new RestaurantViewHolder(itemView, this);
+        return new RestaurantViewHolder(itemView);
     }
 
     @Override
@@ -77,9 +77,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         private RestaurantAdapter mAdapter;
         View left;
 
-        public RestaurantViewHolder(View v, RestaurantAdapter adapter) {
+        public RestaurantViewHolder(View v) {
             super(v);
-            mAdapter = adapter;
             resName =  (TextView) v.findViewById(R.id.resName);
             resAdd = (TextView)  v.findViewById(R.id.resAddress);
 
@@ -93,9 +92,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     }
 
-    public void updateList(List<RestaurantInfo> data) {
+    public void updateData(List<RestaurantInfo> data) {
         restaurantList = data;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
 
