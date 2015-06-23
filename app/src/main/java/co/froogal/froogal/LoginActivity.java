@@ -440,6 +440,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         if(sign_in_clicked) {
 
             // Retrieving additional information
+            Log.d("im", "here");
 
             if (Plus.PeopleApi.getCurrentPerson(google_api_client) != null) {
                 Person currentPerson = Plus.PeopleApi.getCurrentPerson(google_api_client);
@@ -492,6 +493,9 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                 // Store in database
                 new process_login_google().execute();
 
+            }
+            else{
+                Log.d("bitch", "here");
             }
         }
 
