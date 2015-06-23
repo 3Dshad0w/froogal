@@ -71,7 +71,11 @@ public class basic_utils {
         if (preferences.contains("email"))
         {
             if(preferences.contains("password")){
-                return true;
+                if(preferences.contains("mobile_verify")) {
+                    if (this.get_defaults("mobile_verify").toString().equals("true")) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -115,13 +119,6 @@ public class basic_utils {
         }
         return true;
 
-    }
-
-    // Imei retrival fucntion
-    public String get_imei()
-    {
-        TelephonyManager telephonyManager = (TelephonyManager)_context.getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getDeviceId();
     }
 
 }

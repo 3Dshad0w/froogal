@@ -27,6 +27,8 @@ public class UserFunctions {
     private static String save_location_to_server_URL = "http://froogal.in/files/save_location_to_server.php";
     private static String save_google_user_data_to_server_URL = "http://froogal.in/files/save_google_user_data_to_server.php";
     private static String save_facebook_user_data_to_server_URL = "http://froogal.in/files/save_facebook_user_data_to_server.php";
+    private static String send_mobile_verification_status_URL = "http://froogal.in/files/send_mobile_verification_status.php";
+
 
 
     private static String login_tag = "login";
@@ -38,6 +40,23 @@ public class UserFunctions {
     // constructor
     public UserFunctions(){
         jsonParser = new JSONParser();
+    }
+
+    /**
+     * Function to save mobile and its status
+     */
+
+    public JSONObject send_mobile_verification_status(String number,String unique_id){
+
+        // Building Parameters
+        Log.d(TAG, "send_mobile");
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("mobile", number));
+        params.add(new BasicNameValuePair("unique_id", unique_id));
+        params.add(new BasicNameValuePair("mobile_status", "true"));
+        JSONObject json = jsonParser.makeHttpRequest(send_mobile_verification_status_URL,"POST", params);
+        Log.d(TAG,"Json Response : " + json);
+        return json;
     }
 
     /**

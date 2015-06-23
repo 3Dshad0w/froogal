@@ -9,15 +9,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Path;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.text.Layout;
-import android.text.LoginFilter;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -27,26 +23,16 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import com.nhaarman.listviewanimations.util.AbsListViewWrapper;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.UTFDataFormatException;
-
+import co.froogal.froogal.LoginActivity;
 import co.froogal.froogal.MainActivity;
-import co.froogal.froogal.QuickstartPreferences;
 import co.froogal.froogal.R;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.otp_activity;
 import co.froogal.froogal.util.basic_utils;
-import co.froogal.froogal.view.FloatLabeledEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +55,8 @@ public class otp_fragment extends Fragment {
     View view_animate_text1;
     AnimatorSet bouncer;
     AnimatorSet bouncer1;
+    AnimatorSet bouncer2;
+    AnimatorSet bouncer3;
     ObjectAnimator animator_edittext;
     ObjectAnimator animator_otp_edittext;
     ObjectAnimator animator_button;
@@ -76,24 +64,29 @@ public class otp_fragment extends Fragment {
     ObjectAnimator animator_text;
     ObjectAnimator animator_text1;
     ObjectAnimator animator_otp_text;
+    ObjectAnimator animator_buzz;
     Display display;
     int width;
     int height;
 
     //UI elements
     private Button submit_button;
-    private EditText edit_Text;
+    public EditText edit_Text;
     TextView text_otp;
 
     //otp variables
     String number = "";
-    String otp = "";
-    int otp_got = 0;
+    long otp = 0;
+    long otp_got = 0;
     String name = "";
-    String result ="";
+    Boolean otp_sent = false;
+    Cursor cursor;
 
     //basic utils object
     basic_utils bu;
+
+    //User Function
+    UserFunctions uf;
 
     // Receiver
     public BroadcastReceiver sms_otp;
@@ -107,6 +100,12 @@ public class otp_fragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_otp_fragment, container, false);
 
+        // Initialize receiver
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.provider.Telephony.SMS_RECEIVED");
+        filter.addCategory("co.froogal.froogal");
+        getActivity().registerReceiver(new SMSReceiver(), filter);
+
         // UI initialization
         view_animate_edittext = v.findViewById(R.id.editText);
         view_animate_button = v.findViewById(R.id.button);
@@ -115,10 +114,13 @@ public class otp_fragment extends Fragment {
         display = getActivity().getWindowManager().getDefaultDisplay();
         bouncer = new AnimatorSet();
         bouncer1 = new AnimatorSet();
+        bouncer2 = new AnimatorSet();
+        bouncer3 = new AnimatorSet();
         submit_button = (Button) v.findViewById(R.id.button);
         edit_Text = (EditText) v.findViewById(R.id.editText);
         text_otp = (TextView) v.findViewById(R.id.textView5);
         bu = new basic_utils(getActivity());
+        uf = new UserFunctions();
 
         // Select interpolator
         Interpolator interpolator_overshoot = new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.overshoot);
@@ -130,6 +132,11 @@ public class otp_fragment extends Fragment {
         Log.d(TAG, "Width " + width);
 
         // Start animation
+        if(bu.get_defaults("mobile") != "")
+        {
+            text_otp.setText("OTP");
+            new process_otp();
+        }
         bouncer.play(startAnimation_edittext(interpolator_anti_overshoot)).with(startAnimation_button(interpolator_anti_overshoot)).before(startAnimation_text(interpolator_overshoot)).before(startAnimation_text1(interpolator_overshoot));
         bouncer.start();
 
@@ -137,11 +144,11 @@ public class otp_fragment extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit_Text.getText().length() >= 10)
+                if(bu.get_defaults("mobile") != "")
                 {
-                    number = edit_Text.getText().toString();
-                    send_otp();
+                    otp_sent = true;
                 }
+                send_otp();
             }
         });
         return v;
@@ -149,51 +156,127 @@ public class otp_fragment extends Fragment {
 
     private void send_otp()
     {
-        new process_otp().execute();
+        if(!otp_sent)
+        {
+            if(edit_Text.getText().length() >= 10) {
+                number = edit_Text.getText().toString();
+                new process_otp().execute();
+            }
+            else
+            {
+                bouncer2.play(startAnimation_buzz1()).before(startAnimation_buzz2());
+                bouncer3.play(bouncer2).before(startAnimation_buzz3());
+                bouncer3.start();
+                edit_Text.setText("");
+            }
+        }
+        else
+        {
+            if(edit_Text.getText() != null)
+            {
+                try {
+                    otp_got = Integer.parseInt(edit_Text.getText().toString());
+                }
+                catch (NumberFormatException e) {
+                    Log.d(TAG,"Number Format exception");
+                }
+                if(otp_got == otp)
+                {
+                    bu.set_defaults("mobile_verify", "true");
+                    bu.set_defaults("mobile", number);
+                    new process_mobile().execute();
+                }
+                else
+                {
+                    bouncer2.play(startAnimation_buzz1()).before(startAnimation_buzz2());
+                    bouncer3.play(bouncer2).before(startAnimation_buzz3());
+                    bouncer3.start();
+                    edit_Text.setText("");
+                }
+            }
+        }
     }
 
     public class SMSReceiver extends BroadcastReceiver {
 
-        // Get the object of SmsManager
-        final SmsManager sms = SmsManager.getDefault();
-
         public void onReceive(Context context, Intent intent)
         {
-
-
-            // Retrieves a map of extended data from the intent.
             final Bundle bundle = intent.getExtras();
-
             try {
-
                 if (bundle != null) {
-
                     final Object[] pdusObj = (Object[]) bundle.get("pdus");
-
                     for (int i = 0; i < pdusObj.length; i++) {
-
                         SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                         String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-
                         String senderNum = phoneNumber;
                         String message = currentMessage.getDisplayMessageBody();
-
-                        Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
-
-
-                        // Show Alert
-                        int duration = Toast.LENGTH_LONG;
-                        Toast toast = Toast.makeText(context,
-                                "senderNum: "+ senderNum + ", message: " + message, duration);
-                        toast.show();
-
-                    } // end for loop
-                } // bundle is null
-
+                        if(senderNum.equals("DM-FRUGAL"))
+                        {
+                            if(message.contains("Froogal."))
+                            {
+                                if(message.contains("OTP")) {
+                                    if(message.toString().contains(String.valueOf(otp))) {
+                                        edit_Text.setText(String.valueOf(otp));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             } catch (Exception e) {
                 Log.e("SmsReceiver", "Exception smsReceiver" + e);
-
             }
+        }
+    }
+
+    private class process_mobile extends AsyncTask<String, String, JSONObject> {
+
+
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setTitle("Checking ");
+            pDialog.setMessage("Starting ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = userFunction.send_mobile_verification_status(number, "true");
+            return json;
+
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+            pDialog.dismiss();
+           // try {
+                // TODO akhil singh
+               // if (json.getString("success") != null) {
+               //     String res = json.getString("success");
+               //     if(Integer.parseInt(res) == 1){
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+
+               //     }
+               //     else{
+                //        show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+                //    }
+             //   }
+           // } catch (JSONException e) {
+           //     show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+           // }
         }
     }
 
@@ -223,7 +306,8 @@ public class otp_fragment extends Fragment {
             {
                 name = bu.get_defaults("lname");
             }
-            JSONObject json = userFunction.send_otp(String.valueOf((int)(Math.random() * 9000)+1000),number,name);
+            otp = (int)(Math.random() * 9000) + 1000;
+            JSONObject json = userFunction.send_otp(String.valueOf(otp),number,name);
             return json;
 
         }
@@ -241,70 +325,25 @@ public class otp_fragment extends Fragment {
 
                     if(res.contains("Your message is successfully sent to")){
 
-
-                        /*// Sending broadcast
-                        final String action = "android.provider.Telephony.SMS_RECEIVED";
-                        IntentFilter intentFilter = new IntentFilter(action);
-
-
-
-                        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(sms_otp, intentFilter);
-
-                        // broadcast reciever
-                        sms_otp = new BroadcastReceiver() {
-
-                            @Override
-                            public void onReceive(Context context, Intent intent) {
-
-                                final Bundle bundle = intent.getExtras();
-
-                                try {
-
-                                    if (bundle != null) {
-
-                                        final Object[] pdusObj = (Object[]) bundle.get("pdus");
-
-                                        for (int i = 0; i < pdusObj.length; i++) {
-
-                                            SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-                                            String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-
-                                            String senderNum = phoneNumber;
-                                            String message = currentMessage.getDisplayMessageBody();
-                                            if(senderNum.equals("DM-FRUGAL"))
-                                            {
-                                                if(message.contains("Froogal."))
-                                                {
-                                                    if(message.contains("OTP"))
-                                                    {
-                                                        otp_got = Integer.valueOf(message.substring(29,33));
-                                                        edit_Text.setText(otp_got);
-                                                        Log.d(TAG,"GIt into");
-
-                                                        // TODO
-                                                        //LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(sms_otp);
-
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                } catch (Exception e) {
-                                    Log.e("SmsReceiver", "Exception smsReceiver" +e);
-
-                                }
-                            }
-                        };*/
-
+                        otp_sent = true;
                         text_otp.setText("OTP");
                         edit_Text.setText("");
                         bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text());
                         bouncer1.start();
 
                     }else{
-                        // Start animation for cycle
-                        Log.d(TAG,"Cycle animation");
+
+                        if(bu.get_defaults("mobile") != "") {
+                            show_alert_dialog_invalid(getActivity(),"Invalid Mobile Number", "Please check the number you have typed !");
+                        }
+                        else
+                        {
+                            bouncer2.play(startAnimation_buzz1()).before(startAnimation_buzz2());
+                            bouncer3.play(bouncer2).before(startAnimation_buzz3());
+                            bouncer3.start();
+                            edit_Text.setText("");
+
+                        }
 
                     }
                 }
@@ -331,6 +370,22 @@ public class otp_fragment extends Fragment {
         alertDialog.show();
     }
 
+    @SuppressWarnings("deprecation")
+    public void show_alert_dialog_invalid(Context context, String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+        alertDialog.show();
+    }
+
     // All animations
 
 
@@ -350,7 +405,7 @@ public class otp_fragment extends Fragment {
         animator_otp_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.X, width, width/2 -310 );
 
         // Set the duration and interpolator for this animation
-        animator_otp_edittext.setDuration(2000);
+        animator_otp_edittext.setDuration(1000);
         animator_otp_edittext.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_edittext;
@@ -361,7 +416,7 @@ public class otp_fragment extends Fragment {
         animator_otp_button = ObjectAnimator.ofFloat(view_animate_button, View.X, width, width/2 - 220 );
 
         // Set the duration and interpolator for this animation
-        animator_otp_button.setDuration(2000);
+        animator_otp_button.setDuration(1000);
         animator_otp_button.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_button;
@@ -405,10 +460,43 @@ public class otp_fragment extends Fragment {
         animator_otp_text = ObjectAnimator.ofFloat(view_animate_text1, View.X,width,width/2 - 80);
 
         // Set the duration and interpolator for this animation
-        animator_otp_text.setDuration(2000);
+        animator_otp_text.setDuration(1000);
         animator_otp_text.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_text;
+    }
+
+    public ObjectAnimator startAnimation_buzz1() {
+
+        animator_buzz = ObjectAnimator.ofFloat(view_animate_edittext, View.X,view_animate_edittext.getX(),view_animate_edittext.getX() - 70);
+
+        // Set the duration and interpolator for this animation
+        animator_buzz.setDuration(80);
+        animator_buzz.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.linear));
+
+        return animator_buzz;
+    }
+
+    public ObjectAnimator startAnimation_buzz2() {
+
+        animator_buzz = ObjectAnimator.ofFloat(view_animate_edittext, View.X,view_animate_edittext.getX() - 70,view_animate_edittext.getX() + 70);
+
+        // Set the duration and interpolator for this animation
+        animator_buzz.setDuration(80);
+        animator_buzz.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.linear));
+
+        return animator_buzz;
+    }
+
+    public ObjectAnimator startAnimation_buzz3() {
+
+        animator_buzz = ObjectAnimator.ofFloat(view_animate_edittext, View.X,view_animate_edittext.getX() + 70,view_animate_edittext.getX());
+
+        // Set the duration and interpolator for this animation
+        animator_buzz.setDuration(80);
+        animator_buzz.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.linear));
+
+        return animator_buzz;
     }
 
 
