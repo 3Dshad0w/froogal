@@ -46,13 +46,19 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="2dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rating"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/rating"/>
-            <TextView
+
+
+
+
+                <RatingBar
+                    android:id="@+id/ratingBarIndicator"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:isIndicator="true"/>
+
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DATE"
@@ -67,7 +73,7 @@
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true"
-            android:layout_margin="16dp"
+            android:layout_margin="5dp"
             android:src="@android:drawable/radiobutton_on_background"
             android:layout_centerVertical="true" />
 

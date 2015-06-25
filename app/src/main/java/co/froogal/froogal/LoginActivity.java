@@ -235,6 +235,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                                 registered_at = addresses.get(0).getLocality();
                                             }
                                         } catch (Exception e) {
+                                            registered_at = "dontknow";
                                             Log.d(TAG, e.toString());
                                         }
                                     }
@@ -486,6 +487,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         registered_at = addresses.get(0).getLocality();
                     }
                 } catch (Exception e) {
+                    registered_at = "dontknow";
                     Log.d(TAG, e.toString());
                 }
 
@@ -617,7 +619,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", "");
                         bu.set_defaults("birthday", birthday);
-                        bu.set_defaults("id", id);
+                        bu.set_defaults("special_id", id);
+                        bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
                         // TODO done later after akhil singh writes!!
 
@@ -625,8 +628,13 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
                         pDialog.dismiss();
-                        if(bu.get_defaults("mobile") == "") {
+                        if(bu.get_defaults("mobile") == "a") {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -680,7 +688,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", "");
                         bu.set_defaults("birthday", birthday);
-                        bu.set_defaults("facebook_id",id);
+                        bu.set_defaults("special_id",id);
+                        bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
                         // TODO done later after akhil singh writes!!
 
@@ -690,7 +699,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         fbDialog.dismiss();
 
                         fbDialog.dismiss();
-                        if(bu.get_defaults("mobile") == "")
+                        if(bu.get_defaults("mobile") == "a")
                         {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);

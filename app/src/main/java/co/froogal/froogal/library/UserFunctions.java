@@ -250,10 +250,12 @@ public class UserFunctions {
 
     }
 
-    public JSONObject getReviews(String s) {
+    public JSONObject getReviews(String s, String uid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
         params.add(new BasicNameValuePair("resID", s));
+        params.add(new BasicNameValuePair("userID", uid));
+
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getReviews.php","GET", params);
         Log.d("infunctionregREVIEW", json.toString());
         return json;
@@ -261,5 +263,19 @@ public class UserFunctions {
     }
 
 
+    public JSONObject addReview(String userID, String resID, String rating, String title, String description) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", userID));
+        params.add(new BasicNameValuePair("resID", resID));
+        params.add(new BasicNameValuePair("rating", rating));
+        params.add(new BasicNameValuePair("title", title));
+        params.add(new BasicNameValuePair("description", description));
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/addReview.php","POST", params);
+        Log.d("infunctionregREVIEW", json.toString());
+        return json;
+
+    }
 }
 

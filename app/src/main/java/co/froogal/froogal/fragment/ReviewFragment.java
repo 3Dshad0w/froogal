@@ -20,6 +20,7 @@ import co.froogal.froogal.adapter.RestaurantInfo;
 import co.froogal.froogal.adapter.ReviewAdapter;
 import co.froogal.froogal.adapter.ReviewInfo;
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.view.RecyclerViewFragment;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ReviewFragment extends RecyclerViewFragment {
                              Bundle savedInstanceState) {
         mPosition = getArguments().getInt(ARG_POSITION);
 
-        View view = inflater.inflate(R.layout.fragment_recycler_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_review_view, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         new ProcessReviews().execute();
         return view;
@@ -96,8 +97,10 @@ public class ReviewFragment extends RecyclerViewFragment {
 
             UserFunctions userFunction = new UserFunctions();
 
+            basic_utils bu = new basic_utils(getActivity());
+
             //JSONObject json = null;//
-            JSONObject json = userFunction.getReviews("1");
+            JSONObject json = userFunction.getReviews("1", bu.get_defaults("uid"));
 
             Log.d("WOWOWOWOW", json.toString());
 
@@ -129,9 +132,11 @@ public class ReviewFragment extends RecyclerViewFragment {
                     ReviewInfo ci = new ReviewInfo();
                     ci.userName = reviewJson.getString("firstname");
                     ci.image_url = reviewJson.getString("image_url");
-                    ci.date = reviewJson.getString("date");
+                    ci.date = reviewJson.getString("date(reviews.date)");
                     ci.description = reviewJson.getString("description");
                     ci.title = reviewJson.getString("title");
+                    ci.rating = reviewJson.getString("rating");
+                    ci.uid = reviewJson.getString("uid");
                     result.add(ci);
 
                 } catch (JSONException e) {
@@ -151,7 +156,13 @@ public class ReviewFragment extends RecyclerViewFragment {
 
             mLayoutMgr = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(mLayoutMgr);
-            ReviewAdapter reviewAdapter = new ReviewAdapter(result);
+            ReviewAdapter reviewAdapter = null;
+            try {
+                basic_utils bu = new basic_utils(getActivity());
+                reviewAdapter = new ReviewAdapter(result, reviewsJson.getString("isReviewPresent"), bu.get_defaults("uid"), bu.get_defaults("fname"), bu.get_defaults("image_url"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             mRecyclerView.setAdapter(reviewAdapter);
 
             setRecyclerViewOnScrollListener();

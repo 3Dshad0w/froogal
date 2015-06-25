@@ -13,8 +13,8 @@ public class ReviewInfo {
     public String date;
     public String title;
     public String description;
-
-
+    public String rating;
+    public String uid;
 
 
 }
