@@ -1,0 +1,368 @@
+<co.froogal.froogal.library.NotifyingScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    tools:context="co.froogal.froogal.fragment.AboutScrollViewFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:divider="@drawable/horizontal_divider"
+        android:showDividers="middle">
+
+        <include layout="@layout/header_placeholder_temp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/completeLayout">
+
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="4dp"
+                android:id="@+id/imagesCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/imagesLayout">
+                <co.froogal.froogal.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageTextView"
+                    android:text="Images:"
+                    android:textColor="@color/main_color_grey_700"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"
+                    android:id="@+id/divider4"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"/>
+
+            <co.froogal.froogal.adapter.ExpandableHeightGridView
+                android:id="@+id/myId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:horizontalSpacing="2dp"
+                android:isScrollContainer="false"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="20dp" />
+
+            </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/descriptionLayout"
+                android:layout_below="@+id/imagesCard">
+
+
+
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/tagsCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/tagsCardLayout">
+
+                        <TextView
+                            android:id="@+id/tagTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Tags:"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0"
+                            android:id="@+id/divider1"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/TagsTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/listPreferredItemHeight"
+                            android:text="Indian,Chinese,Japanese Cusines"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/addressCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/addressCardLayout">
+
+
+                    <TextView
+                        android:id="@+id/addressTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="Address:"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0"
+                        android:id="@+id/divider2"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"/>
+
+                    <TextView
+                        android:id="@+id/AddressTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/listPreferredItemHeight"
+                        android:text="VIE Vindhya C4, IIT HYD"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/contactCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/contactCardLayout">
+
+
+                        <TextView
+                            android:id="@+id/contactTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Contact:"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0"
+                            android:id="@+id/divider3"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/ContactTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/listPreferredItemHeight"
+                            android:text="8888888888, 9999999999"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/contactCard1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/contactCardLayout1">
+
+
+                        <TextView
+                            android:id="@+id/contactTextView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Contact:"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0"
+                            android:id="@+id/divider31"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/ContactTextView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/listPreferredItemHeight"
+                            android:text="8888888888, 9999999999"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/contactCard2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/contactCardLayout2">
+
+
+                        <TextView
+                            android:id="@+id/contactTextView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Contact:"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0"
+                            android:id="@+id/divider32"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/ContactTextView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/listPreferredItemHeight"
+                            android:text="8888888888, 9999999999"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/contactCard3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/contactCardLayout3">
+
+
+                        <TextView
+                            android:id="@+id/contactTextView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Contact:"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0"
+                            android:id="@+id/divider33"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/ContactTextView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/listPreferredItemHeight"
+                            android:text="8888888888, 9999999999"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </RelativeLayout>
+        </LinearLayout>
+
+
+</co.froogal.froogal.library.NotifyingScrollView>

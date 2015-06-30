@@ -1,19 +1,14 @@
 package co.froogal.froogal.adapter;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,24 +23,19 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import co.froogal.froogal.MainActivity;
 import co.froogal.froogal.R;
 import co.froogal.froogal.ResDetailsActivity;
-import co.froogal.froogal.fragment.ReviewFragment;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.util.ImageUtil;
 
 import co.froogal.froogal.util.basic_utils;
-import co.froogal.froogal.view.FloatLabeledEditText;
 
 public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -215,7 +205,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public ReviewViewHolder(View v) {
             super(v);
             userName =  (TextView) v.findViewById(R.id.username);
-            userImage = (ImageView)  v.findViewById(R.id.userimage);
+            userImage = (ImageView)  v.findViewById(R.id.itemImage);
             date =  (TextView) v.findViewById(R.id.date);
             title =  (TextView) v.findViewById(R.id.title);
             description =  (TextView) v.findViewById(R.id.description);
@@ -274,7 +264,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ratingBar.setRating(rating);
 
         popupWindow.setBackgroundDrawable(d);
-        ImageView userImage = (ImageView) popupView.findViewById(R.id.userimage);
+        ImageView userImage = (ImageView) popupView.findViewById(R.id.itemImage);
         final EditText title = (EditText) popupView.findViewById(R.id.titleEditTextView);
         final EditText description = (EditText) popupView.findViewById(R.id.descriptionEditTextView);
         final Button submitReview = (Button) popupView.findViewById(R.id.submitReview);

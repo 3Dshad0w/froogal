@@ -7,9 +7,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ScrollView;
 
-/**
- * Created by desmond on 1/6/15.
- */
+
 public abstract class ParallaxViewPagerBaseActivity extends AppCompatActivity implements ScrollTabHolder {
 
     public static final String TAG = ParallaxViewPagerBaseActivity.class.getSimpleName();

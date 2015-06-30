@@ -2,13 +2,17 @@ package co.froogal.froogal.library;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
-
-import co.froogal.froogal.util.basic_utils;
 
 
 public class UserFunctions {
@@ -30,7 +34,6 @@ public class UserFunctions {
     private static String send_mobile_verification_status_URL = "http://froogal.in/files/send_mobile_verification_status.php";
 
 
-
     private static String login_tag = "login";
     private static String register_tag = "register";
     private static String forpass_tag = "forpass";
@@ -38,7 +41,7 @@ public class UserFunctions {
 
 
     // constructor
-    public UserFunctions(){
+    public UserFunctions() {
         jsonParser = new JSONParser();
     }
 
@@ -46,7 +49,7 @@ public class UserFunctions {
      * Function to save mobile and its status
      */
 
-    public JSONObject send_mobile_verification_status(String number,String unique_id){
+    public JSONObject send_mobile_verification_status(String number, String unique_id) {
 
         // Building Parameters
         Log.d(TAG, "send_mobile");
@@ -54,8 +57,8 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("mobile", number));
         params.add(new BasicNameValuePair("unique_id", unique_id));
         params.add(new BasicNameValuePair("mobile_status", "true"));
-        JSONObject json = jsonParser.makeHttpRequest(send_mobile_verification_status_URL,"POST", params);
-        Log.d(TAG,"Json Response : " + json);
+        JSONObject json = jsonParser.makeHttpRequest(send_mobile_verification_status_URL, "POST", params);
+        Log.d(TAG, "Json Response : " + json);
         return json;
     }
 
@@ -63,7 +66,7 @@ public class UserFunctions {
      * Function to send otp
      */
 
-    public JSONObject send_otp(String otp,String number,String name){
+    public JSONObject send_otp(String otp, String number, String name) {
 
         // Building Parameters
         Log.d(TAG, "send_otp");
@@ -72,10 +75,10 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("password", "624557932"));
         params.add(new BasicNameValuePair("sendername", "FRUGAL"));
         params.add(new BasicNameValuePair("mobileno", number));
-        params.add(new BasicNameValuePair("message","Dear " + name + " your OTP code is " + otp + ".Thanks for joining Froogal." ));
+        params.add(new BasicNameValuePair("message", "Dear " + name + " your OTP code is " + otp + ".Thanks for joining Froogal."));
         String url = "http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp";
-        JSONObject json = jsonParser.makeHttpRequest(url,"GET", params);
-        Log.d(TAG,"Json Response : " + json);
+        JSONObject json = jsonParser.makeHttpRequest(url, "GET", params);
+        Log.d(TAG, "Json Response : " + json);
         return json;
     }
 
@@ -83,7 +86,7 @@ public class UserFunctions {
      * Function to store facebook user data to server
      */
 
-    public JSONObject save_facebook_user_data_to_server(String id,String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday){
+    public JSONObject save_facebook_user_data_to_server(String id, String gcm_token, String first_name, String last_name, String image_url, String email, String ip_address, String imei, String registered_through, String latitude, String longitude, String registered_at, String birthday) {
         // Building Parameters
         Log.d(TAG, "save_facebook_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -101,8 +104,8 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
         params.add(new BasicNameValuePair("special_id", id));
         Log.d(TAG, "Params : " + params.toString());
-        JSONObject json = jsonParser.makeHttpRequest(save_facebook_user_data_to_server_URL,"POST", params);
-        Log.d(TAG,"Json Response : " + json);
+        JSONObject json = jsonParser.makeHttpRequest(save_facebook_user_data_to_server_URL, "POST", params);
+        Log.d(TAG, "Json Response : " + json);
         return json;
     }
 
@@ -110,7 +113,7 @@ public class UserFunctions {
      * Function to store google+ user data to server
      */
 
-    public JSONObject save_google_user_data_to_server(String gcm_token,String first_name,String last_name,String image_url,String email,String ip_address,String imei,String registered_through,String latitude, String longitude,String registered_at,String birthday, String id){
+    public JSONObject save_google_user_data_to_server(String gcm_token, String first_name, String last_name, String image_url, String email, String ip_address, String imei, String registered_through, String latitude, String longitude, String registered_at, String birthday, String id) {
         // Building Parameters
         Log.d(TAG, "save_google_user_data_to_server");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -128,15 +131,15 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
         params.add(new BasicNameValuePair("special_id", id));
         Log.d(TAG, "Params : " + params.toString());
-        JSONObject json = jsonParser.makeHttpRequest(save_google_user_data_to_server_URL,"POST", params);
-        Log.d(TAG,"Json Response : " + json);
+        JSONObject json = jsonParser.makeHttpRequest(save_google_user_data_to_server_URL, "POST", params);
+        Log.d(TAG, "Json Response : " + json);
         return json;
     }
 
     /**
      * Function to  Register
-     **/
-    public JSONObject registerUser(String fname, String lname, String email, String mobile, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token){
+     */
+    public JSONObject registerUser(String fname, String lname, String email, String mobile, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token) {
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
@@ -154,7 +157,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("image_url", image_url));
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
         params.add(new BasicNameValuePair("special_id", null));
-        JSONObject json = jsonParser.makeHttpRequest(registerURL,"POST", params);
+        JSONObject json = jsonParser.makeHttpRequest(registerURL, "POST", params);
         Log.d("infunctionreg", json.toString());
         return json;
     }
@@ -164,37 +167,36 @@ public class UserFunctions {
      * Function to test gcm
      */
 
-    public JSONObject gcmtest(String alpha){
+    public JSONObject gcmtest(String alpha) {
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("alpha", alpha));
-        JSONObject json = jsonParser.makeHttpRequest(gcm_testingURL,"POST", params);
+        JSONObject json = jsonParser.makeHttpRequest(gcm_testingURL, "POST", params);
         return json;
     }
 
     /**
      * Function to Login
-     **/
+     */
 
     // TODO add gcm_token into server after login
-
-    public JSONObject loginUser(String email, String password,String gcm_token){
+    public JSONObject loginUser(String email, String password, String gcm_token) {
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", login_tag));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
-        JSONObject json = jsonParser.makeHttpRequest(loginURL,"POST", params);
+        JSONObject json = jsonParser.makeHttpRequest(loginURL, "POST", params);
         Log.d("infunction", json.toString());
         return json;
     }
 
     /**
      * Function to change password
-     **/
+     */
 
-    public JSONObject chgPass(String newpas, String email){
+    public JSONObject chgPass(String newpas, String email) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", chgpass_tag));
 
@@ -206,14 +208,11 @@ public class UserFunctions {
     }
 
 
-
-
-
     /**
      * Function to reset the password
-     **/
+     */
 
-    public JSONObject forPass(String forgotpassword){
+    public JSONObject forPass(String forgotpassword) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", forpass_tag));
         params.add(new BasicNameValuePair("forgotpassword", forgotpassword));
@@ -223,16 +222,11 @@ public class UserFunctions {
     }
 
 
-
-
-
-
-
     public JSONObject getMenu(String s) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
         params.add(new BasicNameValuePair("resid", s));
-        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getmenu.php","GET", params);
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getmenu.php", "GET", params);
         Log.d("infunctionregMENU", json.toString());
         return json;
 
@@ -241,10 +235,10 @@ public class UserFunctions {
     public JSONObject getRestaurants(String longitude, String latitude) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
-        params.add(new BasicNameValuePair("longitude","70"));
+        params.add(new BasicNameValuePair("longitude", "70"));
         params.add(new BasicNameValuePair("latitude", "14"));
 
-        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getRestaurants.php","GET", params);
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getRestaurants.php", "GET", params);
         Log.d("infunctionregRESTAURANT", json.toString());
         return json;
 
@@ -256,7 +250,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("resID", s));
         params.add(new BasicNameValuePair("userID", uid));
 
-        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getReviews.php","GET", params);
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getReviews.php", "GET", params);
         Log.d("infunctionregREVIEW", json.toString());
         return json;
 
@@ -272,10 +266,63 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("title", title));
         params.add(new BasicNameValuePair("description", description));
 
-        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/addReview.php","POST", params);
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/addReview.php", "POST", params);
         Log.d("infunctionregREVIEW", json.toString());
         return json;
 
     }
-}
 
+    public JSONObject processOrder(String userID, String resID, Map<String, String> products) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", userID));
+        params.add(new BasicNameValuePair("resID", resID));
+
+        JSONArray JSONProducts = new JSONArray();
+
+        for (Map.Entry<String, String> entry : products.entrySet()) {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("product_id", entry.getKey());
+                object.put("quantity", entry.getValue());
+                JSONProducts.put(object);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        params.add(new BasicNameValuePair("products", JSONProducts.toString()));
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/processOrder.php", "POST", params);
+        Log.d("GAGAGAGAG", json.toString());
+
+        return json;
+    }
+
+    public JSONObject processCloseOrder(String userID, String resID) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", userID));
+        params.add(new BasicNameValuePair("resID", resID));
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/closeOrder.php", "POST", params);
+        Log.d("GAGAGAGAG", json.toString());
+
+        return json;
+
+    }
+
+    public JSONObject getProcessOrder(String userID, String resID) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", userID));
+        params.add(new BasicNameValuePair("resID", resID));
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getProcessOrder.php", "GET", params);
+        Log.d("GAGAGAGAG", json.toString());
+
+        return json;
+
+    }
+}

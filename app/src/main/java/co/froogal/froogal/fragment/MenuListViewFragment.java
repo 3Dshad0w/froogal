@@ -31,7 +31,7 @@ import java.util.Set;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.view.AnimatedExpandableListView;
 import co.froogal.froogal.view.AnimatedExpandableListView.AnimatedExpandableListAdapter;
-import co.froogal.froogal.view.ListViewFragment;
+import co.froogal.froogal.view.ExpandableListViewFragment;
 
 import co.froogal.froogal.R;
 
@@ -39,10 +39,10 @@ import co.froogal.froogal.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MenuListViewFragment extends ListViewFragment {
+public class MenuListViewFragment extends ExpandableListViewFragment {
 
     public static final String TAG = MenuListViewFragment.class.getSimpleName();
-    private ExampleAdapter adapter;
+    private MenuAdapter adapter;
 
 
     public static Fragment newInstance(int position) {
@@ -106,12 +106,12 @@ public class MenuListViewFragment extends ListViewFragment {
     /**
      * Adapter for our list of {@link GroupItem}s.
      */
-    private class ExampleAdapter extends AnimatedExpandableListAdapter {
+    private class MenuAdapter extends AnimatedExpandableListAdapter {
         private LayoutInflater inflater;
 
         private List<GroupItem> items;
 
-        public ExampleAdapter(Context context) {
+        public MenuAdapter(Context context) {
             inflater = LayoutInflater.from(context);
         }
 
@@ -307,66 +307,7 @@ public class MenuListViewFragment extends ListViewFragment {
 
 
 
-/*
-
-            Iterator<String> iterator = json.keys();
-            while(iterator.hasNext()){
-                String key = iterator.next();
-                GroupItem item = new GroupItem();
-                item.title = key;
-
-                Log.d("Key", key);
-                try {
-                    JSONObject category = json.getJSONObject(key);
-
-                    Iterator<String> itemIterator = category.keys();
-                    while(itemIterator.hasNext()) {
-
-                        String menuKey = itemIterator.next();
-                        JSONObject insideItem = category.getJSONObject(menuKey);
-
-                        JSONArray jsonArrprice= insideItem.getJSONArray("price");
-                        JSONArray jsonArrsize= insideItem.getJSONArray("size");
-
-                        if(jsonArrprice.length() != 1) {
-
-                            for (i = 0; i < jsonArrprice.length(); i++) {
-
-                                ChildItem child = new ChildItem();
-                                child.title = menuKey + "(size : " + jsonArrsize.getString(i) + ")" ;
-                                child.price = jsonArrprice.getString(i);
-                                child.rating = "rating + 2";
-                                child.description = "Description: " + insideItem.getString("description");
-                                item.items.add(child);
-                            }
-                        }
-
-
-                          else{
-                                    ChildItem child = new ChildItem();
-                                    child.title = menuKey;
-                                    child.price = jsonArrprice.getString(0);
-                                    child.rating = "rating + 2";
-                                    child.description = "Description: " + insideItem.getString("description");
-
-                            item.items.add(child);
-                                }
-                        Log.d("menuKey", menuKey);
-                    }
-
-                }
-
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                menu.add(item);
-
-            }
-
-*/
-
-
-            adapter = new ExampleAdapter(getActivity());
+            adapter = new MenuAdapter(getActivity());
             adapter.setData(menu);
 
 

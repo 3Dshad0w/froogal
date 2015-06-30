@@ -1,13 +1,14 @@
 package co.froogal.froogal.view;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-
-public class ListViewFragment extends ScrollTabHolderFragment {
+public class ExpandableListViewFragment extends ScrollTabHolderFragment {
     protected static final String ARG_POSITION = "position";
 
-    protected ListView mListView;
+    protected AnimatedExpandableListView mListView;
     protected int mPosition;
 
     @Override
@@ -19,7 +20,9 @@ public class ListViewFragment extends ScrollTabHolderFragment {
         }
 
         mListView.setSelectionFromTop(1, scrollHeight);
+
     }
+
 
     protected void setListViewOnScrollListener() {
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {

@@ -4,9 +4,7 @@ import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-/**
- * Created by desmond on 1/6/15.
- */
+
 public class ParallaxViewPagerChangeListener implements ViewPager.OnPageChangeListener {
 
     public static final String TAG = ParallaxViewPagerChangeListener.class.getSimpleName();

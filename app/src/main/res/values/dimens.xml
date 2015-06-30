@@ -11,4 +11,8 @@
     <dimen name="imageview_height">200dp</dimen>
     <dimen name="header_height">300dp</dimen>
     <dimen name="min_header_height">300dp</dimen>
+
+    <dimen name="imageview_height_order">90dp</dimen>
+    <dimen name="header_height_order">140dp</dimen>
+    <dimen name="min_header_height_order">140dp</dimen>
 </resources>
