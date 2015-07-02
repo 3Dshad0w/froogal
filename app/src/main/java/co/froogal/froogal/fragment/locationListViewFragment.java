@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import co.froogal.froogal.ForgetPasswordActivity;
@@ -71,6 +73,7 @@ public class locationListViewFragment extends Fragment {
         }
 
         list = createList(resJson);
+        //Collections.sort(list, Comparator);
         ca = new RestaurantAdapter(list);
 
 
@@ -79,6 +82,17 @@ public class locationListViewFragment extends Fragment {
         return rootView;
     }
 
+    public static Comparator<RestaurantInfo> Comparator = new Comparator<RestaurantInfo>() {
+
+        @Override
+        public int compare(RestaurantInfo lhs, RestaurantInfo rhs) {
+            if(lhs.checkedIN){
+                return 1;
+            }
+            return 0;
+        }
+
+    };
 
 
     private List<RestaurantInfo> createList(JSONObject json) {
@@ -102,6 +116,11 @@ public class locationListViewFragment extends Fragment {
                 RestaurantInfo ci = new RestaurantInfo();
                 ci.resName = restaurantJson.getString("name");
                 ci.resAddress = restaurantJson.getString("address");
+                ci.phoneNumber = restaurantJson.getString("phone_number");
+                ci.reward = restaurantJson.getString("reward");
+                ci.coupon = restaurantJson.getString("coupon");
+                ci.distance = restaurantJson.getString("latitude") + restaurantJson.getString("longitude");
+                ci.resID = restaurantJson.getString("restaurant_id");
                 result.add(ci);
 
             } catch (JSONException e) {

@@ -321,7 +321,7 @@ public class otp_fragment extends Fragment {
                 if (json.getString("result") != null) {
 
                     Log.d(TAG,json.toString());
-                    String res = json.getString("result"    );
+                    String res = json.getString("result");
 
                     if(res.contains("Your message is successfully sent to")){
 

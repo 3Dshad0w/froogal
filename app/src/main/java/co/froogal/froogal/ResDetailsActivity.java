@@ -64,7 +64,10 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
             @Override
             public void onClick(View v) {
 
-                new ProcessMenu().execute();
+
+                Intent intent = new Intent(ResDetailsActivity.this, MenuOrder.class);
+                startActivity(intent);
+                finish();
 
             }
         });

@@ -68,13 +68,15 @@
 
             </LinearLayout>
         </LinearLayout>
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
-            android:src="@android:drawable/radiobutton_on_background"
+            android:text="Edit"
+            android:id="@+id/editReview"
+            android:visibility="invisible"
             android:layout_centerVertical="true" />
 
     </RelativeLayout>

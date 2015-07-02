@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,19 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
                 Toast.makeText(v.getContext(), "Restaurantchild " + v.getTag(), Toast.LENGTH_SHORT).show();
             }
         });
+        if(ci.reward.equals("green")){
+            restaurantViewHolder.rewardIndicator.setColorFilter(R.color.material_green_500);
+        }
+        if(ci.reward.equals("red")){
+            restaurantViewHolder.rewardIndicator.setColorFilter(R.color.material_red_500);
+        }
+        if(ci.coupon.equals("green")){
+            restaurantViewHolder.offerIndicator.setColorFilter(R.color.material_green_500);
+        }
+        if(ci.coupon.equals("red")){
+            restaurantViewHolder.offerIndicator.setColorFilter(R.color.material_red_500);
+        }
+
 
     }
 
@@ -74,6 +88,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         protected TextView resName;
         protected TextView resAdd;
+        protected TextView rating;
+        protected ImageView call;
+        protected ImageView directions;
+        protected  ImageView favourite;
+        protected ImageView offerIndicator;
+        protected ImageView rewardIndicator;
+
         private RestaurantAdapter mAdapter;
         View left;
 
@@ -81,7 +102,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             super(v);
             resName =  (TextView) v.findViewById(R.id.resName);
             resAdd = (TextView)  v.findViewById(R.id.resAddress);
-
+            rating = (TextView) v.findViewById(R.id.ratingTextView);
+            call = (ImageView) v.findViewById(R.id.call);
+            directions = (ImageView) v.findViewById(R.id.directions);
+            favourite = (ImageView) v.findViewById(R.id.favourite);
+            offerIndicator = (ImageView) v.findViewById(R.id.offerIndicator);
+            rewardIndicator = (ImageView) v.findViewById(R.id.rewardIndicator);
             left = v.findViewById(R.id.details);
             left.setTag(resName);
             //left.setOnClickListener(RestaurantAdapter.this);

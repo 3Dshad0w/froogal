@@ -17,4 +17,5 @@ public class ReviewInfo {
     public String uid;
 
 
+    public String datetime;
 }

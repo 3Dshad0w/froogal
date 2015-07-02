@@ -128,11 +128,11 @@ public class MenuOrderViewFragment extends ListViewFragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                try {
+                /*try {
                     object.type = productJson.getString("type");
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
                     try {
                     object.rating = productJson.getString("rating");
                 } catch (JSONException e) {
@@ -211,6 +211,9 @@ public class MenuOrderViewFragment extends ListViewFragment {
                 holder.top.setBackgroundColor(getResources().getColor(R.color.white_30_percent));
             }
             else{
+                if(selectedItems.containsKey(product.itemID)){
+                    selectedItems.remove(product.itemID);
+                }
                 holder.top.setBackgroundColor(getResources().getColor(R.color.white_15_percent));
             }
 

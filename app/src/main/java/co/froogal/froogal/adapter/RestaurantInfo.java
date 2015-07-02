@@ -5,11 +5,19 @@ package co.froogal.froogal.adapter;
  */
 public class RestaurantInfo {
 
+    public String resID;
     public String resName;
     public String resAddress;
+    public String rating;
+    public  String phoneNumber;
+    public String distance;
+    public String coupon;
+    public String reward;
+    public String favourite;
 
 
     public static final String RES_NAME = "Restaurant_";
     public static final String ADDRESS = "Address_";
 
+    public boolean checkedIN = false;
 }

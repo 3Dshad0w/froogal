@@ -1,6 +1,7 @@
 package co.froogal.froogal;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,16 +65,8 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
         resID = "1";
 
 
-        try {
-            menuJson = new JSONObject(getIntent().getStringExtra("menuJson"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            menuJson = null;
-        }
+        new ProcessMenu().execute();
 
-
-        mNumFragments = menuJson.length();
-        initValues();
 
 
         bottom = (RelativeLayout) findViewById(R.id.bottom);
@@ -101,11 +94,7 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
             @Override
             public void onClick(View v) {
                 new ProcessOrder(userID, resID, MenuOrderViewFragment.selectedItems).execute();
-                mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mNumFragments);
-                mViewPager.setAdapter(mAdapter);
-                mViewPager.setOffscreenPageLimit(mNumFragments+1);
-                countTextView.setText("0");
-                updateBar(0);
+
             }
         });
 
@@ -113,11 +102,7 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
             @Override
             public void onClick(View v) {
                 new ProcessCloseOrder(userID, resID).execute();
-                mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mNumFragments);
-                mViewPager.setAdapter(mAdapter);
-                mViewPager.setOffscreenPageLimit(mNumFragments);
-                countTextView.setText("0");
-                updateBar(0);
+
             }
         });
 
@@ -128,7 +113,7 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
             mHeader.setTranslationY(savedInstanceState.getFloat(HEADER_TRANSLATION_Y));
         }
 
-        setupAdapter();
+
 
 
 
@@ -209,6 +194,7 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
 
         }
         else {
+            countTextView.setText("0");
             bottom.setVisibility(View.INVISIBLE);
         }
 
@@ -273,6 +259,64 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
 
         }
     }
+
+
+
+
+
+    private class ProcessMenu extends AsyncTask<String, String, JSONObject> {
+
+
+        private ProgressDialog pDialog;
+
+        String email, password;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(MenuOrder.this);
+            pDialog.setTitle("Contacting Servers");
+            pDialog.setMessage("Getting Menu ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            Log.d("redmenu", "true");
+            JSONObject json = userFunction.getMenu("1");
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+
+            pDialog.dismiss();
+
+            try {
+                menuJson = json.getJSONObject("menu");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                menuJson = null;
+            }
+
+
+            mNumFragments = menuJson.length();
+            initValues();
+            setupAdapter();
+
+
+        }
+
+    }
+
+
     private class ProcessOrder extends AsyncTask<String, String, JSONObject> {
 
 
@@ -305,15 +349,7 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-/*
-* JSONArray devices = new JSONArray();
-devices.put(device1);
-devices.put(device2);
-devices.put(device3);
 
-String json = devices.toString();
-nameValuePairs.add(new BasicNameValuePair("devices", devices));
-*/
             JSONObject json = userFunction.processOrder(userID, resID, products);
 
             Log.d("keysuccess", json.toString());
@@ -324,6 +360,11 @@ nameValuePairs.add(new BasicNameValuePair("devices", devices));
         @Override
         protected void onPostExecute(JSONObject json) {
 
+            mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mNumFragments);
+            mViewPager.setAdapter(mAdapter);
+            mViewPager.setOffscreenPageLimit(mNumFragments+1);
+            countTextView.setText("0");
+            updateBar(0);
             pDialog.dismiss();
 
 
@@ -371,6 +412,12 @@ nameValuePairs.add(new BasicNameValuePair("devices", devices));
 
         @Override
         protected void onPostExecute(JSONObject json) {
+
+            mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mNumFragments);
+            mViewPager.setAdapter(mAdapter);
+            mViewPager.setOffscreenPageLimit(mNumFragments);
+            countTextView.setText("0");
+            updateBar(0);
 
             pDialog.dismiss();
 

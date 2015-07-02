@@ -320,9 +320,23 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("resID", resID));
 
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getProcessOrder.php", "GET", params);
-        Log.d("GAGAGAGAG", json.toString());
+        Log.d("GAGAGAGAG123", json.toString());
 
         return json;
 
+    }
+
+    public JSONObject updateReview(String userID, String resID, String rating, String title, String description) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", userID));
+        params.add(new BasicNameValuePair("resID", resID));
+        params.add(new BasicNameValuePair("rating", rating));
+        params.add(new BasicNameValuePair("title", title));
+        params.add(new BasicNameValuePair("description", description));
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/updateReview.php", "POST", params);
+        Log.d("infunctionregREVIEW", json.toString());
+        return json;
     }
 }

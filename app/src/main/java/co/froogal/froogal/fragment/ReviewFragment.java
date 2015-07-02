@@ -23,7 +23,11 @@ import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.view.RecyclerViewFragment;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -115,12 +119,13 @@ public class ReviewFragment extends RecyclerViewFragment {
 
 
             List<ReviewInfo> result = new ArrayList<ReviewInfo>();
-
+            String isReviewPresent = "0";
             JSONObject reviewsJson = null;
 
             try {
                 reviewsJson = json.getJSONObject("reviews");
 
+                isReviewPresent = reviewsJson.getString("isReviewPresent");
             Log.d("reviewsJson", reviewsJson.toString());
             int noOfReviews = reviewsJson.length();
             int i = 0;
@@ -133,6 +138,7 @@ public class ReviewFragment extends RecyclerViewFragment {
                     ci.userName = reviewJson.getString("firstname");
                     ci.image_url = reviewJson.getString("image_url");
                     ci.date = reviewJson.getString("date(reviews.date)");
+                    ci.datetime = reviewJson.getString("date");
                     ci.description = reviewJson.getString("description");
                     ci.title = reviewJson.getString("title");
                     ci.rating = reviewJson.getString("rating");
@@ -151,24 +157,38 @@ public class ReviewFragment extends RecyclerViewFragment {
             }
 
 
-
+            Collections.sort(result, Comparator);
 
 
             mLayoutMgr = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(mLayoutMgr);
             ReviewAdapter reviewAdapter = null;
-            try {
-                basic_utils bu = new basic_utils(getActivity());
-                reviewAdapter = new ReviewAdapter(result, reviewsJson.getString("isReviewPresent"), bu.get_defaults("uid"), bu.get_defaults("fname"), bu.get_defaults("image_url"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            basic_utils bu = new basic_utils(getActivity());
+            reviewAdapter = new ReviewAdapter(result, isReviewPresent, bu.get_defaults("uid"), bu.get_defaults("fname"), bu.get_defaults("image_url"));
             mRecyclerView.setAdapter(reviewAdapter);
 
             setRecyclerViewOnScrollListener();
             pDialog.dismiss();
 
         }
+
+        public java.util.Comparator<ReviewInfo> Comparator = new Comparator<ReviewInfo>() {
+
+            @Override
+            public int compare(ReviewInfo lhs, ReviewInfo rhs) {
+            java.sql.Timestamp date1 = Timestamp.valueOf(lhs.datetime);
+            java.sql.Timestamp date2 = Timestamp.valueOf(rhs.datetime);
+
+                if(date1.compareTo(date2) > 0){
+                return 1;
+            }
+                return 0;
+            }
+
+
+
+        };
+
 
     }
 

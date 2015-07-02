@@ -60,6 +60,7 @@ public class SplashScreensActivity extends Activity implements GoogleApiClient.O
     // Basic_utils object
     basic_utils bu;
 
+
     // GCM variables
     public BroadcastReceiver gcm_registration_broadcast_receiver;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;

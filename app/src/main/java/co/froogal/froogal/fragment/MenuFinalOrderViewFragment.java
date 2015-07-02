@@ -267,11 +267,11 @@ public class MenuFinalOrderViewFragment extends ListViewFragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    try {
+                   /* try {
                         object.type = productJson.getString("type");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                     try {
                         object.rating = productJson.getString("rating");
                     } catch (JSONException e) {
