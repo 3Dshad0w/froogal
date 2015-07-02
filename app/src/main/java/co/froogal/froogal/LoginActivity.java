@@ -133,7 +133,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
     // flag for Internet connection status
     Boolean isInternetPresent = false;
-    // Connection detector class
 
 
 
@@ -564,7 +563,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        normal_dialog.dismiss();
         if (requestCode == RC_SIGN_IN) {
             mIntentInProgress = false;
             sign_in_clicked = false;
@@ -622,18 +620,12 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("registered_through", registered_through);
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
-                        //bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
+                        bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id", id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
-
-                        // TODO done later after akhil singh writes!!
-
-               //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
-               //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
-
                         normal_dialog.dismiss();
-                        if(bu.get_defaults("mobile").equals("a")) {
+                        if(bu.get_defaults("mobile").equals("")) {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
                             finish();
@@ -677,12 +669,9 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-
                 if (json.getString(KEY_SUCCESS) != null) {
-
                     String res = json.getString(KEY_SUCCESS);
                     if(Integer.parseInt(res) == 1){
-
                         bu.set_defaults("email", email);
                         bu.set_defaults("password", "");
                         bu.set_defaults("fname", first_name);
@@ -696,16 +685,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id",id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
-
-                        // TODO done later after akhil singh writes!!
-
-                        //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
-                        //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
-
                         fbDialog.dismiss();
-
-                        fbDialog.dismiss();
-                        if(bu.get_defaults("mobile_verified").equals("n"))
+                        if(bu.get_defaults("mobile").equals(""))
                         {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
@@ -779,7 +760,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
                         bu.set_defaults("email", email);
                         bu.set_defaults("password", password);
-//                        Log.d("fname", json.getString("fname"));
                         bu.set_defaults("fname", json.getJSONObject("user").getString("fname"));
                         bu.set_defaults("lname", json.getJSONObject("user").getString("lname"));
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
