@@ -112,6 +112,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     basic_utils bu;
     String gcm_token;
 
+    // UI variables
+    ProgressDialog normal_dialog;
     TextView btnLogin;
     TextView passreset;
     FloatLabeledEditText inputEmail;
@@ -120,9 +122,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     public static final String MyPREFERENCES = "MyPreferences" ;
 
     private TextView loginErrorMsg;
-    /**
-     * Called when the activity is first created.
-     */
     private static String KEY_SUCCESS = "success";
     private static String KEY_UID = "uid";
     private static String KEY_MOBILE = "mobile";
@@ -303,6 +302,13 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
             public void onClick(View v) {
                 if (v.getId() == R.id.google_login && !google_api_client.isConnecting()) {
                     sign_in_clicked = true;
+                    // Show progress till activity result
+                    normal_dialog = new ProgressDialog(LoginActivity.this);
+                    normal_dialog.setTitle("Google+ Accounts");
+                    normal_dialog.setMessage("Fetching ... ");
+                    normal_dialog.setIndeterminate(false);
+                    normal_dialog.setCancelable(false);
+                    normal_dialog.show();
                     google_api_client.connect();
                 }
             }
@@ -558,6 +564,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+        normal_dialog.dismiss();
         if (requestCode == RC_SIGN_IN) {
             mIntentInProgress = false;
             sign_in_clicked = false;
@@ -574,18 +581,15 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
     private class process_login_google extends AsyncTask<String, String, JSONObject> {
 
-        private ProgressDialog pDialog;
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pDialog = new ProgressDialog(LoginActivity.this);
-            pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Logging in ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
+            normal_dialog.setTitle("Contacting Servers");
+            normal_dialog.setMessage("Logging in ...");
+            normal_dialog.setIndeterminate(false);
+            normal_dialog.setCancelable(false);
+            normal_dialog.show();
         }
 
         @Override
@@ -606,8 +610,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     String res = json.getString(KEY_SUCCESS);
                     if(Integer.parseInt(res) == 1){
 
-                        pDialog.setMessage("Loading User Space");
-                        pDialog.setTitle("Getting Data");
+                        normal_dialog.setMessage("Loading User Space");
+                        normal_dialog.setTitle("Getting Data");
 
                         bu.set_defaults("email", email);
                         bu.set_defaults("password", "");
@@ -628,7 +632,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                //         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
                //         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
-                        pDialog.dismiss();
+                        normal_dialog.dismiss();
                         if(bu.get_defaults("mobile").equals("a")) {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
@@ -642,7 +646,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     }
                     else{
 
-                        pDialog.dismiss();
+                        normal_dialog.dismiss();
                         show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
                     }
                 }
