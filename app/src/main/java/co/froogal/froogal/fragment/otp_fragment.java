@@ -144,7 +144,7 @@ public class otp_fragment extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bu.get_defaults("mobile") != "")
+                if(bu.get_defaults("otp_sent") == "true")
                 {
                     otp_sent = true;
                 }
@@ -182,7 +182,7 @@ public class otp_fragment extends Fragment {
                 }
                 if(otp_got == otp)
                 {
-                    bu.set_defaults("mobile_verify", "true");
+                    bu.set_defaults("mobile_verified", "true");
                     bu.set_defaults("mobile", number);
                     new process_mobile().execute();
                 }
@@ -210,14 +210,10 @@ public class otp_fragment extends Fragment {
                         String phoneNumber = currentMessage.getDisplayOriginatingAddress();
                         String senderNum = phoneNumber;
                         String message = currentMessage.getDisplayMessageBody();
-                        if(senderNum.equals("DM-FRUGAL"))
-                        {
-                            if(message.contains("Froogal."))
-                            {
-                                if(message.contains("OTP")) {
-                                    if(message.toString().contains(String.valueOf(otp))) {
-                                        edit_Text.setText(String.valueOf(otp));
-                                    }
+                        if(message.contains("Froogal.")) {
+                            if (message.contains("OTP")) {
+                                if (message.toString().contains(String.valueOf(otp))) {
+                                    edit_Text.setText(String.valueOf(otp));
                                 }
                             }
                         }
@@ -300,13 +296,14 @@ public class otp_fragment extends Fragment {
         @Override
         protected JSONObject doInBackground(String... args) {
 
-            UserFunctions userFunction = new UserFunctions();
+            UserFunctions userFunction = new     UserFunctions();
             name = bu.get_defaults("fname");
             if(name == "")
             {
                 name = bu.get_defaults("lname");
             }
             otp = (int)(Math.random() * 9000) + 1000;
+            bu.set_defaults("otp",String.valueOf(otp));
             JSONObject json = userFunction.send_otp(String.valueOf(otp),number,name);
             return json;
 
@@ -326,6 +323,7 @@ public class otp_fragment extends Fragment {
                     if(res.contains("Your message is successfully sent to")){
 
                         otp_sent = true;
+                        bu.set_defaults("otp_sent","true");
                         text_otp.setText("OTP");
                         edit_Text.setText("");
                         bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text());

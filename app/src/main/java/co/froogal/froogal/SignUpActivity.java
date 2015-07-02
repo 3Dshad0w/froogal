@@ -616,12 +616,13 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         bu.set_defaults("registered_through", registered_through);
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
-                    //    bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
+                 //       bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
+                        bu.set_defaults("mobile_verified", "");
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id", id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
                         normal_dialog.dismiss();
-                        if(bu.get_defaults("mobile").equals("")) {
+                        if(bu.get_defaults("mobile_verified").equals("")) {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
                             finish();
@@ -639,7 +640,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                     }
                 }
             } catch (JSONException e) {
-                Log.d(TAG,e.toString());
+                Log.d(TAG, e.toString());
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
             }
         }
@@ -683,7 +684,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         bu.set_defaults("special_id",id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
                         fbDialog.dismiss();
-                        if(bu.get_defaults("mobile").equals(""))
+                        if(bu.get_defaults("mobile_verified").equals(""))
                         {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
