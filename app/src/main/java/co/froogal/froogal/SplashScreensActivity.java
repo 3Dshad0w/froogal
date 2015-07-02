@@ -55,7 +55,6 @@ public class SplashScreensActivity extends Activity implements GoogleApiClient.O
 
     // Boolean variables
     private Boolean check_all_proceed = false;
-    private Boolean timer_stop = false;
 
     // Basic_utils object
     basic_utils bu;
@@ -118,26 +117,21 @@ public class SplashScreensActivity extends Activity implements GoogleApiClient.O
                 else
                 {
                     check_all_proceed = true;
-                    if(timer_stop)
-                    {
-                        if(bu.login_check()) {
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                            finish();
-                        }
-                        else {
-                            animation2();
-                            animation3();
-                            animation4();
-                        }
-
+                    if(bu.login_check()) {
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    }
+                    else {
+                       animation2();
+                       animation3();
+                       animation4();
                     }
                 }
             }
         };
 
-        start_timer();
         check_location_internet_playservices();
         get_ip_address();
 
@@ -265,36 +259,6 @@ public class SplashScreensActivity extends Activity implements GoogleApiClient.O
             show_alert_dialog_internet(SplashScreensActivity.this, "No Internet Connection", "You don't have internet connection !");
         }
         return true;
-    }
-
-    private void start_timer()
-    {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (check_all_proceed) {
-                    timer_stop = true;
-                    Log.d(TAG, "Starting activity : LoginRegisterActivity");
-
-                    if(bu.login_check()) {
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
-                        finish();
-                    }
-                    else {
-
-                        animation2();
-                        animation3();
-                        animation4();
-                    }
-
-                } else {
-                    timer_stop = true;
-                }
-            }
-        }, 1500);
     }
 	
 	// Entire Animation code
