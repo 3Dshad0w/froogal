@@ -424,6 +424,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     @Override
     public void onConnected(Bundle bundle) {
 
+
         if (currentLocation == null) {
             currentLocation = LocationServices.FusedLocationApi.getLastLocation(google_api_client);
         }
@@ -441,7 +442,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         if(sign_in_clicked) {
 
             // Retrieving additional information
-            Log.d("im", "here");
 
             if (Plus.PeopleApi.getCurrentPerson(google_api_client) != null) {
                 Person currentPerson = Plus.PeopleApi.getCurrentPerson(google_api_client);
@@ -539,12 +539,11 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
         if (!mIntentInProgress) {
             if (sign_in_clicked && connectionResult.hasResolution()) {
                 // The user has already clicked 'sign-in' so we attempt to resolve all
                 // errors until the user is signed in, or they cancel.
-                try {
+                try{
                     connectionResult.startResolutionForResult(this, RC_SIGN_IN);
                     mIntentInProgress = true;
                 } catch (IntentSender.SendIntentException e) {
@@ -561,11 +560,12 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         if (requestCode == RC_SIGN_IN) {
             mIntentInProgress = false;
-            Log.d(TAG, "dsafas");
+            sign_in_clicked = false;
             if (!google_api_client.isConnecting()) {
                 google_api_client.connect();
             }
-        } else {
+        }
+        else {
             callbackManager.onActivityResult(requestCode,responseCode, intent);
         }
     }
