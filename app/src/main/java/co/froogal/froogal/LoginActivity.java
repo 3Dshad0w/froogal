@@ -625,7 +625,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("special_id", id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
                         normal_dialog.dismiss();
-                        if(bu.get_defaults("mobile_verified").equals("")) {
+                        if(bu.get_defaults("mobile_verified").equals("no")) {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
                             finish();
@@ -643,6 +643,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     }
                 }
             } catch (JSONException e) {
+                Log.d(TAG,e.toString());
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
         }
@@ -686,7 +687,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("special_id",id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
                         fbDialog.dismiss();
-                        if(bu.get_defaults("mobile_verified").equals(""))
+                        if(bu.get_defaults("mobile_verified").equals("no"))
                         {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
@@ -694,7 +695,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         }
                         else
                         {
-                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -765,17 +766,28 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
                         bu.set_defaults("unique_id", json.getJSONObject("user").getString("unique_id"));
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
+                        bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
 
 
-                        Intent upanel = new Intent(getApplicationContext(), MainActivity.class);
-                        upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                        if(bu.get_defaults("mobile_verified").equals("no"))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+
                         pDialog.dismiss();
-                        startActivity(upanel);
-                        /**
-                         * Close Login Screen
-                         **/
-                        finish();
-                    }else{
+
+                       }
+                    else{
 
                         pDialog.dismiss();
                         showAlertDialog(LoginActivity.this, "Error",

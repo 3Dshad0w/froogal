@@ -200,8 +200,7 @@ public class otp_fragment extends Fragment {
                 }
                 if(otp_got == otp)
                 {
-                    bu.set_defaults("mobile_verified", "true");
-                    bu.set_defaults("mobile", number);
+
                     new process_mobile().execute();
                 }
                 else
@@ -264,7 +263,7 @@ public class otp_fragment extends Fragment {
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.send_mobile_verification_status(number, "true");
+            JSONObject json = userFunction.send_mobile_verification_status(bu.get_defaults("uid"), number, "yes");
             return json;
 
         }
@@ -273,12 +272,15 @@ public class otp_fragment extends Fragment {
         protected void onPostExecute(JSONObject json) {
 
             pDialog.dismiss();
+            bu.set_defaults("mobile_verified", "yes");
+            bu.set_defaults("mobile", number);
+
            // try {
                 // TODO akhil singh
                // if (json.getString("success") != null) {
                //     String res = json.getString("success");
                //     if(Integer.parseInt(res) == 1){
-
+                        //bu.set_defaults();
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
