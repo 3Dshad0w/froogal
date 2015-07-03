@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp" >
 
 
     <co.froogal.froogal.font.RobotoTextView
@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:minHeight="64dp"
-        android:padding="8dp"
         android:textColor="@color/main_color_grey_700"
         android:textSize="16sp"
-        app:typeface="robotoLight" />
+        app:typeface="robotoLight"
+        android:background="#FFFAFAFA" />
 
 </LinearLayout>

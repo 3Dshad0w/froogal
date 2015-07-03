@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 
@@ -87,14 +88,19 @@ public class MenuListViewFragment extends ExpandableListViewFragment {
         String price;
         String rating;
         String description;
+        String size;
+        String type;
+
         //String hint;
     }
 
     private static class ChildHolder {
         TextView title;
         TextView price;
-        TextView rating;
+        RatingBar rating;
         TextView description;
+        TextView size;
+        TextView type;
         //TextView hint;
     }
 
@@ -142,10 +148,13 @@ public class MenuListViewFragment extends ExpandableListViewFragment {
                         .findViewById(R.id.textTitle);
                 holder.price = (TextView) convertView
                         .findViewById(R.id.textPrice);
-                holder.rating = (TextView) convertView
-                        .findViewById(R.id.textRating);
+                holder.rating = (RatingBar) convertView
+                        .findViewById(R.id.ratingIndicator);
                 holder.description = (TextView) convertView
                         .findViewById(R.id.textDescription);
+                holder.size = (TextView) convertView.findViewById(R.id.sizeTextView);
+                holder.type = (TextView) convertView.findViewById(R.id.typeTextView);
+
 
 				/*holder.hint = (TextView) convertView
 						.findViewById(R.id.textHint);*/
@@ -156,9 +165,10 @@ public class MenuListViewFragment extends ExpandableListViewFragment {
 
             holder.title.setText(item.title);
             holder.price.setText(item.price);
-            holder.rating.setText(item.rating);
+            holder.rating.setRating(Float.parseFloat(item.rating));
             holder.description.setText(item.description);
-
+            holder.size.setText("size: " + item.size);
+            holder.type.setText(item.type);
             //holder.hint.setText(item.hint);
 
             return convertView;
@@ -263,7 +273,7 @@ public class MenuListViewFragment extends ExpandableListViewFragment {
                     GroupItem item = new GroupItem();
                     try {
                         categoryJson = menuJson.getJSONObject("'"+ i +"'");
-                        item.title = categoryJson.getString("name") +" status: " +categoryJson.getString("status");
+                        item.title = categoryJson.getString("name"); //+" status: " +categoryJson.getString("status");
                         Log.d("categoryJson", categoryJson.toString());
                         JSONObject itemsJson = null;
                         try {
@@ -277,10 +287,13 @@ public class MenuListViewFragment extends ExpandableListViewFragment {
                                 itemJson = itemsJson.getJSONObject("'" + j + "'");
                                 Log.d("itemJson", itemJson.toString());
                                 ChildItem child = new ChildItem();
-                                child.title = itemJson.getString("name") + "(size : " + itemJson.getString("size") + ")";
+                                child.title = itemJson.getString("name");
                                 child.price = itemJson.getString("price");
                                 child.rating = itemJson.getString("rating");
-                                child.description = "Description: " + itemJson.getString("description");
+                                child.size = itemJson.getString("size");
+                                //child.type = itemJson.getString("type");
+                                child.type = "Veg";
+                                child.description = itemJson.getString("description");
                                 item.items.add(child);
 
 

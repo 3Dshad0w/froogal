@@ -1,74 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="96dp"
-    android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <co.froogal.froogal.font.RobotoTextView
-        android:id="@+id/textTitle"
-        style="@style/TextViewAppearance.Title1"
-        android:layout_width="wrap_content"
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFFAFAFA"
+    android:paddingLeft="14dp"
+    android:paddingRight="10dp"
+    android:minHeight="96dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:textColor="@color/main_color_grey_700"
-        android:textSize="16sp"
-        app:typeface="robotoLight"
-        android:layout_gravity="left"
-        android:layout_alignParentLeft="true" />
+        android:orientation="vertical"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_vertical"
+        android:layout_toRightOf="@+id/itemImage"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:padding="4dp">
 
-    <co.froogal.froogal.font.RobotoTextView
-        android:id="@+id/textPrice"
-        style="@style/TextViewAppearance.Title1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textColor="@color/main_color_grey_700"
-        android:textSize="16sp"
-        app:typeface="robotoLight"
-        android:gravity="right"
-        android:layout_marginRight="16dp"
-        android:layout_gravity="right"
-        android:layout_alignParentRight="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Name Here"
+                android:id="@+id/textTitle"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RS:200"
+                android:id="@+id/textPrice"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:textSize="12sp"
+                android:paddingRight="2dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="4dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingRight="2dp">
 
 
 
-</RelativeLayout>
 
-    <co.froogal.froogal.font.RobotoTextView
-        android:id="@+id/textRating"
-        style="@style/TextViewAppearance.Title1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textColor="@color/main_color_grey_700"
-        android:textSize="16sp"
-        app:typeface="robotoLight"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="left"
-        android:layout_marginLeft="16dp"
-        android:gravity="left" />
+            <RatingBar
+                android:id="@+id/ratingIndicator"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:isIndicator="true"
+                android:layout_alignParentLeft="true" />
 
-    <co.froogal.froogal.font.RobotoTextView
-        android:id="@+id/textDescription"
-        style="@style/TextViewAppearance.Title1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textColor="@color/main_color_grey_700"
-        android:textSize="16sp"
-        app:typeface="robotoLight"
-        android:layout_alignParentRight="true"
-        android:gravity="left"
-        android:layout_gravity="left"
-        android:layout_marginLeft="16dp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingIndicator"
+                android:layout_marginTop="4dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="size: Normal"
+                    android:id="@+id/sizeTextView"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Veg"
+                    android:id="@+id/typeTextView"
+                    android:layout_toRightOf="@+id/sizeTextView"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textDescription"
+            android:text="Description Here. Restaurant is so bad, but i dont know about it. you have to check that for yourself"
+            android:layout_marginRight="40dp"
+            android:textSize="10sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -272,8 +272,7 @@ public class otp_fragment extends Fragment {
         protected void onPostExecute(JSONObject json) {
 
             pDialog.dismiss();
-            bu.set_defaults("mobile_verified", "yes");
-            bu.set_defaults("mobile", number);
+
             try {
                  if (json.getString("success") != null) {
                     String res = json.getString("success");
