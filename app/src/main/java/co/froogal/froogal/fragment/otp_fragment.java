@@ -53,6 +53,7 @@ public class otp_fragment extends Fragment {
     View view_animate_button;
     View view_animate_text;
     View view_animate_text1;
+    View view_animate_resend;
     AnimatorSet bouncer;
     AnimatorSet bouncer1;
     AnimatorSet bouncer2;
@@ -65,6 +66,7 @@ public class otp_fragment extends Fragment {
     ObjectAnimator animator_text1;
     ObjectAnimator animator_otp_text;
     ObjectAnimator animator_buzz;
+    ObjectAnimator animator_otp_resend;
     Display display;
     int width;
     int height;
@@ -73,6 +75,7 @@ public class otp_fragment extends Fragment {
     private Button submit_button;
     public EditText edit_Text;
     TextView text_otp;
+    TextView resend_otp;
 
     //otp variables
     String number = "";
@@ -111,6 +114,7 @@ public class otp_fragment extends Fragment {
         view_animate_button = v.findViewById(R.id.button);
         view_animate_text = v.findViewById(R.id.textView4);
         view_animate_text1 = v.findViewById(R.id.textView5);
+        view_animate_resend = v.findViewById(R.id.resend);
         display = getActivity().getWindowManager().getDefaultDisplay();
         bouncer = new AnimatorSet();
         bouncer1 = new AnimatorSet();
@@ -119,8 +123,12 @@ public class otp_fragment extends Fragment {
         submit_button = (Button) v.findViewById(R.id.button);
         edit_Text = (EditText) v.findViewById(R.id.editText);
         text_otp = (TextView) v.findViewById(R.id.textView5);
+        resend_otp = (TextView) v.findViewById(R.id.resend);
         bu = new basic_utils(getActivity());
         uf = new UserFunctions();
+
+        // Take phone number if not available
+        number = bu.get_defaults("mobile");
 
         // Select interpolator
         Interpolator interpolator_overshoot = new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.overshoot);
@@ -132,10 +140,11 @@ public class otp_fragment extends Fragment {
         Log.d(TAG, "Width " + width);
 
         // Start animation
-        if(bu.get_defaults("mobile") != "")
+        if(bu.get_defaults("mobile").length() >= 10)
         {
             text_otp.setText("OTP");
-            new process_otp();
+            new process_otp().execute();
+            startAnimation_otp_resend().start();
         }
         bouncer.play(startAnimation_edittext(interpolator_anti_overshoot)).with(startAnimation_button(interpolator_anti_overshoot)).before(startAnimation_text(interpolator_overshoot)).before(startAnimation_text1(interpolator_overshoot));
         bouncer.start();
@@ -151,6 +160,14 @@ public class otp_fragment extends Fragment {
                 send_otp();
             }
         });
+
+        // onclick listener
+        resend_otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new process_otp().execute();
+            }
+        });
         return v;
     }
 
@@ -160,6 +177,7 @@ public class otp_fragment extends Fragment {
         {
             if(edit_Text.getText().length() >= 10) {
                 number = edit_Text.getText().toString();
+                bu.set_defaults("mobile",number);
                 new process_otp().execute();
             }
             else
@@ -326,7 +344,7 @@ public class otp_fragment extends Fragment {
                         bu.set_defaults("otp_sent","true");
                         text_otp.setText("OTP");
                         edit_Text.setText("");
-                        bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text());
+                        bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text()).before(startAnimation_otp_resend());
                         bouncer1.start();
 
                     }else{
@@ -462,6 +480,17 @@ public class otp_fragment extends Fragment {
         animator_otp_text.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
 
         return animator_otp_text;
+    }
+
+    public ObjectAnimator startAnimation_otp_resend() {
+
+        animator_otp_resend = ObjectAnimator.ofFloat(view_animate_resend, "alpha",0,1);
+
+        // Set the duration and interpolator for this animation
+        animator_otp_resend.setDuration(2000);
+        animator_otp_resend.setInterpolator(new AnimationUtils().loadInterpolator(getActivity(), android.R.interpolator.anticipate_overshoot));
+
+        return animator_otp_resend;
     }
 
     public ObjectAnimator startAnimation_buzz1() {

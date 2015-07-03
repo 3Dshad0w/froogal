@@ -498,7 +498,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             //Updating marker
             if(currentmarker != null)
             {
-                currentmarker.remove();
+                //currentmarker.remove();
             }
 
          }
@@ -717,7 +717,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     {
         if(currentmarkerupdate) {
             if (currentmarker != null) {
-                currentmarker.remove();
+                //currentmarker.remove();
             }
             if (updateposition) {
                 currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));

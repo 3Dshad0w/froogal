@@ -249,7 +249,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                                                 registered_at = addresses.get(0).getLocality();
                                             }
                                         } catch (Exception e) {
-                                            registered_at = "dontknow";
+                                            registered_at = "";
                                             Log.d(TAG, e.toString());
                                         }
                                     }
@@ -616,8 +616,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         bu.set_defaults("registered_through", registered_through);
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
-                 //       bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
-                        bu.set_defaults("mobile_verified", "");
+                        bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id", id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
@@ -679,7 +678,10 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         bu.set_defaults("registered_through", registered_through);
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
-                        bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
+                        Log.d(TAG,bu.get_defaults("mobile"));
+                       // bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
+                        // TODO Rohit Svk Remove this line. after akhil singh
+                        bu.set_defaults("mobile_verified","");
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id",id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));

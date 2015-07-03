@@ -233,7 +233,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                                 registered_at = addresses.get(0).getLocality();
                                             }
                                         } catch (Exception e) {
-                                            registered_at = "dontknow";
+                                            registered_at = "";
                                             Log.d(TAG, e.toString());
                                         }
                                     }
