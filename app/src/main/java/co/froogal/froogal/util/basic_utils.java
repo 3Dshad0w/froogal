@@ -68,15 +68,14 @@ public class basic_utils {
     public boolean login_check(){
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
-        if (preferences.contains("email"))
+        if (preferences.contains("mobile"))
         {
-            if(preferences.contains("password")){
-                if(preferences.contains("mobile_verify")) {
-                    if (this.get_defaults("mobile_verify").toString().equals("true")) {
+                if(preferences.contains("mobile_verified")) {
+                    if (this.get_defaults("mobile_verified").toString().equals("yes")) {
                         return true;
                     }
                 }
-            }
+            
         }
         return false;
     }

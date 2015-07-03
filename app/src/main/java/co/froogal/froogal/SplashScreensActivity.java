@@ -118,6 +118,7 @@ public class SplashScreensActivity extends Activity implements GoogleApiClient.O
                 {
                     check_all_proceed = true;
                     if(bu.login_check()) {
+
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
