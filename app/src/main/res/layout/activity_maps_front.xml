@@ -12,6 +12,14 @@
         android:name="com.google.android.gms.maps.SupportMapFragment" >
     </fragment>
 
+    <ImageView
+        android:id="@+id/marker_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_place_black_24dp" />
+
 
 </RelativeLayout>
 

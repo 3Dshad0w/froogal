@@ -563,6 +563,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+        if(normal_dialog != null)
+
         if (requestCode == RC_SIGN_IN) {
             mIntentInProgress = false;
             sign_in_clicked = false;
