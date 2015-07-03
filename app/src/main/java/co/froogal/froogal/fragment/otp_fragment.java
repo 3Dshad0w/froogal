@@ -48,7 +48,6 @@ public class otp_fragment extends Fragment {
     public static final String TAG = "otp_fragment";
 
     // Animation Varibales
-    long duration;
     View view_animate_edittext;
     View view_animate_button;
     View view_animate_text;
@@ -145,6 +144,7 @@ public class otp_fragment extends Fragment {
             text_otp.setText("OTP");
             new process_otp().execute();
             startAnimation_otp_resend().start();
+            view_animate_resend.setVisibility(View.VISIBLE);
         }
         bouncer.play(startAnimation_edittext(interpolator_anti_overshoot)).with(startAnimation_button(interpolator_anti_overshoot)).before(startAnimation_text(interpolator_overshoot)).before(startAnimation_text1(interpolator_overshoot));
         bouncer.start();
@@ -272,12 +272,12 @@ public class otp_fragment extends Fragment {
         protected void onPostExecute(JSONObject json) {
 
             pDialog.dismiss();
-
+            bu.set_defaults("mobile_verified", "yes");
+            bu.set_defaults("mobile", number);
             try {
                  if (json.getString("success") != null) {
                     String res = json.getString("success");
                     if(Integer.parseInt(res) == 1){
-                        //bu.set_defaults();
                         bu.set_defaults("mobile_verified", "yes");
                         bu.set_defaults("mobile", number);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -345,6 +345,7 @@ public class otp_fragment extends Fragment {
                         bu.set_defaults("otp_sent","true");
                         text_otp.setText("OTP");
                         edit_Text.setText("");
+                        view_animate_resend.setVisibility(View.VISIBLE);
                         bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text()).before(startAnimation_otp_resend());
                         bouncer1.start();
 
@@ -419,7 +420,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_otp_edittext() {
 
-        animator_otp_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.X, width, width/2 -310 );
+        animator_otp_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.X, width, width/2 - Math.round(width/3.5) );
 
         // Set the duration and interpolator for this animation
         animator_otp_edittext.setDuration(1000);
@@ -430,7 +431,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_otp_button() {
 
-        animator_otp_button = ObjectAnimator.ofFloat(view_animate_button, View.X, width, width/2 - 220 );
+        animator_otp_button = ObjectAnimator.ofFloat(view_animate_button, View.X, width, width/2 - Math.round(width/5) );
 
         // Set the duration and interpolator for this animation
         animator_otp_button.setDuration(1000);
@@ -441,7 +442,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_edittext(Interpolator interpolator) {
 
-        animator_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.TRANSLATION_Y, -100, height/4 - 100);
+        animator_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.TRANSLATION_Y, -100, height/4 - Math.round(height/19.2));
 
         // Set the duration and interpolator for this animation
         animator_edittext.setDuration(2000);
@@ -452,7 +453,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_button(Interpolator interpolator) {
 
-        animator_button = ObjectAnimator.ofFloat(view_animate_button, View.TRANSLATION_Y,height,height/3 + 100);
+        animator_button = ObjectAnimator.ofFloat(view_animate_button, View.TRANSLATION_Y,height,height/3 + Math.round(height/19.2));
 
         // Set the duration and interpolator for this animation
         animator_button.setDuration(2000);
@@ -474,7 +475,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_otp_text() {
 
-        animator_otp_text = ObjectAnimator.ofFloat(view_animate_text1, View.X,width,width/2 - 80);
+        animator_otp_text = ObjectAnimator.ofFloat(view_animate_text1, View.X,width,width/2 - Math.round(width/13.7));
 
         // Set the duration and interpolator for this animation
         animator_otp_text.setDuration(1000);

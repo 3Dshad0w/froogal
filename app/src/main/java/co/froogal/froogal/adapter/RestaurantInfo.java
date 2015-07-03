@@ -14,6 +14,8 @@ public class RestaurantInfo {
     public String coupon;
     public String reward;
     public String favourite;
+    public String latitude;
+    public String longitude;
 
 
     public static final String RES_NAME = "Restaurant_";

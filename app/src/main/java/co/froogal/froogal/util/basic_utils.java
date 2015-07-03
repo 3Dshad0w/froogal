@@ -70,14 +70,31 @@ public class basic_utils {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
         if (preferences.contains("mobile"))
         {
-                if(preferences.contains("mobile_verified")) {
-                    if (this.get_defaults("mobile_verified").toString().equals("yes")) {
-                        return true;
-                    }
+
+            if(preferences.contains("mobile_verified")) {
+
+                if (this.get_defaults("mobile_verified").toString().equals("yes")) {
+                    return true;
                 }
-            
+            }
         }
         return false;
+    }
+
+    public boolean otp_check() {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
+        if (preferences.contains("email")) {
+            if (preferences.contains("mobile_verified")) {
+
+                if (this.get_defaults("mobile_verified").toString().equals("no")) {
+                    return true;
+                }
+
+            }
+        }
+            return false;
+
     }
     // Get values from shared preferences
 

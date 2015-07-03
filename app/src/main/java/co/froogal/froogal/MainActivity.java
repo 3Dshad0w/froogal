@@ -84,9 +84,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     // Map variables
     private GoogleMap map;
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(8.06890, 68.03215), new LatLng(35.674520, 97.40238));
-    Marker currentmarker;
-    public boolean updateposition = false;
-    public boolean currentmarkerupdate = true;
 
     //.Location variables
     protected GoogleApiClient googleapiclientlocation;
@@ -97,7 +94,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private LatLng destination;
-    public Intent loc_service;
 
     //Fragment variables
     protected boolean fragmentback = false;
@@ -142,16 +138,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         // Starting location intent service
         startService(new Intent(getBaseContext(), location_service.class));
-
-        //Handler for testing purposes - to be removed later
-      /*  new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(MainActivity.this, gcm_activity.class);
-                startActivity(i);
-                finish();
-            }
-        }, 3000);*/
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
@@ -494,13 +480,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
             // Calling map
             setUpMapIfNeeded();
-
-            //Updating marker
-            if(currentmarker != null)
-            {
-                //currentmarker.remove();
-            }
-
          }
         else
         {
@@ -515,7 +494,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         latitude = String.valueOf(currentLocation.getLatitude());
         longitude = String.valueOf(currentLocation.getLongitude());
         Log.d(TAG, "Location changed to " + latitude + " " + longitude);
-        updatecurrentmarker();
         //Updating shared preferences
         bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
         bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
@@ -602,7 +580,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                                 final Place myPlace = places.get(0);
                                 destination = myPlace.getLatLng();
                                 Log.d(TAG, "Place found: " + myPlace.getLatLng());
-                                update_marker_to_specified(destination.latitude, destination.longitude);
                           //      To be put in another activity afterwards
                           //      findDirections(Double.parseDouble(latitude), Double.parseDouble(longitude), destination.latitude, destination.longitude, GMapV2Direction.MODE_DRIVING);
                             }
@@ -614,20 +591,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
         }
     };
-
-    // Updating marker to serached place by user
-    public void update_marker_to_specified(Double deslatitude,Double deslongitude)
-    {
-        if (currentmarker != null) {
-            currentmarker.remove();
-        }
-        currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(deslatitude, deslongitude)).title("Marker"));
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-            .target(new LatLng(deslatitude, deslongitude))
-            .zoom(map.getCameraPosition().zoom)
-            .build();
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
 
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
 
@@ -698,8 +661,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
-                currentmarkerupdate = true;
-                updatecurrentmarker();
                 return true;
 
             }
@@ -709,26 +670,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 .zoom(15)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
 
-    }
-
-    private void updatecurrentmarker()
-    {
-        if(currentmarkerupdate) {
-            if (currentmarker != null) {
-                //currentmarker.remove();
-            }
-            if (updateposition) {
-                currentmarker = map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).title("Marker"));
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
-                        .zoom(map.getCameraPosition().zoom)
-                        .build();
-                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                currentmarkerupdate = false;
-            }
-        }
     }
 
     public void findDirections(double fromPositionDoubleLat, double fromPositionDoubleLong, double toPositionDoubleLat, double toPositionDoubleLong, String mode)

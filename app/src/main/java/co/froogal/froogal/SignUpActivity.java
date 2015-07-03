@@ -39,6 +39,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
@@ -631,13 +632,13 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         }
                     }
                     else{
-
+                        bu.clear_defaults();
                         normal_dialog.dismiss();
                         show_alert_dialog(SignUpActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
-                Log.d(TAG, e.toString());
+                bu.clear_defaults();
                 normal_dialog.dismiss();
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
             }
@@ -677,9 +678,6 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         bu.set_defaults("registered_through", registered_through);
                         bu.set_defaults("registered_at", registered_at);
                         bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
-                        Log.d(TAG,bu.get_defaults("mobile"));
-                       // bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
-                        // TODO Rohit Svk Remove this line. after akhil singh
                         bu.set_defaults("mobile_verified",json.getJSONObject("user").getString("mobile_verified"));
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id",id);
@@ -701,11 +699,15 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                     else{
                         fbDialog.dismiss();
                         show_alert_dialog(SignUpActivity.this, "Error", json.getString("message") + " Please try again later!");
+                        LoginManager.getInstance().logOut();
+                        bu.clear_defaults();
                     }
                 }
             } catch (JSONException e) {
                 fbDialog.dismiss();
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
+                LoginManager.getInstance().logOut();
+                bu.clear_defaults();
             }
         }
     }
