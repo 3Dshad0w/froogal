@@ -170,7 +170,6 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
         google_sign_in = (com.google.android.gms.common.SignInButton)findViewById(R.id.google_login);
         inputFirstName = (FloatLabeledEditText) findViewById(R.id.fname);
         inputLastName = (FloatLabeledEditText) findViewById(R.id.lname);
-        inputMobile = (FloatLabeledEditText) findViewById(R.id.umobile);
         inputEmail = (FloatLabeledEditText) findViewById(R.id.email);
         inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
         btnRegister = (TextView) findViewById(R.id.register);
@@ -348,7 +347,6 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                 String mFirstName = inputFirstName.getText().toString();
                 String mLastName = inputLastName.getText().toString();
                 String mPassword = inputPassword.getText().toString();
-                String mPhoneNumber = inputMobile.getText().toString();
 
 
 
@@ -386,7 +384,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                     focusView = inputLastName;
                     cancel = true;
                 }
-
+                /*
                 if (TextUtils.isEmpty(mPhoneNumber)) {
                     inputMobile.setError(getString(R.string.error_field_required));
                     focusView = inputMobile;
@@ -397,7 +395,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                     focusView = inputMobile;
                     cancel = true;
                 }
-
+                */
 
                 if (cancel) {
                     // There was an error; don't attempt login and focus the first
@@ -621,7 +619,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         bu.set_defaults("special_id", id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
                         normal_dialog.dismiss();
-                        if(bu.get_defaults("mobile_verified").equals("")) {
+                        if(bu.get_defaults("mobile_verified").equals("no")) {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
                             finish();
@@ -681,12 +679,12 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         Log.d(TAG,bu.get_defaults("mobile"));
                        // bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
                         // TODO Rohit Svk Remove this line. after akhil singh
-                        bu.set_defaults("mobile_verified","");
+                        bu.set_defaults("mobile_verified",json.getJSONObject("user").getString("mobile_verified"));
                         bu.set_defaults("birthday", birthday);
                         bu.set_defaults("special_id",id);
                         bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
                         fbDialog.dismiss();
-                        if(bu.get_defaults("mobile_verified").equals(""))
+                        if(bu.get_defaults("mobile_verified").equals("no"))
                         {
                             Intent intent = new Intent(getApplicationContext(), otp_activity.class);
                             startActivity(intent);
@@ -694,7 +692,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         }
                         else
                         {
-                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -824,16 +822,14 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
          **/
         private ProgressDialog pDialog;
 
-        String email,password,fname,lname,mobile;
+        String email,password,fname,lname;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            inputMobile = (FloatLabeledEditText) findViewById(R.id.umobile);
             inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
             fname = inputFirstName.getText().toString();
             lname = inputLastName.getText().toString();
             email = inputEmail.getText().toString();
-            mobile = inputMobile.getText().toString();
             password = inputPassword.getText().toString();
             pDialog = new ProgressDialog(SignUpActivity.this);
             pDialog.setTitle("Contacting Servers");
@@ -848,8 +844,8 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
 
 
             UserFunctions userFunction = new UserFunctions();
-            Log.d("upjson", fname+lname+email+mobile+password);
-            registered_through  ="s";
+            Log.d("upjson", fname+lname+email+password);
+            registered_through  ="e";
             TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
             imei = telephonyManager.getDeviceId();
             if(latitude != "" && longitude != "") {
@@ -868,7 +864,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
             ip_address = bu.get_defaults("ip_address");
             gcm_token = bu.get_defaults("gcm_token");
             image_url = "";
-            JSONObject json = userFunction.registerUser(fname, lname, email, mobile, password, registered_at, registered_through, imei, ip_address, image_url, longitude, latitude, gcm_token);
+            JSONObject json = userFunction.registerUser(fname, lname, email,password, registered_at, registered_through, imei, ip_address, image_url, longitude, latitude, gcm_token);
             Log.d("json", json.toString());
             return json;
 
@@ -892,26 +888,38 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
 
 
 
-                        basic_utils bf = new basic_utils(getApplicationContext());
+                        bu.set_defaults("email", email);
+                        bu.set_defaults("password", password);
+                        bu.set_defaults("fname", fname);
+                        bu.set_defaults("lname", lname);
+                        bu.set_defaults("image_url", "");
+                        bu.set_defaults("ip_address", bu.get_defaults("ip_address"));
+                        bu.set_defaults("registered_through", "e");
+                        bu.set_defaults("registered_at", registered_at);
+                        bu.set_defaults("mobile", json.getJSONObject("user").getString("mobile"));
+                        Log.d(TAG,bu.get_defaults("mobile"));
+                        // bu.set_defaults("mobile_verified", json.getJSONObject("user").getString("mobile_verified"));
+                        // TODO Rohit Svk Remove this line. after akhil singh
+                        bu.set_defaults("mobile_verified","no");
+                        bu.set_defaults("birthday", "");
+                        bu.set_defaults("special_id","");
+                        bu.set_defaults("uid", json.getJSONObject("user").getString("uid"));
 
-                        bf.set_defaults("email", email);
-                        bf.set_defaults("password", password);
-                        bf.set_defaults("fname", fname);
-                        bf.set_defaults("lname", lname);
-                        bf.set_defaults("mobile", mobile);
+                        if(bu.get_defaults("mobile_verified").equals("no"))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), otp_activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
 
 
-                        Intent registered = new Intent(getApplicationContext(), MainActivity.class);
 
-                        /**
-                         * Close all views before launching Registered screen
-                         **/
-                        registered.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        pDialog.dismiss();
-                        startActivity(registered);
-
-
-                        finish();
                     }
 
                     else if (Integer.parseInt(red) ==2){

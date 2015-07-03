@@ -106,17 +106,7 @@
         app:fletTextBackground="@drawable/edit_text_background_accent"
         app:fletTextColor="@color/main_color_400" />
 
-    <co.froogal.froogal.view.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:fletFloatingHint="Mobile"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/umobile"
-        app:fletHintTextColor="@color/main_color_500"
-        app:fletSingleLine="true"
-        app:fletTextBackground="@drawable/edit_text_background_accent"
-        app:fletTextColor="@color/main_color_400"/>
+
 
     <co.froogal.froogal.view.FloatLabeledEditText
         android:layout_width="match_parent"

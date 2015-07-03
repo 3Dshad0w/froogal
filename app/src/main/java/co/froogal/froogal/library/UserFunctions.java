@@ -49,16 +49,16 @@ public class UserFunctions {
      * Function to save mobile and its status
      */
 
-    public JSONObject send_mobile_verification_status(String number, String unique_id) {
+    public JSONObject send_mobile_verification_status(String uid, String number, String status) {
 
         // Building Parameters
         Log.d(TAG, "send_mobile");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("userID", uid));
         params.add(new BasicNameValuePair("mobile", number));
-        params.add(new BasicNameValuePair("unique_id", unique_id));
-        params.add(new BasicNameValuePair("mobile_status", "true"));
+        params.add(new BasicNameValuePair("mobile_status", status));
         JSONObject json = jsonParser.makeHttpRequest(send_mobile_verification_status_URL, "POST", params);
-        Log.d(TAG, "Json Response : " + json);
+        Log.d(TAG, "Json Response MobileVerfi: " + json);
         return json;
     }
 
@@ -139,14 +139,13 @@ public class UserFunctions {
     /**
      * Function to  Register
      */
-    public JSONObject registerUser(String fname, String lname, String email, String mobile, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token) {
+    public JSONObject registerUser(String fname, String lname, String email, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token) {
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
         params.add(new BasicNameValuePair("fname", fname));
         params.add(new BasicNameValuePair("lname", lname));
         params.add(new BasicNameValuePair("email", email));
-        params.add(new BasicNameValuePair("mobile", mobile));
         params.add(new BasicNameValuePair("password", password));
         params.add(new BasicNameValuePair("ip_address", ip_address));
         params.add(new BasicNameValuePair("imei", imei));
