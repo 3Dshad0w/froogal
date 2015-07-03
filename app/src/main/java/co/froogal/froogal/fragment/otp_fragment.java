@@ -286,10 +286,12 @@ public class otp_fragment extends Fragment {
 
                     }
                     else{
+                        bu.clear_defaults();
                         show_alert_dialog(getActivity(), "Server Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
+                bu.clear_defaults();
                 show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
             }
         }
