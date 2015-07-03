@@ -658,19 +658,20 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMyLocationEnabled(true);
-        map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+       /* map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
                 return true;
 
             }
-        });
+        });*/
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
                 .zoom(15)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+        Log.d(TAG, latitude.toString());
+        Log.d(TAG, map.getCameraPosition().target.toString());
     }
 
     public void findDirections(double fromPositionDoubleLat, double fromPositionDoubleLong, double toPositionDoubleLat, double toPositionDoubleLong, String mode)

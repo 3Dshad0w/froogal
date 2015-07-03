@@ -140,6 +140,9 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LoginManager.getInstance().logOut();
+
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         SpannableString s = new SpannableString("Login");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
