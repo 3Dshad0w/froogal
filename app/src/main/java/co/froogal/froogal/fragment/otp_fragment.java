@@ -274,23 +274,23 @@ public class otp_fragment extends Fragment {
             pDialog.dismiss();
             bu.set_defaults("mobile_verified", "yes");
             bu.set_defaults("mobile", number);
-
             try {
-                    if (json.getString("success") != null) {
+                 if (json.getString("success") != null) {
                     String res = json.getString("success");
-                        if(Integer.parseInt(res) == 1)
-                        {
-                             Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
-                        }
-                        else{
-                            show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+                    if(Integer.parseInt(res) == 1){
+                        bu.set_defaults("mobile_verified", "yes");
+                        bu.set_defaults("mobile", number);
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
 
-                        }
                     }
+                    else{
+                        show_alert_dialog(getActivity(), "Server Error", json.getString("message") + " Please try again later!");
+                    }
+                }
             } catch (JSONException e) {
-               show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+                show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
             }
         }
     }
@@ -420,7 +420,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_otp_edittext() {
 
-        animator_otp_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.X, width, width/2 - Math.round(width/3.475) );
+        animator_otp_edittext = ObjectAnimator.ofFloat(view_animate_edittext, View.X, width, width/2 - Math.round(width/3.5) );
 
         // Set the duration and interpolator for this animation
         animator_otp_edittext.setDuration(1000);
@@ -431,7 +431,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_otp_button() {
 
-        animator_otp_button = ObjectAnimator.ofFloat(view_animate_button, View.X, width, width/2 - Math.round(width/4.9) );
+        animator_otp_button = ObjectAnimator.ofFloat(view_animate_button, View.X, width, width/2 - Math.round(width/5) );
 
         // Set the duration and interpolator for this animation
         animator_otp_button.setDuration(1000);
@@ -475,7 +475,7 @@ public class otp_fragment extends Fragment {
 
     public ObjectAnimator startAnimation_otp_text() {
 
-        animator_otp_text = ObjectAnimator.ofFloat(view_animate_text1, View.X,width,width/2 - Math.round(width/13.5));
+        animator_otp_text = ObjectAnimator.ofFloat(view_animate_text1, View.X,width,width/2 - Math.round(width/13.7));
 
         // Set the duration and interpolator for this animation
         animator_otp_text.setDuration(1000);

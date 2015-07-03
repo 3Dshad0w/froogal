@@ -422,7 +422,9 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                 Log.i("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
-        } catch (NoSuchAlgorithmException e) {
+
+        }
+        catch (NoSuchAlgorithmException e) {
         }
     }
 
@@ -563,8 +565,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        if(normal_dialog != null)
-
         if (requestCode == RC_SIGN_IN) {
             mIntentInProgress = false;
             sign_in_clicked = false;
@@ -641,7 +641,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     else{
 
                         normal_dialog.dismiss();
-                        show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                        show_alert_dialog(LoginActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
@@ -704,7 +704,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     }
                     else{
 
-                        show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                        show_alert_dialog(LoginActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
@@ -794,7 +794,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         pDialog.dismiss();
                         showAlertDialog(LoginActivity.this, "Error",
                                 "Incorrect username/password.", false);
-                        loginErrorMsg.setText("Incorrect username/password");
+                        //loginErrorMsg.setText("Incorrect username/password");
                     }
                 }
             } catch (JSONException e) {

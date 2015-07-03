@@ -633,11 +633,12 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                     else{
 
                         normal_dialog.dismiss();
-                        show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
+                        show_alert_dialog(SignUpActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
                 Log.d(TAG, e.toString());
+                normal_dialog.dismiss();
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
             }
         }
@@ -695,11 +696,12 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         }
                     }
                     else{
-
-                        show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
+                        fbDialog.dismiss();
+                        show_alert_dialog(SignUpActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
+                fbDialog.dismiss();
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
             }
         }
@@ -948,11 +950,14 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                 }
 
             } catch (JSONException e) {
+                pDialog.dismiss();
                 e.printStackTrace();
 
 
             }
-        }}
+        }
+
+    }
     public void NetAsync(View view){
         new NetCheck().execute();
     }
