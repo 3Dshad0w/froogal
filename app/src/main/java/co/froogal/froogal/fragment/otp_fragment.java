@@ -48,7 +48,6 @@ public class otp_fragment extends Fragment {
     public static final String TAG = "otp_fragment";
 
     // Animation Varibales
-    long duration;
     View view_animate_edittext;
     View view_animate_button;
     View view_animate_text;
@@ -145,6 +144,7 @@ public class otp_fragment extends Fragment {
             text_otp.setText("OTP");
             new process_otp().execute();
             startAnimation_otp_resend().start();
+            view_animate_resend.setVisibility(View.VISIBLE);
         }
         bouncer.play(startAnimation_edittext(interpolator_anti_overshoot)).with(startAnimation_button(interpolator_anti_overshoot)).before(startAnimation_text(interpolator_overshoot)).before(startAnimation_text1(interpolator_overshoot));
         bouncer.start();
@@ -344,6 +344,7 @@ public class otp_fragment extends Fragment {
                         bu.set_defaults("otp_sent","true");
                         text_otp.setText("OTP");
                         edit_Text.setText("");
+                        view_animate_resend.setVisibility(View.VISIBLE);
                         bouncer1.play(startAnimation_otp_edittext()).with(startAnimation_otp_button()).with(startAnimation_otp_text()).before(startAnimation_otp_resend());
                         bouncer1.start();
 
