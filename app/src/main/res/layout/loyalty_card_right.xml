@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="0.5dp">
+-->
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/loyalty_card_round_border">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:minHeight="64dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Buy One Pizza and Get another Free!!"
+                android:id="@+id/loyaltyInfo"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:textColor="@color/main_color_500" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="63dp"
+            android:background="#FFFFFF"
+            android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:minHeight="64dp"
+            android:id="@+id/visitLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VISIT"
+                android:id="@+id/textView10"
+                android:gravity="center_horizontal"
+                android:textColor="@color/cpb_white"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01"
+                android:id="@+id/visitCount"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="40sp"
+                android:textIsSelectable="false"
+                android:textColor="@color/cpb_white" />
+        </LinearLayout>
+    </LinearLayout>
+

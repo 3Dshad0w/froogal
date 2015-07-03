@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Colored rectangle-->
+
+   <!-- <item>
+
+        <shape android:shape="rectangle">
+
+            <solid android:color="#FAD55C" />
+            <corners android:radius="48dp"/>
+        </shape>
+    </item>
+-->
+    <!-- This rectangle for the left side -->
+    <!-- Its color should be the same as layout's -->
+
+    <item
+        android:right="5dp">
+
+            <shape android:shape="oval">
+
+                <solid android:color="#FFFFFF" />
+                <corners android:radius="5dp"/>
+            </shape>
+
+
+    </item>
+
+
+    <!-- These rectangles for the right side -->
+    <!-- Their color should be the same as layout's -->
+
+</layer-list>
