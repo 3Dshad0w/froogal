@@ -272,27 +272,26 @@ public class otp_fragment extends Fragment {
         protected void onPostExecute(JSONObject json) {
 
             pDialog.dismiss();
-            bu.set_defaults("mobile_verified", "yes");
-            bu.set_defaults("mobile", number);
 
-           // try {
-                // TODO akhil singh
-               // if (json.getString("success") != null) {
-               //     String res = json.getString("success");
-               //     if(Integer.parseInt(res) == 1){
+            try {
+                 if (json.getString("success") != null) {
+                    String res = json.getString("success");
+                    if(Integer.parseInt(res) == 1){
                         //bu.set_defaults();
+                        bu.set_defaults("mobile_verified", "yes");
+                        bu.set_defaults("mobile", number);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
 
-               //     }
-               //     else{
-                //        show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
-                //    }
-             //   }
-           // } catch (JSONException e) {
-           //     show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
-           // }
+                    }
+                    else{
+                        show_alert_dialog(getActivity(), "Server Error", json.getString("message") + " Please try again later!");
+                    }
+                }
+            } catch (JSONException e) {
+                show_alert_dialog(getActivity(), "Server Error", "Please try again later!");
+            }
         }
     }
 

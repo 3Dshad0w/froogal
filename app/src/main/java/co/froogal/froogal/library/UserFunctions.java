@@ -59,6 +59,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("mobile_status", status));
         JSONObject json = jsonParser.makeHttpRequest(send_mobile_verification_status_URL, "POST", params);
         Log.d(TAG, "Json Response MobileVerfi: " + json);
+        Log.d("vah", params.toString());
         return json;
     }
 

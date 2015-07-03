@@ -639,7 +639,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     else{
 
                         normal_dialog.dismiss();
-                        show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                        show_alert_dialog(LoginActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
@@ -702,7 +702,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     }
                     else{
 
-                        show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
+                        show_alert_dialog(LoginActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
@@ -792,7 +792,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         pDialog.dismiss();
                         showAlertDialog(LoginActivity.this, "Error",
                                 "Incorrect username/password.", false);
-                        loginErrorMsg.setText("Incorrect username/password");
+                        //loginErrorMsg.setText("Incorrect username/password");
                     }
                 }
             } catch (JSONException e) {
