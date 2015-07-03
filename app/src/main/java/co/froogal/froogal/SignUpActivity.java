@@ -39,6 +39,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
@@ -631,13 +632,13 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                         }
                     }
                     else{
-
+                        bu.clear_defaults();
                         normal_dialog.dismiss();
                         show_alert_dialog(SignUpActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
-                Log.d(TAG, e.toString());
+                bu.clear_defaults();
                 normal_dialog.dismiss();
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
             }
@@ -698,11 +699,15 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                     else{
                         fbDialog.dismiss();
                         show_alert_dialog(SignUpActivity.this, "Error", json.getString("message") + " Please try again later!");
+                        LoginManager.getInstance().logOut();
+                        bu.clear_defaults();
                     }
                 }
             } catch (JSONException e) {
                 fbDialog.dismiss();
                 show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
+                LoginManager.getInstance().logOut();
+                bu.clear_defaults();
             }
         }
     }

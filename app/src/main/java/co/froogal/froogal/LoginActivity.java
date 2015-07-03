@@ -527,9 +527,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     }
 
 
-    // For logout
-
-   /* @Override
+    /*@Override
     public void onClick(View view) {
         if (view.getId() == R.id.sign_out_button) {
             if (mGoogleApiClient.isConnected()) {
@@ -639,13 +637,14 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         }
                     }
                     else{
-
+                        bu.clear_defaults();
                         normal_dialog.dismiss();
                         show_alert_dialog(LoginActivity.this, "Error", json.getString("message") + " Please try again later!");
                     }
                 }
             } catch (JSONException e) {
-                Log.d(TAG,e.toString());
+                Log.d(TAG, e.toString());
+                bu.clear_defaults();
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
         }
@@ -705,9 +704,13 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     else{
 
                         show_alert_dialog(LoginActivity.this, "Error", json.getString("message") + " Please try again later!");
+                        LoginManager.getInstance().logOut();
+                        bu.clear_defaults();
                     }
                 }
             } catch (JSONException e) {
+                LoginManager.getInstance().logOut();
+                bu.clear_defaults();
                 show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
             }
         }

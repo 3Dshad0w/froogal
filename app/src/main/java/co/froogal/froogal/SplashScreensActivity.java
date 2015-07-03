@@ -123,6 +123,12 @@ public class SplashScreensActivity extends Activity implements GoogleApiClient.O
                         startActivity(i);
                         finish();
                     }
+                    else if(bu.otp_check()){
+                        Intent i = new Intent(getApplicationContext(), otp_activity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    }
                     else {
                        animation2();
                        animation3();

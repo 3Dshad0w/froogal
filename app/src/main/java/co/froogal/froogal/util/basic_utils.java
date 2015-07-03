@@ -70,11 +70,25 @@ public class basic_utils {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
         if (preferences.contains("email"))
         {
-            if(preferences.contains("password")){
-                if(preferences.contains("mobile_verify")) {
-                    if (this.get_defaults("mobile_verify").toString().equals("true")) {
-                        return true;
-                    }
+            if(preferences.contains("mobile_verified")) {
+
+                if (this.get_defaults("mobile_verified").toString().equals("yes")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean otp_check(){
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
+        if (preferences.contains("email"))
+        {
+            if(preferences.contains("mobile_verified")) {
+
+                if (this.get_defaults("mobile_verified").toString().equals("no")) {
+                    return true;
                 }
             }
         }
