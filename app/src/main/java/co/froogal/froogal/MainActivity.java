@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
@@ -67,8 +68,11 @@ import co.froogal.froogal.adapter.PlaceAutocompleteAdapter;
 import co.froogal.froogal.adapter.RestaurantInfo;
 import co.froogal.froogal.fragment.locationListViewFragment;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import co.froogal.froogal.adapter.DrawerAdapter;
 import co.froogal.froogal.library.GMapV2Direction;
@@ -89,6 +93,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(8.06890, 68.03215), new LatLng(35.674520, 97.40238));
     JSONObject restaurantsJson;
     JSONObject restaurantJson;
+    ArrayList<Marker> sdf;
 
     //.Location variables
     protected GoogleApiClient googleapiclientlocation;
@@ -160,8 +165,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         }
 
-
-
         // Card flip animation
         if (savedInstanceState == null) {
             getFragmentManager()
@@ -172,8 +175,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         // location
         buildGoogleApiClient();
-
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -204,7 +205,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_view);
-
+        sdf = new ArrayList<Marker>();
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         prepareNavigationDrawerItems();
         setAdapter();
@@ -225,14 +226,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // start dialog
-        normal_dialog = new ProgressDialog(MainActivity.this);
-        normal_dialog.setTitle("Contacting Servers");
-        normal_dialog.setMessage("Loding data ...");
-        normal_dialog.setIndeterminate(false);
-        normal_dialog.setCancelable(false);
-        normal_dialog.show();
     }
 
     // Onclick buttons
@@ -514,7 +507,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         @Override
         protected JSONObject doInBackground(String... args) {
-
             UserFunctions userFunction = new UserFunctions();
             JSONObject json = userFunction.getRestaurants(longitude, latitude);
             return json;
@@ -552,9 +544,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
                         //Adding each restaurant marker
                         map.addMarker(new MarkerOptions()
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
-                                .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
-                                .title(ci.resName));
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
+                                    .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
+                                    .title(ci.resName));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -681,10 +673,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         result.add(ci);
 
                         //Adding each restaurant marker
-                        map.addMarker(new MarkerOptions()
+                        sdf.add(map.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
                                 .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
-                                .title(ci.resName));
+                                .title(ci.resName)));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -820,7 +812,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 .zoom(15)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        Log.d(TAG, latitude.toString());
+        // Call preocess
+        normal_dialog = new ProgressDialog(MainActivity.this);
+        normal_dialog.setTitle("Contacting Servers");
+        normal_dialog.setMessage("Loading data ...");
+        normal_dialog.setIndeterminate(false);
+        normal_dialog.setCancelable(false);
+        normal_dialog.show();
+        new ProcessRestaurants().execute();
         map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition arg0) {
@@ -833,6 +832,15 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         new ProcessRestaurants().execute();
                     }
                 });
+            }
+        });
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            public boolean onMarkerClick(Marker marker) {
+                marker.showInfoWindow();
+                Intent intent = new Intent(MainActivity.this, ResDetailsActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
             }
         });
     }
