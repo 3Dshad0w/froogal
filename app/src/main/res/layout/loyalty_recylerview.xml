@@ -1,54 +1,20 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context=".loyaltyActivity">
-    <!--
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="86dp"
-            android:id="@+id/topLayout"
-            android:background="@color/main_color_500">
 
-            <ImageView
-                android:layout_width="86dp"
-                android:layout_height="86dp"
-                android:id="@+id/loyaltyImage"
-                android:src="@drawable/ic_launcher"
-                android:padding="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Loyalty Card"
-                android:id="@+id/textView6"
-                android:layout_toRightOf="@+id/loyaltyImage"
-                android:textColor="@color/cpb_white"
-                android:textSize="30sp"
-                android:layout_centerInParent="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Expires on your expiry"
-                android:id="@+id/textView11"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/cpb_white"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#FFFFFF"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/border"
-            android:layout_below="@+id/topLayout" />
-    -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/expiryLayout" />
 
-</RelativeLayout>
+
+
+
+
+</LinearLayout>

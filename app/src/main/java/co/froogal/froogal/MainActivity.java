@@ -49,6 +49,8 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -84,6 +86,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     // Map variables
     private GoogleMap map;
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(8.06890, 68.03215), new LatLng(35.674520, 97.40238));
+    JSONObject restaurantsJson;
+    JSONObject restaurantJson;
 
     //.Location variables
     protected GoogleApiClient googleapiclientlocation;
@@ -93,7 +97,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     protected LocationRequest locationrequest;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
-    private LatLng destination;
+    private LatLng center_map;
+    LatLng destination;
 
     //Fragment variables
     protected boolean fragmentback = false;
@@ -126,7 +131,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     String username = "user";
 
     private Handler mHandler;
-    private JSONObject restaurantJson = null;
     locationListViewFragment listFragment;
     basic_utils bu;
 
@@ -142,17 +146,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
 
-        new ProcessRestaurants().execute();
         // Updating values from shared preferences
         if(bu.location_check()) {
 
             latitude = bu.get_defaults("latitude");
             longitude = bu.get_defaults("longitude");
-            Log.d(TAG,"Location Updated from shared preference");
+            Log.d(TAG, "Location Updated from shared preference");
 
         }
-
-
 
 
 
@@ -184,7 +185,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 .addApi(Places.GEO_DATA_API)
                 .build();
         googleapiclientplaces.connect();
-        adapter = new PlaceAutocompleteAdapter(this, R.layout.listview,googleapiclientplaces, BOUNDS_INDIA, null);
+        adapter = new PlaceAutocompleteAdapter(this, android.R.layout.simple_list_item_1,googleapiclientplaces, BOUNDS_INDIA, null);
 
         //UI
         autocompletetextview = (AutoCompleteTextView) findViewById(R.id.autocomplete_places);
@@ -296,27 +297,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         }
         // Handle action buttons
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-
-            basic_utils bf = new basic_utils(getApplicationContext());
-            if(bf.get_defaults("registered_through").equals("f"))
-            {
-                LoginManager.getInstance().logOut();
-            }
-            bf.clear_defaults();
-            Intent login = new Intent(getApplicationContext(), SplashScreensActivity.class);
-            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(login);
-            finish();
-        }
-        if (id == R.id.action_changePassword){
-            Intent chgpass = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-
-            startActivity(chgpass);
-        }
-
 
         if (id == R.id.search) {
             if (!searchexpanded) {
@@ -461,7 +441,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         if(googleapiclientplaces.isConnected()) {
             googleapiclientlocation.disconnect();
         }
+
     }
+
 
     @Override
     public void onConnected(Bundle connectionHint) {
@@ -505,10 +487,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     private class ProcessRestaurants extends AsyncTask<String, String, JSONObject> {
 
-
         private ProgressDialog pDialog;
-
-
 
         @Override
         protected void onPreExecute() {
@@ -526,26 +505,53 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-
-            //JSONObject json = null;//
             JSONObject json = userFunction.getRestaurants(longitude, latitude);
-
-            Log.d("RestaurantFlashingLOL", json.toString());
-
             return json;
+
         }
 
         @Override
         protected void onPostExecute(JSONObject json) {
 
+            List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
             try {
+
                 listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
-                //listFragment.updateList();
+
+                // Creating Markers for Restaurants
+                restaurantsJson = json.getJSONObject("restaurants");
+                int noOfRestaurants = restaurantsJson.length();
+                int i = 0;
+                for (i = 0 ; i < noOfRestaurants ; i++) {
+                    restaurantJson = null;
+                    try {
+                        restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
+                        RestaurantInfo ci = new RestaurantInfo();
+                        ci.resName = restaurantJson.getString("name");
+                        ci.resAddress = restaurantJson.getString("address");
+                        ci.phoneNumber = restaurantJson.getString("phone_number");
+                        ci.reward = restaurantJson.getString("reward");
+                        ci.coupon = restaurantJson.getString("coupon");
+                        ci.latitude = restaurantJson.getString("latitude");
+                        ci.longitude = restaurantJson.getString("longitude");
+                        ci.resID = restaurantJson.getString("restaurant_id");
+                        result.add(ci);
+
+                        //Adding each restaurant marker
+                        map.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
+                                .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
+                                .title(ci.resName));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             pDialog.dismiss();
-
         }
 
     }
@@ -658,20 +664,20 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMyLocationEnabled(true);
-       /* map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-            @Override
-            public boolean onMyLocationButtonClick() {
-                return true;
-
-            }
-        });*/
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
                 .zoom(15)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         Log.d(TAG, latitude.toString());
-        Log.d(TAG, map.getCameraPosition().target.toString());
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                center_map = map.getCameraPosition().target;
+                // Load restaurants
+                new ProcessRestaurants().execute();
+            }
+        });
     }
 
     public void findDirections(double fromPositionDoubleLat, double fromPositionDoubleLong, double toPositionDoubleLat, double toPositionDoubleLong, String mode)

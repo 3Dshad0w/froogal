@@ -3,13 +3,12 @@
 
 
 
-    <item
-        android:right="5dp">
+    <item>
 
             <shape android:shape="oval">
 
                 <solid android:color="#FFFFFF" />
-                <corners android:radius="5dp"/>
+                <corners android:radius="8dp"/>
             </shape>
 
 

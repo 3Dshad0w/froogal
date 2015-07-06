@@ -7,4 +7,5 @@ public class loyaltyInfo {
         public String info;
         public  String visit;
 
+        public String status;
 }

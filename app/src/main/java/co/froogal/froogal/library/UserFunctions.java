@@ -233,11 +233,11 @@ public class UserFunctions {
     }
 
     public JSONObject getRestaurants(String longitude, String latitude) {
+
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
-        params.add(new BasicNameValuePair("longitude", "70"));
-        params.add(new BasicNameValuePair("latitude", "14"));
-
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("latitude", latitude));
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getRestaurants.php", "GET", params);
         Log.d("infunctionregRESTAURANT", json.toString());
         return json;

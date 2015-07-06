@@ -45,10 +45,12 @@ public class loyaltyActivity extends ActionBarActivity {
             loyaltyInfo ci = new loyaltyInfo();
             ci.info = "jE nasd commen parle" + String.valueOf(i);
             ci.visit = String.valueOf(i);
-
+            ci.status = "false";
             result.add(ci);
 
         }
+        result.get(0).status = "true";
+        result.get(1).status = "true";
 
         return result;
     }
