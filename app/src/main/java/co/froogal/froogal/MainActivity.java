@@ -58,6 +58,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,6 +110,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     // UI variables
     private static View view;
     private AutoCompleteTextView autocompletetextview;
+    ProgressDialog normal_dialog;
 
     //Adapter variables
     private PlaceAutocompleteAdapter adapter;
@@ -124,6 +126,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private ImageView imageview_left;
+    private ImageView imageview_center;
+    private ImageView imageview_right;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -191,8 +196,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         autocompletetextview = (AutoCompleteTextView) findViewById(R.id.autocomplete_places);
         autocompletetextview.setAdapter(adapter);
         autocompletetextview.setOnItemClickListener(autocompleteclicklistener);
-
-
+        //imageview_left  =  (ImageView) findViewById(R.id.image_left);
+        //imageview_center = (ImageView) findViewById(R.id.image_center);
+        //imageview_right = (ImageView) findViewById(R.id.image_right);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTitle = mDrawerTitle = getTitle();
@@ -220,8 +226,27 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+        // start dialog
+        normal_dialog = new ProgressDialog(MainActivity.this);
+        normal_dialog.setTitle("Contacting Servers");
+        normal_dialog.setMessage("Loding data ...");
+        normal_dialog.setIndeterminate(false);
+        normal_dialog.setCancelable(false);
+        normal_dialog.show();
+    }
 
-
+    // Onclick buttons
+    public void image_right(View v) {
+        new ProcessRestaurants_pop().execute();
+        Log.d(TAG,"pop");
+    }
+    public void image_center(View v) {
+        new ProcessRestaurants().execute();
+        Log.d(TAG, "nb");
+    }
+    public void image_left(View v) {
+        new ProcessRestaurants_fav().execute();
+        Log.d(TAG, "fav");
     }
 
     private void setAdapter() {
@@ -302,7 +327,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             if (!searchexpanded) {
 
                 searchexpanded = true;
-                item.setIcon(R.drawable.ic_action_delete);
+                item.setIcon(R.drawable.ic_clear_white_36dp);
 
                 // Action Bar
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -348,7 +373,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
                 //Animation
                 flipCard();
-
                 item.setIcon(R.drawable.ic_action_locate);
                 fragmentback = true;
 
@@ -366,15 +390,13 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             return;
         }
         fragmentback = true;
-
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(
-                        R.anim.card_flip_right_in, R.anim.card_flip_right_out,
-                        R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-                .replace(R.id.content_frame, listFragment)
-                .addToBackStack(null)
-                .commit();
-
+                    .setCustomAnimations(
+                            R.anim.card_flip_right_in, R.anim.card_flip_right_out,
+                            R.anim.card_flip_left_in, R.anim.card_flip_left_out)
+                    .replace(R.id.content_frame, listFragment)
+                    .addToBackStack(null)
+                    .commit();
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -480,25 +502,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         bu.set_defaults("latitude", String.valueOf(currentLocation.getLatitude()));
         bu.set_defaults("longitude", String.valueOf(currentLocation.getLongitude()));
 
-
-
     }
 
-
+    // For default
     private class ProcessRestaurants extends AsyncTask<String, String, JSONObject> {
-
-        private ProgressDialog pDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Getting Resources ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
         }
 
         @Override
@@ -518,6 +529,75 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
                 listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
 
+                // Remove all markers before
+                map.clear();
+                // Creating Markers for Restaurants
+                restaurantsJson = json.getJSONObject("restaurants");
+                int noOfRestaurants = restaurantsJson.length();
+                int i = 0;
+                for (i = 0 ; i < noOfRestaurants ; i++) {
+                    restaurantJson = null;
+                    try {
+                        restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
+                        RestaurantInfo ci = new RestaurantInfo();
+                        ci.resName = restaurantJson.getString("name");
+                        ci.resAddress = restaurantJson.getString("address");
+                        ci.phoneNumber = restaurantJson.getString("phone_number");
+                        ci.reward = restaurantJson.getString("reward");
+                        ci.coupon = restaurantJson.getString("coupon");
+                        ci.latitude = restaurantJson.getString("latitude");
+                        ci.longitude = restaurantJson.getString("longitude");
+                        ci.resID = restaurantJson.getString("restaurant_id");
+                        result.add(ci);
+
+                        //Adding each restaurant marker
+                        map.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
+                                .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
+                                .title(ci.resName));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(normal_dialog != null)
+                {
+                    normal_dialog.dismiss();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    // For favourite
+    private class ProcessRestaurants_fav extends AsyncTask<String, String, JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = userFunction.getRestaurants(longitude, latitude);
+            return json;
+
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+            List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
+            try {
+
+                listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+
+                // Remove all markers before
+                map.clear();
                 // Creating Markers for Restaurants
                 restaurantsJson = json.getJSONObject("restaurants");
                 int noOfRestaurants = restaurantsJson.length();
@@ -551,7 +631,69 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            pDialog.dismiss();
+        }
+    }
+
+    // For popular
+    private class ProcessRestaurants_pop extends AsyncTask<String, String, JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = userFunction.getRestaurants(longitude, latitude);
+            return json;
+
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+            List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
+            try {
+
+                listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+
+                // Remove all markers before
+                map.clear();
+                // Creating Markers for Restaurants
+                restaurantsJson = json.getJSONObject("restaurants");
+                int noOfRestaurants = restaurantsJson.length();
+                int i = 0;
+                for (i = 0 ; i < noOfRestaurants ; i++) {
+                    restaurantJson = null;
+                    try {
+                        restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
+                        RestaurantInfo ci = new RestaurantInfo();
+                        ci.resName = restaurantJson.getString("name");
+                        ci.resAddress = restaurantJson.getString("address");
+                        ci.phoneNumber = restaurantJson.getString("phone_number");
+                        ci.reward = restaurantJson.getString("reward");
+                        ci.coupon = restaurantJson.getString("coupon");
+                        ci.latitude = restaurantJson.getString("latitude");
+                        ci.longitude = restaurantJson.getString("longitude");
+                        ci.resID = restaurantJson.getString("restaurant_id");
+                        result.add(ci);
+
+                        //Adding each restaurant marker
+                        map.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
+                                .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
+                                .title(ci.resName));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -586,6 +728,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                                 final Place myPlace = places.get(0);
                                 destination = myPlace.getLatLng();
                                 Log.d(TAG, "Place found: " + myPlace.getLatLng());
+                                latitude = String.valueOf(destination.latitude);
+                                longitude = String.valueOf(destination.longitude);
+                                new ProcessRestaurants().execute();
+                                CameraPosition cameraPosition = new CameraPosition.Builder()
+                                        .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+                                        .zoom(15)
+                                        .build();
+                                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                           //      To be put in another activity afterwards
                           //      findDirections(Double.parseDouble(latitude), Double.parseDouble(longitude), destination.latitude, destination.longitude, GMapV2Direction.MODE_DRIVING);
                             }
@@ -664,18 +814,25 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMyLocationEnabled(true);
+        map.getUiSettings().setZoomControlsEnabled(true);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
                 .zoom(15)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         Log.d(TAG, latitude.toString());
-        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+        map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
-            public void onMapLoaded() {
-                center_map = map.getCameraPosition().target;
-                // Load restaurants
-                new ProcessRestaurants().execute();
+            public void onCameraChange(CameraPosition arg0) {
+                map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+                        center_map = map.getCameraPosition().target;
+                        latitude = String.valueOf(center_map.latitude);
+                        longitude = String.valueOf(center_map.longitude);
+                        new ProcessRestaurants().execute();
+                    }
+                });
             }
         });
     }

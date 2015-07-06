@@ -107,7 +107,7 @@ public class location_service extends Service implements GoogleApiClient.OnConne
         locationrequest = new LocationRequest();
         locationrequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         locationrequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        locationrequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationrequest.setPriority(LocationRequest.PRIORITY_NO_POWER);
 
     }
 
