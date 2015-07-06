@@ -46,10 +46,12 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:onClick="image_left"
-                    android:background="@drawable/round_border_main"
+                    android:background="@drawable/round_border_main_unselected"
                     android:src="@drawable/ic_favorite_white_24dp"
                     android:scaleType="center"
-                    android:layout_gravity="center" />
+                    android:id="@+id/image_left"
+                    android:layout_gravity="center"
+                    android:clickable="true" />
 
             </LinearLayout>
 
@@ -57,8 +59,7 @@
                 android:layout_width="2dp"
                 android:layout_height="40dp"
                 android:background="#FFFFFF"
-                android:layout_marginTop="30dp"
-                />
+                android:layout_marginTop="30dp" />
 
             <LinearLayout
                 android:layout_weight="1"
@@ -83,10 +84,13 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:onClick="image_center"
-                    android:background="@drawable/round_border_main"
+                    android:id="@+id/image_center"
+                    android:background="@drawable/round_border_main_selected"
                     android:src="@drawable/ic_location_searching_white_24dp"
                     android:scaleType="center"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:tint="@color/material_black_500" />
 
             </LinearLayout>
 
@@ -119,10 +123,12 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:onClick="image_right"
-                    android:background="@drawable/round_border_main"
+                    android:id="@+id/image_right"
+                    android:background="@drawable/round_border_main_unselected"
                     android:src="@drawable/ic_star_white_24dp"
                     android:scaleType="center"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
 
             </LinearLayout>
 

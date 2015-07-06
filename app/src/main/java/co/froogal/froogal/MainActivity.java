@@ -2,6 +2,7 @@ package co.froogal.froogal;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -197,9 +198,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         autocompletetextview = (AutoCompleteTextView) findViewById(R.id.autocomplete_places);
         autocompletetextview.setAdapter(adapter);
         autocompletetextview.setOnItemClickListener(autocompleteclicklistener);
-        //imageview_left  =  (ImageView) findViewById(R.id.image_left);
-        //imageview_center = (ImageView) findViewById(R.id.image_center);
-        //imageview_right = (ImageView) findViewById(R.id.image_right);
+        imageview_left  =  (ImageView) findViewById(R.id.image_left);
+        imageview_center = (ImageView) findViewById(R.id.image_center);
+        imageview_right = (ImageView) findViewById(R.id.image_right);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTitle = mDrawerTitle = getTitle();
@@ -230,14 +231,37 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     // Onclick buttons
     public void image_right(View v) {
+
+        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_center.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_right.setBackgroundResource(R.drawable.round_border_main_selected);
+        imageview_left.setColorFilter(null);
+        imageview_center.setColorFilter(null);
+        imageview_right.setColorFilter(R.color.material_black_500);
+
         new ProcessRestaurants_pop().execute();
         Log.d(TAG,"pop");
     }
     public void image_center(View v) {
+
+        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
+        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_left.setColorFilter(null);
+        imageview_center.setColorFilter(R.color.material_black_500);
+        imageview_right.setColorFilter(null);
+
         new ProcessRestaurants().execute();
         Log.d(TAG, "nb");
     }
     public void image_left(View v) {
+
+        imageview_left.setBackgroundResource(R.drawable.round_border_main_selected);
+        imageview_center.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_left.setColorFilter(R.color.material_black_500);
+        imageview_center.setColorFilter(null);
+        imageview_right.setColorFilter(null);
         new ProcessRestaurants_fav().execute();
         Log.d(TAG, "fav");
     }
