@@ -14,7 +14,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -89,6 +92,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     //tag
     public static String TAG = "MainActivity";
 
+    //Screen Slide
+    private static final int NUM_PAGES = 2;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+
     // Map variables
     private GoogleMap map;
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(8.06890, 68.03215), new LatLng(35.674520, 97.40238));
@@ -156,6 +164,22 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
+
+
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // When changing pages, reset the action bar actions since they are dependent
+                // on which page is currently active. An alternative approach is to have each
+                // fragment expose actions itself (rather than the activity exposing actions),
+                // but for simplicity, the activity provides the actions in this sample.
+                invalidateOptionsMenu();
+            }
+        });
 
         // Updating values from shared preferences
         if(bu.location_check()) {
@@ -229,6 +253,22 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(android.app.FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public android.app.Fragment getItem(int position) {
+            return ScreenSlidePageFragment.create(position);
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
+    }
+
     // Onclick buttons
     public void image_right(View v) {
 
@@ -243,23 +283,24 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     }
     public void image_center(View v) {
 
+        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
         imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
         imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
-        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
         imageview_left.setColorFilter(null);
-        imageview_center.setColorFilter(R.color.material_black_500);
         imageview_right.setColorFilter(null);
+        imageview_center.setColorFilter(R.color.material_black_500);
 
         new ProcessRestaurants().execute();
     }
     public void image_left(View v) {
 
-        imageview_left.setBackgroundResource(R.drawable.round_border_main_selected);
         imageview_center.setBackgroundResource(R.drawable.round_border_main_unselected);
         imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_left.setColorFilter(R.color.material_black_500);
+        imageview_left.setBackgroundResource(R.drawable.round_border_main_selected);
         imageview_center.setColorFilter(null);
         imageview_right.setColorFilter(null);
+        imageview_left.setColorFilter(R.color.material_black_500);
+
         new ProcessRestaurants_fav().execute();
     }
 
