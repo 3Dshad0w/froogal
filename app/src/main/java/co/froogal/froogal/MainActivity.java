@@ -239,8 +239,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_center.setColorFilter(null);
         imageview_right.setColorFilter(R.color.material_black_500);
 
-        new ProcessRestaurants_pop().execute();
-        Log.d(TAG,"pop");
+        new ProcessRestaurants_pop().execute();;
     }
     public void image_center(View v) {
 
@@ -252,7 +251,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_right.setColorFilter(null);
 
         new ProcessRestaurants().execute();
-        Log.d(TAG, "nb");
     }
     public void image_left(View v) {
 
@@ -263,7 +261,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_center.setColorFilter(null);
         imageview_right.setColorFilter(null);
         new ProcessRestaurants_fav().execute();
-        Log.d(TAG, "fav");
     }
 
     private void setAdapter() {
@@ -749,7 +746,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                                 new ProcessRestaurants().execute();
                                 CameraPosition cameraPosition = new CameraPosition.Builder()
                                         .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
-                                        .zoom(15)
+                                        .zoom(13)
                                         .build();
                                 map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                           //      To be put in another activity afterwards
@@ -801,10 +798,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             fragmentback = false;
             return view;
         }
-
     }
-
-
 
     @Override
     protected void onPause() {
@@ -833,7 +827,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         map.getUiSettings().setZoomControlsEnabled(true);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
-                .zoom(15)
+                .zoom(13)
                 .build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         // Call preocess
@@ -858,13 +852,34 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 });
             }
         });
+        map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                View v = getLayoutInflater().inflate(R.layout.marker_info, null);
+                TextView title = (TextView) v.findViewById(R.id.title_name);
+                title.setText(marker.getTitle());
+                return v;
+            }
+        });
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
             public boolean onMarkerClick(Marker marker) {
                 marker.showInfoWindow();
-                Intent intent = new Intent(MainActivity.this, ResDetailsActivity.class);
-                startActivity(intent);
-                finish();
                 return true;
+            }
+        });
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent i = new Intent(MainActivity.this, ResDetailsActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }
