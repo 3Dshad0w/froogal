@@ -145,6 +145,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     locationListViewFragment listFragment;
     basic_utils bu;
 
+    CardFrontFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,11 +167,13 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         }
 
+        mapFragment = new CardFrontFragment();
+
         // Card flip animation
         if (savedInstanceState == null) {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.content_frame, new CardFrontFragment())
+                    .add(R.id.content_frame,mapFragment )
                     .commit();
         }
 
@@ -404,13 +407,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         if (fragmentback) {
             getFragmentManager().popBackStack();
-            return;
         }
         fragmentback = true;
         getFragmentManager().beginTransaction()
                     .setCustomAnimations(
-                            R.anim.card_flip_right_in, R.anim.card_flip_right_out,
-                            R.anim.card_flip_left_in, R.anim.card_flip_left_out)
+                            R.anim.slide_in,  R.anim.slide_out)
                     .replace(R.id.content_frame, listFragment)
                     .addToBackStack(null)
                     .commit();
@@ -469,6 +470,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         }
 
     }
+
 
     @Override
     protected void onStop() {

@@ -65,8 +65,7 @@
                         android:layout_height="5dp"
                         android:id="@+id/offerIndicator"
                         android:layout_gravity="center_vertical"
-                        android:src="@android:drawable/ic_notification_overlay"
-                        android:tint="@color/material_green_500" />
+                        android:src="@android:drawable/ic_notification_overlay" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -80,8 +79,7 @@
                         android:layout_height="5dp"
                         android:id="@+id/rewardIndicator"
                         android:layout_gravity="center_vertical"
-                        android:src="@android:drawable/ic_notification_overlay"
-                        android:tint="@color/material_green_500"/>
+                        android:src="@android:drawable/ic_notification_overlay" />
 
                     <TextView
                         android:layout_width="wrap_content"
