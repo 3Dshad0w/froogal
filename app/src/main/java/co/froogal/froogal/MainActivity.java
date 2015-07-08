@@ -336,10 +336,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private View prepareHeaderView(int layoutRes, String url) {
         View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList, false);
         ImageView iv = (ImageView) headerView.findViewById(R.id.image);
-        TextView tv = (TextView) headerView.findViewById(R.id.email);
+        TextView tv = (TextView) headerView.findViewById(R.id.name);
         ImageUtil.displayRoundImage(iv, url, null);
 
-        tv.setText(bu.get_defaults("fname"));
+        String name = bu.get_defaults("fname") + " " + bu.get_defaults("lname");
+        tv.setText(name);
 
         return headerView;
     }
@@ -349,23 +350,39 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         mDrawerItems.add(
                 new DrawerItem(
                         R.string.drawer_icon_linked_in,
-                        R.string.drawer_title_linked_in,
-                        DrawerItem.DRAWER_ITEM_TAG_LINKED_IN));
+                        R.string.drawer_title_orders,
+                        DrawerItem.DRAWER_ITEM_TAG_ORDERS));
         mDrawerItems.add(
                 new DrawerItem(
                         R.string.drawer_icon_blog,
-                        R.string.drawer_title_blog,
-                        DrawerItem.DRAWER_ITEM_TAG_BLOG));
+                        R.string.drawer_title_rewardpoints,
+                        DrawerItem.DRAWER_ITEM_TAG_REWARDPOINTS));
         mDrawerItems.add(
                 new DrawerItem(
                         R.string.drawer_icon_git_hub,
-                        R.string.drawer_title_git_hub,
-                        DrawerItem.DRAWER_ITEM_TAG_GIT_HUB));
+                        R.string.drawer_title_redeem,
+                        DrawerItem.DRAWER_ITEM_TAG_REDEEM));
+        mDrawerItems.add(
+                new DrawerItem(
+                        R.string.drawer_icon_git_hub,
+                        R.string.drawer_title_invite,
+                        DrawerItem.DRAWER_ITEM_TAG_INVITE));
+
         mDrawerItems.add(
                 new DrawerItem(
                         R.string.drawer_icon_instagram,
-                        R.string.drawer_title_instagram,
-                        DrawerItem.DRAWER_ITEM_TAG_INSTAGRAM));
+                        R.string.drawer_title_editprofile,
+                        DrawerItem.DRAWER_ITEM_TAG_EDITPROFILE));
+        mDrawerItems.add(
+                new DrawerItem(
+                        R.string.drawer_icon_instagram,
+                        R.string.drawer_title_aboutus,
+                        DrawerItem.DRAWER_ITEM_TAG_ABOUTUS));
+        mDrawerItems.add(
+                new DrawerItem(
+                        R.string.drawer_icon_instagram,
+                        R.string.drawer_title_logout,
+                        DrawerItem.DRAWER_ITEM_TAG_LOGOUT));
     }
 
     @Override
@@ -1032,19 +1049,56 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            selectItem(position);
+            selectItem(position,  mDrawerItems.get(position - 1).getTag());
         }
     }
 
-    private void selectItem(int position/*, int drawerTag*/) {
+    private void selectItem(int position, int drawerTag) {
         if (position < 1) {
             return;
         }
+
+        if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_ORDERS){
+
+            Intent login = new Intent(getApplicationContext(), OrdersActivity.class);
+            startActivity(login);
+        }
+        else if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_REWARDPOINTS){
+            Intent login = new Intent(getApplicationContext(), RewardsActivity.class);
+            startActivity(login);
+        }
+        else if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_REDEEM){
+            Intent login = new Intent(getApplicationContext(), RedeemActivity.class);
+            startActivity(login);
+        }
+        else if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_INVITE){
+            Intent login = new Intent(getApplicationContext(), InviteActivity.class);
+            startActivity(login);
+        }
+        else if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_EDITPROFILE){
+            Intent login = new Intent(getApplicationContext(), EditProfileActivity.class);
+            startActivity(login);
+        }
+        else if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_ABOUTUS){
+            Intent login = new Intent(getApplicationContext(), AboutUSActivity.class);
+            startActivity(login);
+        }
+        else if(drawerTag == DrawerItem.DRAWER_ITEM_TAG_LOGOUT){
+
+            bu.clear_defaults();
+            LoginManager.getInstance().logOut();
+            Intent login = new Intent(getApplicationContext(), SplashScreensActivity.class);
+            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(login);
+            finish();
+
+        }
+
         String drawerTitle = getString(mDrawerItems.get(position - 1).getTitle());
         Toast.makeText(this, "You selected " + drawerTitle + " at position: " + position, Toast.LENGTH_SHORT).show();
 
         mDrawerList.setItemChecked(position, true);
-        setTitle(mDrawerItems.get(position - 1).getTitle());
+        //setTitle(mDrawerItems.get(position - 1).getTitle());
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
