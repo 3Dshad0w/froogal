@@ -232,7 +232,7 @@ public class UserFunctions {
 
     }
 
-    public JSONObject getRestaurants(String longitude, String latitude) {
+    public JSONObject getRestaurants(String latitude, String longitude) {
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
@@ -336,7 +336,26 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("description", description));
 
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/updateReview.php", "POST", params);
-        Log.d("infunctionregREVIEW", json.toString());
+        Log.d("infunctionregREVIEW22", json.toString());
+        return json;
+    }
+
+    public JSONObject getPopRestaurants(String latitude, String longitude) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("latitude", latitude));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getPopRestaurants.php", "GET", params);
+        Log.d("infunctionregREAURANT2", json.toString());
+        return json;
+    }
+
+    public JSONObject getFavRestaurants(String uid) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", uid));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getFavRestaurants.php", "GET", params);
+        Log.d("infunctionregRRANT1", json.toString());
         return json;
     }
 }

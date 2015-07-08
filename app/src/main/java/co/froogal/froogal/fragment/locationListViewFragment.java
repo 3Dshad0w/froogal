@@ -33,18 +33,26 @@ import co.froogal.froogal.adapter.RestaurantInfo;
  */
 public class locationListViewFragment extends Fragment {
 
+    private RecyclerView recList;
+    List<RestaurantInfo> list;
+    RestaurantAdapter ca;
+
     public static locationListViewFragment newInstance(JSONObject restaurants) {
         locationListViewFragment fragment = new locationListViewFragment();
         // Supply index input as an argument.
         Bundle args = new Bundle();
-        args.putString("values", restaurants.toString());
+        if(restaurants != null)
+            args.putString("values", restaurants.toString());
+        else{
+            args.putString("values", "");
+        }
         fragment.setArguments(args);
+
+
         return fragment;
     }
 
-    private RecyclerView recList;
-    List<RestaurantInfo> list;
-    RestaurantAdapter ca;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,10 +74,15 @@ public class locationListViewFragment extends Fragment {
 
         Bundle args = getArguments();
         JSONObject resJson = null;
-         try {
-            resJson = new JSONObject(args.getString("values"));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if(!args.getString("values").equals("")) {
+            try {
+                resJson = new JSONObject(args.getString("values"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            resJson = null;
         }
 
         list = createList(resJson);
@@ -104,6 +117,44 @@ public class locationListViewFragment extends Fragment {
 
         //restaurantsJson = json.getJSONObject("restaurants");
         restaurantsJson = json;
+        if(restaurantsJson != null) {
+            Log.d("restaurantsJson", restaurantsJson.toString());
+            int noOfRestaurants = restaurantsJson.length();
+            int i = 0;
+            for (i = 0; i < noOfRestaurants; i++) {
+                JSONObject restaurantJson = null;
+                try {
+                    restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
+
+                    RestaurantInfo ci = new RestaurantInfo();
+                    ci.resName = restaurantJson.getString("name");
+                    ci.resAddress = restaurantJson.getString("address");
+                    ci.phoneNumber = restaurantJson.getString("phone_number");
+                    ci.reward = restaurantJson.getString("reward");
+                    ci.coupon = restaurantJson.getString("coupon");
+                    ci.distance = restaurantJson.getString("latitude") + restaurantJson.getString("longitude");
+                    ci.resID = restaurantJson.getString("restaurant_id");
+                    result.add(ci);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
+        return result;
+    }
+
+    public void updateList(JSONObject json){
+
+        List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
+
+        JSONObject restaurantsJson = null;
+
+        //restaurantsJson = json.getJSONObject("restaurants");
+        restaurantsJson = json;
 
         Log.d("restaurantsJson", restaurantsJson.toString());
         int noOfRestaurants = restaurantsJson.length();
@@ -131,41 +182,8 @@ public class locationListViewFragment extends Fragment {
 
         }
 
-        return result;
-    }
-
-    public void updateList(JSONObject json){
-
-        List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
-
-        JSONObject restaurantsJson = null;
-
-        //restaurantsJson = json.getJSONObject("restaurants");
-        restaurantsJson = json;
-
-        Log.d("restaurantsJson", restaurantsJson.toString());
-        int noOfRestaurants = restaurantsJson.length();
-        int i = 0;
-        for (i = 0 ; i < noOfRestaurants ; i++) {
-            JSONObject restaurantJson = null;
-            try {
-                restaurantJson = restaurantsJson.getJSONObject("'" + i + "'");
-
-            RestaurantInfo ci = new RestaurantInfo();
-            ci.resName = restaurantJson.getString("name");
-            ci.resAddress = restaurantJson.getString("address");
-            result.add(ci);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-        }
-
-        ca.updateData(result);
-
+       list = result;
+       ca.updateData(result);
     }
 
 }

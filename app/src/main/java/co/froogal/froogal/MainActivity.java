@@ -2,6 +2,7 @@ package co.froogal.froogal;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -167,13 +168,20 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         }
 
+        imageview_left  =  (ImageView) findViewById(R.id.image_left);
+        imageview_center = (ImageView) findViewById(R.id.image_center);
+        imageview_right = (ImageView) findViewById(R.id.image_right);
+        JSONObject a = null;
+        listFragment = locationListViewFragment.newInstance(a);
+        //image_center(imageview_center.getRootView());
+        //new ProcessRestaurants().execute();
         mapFragment = new CardFrontFragment();
 
         // Card flip animation
         if (savedInstanceState == null) {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.content_frame,mapFragment )
+                    .add(R.id.content_frame,new CardFrontFragment() )
                     .commit();
         }
 
@@ -201,9 +209,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         autocompletetextview = (AutoCompleteTextView) findViewById(R.id.autocomplete_places);
         autocompletetextview.setAdapter(adapter);
         autocompletetextview.setOnItemClickListener(autocompleteclicklistener);
-        imageview_left  =  (ImageView) findViewById(R.id.image_left);
-        imageview_center = (ImageView) findViewById(R.id.image_center);
-        imageview_right = (ImageView) findViewById(R.id.image_right);
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTitle = mDrawerTitle = getTitle();
@@ -240,7 +246,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_right.setBackgroundResource(R.drawable.round_border_main_selected);
         imageview_left.setColorFilter(null);
         imageview_center.setColorFilter(null);
-        imageview_right.setColorFilter(R.color.material_black_500);
+        imageview_right.setColorFilter(R.color.material_black_900, PorterDuff.Mode.SRC_ATOP);
 
         new ProcessRestaurants_pop().execute();;
     }
@@ -250,7 +256,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
         imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
         imageview_left.setColorFilter(null);
-        imageview_center.setColorFilter(R.color.material_black_500);
+        imageview_center.setColorFilter(R.color.material_black_900, PorterDuff.Mode.SRC_ATOP);
         imageview_right.setColorFilter(null);
 
         new ProcessRestaurants().execute();
@@ -260,7 +266,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_left.setBackgroundResource(R.drawable.round_border_main_selected);
         imageview_center.setBackgroundResource(R.drawable.round_border_main_unselected);
         imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_left.setColorFilter(R.color.material_black_500);
+        imageview_left.setColorFilter(R.color.material_black_900, PorterDuff.Mode.SRC_ATOP);
         imageview_center.setColorFilter(null);
         imageview_right.setColorFilter(null);
         new ProcessRestaurants_fav().execute();
@@ -404,11 +410,13 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         if (fragmentback) {
             getFragmentManager().popBackStack();
+            return;
         }
         fragmentback = true;
         getFragmentManager().beginTransaction()
                     .setCustomAnimations(
-                            R.anim.slide_in,  R.anim.slide_out)
+                            R.anim.slide_in, R.anim.slide_in,
+                            R.anim.slide_out, R.anim.slide_out)
                     .replace(R.id.content_frame, listFragment)
                     .addToBackStack(null)
                     .commit();
@@ -531,7 +539,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         @Override
         protected JSONObject doInBackground(String... args) {
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.getRestaurants(longitude, latitude);
+            JSONObject json = userFunction.getRestaurants(latitude, longitude);
             return json;
 
         }
@@ -542,8 +550,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
             try {
 
-                listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
-
+                if(fragmentback) {
+                    listFragment.updateList(json.getJSONObject("restaurants"));//
+                }
+                else{
+                    listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+                }
                 // Remove all markers before
                 map.clear();
                 // Creating Markers for Restaurants
@@ -598,7 +610,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.getRestaurants(longitude, latitude);
+            JSONObject json = userFunction.getFavRestaurants(bu.get_defaults("uid"));
             return json;
 
         }
@@ -609,8 +621,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
             try {
 
-                listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
-
+                if(fragmentback) {
+                    listFragment.updateList(json.getJSONObject("restaurants"));//
+                }
+                else{
+                    listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+                }
                 // Remove all markers before
                 map.clear();
                 // Creating Markers for Restaurants
@@ -661,7 +677,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.getRestaurants(longitude, latitude);
+            JSONObject json = userFunction.getPopRestaurants(latitude, longitude);
             return json;
 
         }
@@ -672,8 +688,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             List<RestaurantInfo> result = new ArrayList<RestaurantInfo>();
             try {
 
-                listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
-
+                if(fragmentback) {
+                    listFragment.updateList(json.getJSONObject("restaurants"));//
+                }
+                else{
+                    listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+                }
                 // Remove all markers before
                 map.clear();
                 // Creating Markers for Restaurants
