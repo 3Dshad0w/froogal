@@ -137,6 +137,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private ImageView imageview_center;
     private ImageView imageview_right;
 
+    private TextView textview_left;
+    private TextView textview_center;
+    private TextView textview_right;
+
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     SharedPreferences sharedpreferences;
@@ -171,6 +175,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_left  =  (ImageView) findViewById(R.id.image_left);
         imageview_center = (ImageView) findViewById(R.id.image_center);
         imageview_right = (ImageView) findViewById(R.id.image_right);
+        textview_left = (TextView) findViewById(R.id.text_left);
+        textview_center = (TextView) findViewById(R.id.text_center);
+        textview_right = (TextView) findViewById(R.id.text_right);
+
         JSONObject a = null;
         listFragment = locationListViewFragment.newInstance(a);
         //image_center(imageview_center.getRootView());
@@ -239,37 +247,74 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     }
 
     // Onclick buttons
-    public void image_right(View v) {
+    public void image_left(View v) {
 
-        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_center.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_right.setBackgroundResource(R.drawable.round_border_main_selected);
-        imageview_left.setColorFilter(null);
+/*
+        imageview_left.setColorFilter(R.color.cpb_red_dark, PorterDuff.Mode.SRC_ATOP);
         imageview_center.setColorFilter(null);
-        imageview_right.setColorFilter(R.color.material_black_900, PorterDuff.Mode.SRC_ATOP);
+        imageview_right.setColorFilter(null);
+*/
+        textview_left.setTextColor(getResources().getColor(R.color.cpb_red_dark));
+        textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
+        textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
 
-        new ProcessRestaurants_pop().execute();;
+        imageview_left.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
+        imageview_center.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+        imageview_right.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+
+        imageview_left.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_red_24dp));
+        imageview_center.setImageDrawable(getResources().getDrawable(R.drawable.ic_around_white));
+        imageview_right.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_white_24dp));
+
+
+        new ProcessRestaurants_fav().execute();
     }
+
     public void image_center(View v) {
 
-        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
-        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
+/*
         imageview_left.setColorFilter(null);
-        imageview_center.setColorFilter(R.color.material_black_900, PorterDuff.Mode.SRC_ATOP);
+        imageview_center.setColorFilter(R.color.cpb_blue_dark, PorterDuff.Mode.SRC_ATOP);
         imageview_right.setColorFilter(null);
+*/
+        textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
+        textview_center.setTextColor(getResources().getColor(R.color.cpb_blue_dark));
+        textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
+
+
+        imageview_left.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+        imageview_center.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
+        imageview_right.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+
+        imageview_left.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
+        imageview_center.setImageDrawable(getResources().getDrawable(R.drawable.ic_around_blue));
+        imageview_right.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_white_24dp));
+
 
         new ProcessRestaurants().execute();
     }
-    public void image_left(View v) {
 
-        imageview_left.setBackgroundResource(R.drawable.round_border_main_selected);
-        imageview_center.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_left.setColorFilter(R.color.material_black_900, PorterDuff.Mode.SRC_ATOP);
+    public void image_right(View v) {
+
+/*
+        imageview_left.setColorFilter(null);
         imageview_center.setColorFilter(null);
-        imageview_right.setColorFilter(null);
-        new ProcessRestaurants_fav().execute();
+        imageview_right.setColorFilter(R.color.material_yellow_900, PorterDuff.Mode.SRC_ATOP);
+*/
+        textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
+        textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
+        textview_right.setTextColor(getResources().getColor(R.color.material_yellow_900));
+
+        imageview_left.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+        imageview_center.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+        imageview_right.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
+
+        imageview_left.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
+        imageview_center.setImageDrawable(getResources().getDrawable(R.drawable.ic_around_white));
+        imageview_right.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_yellow_24dp));
+
+
+        new ProcessRestaurants_pop().execute();;
     }
 
     private void setAdapter() {
