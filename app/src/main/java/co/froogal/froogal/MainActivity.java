@@ -303,7 +303,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 */
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
-        textview_right.setTextColor(getResources().getColor(R.color.material_yellow_900));
+        textview_right.setTextColor(getResources().getColor(R.color.material_yellow_500));
 
         imageview_left.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
         imageview_center.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));

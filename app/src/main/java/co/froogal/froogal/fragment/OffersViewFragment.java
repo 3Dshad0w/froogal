@@ -55,7 +55,6 @@ public class OffersViewFragment extends ScrollViewFragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), loyaltyActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         });
