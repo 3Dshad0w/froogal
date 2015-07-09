@@ -1,0 +1,36 @@
+<co.froogal.froogal.library.NotifyingScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    tools:context="co.froogal.froogal.fragment.AboutScrollViewFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:divider="@drawable/horizontal_divider"
+        android:showDividers="middle">
+
+        <include layout="@layout/header_placeholder_temp"/>
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" />
+
+
+    </LinearLayout>
+
+
+
+    </co.froogal.froogal.library.NotifyingScrollView>
