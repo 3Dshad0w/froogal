@@ -46,16 +46,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             }
         });
         if(ci.reward.equals("green")){
-            restaurantViewHolder.rewardIndicator.setColorFilter(R.color.material_green_500);
+            restaurantViewHolder.rewardIndicator.setImageResource(R.drawable.ic_indicator_green);
         }
         if(ci.reward.equals("red")){
-            restaurantViewHolder.rewardIndicator.setColorFilter(R.color.material_red_500);
+            restaurantViewHolder.rewardIndicator.setImageResource(R.drawable.ic_indicator_red);
         }
         if(ci.coupon.equals("green")){
-            restaurantViewHolder.offerIndicator.setColorFilter(R.color.material_green_500);
+            restaurantViewHolder.offerIndicator.setImageResource(R.drawable.ic_indicator_green);
         }
         if(ci.coupon.equals("red")){
-            restaurantViewHolder.offerIndicator.setColorFilter(R.color.material_red_500);
+            restaurantViewHolder.offerIndicator.setImageResource(R.drawable.ic_indicator_red);
         }
 
 
