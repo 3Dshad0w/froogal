@@ -14,9 +14,11 @@ import android.widget.ImageView;
 
 import org.json.JSONException;
 
+import co.froogal.froogal.fragment.AboutScrollViewFragmentTemp;
 import co.froogal.froogal.fragment.MenuFinalOrderViewFragment;
 import co.froogal.froogal.fragment.MenuOrderViewFragment;
 import co.froogal.froogal.fragment.ReviewFragment;
+import co.froogal.froogal.fragment.RewardsScrollViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
@@ -133,9 +135,9 @@ public class RewardsActivity extends ParallaxViewPagerBaseActivity {
             Fragment fragment;
 
             if(position ==  numFragments){
-                return ReviewFragment.newInstance(position);
+                return RewardsScrollViewFragment.newInstance(position);
             }
-            fragment = ReviewFragment.newInstance(position);
+            fragment = RewardsScrollViewFragment.newInstance(position);
             return fragment;
         }
         @Override
