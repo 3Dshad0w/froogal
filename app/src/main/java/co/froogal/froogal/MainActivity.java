@@ -15,13 +15,17 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -90,12 +95,17 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     //tag
     public static String TAG = "MainActivity";
 
+    //Screen Slide
+    private static final int NUM_PAGES = 2;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+
     // Map variables
     private GoogleMap map;
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(8.06890, 68.03215), new LatLng(35.674520, 97.40238));
     JSONObject restaurantsJson;
     JSONObject restaurantJson;
-    ArrayList<Marker> sdf;
+    private HashMap<Marker, RestaurantInfo> eventMarkerMap;
 
     //.Location variables
     protected GoogleApiClient googleapiclientlocation;
@@ -128,7 +138,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     public static final String LEFT_MENU_OPTION = "co.froogal.froogal.MainActivity";
     public static final String LEFT_MENU_OPTION_1 = "Left Menu Option 1";
     public static final String LEFT_MENU_OPTION_2 = "Left Menu Option 2";
-
+    public int height;
+    public int width;
     private ListView mDrawerList;
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
@@ -157,11 +168,20 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get height and width
+        Display display = this.getWindowManager().getDefaultDisplay();
+        width  = display.getWidth();
+        height = display.getHeight();
+        Log.d(TAG, String.valueOf(width));
+        Log.d(TAG, String.valueOf(height));
+
+
         // Starting location intent service
         startService(new Intent(getBaseContext(), location_service.class));
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
+        eventMarkerMap = new HashMap<Marker, RestaurantInfo>();
 
         // Updating values from shared preferences
         if(bu.location_check()) {
@@ -223,7 +243,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_view);
-        sdf = new ArrayList<Marker>();
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         prepareNavigationDrawerItems();
         setAdapter();
@@ -249,11 +268,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     // Onclick buttons
     public void image_left(View v) {
 
-/*
-        imageview_left.setColorFilter(R.color.cpb_red_dark, PorterDuff.Mode.SRC_ATOP);
-        imageview_center.setColorFilter(null);
-        imageview_right.setColorFilter(null);
-*/
         textview_left.setTextColor(getResources().getColor(R.color.cpb_red_dark));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
@@ -272,11 +286,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     public void image_center(View v) {
 
-/*
+        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
         imageview_left.setColorFilter(null);
-        imageview_center.setColorFilter(R.color.cpb_blue_dark, PorterDuff.Mode.SRC_ATOP);
         imageview_right.setColorFilter(null);
-*/
+        imageview_center.setColorFilter(R.color.material_black_500);
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_blue_dark));
         textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
@@ -290,17 +305,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_center.setImageDrawable(getResources().getDrawable(R.drawable.ic_around_blue));
         imageview_right.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_white_24dp));
 
-
         new ProcessRestaurants().execute();
     }
 
     public void image_right(View v) {
 
-/*
-        imageview_left.setColorFilter(null);
-        imageview_center.setColorFilter(null);
-        imageview_right.setColorFilter(R.color.material_yellow_900, PorterDuff.Mode.SRC_ATOP);
-*/
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_right.setTextColor(getResources().getColor(R.color.material_yellow_500));
@@ -313,8 +322,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_center.setImageDrawable(getResources().getDrawable(R.drawable.ic_around_white));
         imageview_right.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_yellow_24dp));
 
-
         new ProcessRestaurants_pop().execute();;
+
     }
 
     private void setAdapter() {
@@ -640,10 +649,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         result.add(ci);
 
                         //Adding each restaurant marker
-                        map.addMarker(new MarkerOptions()
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
-                                    .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
-                                    .title(ci.resName));
+                        eventMarkerMap.put(map.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
+                                .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
+                                .title(ci.resName)), ci);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -778,10 +787,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         result.add(ci);
 
                         //Adding each restaurant marker
-                        sdf.add(map.addMarker(new MarkerOptions()
+                        map.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
                                 .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
-                                .title(ci.resName)));
+                                .title(ci.resName));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -921,6 +930,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         normal_dialog.setIndeterminate(false);
         normal_dialog.setCancelable(false);
         normal_dialog.show();
+        normal_dialog.dismiss();
         new ProcessRestaurants().execute();
         map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
@@ -961,7 +971,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                RestaurantInfo eventInfo = eventMarkerMap.get(marker);
                 Intent i = new Intent(MainActivity.this, ResDetailsActivity.class);
+                i.putExtra("res_latitude", String.valueOf(marker.getPosition().latitude));
+                i.putExtra("res_longitude",String.valueOf(marker.getPosition().longitude));
+                i.putExtra("res_ID",eventInfo.resID);
                 startActivity(i);
                 finish();
             }

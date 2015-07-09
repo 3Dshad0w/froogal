@@ -48,6 +48,8 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
     private Drawable mActionBarBackgroundDrawable;
 
     public static String resID = "0";
+    public static String res_latitude;
+    public static String res_longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +58,22 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         mActionBarBackgroundDrawable = getResources().getDrawable(R.color.main_color_500);
         initValues();
 
-
-        resID = "1";
+        // Getting extras
+        Intent intent = getIntent();
+        resID = intent.getStringExtra("res_ID");
+        res_latitude = intent.getStringExtra("res_latitude");
+        res_longitude = intent.getStringExtra("res_longitude");
 
         Button checkin = (Button) findViewById(R.id.checkInButton);
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-                Intent intent = new Intent(ResDetailsActivity.this, MenuOrder.class);
-                startActivity(intent);
+                Intent i = new Intent(ResDetailsActivity.this, scanner_activity.class);
+                i.putExtra("res_latitude", res_latitude);
+                i.putExtra("res_longitude",res_longitude);
+                i.putExtra("res_ID",resID);
+                startActivity(i);
                 finish();
 
             }
