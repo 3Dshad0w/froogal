@@ -79,8 +79,17 @@ public class SimpleScannerFragment extends Fragment implements ZBarScannerView.R
             float[] results = new float[1];
 
             Location.distanceBetween(Double.valueOf(scanner_activity.res_latitude), Double.valueOf(scanner_activity.res_longitude), Double.valueOf(latitude), Double.valueOf(longitude), results);
-            //distanceInMetersOne = location.distanceTo(new LatLng(Double.valueOf(ResDetailsActivity.res_latitude),Double.valueOf(ResDetailsActivity.res_longitude)));
-            Log.d(TAG,results.toString());
+            if(results[0] > 100.00)
+            {
+                Intent intent =  new Intent(getActivity(),MenuOrder.class);
+                intent.putExtra("res_ID",scanner_activity.res_ID);
+                startActivity(intent);
+                getActivity().finish();
+            }
+            else
+            {
+                show_alert_dialog(getActivity(),"Invalid","You are not in the restarurant !");
+            }
         }
         else
         {

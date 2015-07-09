@@ -61,8 +61,8 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         // Getting extras
         Intent intent = getIntent();
         resID = intent.getStringExtra("res_ID");
-        res_latitude = intent.getStringExtra("latitude");
-        res_longitude = intent.getStringExtra("longitude");
+        res_latitude = intent.getStringExtra("res_latitude");
+        res_longitude = intent.getStringExtra("res_longitude");
 
         Button checkin = (Button) findViewById(R.id.checkInButton);
         checkin.setOnClickListener(new View.OnClickListener() {

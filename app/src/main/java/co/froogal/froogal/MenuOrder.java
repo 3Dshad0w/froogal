@@ -63,11 +63,10 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
         setContentView(R.layout.activity_order_menu);
 
         resID = "1";
-
+        Intent i = getIntent();
+        resID = i.getStringExtra("res_ID");
 
         new ProcessMenu().execute();
-
-
 
         bottom = (RelativeLayout) findViewById(R.id.bottom);
         countTextView = (TextView) findViewById(R.id.itemCountTextView);
