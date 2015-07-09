@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="@color/material_black_500"
             android:layout_alignParentBottom="true">
@@ -30,21 +30,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_marginTop="2dp"
-                    android:id="@+id/text_left"
-                    android:textColor="@color/cpb_white"
-                    android:text="Favourite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal" />
-
                 <ImageView
                     android:layout_below="@+id/text_left"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:onClick="image_left"
                     android:background="@drawable/round_border_main_unselected"
                     android:src="@drawable/ic_favorite_white_24dp"
@@ -53,13 +43,24 @@
                     android:layout_gravity="center"
                     android:clickable="true" />
 
+                <TextView
+                    android:id="@+id/text_left"
+                    android:textColor="@color/cpb_white"
+                    android:text="Favourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <View
                 android:layout_width="2dp"
-                android:layout_height="40dp"
+                android:layout_height="25dp"
                 android:background="#FFFFFF"
-                android:layout_marginTop="30dp" />
+                android:layout_gravity="center_vertical" />
 
             <LinearLayout
                 android:layout_weight="1"
@@ -68,44 +69,57 @@
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal">
 
+                <ImageView
+                    android:layout_below="@+id/text_center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="image_center"
+                    android:id="@+id/image_center"
+                    android:background="@drawable/round_border_main_selected"
+                    android:src="@drawable/ic_around_blue"
+                    android:scaleType="center"
+                    android:layout_gravity="center"
+                    android:clickable="true" />
+
                 <TextView
                     android:layout_marginTop="2dp"
                     android:id="@+id/text_center"
-                    android:textColor="@color/cpb_white"
+                    android:textColor="@color/cpb_blue_dark"
                     android:text="Near By"
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-                <ImageView
-                    android:layout_below="@+id/text_center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:onClick="image_center"
-                    android:id="@+id/image_center"
-                    android:background="@drawable/round_border_main_selected"
-                    android:src="@drawable/ic_location_searching_white_24dp"
-                    android:scaleType="center"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:tint="@color/material_black_500" />
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="2dp"
-                android:layout_height="40dp"
+                android:layout_height="25dp"
                 android:background="#FFFFFF"
-                android:layout_marginTop="30dp"
-                />
+                android:layout_gravity="center_vertical" />
 
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:layout_below="@+id/text_right"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="image_right"
+                    android:id="@+id/image_right"
+                    android:background="@drawable/round_border_main_unselected"
+                    android:src="@drawable/ic_star_white_24dp"
+                    android:scaleType="center"
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
 
                 <TextView
                     android:layout_marginTop="2dp"
@@ -115,20 +129,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-                <ImageView
-                    android:layout_below="@+id/text_right"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:onClick="image_right"
-                    android:id="@+id/image_right"
-                    android:background="@drawable/round_border_main_unselected"
-                    android:src="@drawable/ic_star_white_24dp"
-                    android:scaleType="center"
-                    android:layout_gravity="center"
-                    android:clickable="true"/>
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

@@ -56,10 +56,9 @@ public class DrawerAdapter extends BaseAdapter {
 		
 		DrawerItem item = mDrawerItems.get(position);
 		
-		if (mIsFirstType) {	//We chose to set icon that exists in list_view_item_navigation_drawer.xml		holder.icon.setText(item.getIcon());
-		}
+
 		holder.title.setText(item.getTitle());
-		
+		holder.icon.setText(item.getIcon());
 		return convertView;
 	}
 	

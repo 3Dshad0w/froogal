@@ -25,6 +25,7 @@ import co.froogal.froogal.MenuOrder;
 import co.froogal.froogal.ResDetailsActivity;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.otp_activity;
+import co.froogal.froogal.scanner_activity;
 import co.froogal.froogal.util.basic_utils;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
@@ -72,10 +73,12 @@ public class SimpleScannerFragment extends Fragment implements ZBarScannerView.R
 
         value = rawResult.getContents().toString();
         Intent i = getActivity().getIntent();
+
         if(value.equals(i.getStringExtra("res_ID")))
         {
             float[] results = new float[1];
-            Location.distanceBetween(Double.valueOf(i.getStringExtra("res_latitude")), Double.valueOf(i.getStringExtra("res_longitude")), Double.valueOf(latitude), Double.valueOf(longitude), results);
+
+            Location.distanceBetween(Double.valueOf(scanner_activity.res_latitude), Double.valueOf(scanner_activity.res_longitude), Double.valueOf(latitude), Double.valueOf(longitude), results);
             //distanceInMetersOne = location.distanceTo(new LatLng(Double.valueOf(ResDetailsActivity.res_latitude),Double.valueOf(ResDetailsActivity.res_longitude)));
             Log.d(TAG,results.toString());
         }

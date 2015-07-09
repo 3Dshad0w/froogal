@@ -15,22 +15,20 @@
         android:id="@+id/image"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:layout_centerVertical="true" />
 
     <co.froogal.froogal.font.RobotoTextView
-        android:id="@+id/email"
+        android:id="@+id/name"
         style="@style/TextViewAppearance.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="false"
         android:layout_toRightOf="@+id/image"
-        android:gravity="right"
-        android:paddingBottom="10dp"
-        android:paddingLeft="18dp"
+        android:paddingLeft="10dp"
         android:textColor="#fff"
-        android:textSize="14sp"
-        app:typeface="robotoLight"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp" />
+        android:textSize="18sp"
+        app:typeface="robotoBold"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

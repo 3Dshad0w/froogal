@@ -2,7 +2,9 @@
 package co.froogal.froogal.adapter;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,11 +73,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("Ada", String.valueOf(val));
                 RestaurantInfo ci = restaurantList.get(val);
-                Intent openMainActivity =  new Intent(v.getContext(), ResDetailsActivity.class);
-                openMainActivity.putExtra("res_latitude",ci.latitude);
-                openMainActivity.putExtra("res_longitude",ci.longitude);
-                openMainActivity.putExtra("res_ID",ci.resID);
+                Log.d("Ada", ci.resID.toString());
+                Log.d("Ada", ci.phoneNumber.toString());
+                Log.d("Ada", ci.latitude);
+                Intent openMainActivity = new Intent(v.getContext(), ResDetailsActivity.class);
+                openMainActivity.putExtra("res_latitude", ci.latitude);
+                openMainActivity.putExtra("res_longitude", ci.longitude);
+                openMainActivity.putExtra("res_ID", ci.resID);
+                Log.d("Ada", ci.latitude.toString());
+                Log.d("Ada", ci.longitude.toString());
                 v.getContext().startActivity(openMainActivity);
             }
         });

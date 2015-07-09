@@ -461,12 +461,12 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                 if (currentPerson.hasName()) {
                     person_name = currentPerson.getName();
                     if (person_name.hasFamilyName()) {
-                        first_name = person_name.getFamilyName();
+                        last_name = person_name.getFamilyName();
                     } else {
-                        first_name = person_name.getMiddleName();
+                        last_name = person_name.getMiddleName();
                     }
                     if (person_name.hasGivenName()) {
-                        last_name = person_name.getGivenName();
+                        first_name = person_name.getGivenName();
                     }
                 }
                 if(currentPerson.hasId())
