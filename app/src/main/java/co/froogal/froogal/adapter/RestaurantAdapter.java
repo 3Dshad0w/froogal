@@ -68,7 +68,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public RestaurantViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.card_layout, viewGroup, false);
+                inflate(R.layout.card_layout_temp, viewGroup, false);
         final int val = i;
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

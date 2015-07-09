@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:divider="@drawable/horizontal_divider"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
 
         <include layout="@layout/header_placeholder_temp"/>
 
@@ -24,9 +24,10 @@
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
             android:shrinkColumns="*"
-            android:stretchColumns="*" />
+            android:stretchColumns="*"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp" />
 
 
     </LinearLayout>

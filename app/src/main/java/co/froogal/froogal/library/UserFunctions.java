@@ -370,4 +370,13 @@ public class UserFunctions {
         Log.d("infunctionregREVIEW", json.toString());
         return json;
     }
+
+    public JSONObject getRewardsList(String uid) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", uid));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getRewardsList.php", "GET", params);
+        Log.d("infunctionregREAURANT2", json.toString());
+        return json;
+    }
 }
