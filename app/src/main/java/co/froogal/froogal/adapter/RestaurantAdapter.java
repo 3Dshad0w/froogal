@@ -67,11 +67,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.card_layout, viewGroup, false);
-
+        final int val = i;
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RestaurantInfo ci = restaurantList.get(val);
                 Intent openMainActivity =  new Intent(v.getContext(), ResDetailsActivity.class);
+                openMainActivity.putExtra("res_latitude",ci.latitude);
+                openMainActivity.putExtra("res_longitude",ci.longitude);
+                openMainActivity.putExtra("res_ID",ci.resID);
                 v.getContext().startActivity(openMainActivity);
             }
         });

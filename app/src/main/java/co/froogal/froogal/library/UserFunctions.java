@@ -339,4 +339,16 @@ public class UserFunctions {
         Log.d("infunctionregREVIEW", json.toString());
         return json;
     }
+
+
+    public JSONObject get_menu_dine_in(String latitude, String longitude, String value) {
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("latitude", latitude));
+        params.add(new BasicNameValuePair("longitude", longitude));
+        params.add(new BasicNameValuePair("resID", value));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/get_menu_dine_in.php", "POST", params);
+        Log.d("infunctionregREVIEW", json.toString());
+        return json;
+    }
 }

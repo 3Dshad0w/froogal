@@ -24,6 +24,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +32,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -135,7 +137,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     public static final String LEFT_MENU_OPTION = "co.froogal.froogal.MainActivity";
     public static final String LEFT_MENU_OPTION_1 = "Left Menu Option 1";
     public static final String LEFT_MENU_OPTION_2 = "Left Menu Option 2";
-
+    public int height;
+    public int width;
     private ListView mDrawerList;
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
@@ -160,27 +163,19 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get height and width
+        Display display = this.getWindowManager().getDefaultDisplay();
+        width  = display.getWidth();
+        height = display.getHeight();
+        Log.d(TAG, String.valueOf(width));
+        Log.d(TAG, String.valueOf(height));
+
+
         // Starting location intent service
         startService(new Intent(getBaseContext(), location_service.class));
 
         // Basic utils object
         bu = new basic_utils(getApplicationContext());
-
-
-        // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                // When changing pages, reset the action bar actions since they are dependent
-                // on which page is currently active. An alternative approach is to have each
-                // fragment expose actions itself (rather than the activity exposing actions),
-                // but for simplicity, the activity provides the actions in this sample.
-                invalidateOptionsMenu();
-            }
-        });
 
         // Updating values from shared preferences
         if(bu.location_check()) {
@@ -254,22 +249,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
-
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(android.app.FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public android.app.Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create(position);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_PAGES;
-        }
     }
 
     // Onclick buttons
@@ -880,6 +859,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         normal_dialog.setIndeterminate(false);
         normal_dialog.setCancelable(false);
         normal_dialog.show();
+        normal_dialog.dismiss();
         new ProcessRestaurants().execute();
         map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
