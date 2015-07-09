@@ -197,7 +197,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         textview_center = (TextView) findViewById(R.id.text_center);
         textview_right = (TextView) findViewById(R.id.text_right);
 
-        imageview_marker.setPadding(0,0,0,Math.round(height/22));
+//        imageview_marker.setPadding(0,0,0,Math.round(height/21));
 
         JSONObject a = null;
         listFragment = locationListViewFragment.newInstance(a);

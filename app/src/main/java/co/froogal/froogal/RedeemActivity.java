@@ -12,10 +12,6 @@ import android.text.SpannableString;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import org.json.JSONException;
-
-import co.froogal.froogal.fragment.MenuFinalOrderViewFragment;
-import co.froogal.froogal.fragment.MenuOrderViewFragment;
 import co.froogal.froogal.fragment.ReviewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
@@ -24,7 +20,7 @@ import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
 /**
  * Created by akhil on 8/7/15.
  */
-public class RewardsActivity extends ParallaxViewPagerBaseActivity {
+public class RedeemActivity extends ParallaxViewPagerBaseActivity {
 
     private ImageView mTopImage;
     private SlidingTabLayout mNavigBar;
@@ -40,7 +36,7 @@ public class RewardsActivity extends ParallaxViewPagerBaseActivity {
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);
 
-        SpannableString s = new SpannableString("Rewards");
+        SpannableString s = new SpannableString("Redeem");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
 
         s.setSpan(myfont, 0, s.length(),
