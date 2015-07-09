@@ -287,18 +287,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     public void image_center(View v) {
 
-<<<<<<< HEAD
-
-=======
         button_clicked = "near_by";
 
-        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
-        imageview_left.setColorFilter(null);
-        imageview_right.setColorFilter(null);
-        imageview_center.setColorFilter(R.color.material_black_500);
->>>>>>> 3f08017b4e16a2720c87a24bce57f6a691a7ff32
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_blue_dark));
         textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
