@@ -151,7 +151,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private TextView textview_left;
     private TextView textview_center;
     private TextView textview_right;
-
+    private String button_clicked = "near_by";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     SharedPreferences sharedpreferences;
@@ -268,6 +268,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     // Onclick buttons
     public void image_left(View v) {
 
+        button_clicked = "favourite";
+
         textview_left.setTextColor(getResources().getColor(R.color.cpb_red_dark));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
@@ -280,13 +282,23 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         imageview_center.setImageDrawable(getResources().getDrawable(R.drawable.ic_around_white));
         imageview_right.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_white_24dp));
 
-
         new ProcessRestaurants_fav().execute();
     }
 
     public void image_center(View v) {
 
+<<<<<<< HEAD
 
+=======
+        button_clicked = "near_by";
+
+        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
+        imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
+        imageview_left.setColorFilter(null);
+        imageview_right.setColorFilter(null);
+        imageview_center.setColorFilter(R.color.material_black_500);
+>>>>>>> 3f08017b4e16a2720c87a24bce57f6a691a7ff32
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_blue_dark));
         textview_right.setTextColor(getResources().getColor(R.color.cpb_white));
@@ -304,6 +316,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     }
 
     public void image_right(View v) {
+
+        button_clicked = "popular";
 
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_white));
@@ -620,13 +634,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             try {
 
                 if(fragmentback) {
-                    listFragment.updateList(json.getJSONObject("restaurants"));//
+                    listFragment.updateList(json.getJSONObject("restaurants"));
                 }
                 else{
                     listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
                 }
                 // Remove all markers before
                 map.clear();
+                eventMarkerMap.clear();
                 // Creating Markers for Restaurants
                 restaurantsJson = json.getJSONObject("restaurants");
                 int noOfRestaurants = restaurantsJson.length();
@@ -698,6 +713,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 }
                 // Remove all markers before
                 map.clear();
+                eventMarkerMap.clear();
                 // Creating Markers for Restaurants
                 restaurantsJson = json.getJSONObject("restaurants");
                 int noOfRestaurants = restaurantsJson.length();
@@ -718,10 +734,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         result.add(ci);
 
                         //Adding each restaurant marker
-                        map.addMarker(new MarkerOptions()
+                        eventMarkerMap.put(map.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.restaurant_marker))
                                 .position(new LatLng(Double.valueOf(ci.latitude), Double.valueOf(ci.longitude)))
-                                .title(ci.resName));
+                                .title(ci.resName)),ci);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -834,7 +850,17 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                                 Log.d(TAG, "Place found: " + myPlace.getLatLng());
                                 latitude = String.valueOf(destination.latitude);
                                 longitude = String.valueOf(destination.longitude);
-                                new ProcessRestaurants().execute();
+                                if(button_clicked.equals("favourite"))
+                                {
+                                    new ProcessRestaurants_fav().execute();
+                                }
+                                else if(button_clicked.equals("popular"))
+                                {
+                                    new ProcessRestaurants_pop().execute();
+                                }
+                                else {
+                                    new ProcessRestaurants().execute();
+                                }
                                 CameraPosition cameraPosition = new CameraPosition.Builder()
                                         .target(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
                                         .zoom(13)
@@ -939,7 +965,17 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         center_map = map.getCameraPosition().target;
                         latitude = String.valueOf(center_map.latitude);
                         longitude = String.valueOf(center_map.longitude);
-                        new ProcessRestaurants().execute();
+                        if(button_clicked.equals("favourite"))
+                        {
+                            new ProcessRestaurants_fav().execute();
+                        }
+                        else if(button_clicked.equals("popular"))
+                        {
+                            new ProcessRestaurants_pop().execute();
+                        }
+                        else {
+                            new ProcessRestaurants().execute();
+                        }
                     }
                 });
             }
