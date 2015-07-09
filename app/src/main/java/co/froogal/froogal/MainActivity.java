@@ -147,7 +147,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private ImageView imageview_left;
     private ImageView imageview_center;
     private ImageView imageview_right;
-
+    private ImageView imageview_marker;
     private TextView textview_left;
     private TextView textview_center;
     private TextView textview_right;
@@ -172,9 +172,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         Display display = this.getWindowManager().getDefaultDisplay();
         width  = display.getWidth();
         height = display.getHeight();
-        Log.d(TAG, String.valueOf(width));
-        Log.d(TAG, String.valueOf(height));
-
 
         // Starting location intent service
         startService(new Intent(getBaseContext(), location_service.class));
@@ -192,12 +189,15 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         }
 
+        imageview_marker = (ImageView) findViewById(R.id.marker_button);
         imageview_left  =  (ImageView) findViewById(R.id.image_left);
         imageview_center = (ImageView) findViewById(R.id.image_center);
         imageview_right = (ImageView) findViewById(R.id.image_right);
         textview_left = (TextView) findViewById(R.id.text_left);
         textview_center = (TextView) findViewById(R.id.text_center);
         textview_right = (TextView) findViewById(R.id.text_right);
+
+        imageview_marker.setPadding(0,0,0,Math.round(height/22));
 
         JSONObject a = null;
         listFragment = locationListViewFragment.newInstance(a);
@@ -456,6 +456,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         {
             if(fragmentback)
             {
+                imageview_marker.setVisibility(View.VISIBLE);
                 //Animation
                 flipCard();
 
@@ -464,6 +465,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
             }
             else {
+
+                imageview_marker.setVisibility(View.GONE);
 
                 //Animation
                 flipCard();
