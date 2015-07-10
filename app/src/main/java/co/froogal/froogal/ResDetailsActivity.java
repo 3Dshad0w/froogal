@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import co.froogal.froogal.fragment.MenuListViewFragment;
 import co.froogal.froogal.fragment.OffersViewFragment;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
+import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
 import co.froogal.froogal.fragment.ReviewFragment;
@@ -46,11 +48,15 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
     private SlidingTabLayout mNavigBar;
 
     private Drawable mActionBarBackgroundDrawable;
+    private ImageView favourite;
+    private ImageView call;
+    private ImageView directions;
 
     public static String resID = "0";
+    public static String isFav = "0";
     public static String res_latitude;
     public static String res_longitude;
-
+    basic_utils bu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +69,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         resID = intent.getStringExtra("res_ID");
         res_latitude = intent.getStringExtra("res_latitude");
         res_longitude = intent.getStringExtra("res_longitude");
+        isFav = intent.getStringExtra("isFav");
 
         Button checkin = (Button) findViewById(R.id.checkInButton);
         checkin.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +85,18 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
             }
         });
+        bu =new basic_utils(this);
         mTopImage = (ImageView) findViewById(R.id.image);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);
+        favourite = (ImageView) findViewById(R.id.favourite);
+        call = (ImageView) findViewById(R.id.call);
+        directions = (ImageView) findViewById(R.id.directions);
+        if(isFav.equals("1")){
+            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
+            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_red_24dp));
+        }
         SpannableString s = new SpannableString("Restaurant Name");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
 
@@ -194,6 +209,22 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         final float ratio = (float) Math.min(Math.max(scrollY, 0), headerHeight) / headerHeight;
         final int newAlpha = (int) (ratio * 255);
         mActionBarBackgroundDrawable.setAlpha(newAlpha);
+    }
+
+    public void favourite(View view) {
+        if(isFav.equals("1")){
+            new ProcessFav(isFav, bu.get_defaults("uid"), resID).execute();
+            isFav = "0";
+            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
+        }
+        else {
+            new ProcessFav(isFav, bu.get_defaults("uid"), resID).execute();
+            isFav = "1";
+            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
+            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_red_24dp));
+        }
+
     }
 
 //    private int getActionBarHeight() {
@@ -314,5 +345,54 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         }
 
     }
+
+    private class ProcessFav extends AsyncTask<String, String, JSONObject> {
+
+
+        private ProgressDialog pDialog;
+
+        String isFav, uid, resID;
+
+        public ProcessFav(String isFav, String uid, String resID) {
+            this.isFav = isFav;
+            this.uid = uid;
+            this.resID = resID;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(ResDetailsActivity.this);
+            pDialog.setTitle("Contacting Servers");
+            pDialog.setMessage("Processing Data ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            Log.d("redmenu", "true");
+            JSONObject json = userFunction.processFav(isFav, uid, resID);
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+
+
+            pDialog.dismiss();
+
+            favourite(favourite);
+
+
+        }
+
+    }
+
 
 }
