@@ -619,7 +619,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         @Override
         protected JSONObject doInBackground(String... args) {
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.getRestaurants(latitude, longitude);
+            JSONObject json = userFunction.getRestaurants(latitude, longitude, bu.get_defaults("uid"));
             return json;
 
         }
@@ -728,6 +728,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         ci.latitude = restaurantJson.getString("latitude");
                         ci.longitude = restaurantJson.getString("longitude");
                         ci.resID = restaurantJson.getString("restaurant_id");
+                        ci.isFav = "1";
                         result.add(ci);
 
                         //Adding each restaurant marker
@@ -759,7 +760,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.getPopRestaurants(latitude, longitude);
+            JSONObject json = userFunction.getPopRestaurants(latitude, longitude, bu.get_defaults("uid"));
             return json;
 
         }
@@ -795,6 +796,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                         ci.latitude = restaurantJson.getString("latitude");
                         ci.longitude = restaurantJson.getString("longitude");
                         ci.resID = restaurantJson.getString("restaurant_id");
+                        ci.isFav = restaurantJson.getString("isFav");
                         result.add(ci);
 
                         //Adding each restaurant marker
@@ -1007,6 +1009,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 i.putExtra("res_latitude", String.valueOf(marker.getPosition().latitude));
                 i.putExtra("res_longitude",String.valueOf(marker.getPosition().longitude));
                 i.putExtra("res_ID",eventInfo.resID);
+                i.putExtra("isFav", eventInfo.isFav);
                 startActivity(i);
                 finish();
             }

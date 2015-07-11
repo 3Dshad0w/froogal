@@ -136,6 +136,7 @@ public class locationListViewFragment extends Fragment {
                     ci.resID = restaurantJson.getString("restaurant_id");
                     ci.latitude = restaurantJson.getString("latitude");
                     ci.longitude = restaurantJson.getString("longitude");
+                    ci.isFav = restaurantJson.getString("isFav");
                     result.add(ci);
 
                 } catch (JSONException e) {
@@ -176,6 +177,8 @@ public class locationListViewFragment extends Fragment {
                 ci.resID = restaurantJson.getString("restaurant_id");
                 ci.latitude = restaurantJson.getString("latitude");
                 ci.longitude = restaurantJson.getString("longitude");
+                ci.isFav = restaurantJson.getString("isFav");
+
                 result.add(ci);
 
             } catch (JSONException e) {

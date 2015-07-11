@@ -68,22 +68,23 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public RestaurantViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.card_layout, viewGroup, false);
+                inflate(R.layout.card_layout_temp, viewGroup, false);
         final int val = i;
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Ada", String.valueOf(val));
                 RestaurantInfo ci = restaurantList.get(val);
-                Log.d("Ada", ci.resID.toString());
-                Log.d("Ada", ci.phoneNumber.toString());
+                Log.d("Ada", ci.resID);
+                Log.d("Ada", ci.phoneNumber);
                 Log.d("Ada", ci.latitude);
                 Intent openMainActivity = new Intent(v.getContext(), ResDetailsActivity.class);
                 openMainActivity.putExtra("res_latitude", ci.latitude);
                 openMainActivity.putExtra("res_longitude", ci.longitude);
                 openMainActivity.putExtra("res_ID", ci.resID);
-                Log.d("Ada", ci.latitude.toString());
-                Log.d("Ada", ci.longitude.toString());
+                openMainActivity.putExtra("isFav", ci.isFav);
+                Log.d("Ada", ci.latitude);
+                Log.d("Ada", ci.longitude);
                 v.getContext().startActivity(openMainActivity);
             }
         });

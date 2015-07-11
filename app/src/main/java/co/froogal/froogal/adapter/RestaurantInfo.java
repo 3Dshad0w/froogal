@@ -13,7 +13,6 @@ public class RestaurantInfo {
     public String distance;
     public String coupon;
     public String reward;
-    public String favourite;
     public String latitude;
     public String longitude;
 
@@ -22,4 +21,5 @@ public class RestaurantInfo {
     public static final String ADDRESS = "Address_";
 
     public boolean checkedIN = false;
+    public String isFav = "0";
 }
