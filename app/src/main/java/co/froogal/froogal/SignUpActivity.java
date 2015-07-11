@@ -974,5 +974,4 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
        inputPassword.setError(null);
 
     }
-
 }

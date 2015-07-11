@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -32,6 +33,8 @@ public class UserFunctions {
     private static String save_google_user_data_to_server_URL = "http://froogal.in/files/save_google_user_data_to_server.php";
     private static String save_facebook_user_data_to_server_URL = "http://froogal.in/files/save_facebook_user_data_to_server.php";
     private static String send_mobile_verification_status_URL = "http://froogal.in/files/send_mobile_verification_status.php";
+    private static String recharge_URL = "http://www.joloapi.com/api/recharge2.php";
+
 
 
     private static String login_tag = "login";
@@ -398,6 +401,20 @@ public class UserFunctions {
         return json;
     }
 
+    public JSONObject recharge(String number, String operator, String amount) {
+        String myjoloappkey = "662214997158655";
+        String uniqueID = UUID.randomUUID().toString();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("mode", "0"));
+        params.add(new BasicNameValuePair("userid", "shopex"));
+        params.add(new BasicNameValuePair("key", myjoloappkey));
+        params.add(new BasicNameValuePair("operator", operator));
+        params.add(new BasicNameValuePair("service", number));
+        params.add(new BasicNameValuePair("amount", amount));
+        params.add(new BasicNameValuePair("orderid", uniqueID));
+        JSONObject json = jsonParser.makeHttpRequest(recharge_URL, "GET", params);
+        return json;
+    }
     public JSONObject updateUser(String uid, String fname, String lname, String email) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));

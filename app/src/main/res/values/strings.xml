@@ -8,6 +8,14 @@
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">807684845967248</string>
 
+    <!-- Recharge Strings -->
+    <string name="submit">Submit</string>
+    <string name="amount">Amount</string>
+    <string name="number">Number</string>
+    <string name="operator">Operator</string>
+
+
+
     <!--OTP Strings -->
     <string name="resend_text"><u>Resend Otp</u>.</string>
 

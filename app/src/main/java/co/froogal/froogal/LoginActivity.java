@@ -303,13 +303,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
             public void onClick(View v) {
                 if (v.getId() == R.id.google_login && !google_api_client.isConnecting()) {
                     sign_in_clicked = true;
-                    // Show progress till activity result
-                    normal_dialog = new ProgressDialog(LoginActivity.this);
-                    normal_dialog.setTitle("Google+ Accounts");
-                    normal_dialog.setMessage("Fetching ... ");
-                    normal_dialog.setIndeterminate(false);
-                    normal_dialog.setCancelable(false);
-                    normal_dialog.show();
                     google_api_client.connect();
                 }
             }
@@ -584,7 +577,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            normal_dialog = new ProgressDialog(LoginActivity.this);
             normal_dialog.setTitle("Contacting Servers");
             normal_dialog.setMessage("Logging in ...");
             normal_dialog.setIndeterminate(false);
@@ -799,7 +792,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                         pDialog.dismiss();
                         showAlertDialog(LoginActivity.this, "Error",
                                 "Incorrect username/password.", false);
-                        //loginErrorMsg.setText("Incorrect username/password");
                     }
                 }
             } catch (JSONException e) {

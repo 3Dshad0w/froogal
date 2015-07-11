@@ -137,11 +137,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private ImageView imageview_left;
     private ImageView imageview_center;
     private ImageView imageview_right;
-    private ImageView imageview_marker;
     private TextView textview_left;
     private TextView textview_center;
     private TextView textview_right;
-    private TypedArray navMenuIcons;
     private String button_clicked = "near_by";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -180,16 +178,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         }
 
-        imageview_marker = (ImageView) findViewById(R.id.marker_button);
         imageview_left  =  (ImageView) findViewById(R.id.image_left);
         imageview_center = (ImageView) findViewById(R.id.image_center);
         imageview_right = (ImageView) findViewById(R.id.image_right);
         textview_left = (TextView) findViewById(R.id.text_left);
         textview_center = (TextView) findViewById(R.id.text_center);
         textview_right = (TextView) findViewById(R.id.text_right);
-        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
-
-//        imageview_marker.setPadding(0,0,0,Math.round(height/21));
 
         JSONObject a = null;
         listFragment = locationListViewFragment.newInstance(a);
@@ -892,6 +886,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
             }
             try {
                 view = inflater.inflate(R.layout.activity_maps_front, container, false);
+                view.findViewById(R.id.marker_button).setPadding(0,0,0, (int) Math.round(height/21.3));
             }
             catch (InflateException e) {
             }
