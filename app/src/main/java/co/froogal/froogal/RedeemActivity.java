@@ -33,7 +33,7 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
 
         setContentView(R.layout.activity_rewards);
 
-        mTopImage = (ImageView) findViewById(R.id.image);
+        mTopImage = (ImageView) findViewById(R.id.userImage);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);

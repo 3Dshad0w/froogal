@@ -6,16 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import org.json.JSONException;
-import co.froogal.froogal.fragment.AboutScrollViewFragmentTemp;
-import co.froogal.froogal.fragment.MenuFinalOrderViewFragment;
-import co.froogal.froogal.fragment.MenuOrderViewFragment;
-import co.froogal.froogal.fragment.ReviewFragment;
+
 import co.froogal.froogal.fragment.RewardsScrollViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
@@ -35,7 +30,7 @@ public class RewardsActivity extends ParallaxViewPagerBaseActivity {
 
         setContentView(R.layout.activity_rewards);
 
-        mTopImage = (ImageView) findViewById(R.id.image);
+        mTopImage = (ImageView) findViewById(R.id.userImage);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);

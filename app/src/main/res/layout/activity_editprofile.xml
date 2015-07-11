@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/main_color_500"
+                    android:scaleType="centerCrop"/>
+                <ImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="16dp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/names"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp">
+                <co.froogal.froogal.view.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:fletFloatingHint="First Name"
+                    android:id="@+id/fnameEditText"
+                    android:layout_marginTop="5dp"
+                    app:fletHintTextColor="@color/main_color_500"
+                    app:fletSingleLine="true"
+                    app:fletTextBackground="@drawable/edit_text_background_accent"
+                    app:fletTextColor="@color/main_color_400"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="fname"
+                    android:id="@+id/fnameTextView"
+                    android:layout_marginRight="5dp"
+                    android:textSize="18sp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_weight="1"
+                    android:minHeight="60dp"
+                    android:gravity="bottom"
+                    android:textColor="@color/main_color_500" />
+
+                <co.froogal.froogal.view.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:fletFloatingHint="Last Name"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/lnameEditText"
+                    app:fletHintTextColor="@color/main_color_500"
+                    app:fletSingleLine="true"
+                    app:fletTextBackground="@drawable/edit_text_background_accent"
+                    app:fletTextColor="@color/main_color_400"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="lname"
+                    android:id="@+id/lnameTextView"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="bottom"
+                    android:minHeight="60dp"
+                    android:textColor="@color/main_color_500" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Email"
+                    android:id="@+id/emailTextView"
+                    android:textSize="18sp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="5dp"
+                    android:minHeight="60dp"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/main_color_500"
+                    android:gravity="bottom"
+                    android:paddingBottom="5dp" />
+
+                <co.froogal.froogal.view.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:fletFloatingHint="Email"
+                    app:fletInputType="textEmailAddress"
+                    android:id="@+id/emailEditText"
+                    app:fletHintTextColor="@color/main_color_500"
+                    app:fletSingleLine="true"
+                    app:fletTextBackground="@drawable/edit_text_background_accent"
+                    app:fletTextColor="@color/main_color_400"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number"
+                android:id="@+id/mobileTextView"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="18sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:minHeight="60dp"
+                android:gravity="bottom"
+                android:textColor="@color/main_color_500" />
+
+
+            <co.froogal.froogal.view.MaterialRippleLayout
+                style="@style/RippleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                app:rippleColor="@color/main_color_grey_400"
+                android:layout_marginBottom="5dp">
+
+                <co.froogal.froogal.font.RobotoTextView
+                    android:id="@+id/changePassword"
+                    style="@style/ButtonStyle.RaisedEmpty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@android:color/transparent"
+                    android:minWidth="112dp"
+                    android:text="CHANGE PASSWORD"
+                    android:textSize="10sp"
+                    android:textColor="@color/main_color_500"
+                    android:padding="10dp" />
+            </co.froogal.froogal.view.MaterialRippleLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/registerLayout"
+                android:padding="10dp">
+
+                <co.froogal.froogal.view.MaterialRippleLayout
+                    style="@style/RippleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    app:rippleColor="@color/main_color_grey_400" >
+
+                    <co.froogal.froogal.font.RobotoTextView
+                        android:id="@+id/saveChanges"
+                        style="@style/ButtonStyle.RaisedEmpty"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="0dp"
+                        android:background="@color/main_color_500"
+                        android:minWidth="140dp"
+                        android:text="SAVE CHANGES"
+                        android:textColor="#fff" />
+                </co.froogal.froogal.view.MaterialRippleLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+</ScrollView>

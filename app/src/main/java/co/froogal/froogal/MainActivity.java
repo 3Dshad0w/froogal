@@ -3,11 +3,8 @@ package co.froogal.froogal;
 import android.app.ProgressDialog;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
@@ -16,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -34,7 +30,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -58,7 +53,6 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -67,7 +61,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,11 +69,8 @@ import co.froogal.froogal.adapter.PlaceAutocompleteAdapter;
 import co.froogal.froogal.adapter.RestaurantInfo;
 import co.froogal.froogal.fragment.locationListViewFragment;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import co.froogal.froogal.adapter.DrawerAdapter;
 import co.froogal.froogal.library.GMapV2Direction;
@@ -89,7 +79,6 @@ import co.froogal.froogal.model.DrawerItem;
 import co.froogal.froogal.services.location_service;
 import co.froogal.froogal.util.ImageUtil;
 import co.froogal.froogal.util.basic_utils;
-import static co.froogal.froogal.LoginActivity.MyPREFERENCES;
 
 public class MainActivity extends ActionBarActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
 
@@ -342,7 +331,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     private View prepareHeaderView(int layoutRes, String url) {
         View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList, false);
-        ImageView iv = (ImageView) headerView.findViewById(R.id.image);
+        ImageView iv = (ImageView) headerView.findViewById(R.id.userImage);
         TextView tv = (TextView) headerView.findViewById(R.id.name);
         ImageUtil.displayRoundImage(iv, url, null);
 

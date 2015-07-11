@@ -392,13 +392,15 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("userID", uid));
         params.add(new BasicNameValuePair("isFav", isFav));
         params.add(new BasicNameValuePair("resID", resID));
+        Log.d("isFav", "Params : " + params.toString());
+
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/processFav.php", "POST", params);
         Log.d("infunctionregREAURANT2", json.toString());
         return json;
     }
 
     public JSONObject recharge(String number, String operator, String amount) {
-        String myjoloappkey="662214997158655";
+        String myjoloappkey = "662214997158655";
         String uniqueID = UUID.randomUUID().toString();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("mode", "0"));
@@ -409,6 +411,32 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("amount", amount));
         params.add(new BasicNameValuePair("orderid", uniqueID));
         JSONObject json = jsonParser.makeHttpRequest(recharge_URL, "GET", params);
+        return json;
+    }
+    public JSONObject updateUser(String uid, String fname, String lname, String email) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", uid));
+        params.add(new BasicNameValuePair("lname", lname));
+        params.add(new BasicNameValuePair("fname", fname));
+        params.add(new BasicNameValuePair("email", email));
+
+        Log.d("ookok", "Params : " + params.toString());
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/updateUser.php", "POST", params);
+        Log.d("infunctionregREAURANT2", json.toString());
+        return json;
+    }
+
+    public JSONObject invalidateMobile(String uid, String mobile) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", uid));
+        params.add(new BasicNameValuePair("mobile", mobile));
+        Log.d("ookok", "Params : " + params.toString());
+
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/invalidateMobile.php", "POST", params);
+        Log.d("infunctionregREAURANT2", json.toString());
         return json;
     }
 }

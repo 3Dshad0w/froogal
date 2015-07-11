@@ -2,11 +2,8 @@ package co.froogal.froogal;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,19 +14,13 @@ import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import co.froogal.froogal.fragment.AboutScrollViewFragment;
 import co.froogal.froogal.fragment.MenuListViewFragment;
@@ -57,6 +48,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
     public static String res_latitude;
     public static String res_longitude;
     basic_utils bu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +62,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         res_latitude = intent.getStringExtra("res_latitude");
         res_longitude = intent.getStringExtra("res_longitude");
         isFav = intent.getStringExtra("isFav");
-
+        Log.d("isFav", isFav);
         Button checkin = (Button) findViewById(R.id.checkInButton);
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,24 +70,28 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
                 Intent i = new Intent(ResDetailsActivity.this, scanner_activity.class);
                 i.putExtra("res_latitude", res_latitude);
-                i.putExtra("res_longitude",res_longitude);
-                i.putExtra("res_ID",resID);
+                i.putExtra("res_longitude", res_longitude);
+                i.putExtra("res_ID", resID);
                 startActivity(i);
                 finish();
 
             }
         });
-        bu =new basic_utils(this);
-        mTopImage = (ImageView) findViewById(R.id.image);
+        bu = new basic_utils(this);
+        mTopImage = (ImageView) findViewById(R.id.userImage);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);
         favourite = (ImageView) findViewById(R.id.favourite);
         call = (ImageView) findViewById(R.id.call);
         directions = (ImageView) findViewById(R.id.directions);
-        if(isFav.equals("1")){
+        if (isFav.equals("1")) {
             favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
             favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_red_24dp));
+        }
+        else{
+            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
         }
         SpannableString s = new SpannableString("Restaurant Name");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -108,13 +104,11 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             mActionBarBackgroundDrawable.setCallback(mDrawableCallback);
-        }
-        else {
+        } else {
 
             getSupportActionBar().setBackgroundDrawable(mActionBarBackgroundDrawable);
         }
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         if (savedInstanceState != null) {
@@ -123,8 +117,6 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         }
 
         setupAdapter();
-
-
 
 
     }
@@ -155,7 +147,6 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
@@ -212,18 +203,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
     }
 
     public void favourite(View view) {
-        if(isFav.equals("1")){
-            new ProcessFav(isFav, bu.get_defaults("uid"), resID).execute();
-            isFav = "0";
-            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
-            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
-        }
-        else {
-            new ProcessFav(isFav, bu.get_defaults("uid"), resID).execute();
-            isFav = "1";
-            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
-            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_red_24dp));
-        }
+        new ProcessFav(isFav, bu.get_defaults("uid"), resID).execute();
 
     }
 
@@ -376,7 +356,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
             UserFunctions userFunction = new UserFunctions();
             Log.d("redmenu", "true");
-            JSONObject json = userFunction.processFav(isFav, uid, resID);
+            JSONObject json = userFunction.processFav(ResDetailsActivity.isFav, uid, resID);
 
             return json;
         }
@@ -384,15 +364,38 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         @Override
         protected void onPostExecute(JSONObject json) {
 
+            try {
+                if (json.getString("success") != null) {
+                    Log.d("isFav", json.toString());
+                    String res = json.getString("success");
 
-            pDialog.dismiss();
+                    if (Integer.parseInt(res) == 1) {
+                        if (ResDetailsActivity.isFav.equals("1")) {
+                            ResDetailsActivity.isFav = "0";
+                        } else {
+                            ResDetailsActivity.isFav = "1";
+                        }
 
-            favourite(favourite);
+                        if (ResDetailsActivity.isFav.equals("0")) {
+                            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_unselected));
+                            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_white_24dp));
+                        } else {
+                            favourite.setBackground(getResources().getDrawable(R.drawable.round_border_main_selected));
+                            favourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_red_24dp));
+                        }
+                    }
+                }
+
+
+                pDialog.dismiss();
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         }
 
     }
-
-
 }

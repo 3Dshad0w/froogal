@@ -15,22 +15,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
-import co.froogal.froogal.adapter.ProductInfo;
-import co.froogal.froogal.adapter.ReviewInfo;
-import co.froogal.froogal.fragment.AboutScrollViewFragmentTemp;
 import co.froogal.froogal.fragment.MenuFinalOrderViewFragment;
 import co.froogal.froogal.fragment.MenuOrderViewFragment;
 import co.froogal.froogal.library.UserFunctions;
@@ -73,7 +65,7 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
         countTextView.setText("0");
         proceed = (ImageView) findViewById(R.id.proceed);
 
-        mTopImage = (ImageView) findViewById(R.id.image);
+        mTopImage = (ImageView) findViewById(R.id.userImage);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         closeDeal = (ImageView) findViewById(R.id.closeDeal);
