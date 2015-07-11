@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="nav_drawer_icons">
-        <item>@drawable/ic_redeem_black_24dp</item>
-    </array>
+    <string-array name="operator_array">	
+        <item value="AT">Airtel</item>
+        <item value="AL">Aircel</item>
+        <item value="BS">BSNL</item>
+        <item value="BSS">BSNL Special</item>
+        <item value="IDX">Idea</item>
+        <item value="VF">Vodafone</item>
+        <item value="TD">Docomo GSM</item>
+        <item value="TDS">Docomo GSM Special</item>
+        <item value="TI">Docomo CDMA (Indicom)</item>
+        <item value="RG">Reliance GSM</item>
+        <item value="RL">Reliance CDMA</item>
+        <item value="MS">MTS</item>
+        <item value="UN">Uninor</item>
+        <item value="UNS">Uninor Special</item>
+        <item value="VD">Videocon</item>
+        <item value="VDS">Videocon Special</item>
+        <item value="MTM">MTNL Mumbai</item>
+        <item value="MTMS">MTNL Mumbai Special</item>
+        <item value="MTD">MTNL Delhi</item>
+        <item value="MTDS">MTNL Delhi Special</item>
+        <item value="VG">Virgin GSM</item>
+        <item value="VGS">Virgin GSM Special</item>
+        <item value="VC">Virgin CDMA</item>
+        <item value="T24">T24</item>
+        <item value="T24S">T24 Special</item>
+    </string-array>
+
 </resources>

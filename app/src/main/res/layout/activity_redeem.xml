@@ -36,8 +36,7 @@ tools:context=".RedeemActivity">
             android:background="@android:color/white"
             app:shouldExpand="true"
             app:indicatorColor="@color/theme_color"
-            app:tabBackground="@layout/sliding_tab_view"
-            app:tabBackgroundTextViewId="@+id/tab_textview"/>
+            />
 
     </LinearLayout>
 

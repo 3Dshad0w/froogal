@@ -1,20 +1,22 @@
 package co.froogal.froogal;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import co.froogal.froogal.fragment.ReviewFragment;
+import co.froogal.froogal.fragment.RedeemRechargeScrollViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
+import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
 
 /**
@@ -116,7 +118,7 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
         mNavigBar.setViewPager(mViewPager);
     }
 
-    private static class ViewPagerAdapter extends ParallaxFragmentPagerAdapter {
+    private class ViewPagerAdapter extends ParallaxFragmentPagerAdapter {
 
         int numFragments;
         public ViewPagerAdapter(FragmentManager fm, int numFragments) {
@@ -129,28 +131,27 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
             Fragment fragment;
 
             if(position ==  numFragments){
-                return ReviewFragment.newInstance(position);
+                return RedeemRechargeScrollViewFragment.newInstance(position);
             }
-            fragment = ReviewFragment.newInstance(position);
+            fragment = RedeemRechargeScrollViewFragment.newInstance(position);
             return fragment;
         }
+
+        private int[] imageResId = {
+                R.drawable.ic_phone_android_black_36dp,
+                R.drawable.ic_account_balance_black_36dp,
+                R.drawable.shopex_icon
+        };
+
         @Override
         public CharSequence getPageTitle(int position) {
 
-            String title = "";
-
-            if(position == 0){
-                title = "Recharge Mobile";
-            }
-            else if(position == 1){
-                title = "Transfer to Bank";
-            }
-            else
-            {
-                title = "Convert to shopex Cash";
-            }
-            return title;
-
+            Drawable image = getResources().getDrawable(imageResId[position]);
+            image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+            SpannableString sb = new SpannableString(" ");
+            ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+            sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return sb;
         }
     }
 
