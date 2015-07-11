@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,13 +24,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import co.froogal.froogal.library.UserFunctions;
-import co.froogal.froogal.services.location_service;
 
 
 /**
  * Created by akhil on 10/3/15.
  */
-public class ForgetPasswordActivity extends Activity {
+public class ForgotPasswordActivity extends Activity {
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_ERROR = "error";
@@ -110,7 +108,7 @@ public class ForgetPasswordActivity extends Activity {
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            nDialog = new ProgressDialog(ForgetPasswordActivity.this);
+            nDialog = new ProgressDialog(ForgotPasswordActivity.this);
             nDialog.setMessage("Loading..");
             nDialog.setTitle("Checking Network");
             nDialog.setIndeterminate(false);
@@ -180,7 +178,7 @@ public class ForgetPasswordActivity extends Activity {
             super.onPreExecute();
             forgotpassword = email.getText().toString();
 
-            pDialog = new ProgressDialog(ForgetPasswordActivity.this);
+            pDialog = new ProgressDialog(ForgotPasswordActivity.this);
             pDialog.setTitle("Contacting Servers");
             pDialog.setMessage("Getting Data ...");
             pDialog.setIndeterminate(false);

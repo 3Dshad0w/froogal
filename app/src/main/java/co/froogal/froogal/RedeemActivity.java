@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
@@ -31,7 +30,7 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
 
         setContentView(R.layout.activity_rewards);
 
-        mTopImage = (ImageView) findViewById(R.id.image);
+        mTopImage = (ImageView) findViewById(R.id.userImage);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
         mHeader = findViewById(R.id.header);

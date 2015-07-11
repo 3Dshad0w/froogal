@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/userImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/imageview_height"
                 android:background="@drawable/background_small"
@@ -67,7 +67,7 @@
                 android:layout_below="@+id/text_left"
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/round_border_main_unselected"
                 android:src="@drawable/ic_call_white_24dp"
                 android:scaleType="center"
@@ -75,14 +75,14 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:layout_weight="3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
 
             <ImageView
                 android:layout_below="@+id/text_left"
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/round_border_main_unselected"
                 android:src="@drawable/ic_directions_white_24dp"
                 android:scaleType="center"
@@ -90,14 +90,14 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:layout_weight="3"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
 
             <ImageView
                 android:layout_below="@+id/text_left"
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/round_border_main_unselected"
                 android:src="@drawable/ic_favorite_white_24dp"
                 android:scaleType="center"
@@ -106,8 +106,8 @@
                 android:clickable="true"
                 android:onClick="favourite"
                 android:layout_weight="3"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp" />
 
             <Button
                 android:layout_width="match_parent"

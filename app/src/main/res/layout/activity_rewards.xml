@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/userImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/imageview_height_order"
                 android:background="@color/main_color_500"

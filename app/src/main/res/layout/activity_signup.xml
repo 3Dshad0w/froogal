@@ -101,6 +101,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:id="@+id/email"
+        app:fletInputType="textEmailAddress"
         app:fletHintTextColor="@color/main_color_500"
         app:fletSingleLine="true"
         app:fletTextBackground="@drawable/edit_text_background_accent"

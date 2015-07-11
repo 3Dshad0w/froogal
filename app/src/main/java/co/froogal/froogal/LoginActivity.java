@@ -1,6 +1,5 @@
 package co.froogal.froogal;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -319,7 +318,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 
         passreset.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), ForgetPasswordActivity.class);
+                Intent myIntent = new Intent(view.getContext(), ForgotPasswordActivity.class);
                 startActivityForResult(myIntent, 0);
                 finish();
             }});

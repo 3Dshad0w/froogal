@@ -2,7 +2,6 @@
 package co.froogal.froogal.adapter;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,16 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
-import co.froogal.froogal.ForgetPasswordActivity;
 import co.froogal.froogal.R;
 import co.froogal.froogal.ResDetailsActivity;
-import co.froogal.froogal.fragment.locationListViewFragment;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> implements View.OnClickListener{
 
