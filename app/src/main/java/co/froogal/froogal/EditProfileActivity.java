@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -57,6 +58,8 @@ public class EditProfileActivity extends ActionBarActivity {
     private TextView mobileTextView;
     private TextView changePassword;
     private TextView saveChanges;
+
+
 
     private FloatLabeledEditText fnameEditText;
     private FloatLabeledEditText lnameEditText;
@@ -97,6 +100,10 @@ public class EditProfileActivity extends ActionBarActivity {
         emailEditText = (FloatLabeledEditText) findViewById(R.id.emailEditText);
 
 
+        if(bu.get_defaults("registered_through").equals("f") || bu.get_defaults("registered_through").equals("g"))
+        {
+            changePassword.setVisibility(View.GONE);
+        }
         fnameTextView.setText(fname);
         lnameTextView.setText(lname);
         emailTextView.setText(email);

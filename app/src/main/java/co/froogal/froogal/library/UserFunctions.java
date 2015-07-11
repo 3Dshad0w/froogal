@@ -196,12 +196,14 @@ public class UserFunctions {
      * Function to change password
      */
 
-    public JSONObject chgPass(String newpas, String email) {
+    public JSONObject chgPass(String oldpass, String newpass, String uid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", chgpass_tag));
 
-        params.add(new BasicNameValuePair("newpas", newpas));
-        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("newpass", newpass));
+        params.add(new BasicNameValuePair("userID", uid));
+        params.add(new BasicNameValuePair("oldpass", oldpass));
+
         JSONObject json = jsonParser.makeHttpRequest(chgpassURL, "POST", params);
         Log.d("inchgpassfunction", json.toString());
         return json;
@@ -212,10 +214,10 @@ public class UserFunctions {
      * Function to reset the password
      */
 
-    public JSONObject forPass(String forgotpassword) {
+    public JSONObject forPass(String email) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", forpass_tag));
-        params.add(new BasicNameValuePair("forgotpassword", forgotpassword));
+        params.add(new BasicNameValuePair("email", email));
         JSONObject json = jsonParser.makeHttpRequest(forpassURL, "POST", params);
         Log.d("inforpassfunction", json.toString());
         return json;

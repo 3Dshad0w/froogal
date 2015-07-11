@@ -159,7 +159,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
                 app:rippleColor="@color/main_color_grey_400"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:id="@+id/chgpass">
 
                 <co.froogal.froogal.font.RobotoTextView
                     android:id="@+id/changePassword"
