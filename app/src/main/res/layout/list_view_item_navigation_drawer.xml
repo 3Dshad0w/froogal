@@ -16,20 +16,19 @@
         android:paddingBottom="4dp"
         android:paddingTop="4dp" >
 
-        <co.froogal.froogal.font.FontelloTextView
+        <ImageView
             android:id="@+id/icon"
-            style="@style/TextViewAppearance.Title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="18dp"
-            android:textColor="@drawable/selector_text_empty" />
+            />
 
         <co.froogal.froogal.font.RobotoTextView
             android:id="@+id/title"
             style="@style/TextViewAppearance.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
+            android:paddingLeft="18dp"
             android:textColor="@drawable/selector_text_empty"
             android:textSize="14sp"
             app:typeface="robotoBold" />

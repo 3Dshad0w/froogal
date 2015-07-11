@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     tools:context=".MapsActivity">
 
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -18,10 +19,10 @@
     <ImageView
         android:id="@+id/marker_button"
         android:layout_width="wrap_content"
-        android:paddingBottom="25dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:paddingBottom="40dp"
         android:src="@drawable/ic_location_on_black_36dp" />
 
 </RelativeLayout>

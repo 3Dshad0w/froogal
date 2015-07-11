@@ -1,6 +1,7 @@
 package co.froogal.froogal;
 
 import android.app.ProgressDialog;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -151,6 +152,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
     private TextView textview_left;
     private TextView textview_center;
     private TextView textview_right;
+    private TypedArray navMenuIcons;
     private String button_clicked = "near_by";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -196,6 +198,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         textview_left = (TextView) findViewById(R.id.text_left);
         textview_center = (TextView) findViewById(R.id.text_center);
         textview_right = (TextView) findViewById(R.id.text_right);
+        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 
 //        imageview_marker.setPadding(0,0,0,Math.round(height/21));
 
@@ -289,12 +292,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
         button_clicked = "near_by";
 
-        imageview_right.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_left.setBackgroundResource(R.drawable.round_border_main_unselected);
-        imageview_center.setBackgroundResource(R.drawable.round_border_main_selected);
-        imageview_left.setColorFilter(null);
-        imageview_right.setColorFilter(null);
-        imageview_center.setColorFilter(R.color.material_black_500);
+
 
         textview_left.setTextColor(getResources().getColor(R.color.cpb_white));
         textview_center.setTextColor(getResources().getColor(R.color.cpb_blue_dark));
@@ -364,38 +362,38 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         mDrawerItems = new ArrayList<>();
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_linked_in,
+                       getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_orders,
                         DrawerItem.DRAWER_ITEM_TAG_ORDERS));
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_blog,
+                        getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_rewardpoints,
                         DrawerItem.DRAWER_ITEM_TAG_REWARDPOINTS));
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_git_hub,
+                        getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_redeem,
                         DrawerItem.DRAWER_ITEM_TAG_REDEEM));
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_git_hub,
+                        getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_invite,
                         DrawerItem.DRAWER_ITEM_TAG_INVITE));
 
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_instagram,
+                        getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_editprofile,
                         DrawerItem.DRAWER_ITEM_TAG_EDITPROFILE));
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_instagram,
+                        getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_aboutus,
                         DrawerItem.DRAWER_ITEM_TAG_ABOUTUS));
         mDrawerItems.add(
                 new DrawerItem(
-                        R.string.drawer_icon_instagram,
+                        getResources().getDrawable(R.drawable.ic_redeem_black_24dp),
                         R.string.drawer_title_logout,
                         DrawerItem.DRAWER_ITEM_TAG_LOGOUT));
     }
@@ -462,7 +460,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
         {
             if(fragmentback)
             {
-                imageview_marker.setVisibility(View.VISIBLE);
                 //Animation
                 flipCard();
 
@@ -471,8 +468,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
             }
             else {
-
-                imageview_marker.setVisibility(View.GONE);
 
                 //Animation
                 flipCard();

@@ -1,5 +1,7 @@
 package co.froogal.froogal.model;
 
+import android.graphics.drawable.Drawable;
+
 public class DrawerItem {
 
 	public static final int DRAWER_ITEM_TAG_ORDERS = 26;
@@ -11,21 +13,21 @@ public class DrawerItem {
 	public static final int DRAWER_ITEM_TAG_INVITE = 32;
 
 
-	public DrawerItem(int icon, int title, int tag) {
+	public DrawerItem(Drawable icon, int title, int tag) {
 		this.icon = icon;
 		this.title = title;
 		this.tag = tag;
 	}
 
-	private int icon;
+	private Drawable icon;
 	private int title;
 	private int tag;
 
-	public int getIcon() {
+	public Drawable getIcon() {
 		return icon;
 	}
 
-	public void setIcon(int icon) {
+	public void setIcon(Drawable icon) {
 		this.icon = icon;
 	}
 

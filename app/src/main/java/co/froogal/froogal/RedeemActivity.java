@@ -41,7 +41,7 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
 
         s.setSpan(myfont, 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mNumFragments = 2;
+        mNumFragments = 3;
 
         getSupportActionBar().setTitle(s);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,12 +140,15 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
             String title = "";
 
             if(position == 0){
-                title = "Recieved";
+                title = "Recharge Mobile";
             }
-            else{
-                title = "spent";
+            else if(position == 1){
+                title = "Transfer to Bank";
             }
-
+            else
+            {
+                title = "Convert to shopex Cash";
+            }
             return title;
 
         }

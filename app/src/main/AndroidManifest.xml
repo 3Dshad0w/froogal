@@ -158,6 +158,18 @@
                 android:value="co.froogal.froogal.MainActivity" />
         </activity>
         <activity
+            android:name=".RedeemActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.froogal.froogal.MainActivity" />
+        </activity>
+        <activity
             android:name=".OrdersActivity"
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity"

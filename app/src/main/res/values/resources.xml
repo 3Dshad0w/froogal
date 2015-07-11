@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_redeem_black_24dp</item>
+    </array>
+</resources>

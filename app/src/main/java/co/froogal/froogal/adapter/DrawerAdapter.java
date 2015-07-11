@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.froogal.froogal.R;
@@ -47,7 +48,7 @@ public class DrawerAdapter extends BaseAdapter {
 				convertView = mInflater.inflate(R.layout.list_view_item_navigation_drawer, parent, false);
 			}
 			holder = new ViewHolder();
-			holder.icon = (TextView) convertView.findViewById(R.id.icon); // holder.icon object is null if mIsFirstType is set to false
+			holder.icon = (ImageView) convertView.findViewById(R.id.icon); // holder.icon object is null if mIsFirstType is set to false
 			holder.title = (TextView) convertView.findViewById(R.id.title);
 			convertView.setTag(holder);
 		} else {
@@ -58,12 +59,12 @@ public class DrawerAdapter extends BaseAdapter {
 		
 
 		holder.title.setText(item.getTitle());
-		holder.icon.setText(item.getIcon());
+		holder.icon.setImageDrawable(item.getIcon());
 		return convertView;
 	}
 	
 	private static class ViewHolder {
-		public TextView icon;
+		public ImageView icon;
 		public /*Roboto*/TextView title;
 	}
 }

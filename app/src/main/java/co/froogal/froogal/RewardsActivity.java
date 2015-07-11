@@ -11,9 +11,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
 import android.widget.ImageView;
-
 import org.json.JSONException;
-
 import co.froogal.froogal.fragment.AboutScrollViewFragmentTemp;
 import co.froogal.froogal.fragment.MenuFinalOrderViewFragment;
 import co.froogal.froogal.fragment.MenuOrderViewFragment;
