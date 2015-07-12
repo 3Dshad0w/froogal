@@ -33,7 +33,9 @@ public class UserFunctions {
     private static String save_google_user_data_to_server_URL = "http://froogal.in/files/save_google_user_data_to_server.php";
     private static String save_facebook_user_data_to_server_URL = "http://froogal.in/files/save_facebook_user_data_to_server.php";
     private static String send_mobile_verification_status_URL = "http://froogal.in/files/send_mobile_verification_status.php";
-    private static String recharge_URL = "http://www.joloapi.com/api/recharge2.php";
+    private static String recharge_URL = "http://froogal.in/files/recharge.php";
+    private static String bank_URL = "http://froogal.in/files/bank.php";
+
 
 
 
@@ -410,9 +412,10 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("service", number));
         params.add(new BasicNameValuePair("amount", amount));
         params.add(new BasicNameValuePair("orderid", uniqueID));
-        JSONObject json = jsonParser.makeHttpRequest(recharge_URL, "GET", params);
+        JSONObject json = jsonParser.makeHttpRequest(recharge_URL, "POST", params);
         return json;
     }
+
     public JSONObject updateUser(String uid, String fname, String lname, String email) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
@@ -438,5 +441,19 @@ public class UserFunctions {
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/invalidateMobile.php", "POST", params);
         Log.d("infunctionregREAURANT2", json.toString());
         return json;
+    }
+
+    public JSONObject bank(String account_name, String account_number, String bank_name,String ifsc_code,String number,String amount) {
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("account_name", account_name));
+        params.add(new BasicNameValuePair("account_number", account_number));
+        params.add(new BasicNameValuePair("bank_name", bank_name));
+        params.add(new BasicNameValuePair("ifsc_code", ifsc_code));
+        params.add(new BasicNameValuePair("number", number));
+        params.add(new BasicNameValuePair("amount", amount));
+        JSONObject json = jsonParser.makeHttpRequest(bank_URL, "POST", params);
+        return json;
+
     }
 }

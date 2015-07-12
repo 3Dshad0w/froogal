@@ -13,6 +13,12 @@
     <string name="amount">Amount</string>
     <string name="number">Number</string>
     <string name="operator">Operator</string>
+    <string name="account_name">Account Name</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="account_number">Account Number</string>
+
+
 
 
 

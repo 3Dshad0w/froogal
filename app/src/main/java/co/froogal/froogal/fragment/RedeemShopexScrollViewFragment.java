@@ -4,40 +4,23 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
-import com.google.android.gms.location.internal.LocationRequestUpdateData;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import co.froogal.froogal.MainActivity;
 import co.froogal.froogal.R;
-import co.froogal.froogal.adapter.RewardInfo;
 import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.library.NotifyingScrollView;
 import co.froogal.froogal.library.UserFunctions;
-import co.froogal.froogal.otp_activity;
 import co.froogal.froogal.util.basic_utils;
 import co.froogal.froogal.view.FloatLabeledEditText;
 import co.froogal.froogal.view.ScrollViewFragment;
@@ -45,7 +28,7 @@ import co.froogal.froogal.view.ScrollViewFragment;
 /**
  * Created by akhil on 17/6/15.
  */
-public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
+public class RedeemShopexScrollViewFragment extends ScrollViewFragment {
 
     basic_utils bu;
     private FloatLabeledEditText number;
@@ -57,17 +40,17 @@ public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
     String operator_text;
 
 
-    public static final String TAG = RedeemRechargeScrollViewFragment.class.getSimpleName();
+    public static final String TAG = RedeemShopexScrollViewFragment.class.getSimpleName();
 
     public static Fragment newInstance(int position) {
-        RedeemRechargeScrollViewFragment fragment = new RedeemRechargeScrollViewFragment();
+        RedeemShopexScrollViewFragment fragment = new RedeemShopexScrollViewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_POSITION, position);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public RedeemRechargeScrollViewFragment() {}
+    public RedeemShopexScrollViewFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -231,7 +214,7 @@ public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
 
             pDialog = new ProgressDialog(getActivity());
             pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Fueling your mobile ...");
+            pDialog.setMessage("Logging in ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
