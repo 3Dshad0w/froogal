@@ -52,7 +52,7 @@ public class ForgotPasswordActivity extends Activity {
 
         setContentView(R.layout.activity_forgetpassword);
 
-        
+
 
         bu = new basic_utils(ForgotPasswordActivity.this);
 

@@ -25,6 +25,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -257,9 +258,13 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                                     if (object.has("birthday")) {
                                         birthday = object.getString("birthday");
                                     }
-
-                                    // TODO firends list store after someone uses
-                                    new process_login_facebook().execute();
+                                    if(email.equals(null) || email.equals("")){
+                                        showPopup();
+                                    }
+                                    else {
+                                        // TODO firends list store after someone uses
+                                        new process_login_facebook().execute();
+                                    }
                                 } catch (Exception e) {
                                     Log.d(TAG, e.toString());
                                     show_alert_dialog(SignUpActivity.this, "Server Error", "Please try again later!");
@@ -729,6 +734,50 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
         super.onResume();
 
     }
+
+
+
+    public void showPopup(){
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(SignUpActivity.this);
+        View promptsView = li.inflate(R.layout.email_prompt, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.emailEditTextDialogUserInput);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and set it to result
+                                // edit text
+                                email = userInput.getText().toString();
+
+                                new process_login_facebook().execute();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+    }
+
 
 
     /**

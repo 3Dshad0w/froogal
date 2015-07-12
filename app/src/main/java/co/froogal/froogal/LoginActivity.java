@@ -24,8 +24,10 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -243,9 +245,13 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                                     if (object.has("birthday")) {
                                         birthday = object.getString("birthday");
                                     }
-
-                                    // TODO firends list store after someone uses
-                                    new process_login_facebook().execute();
+                                    if(email.equals(null) || email.equals("")){
+                                        showPopup();
+                                    }
+                                    else {
+                                        // TODO firends list store after someone uses
+                                        new process_login_facebook().execute();
+                                    }
                                 } catch (Exception e) {
                                     Log.d(TAG, e.toString());
                                     show_alert_dialog(LoginActivity.this, "Server Error", "Please try again later!");
@@ -306,6 +312,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                     google_api_client.connect();
                 }
             }
+
+
         });
 
 
@@ -373,6 +381,53 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
     }
+
+
+
+
+
+    public void showPopup(){
+				// get prompts.xml view
+				LayoutInflater li = LayoutInflater.from(LoginActivity.this);
+				View promptsView = li.inflate(R.layout.email_prompt, null);
+
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+
+				// set prompts.xml to alertdialog builder
+				alertDialogBuilder.setView(promptsView);
+
+				final EditText userInput = (EditText) promptsView
+						.findViewById(R.id.emailEditTextDialogUserInput);
+
+				// set dialog message
+				alertDialogBuilder
+					.setCancelable(false)
+					.setPositiveButton("OK",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						// get user input and set it to result
+						// edit text
+						email = userInput.getText().toString();
+                        new process_login_facebook().execute();
+                        }
+					  })
+					.setNegativeButton("Cancel",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						dialog.cancel();
+					    }
+					  });
+
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+
+				// show it
+				alertDialog.show();
+
+			}
+
+
+
 
     @Override
     protected void onStart()
