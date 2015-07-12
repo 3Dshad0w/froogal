@@ -56,7 +56,7 @@ public class ForgotPasswordActivity extends Activity {
 
         bu = new basic_utils(ForgotPasswordActivity.this);
 
-        email = (FloatLabeledEditText) findViewById(R.id.forpas);
+        email = (FloatLabeledEditText) findViewById(R.id.email);
         resetpass = (TextView) findViewById(R.id.resPass);
         resetpass.setOnClickListener(new View.OnClickListener() {
             @Override

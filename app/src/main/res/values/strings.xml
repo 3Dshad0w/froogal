@@ -17,6 +17,8 @@
     <string name="bank_name">Bank Name</string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="account_number">Account Number</string>
+    <string name="uid">UID</string>
+
 
 
 

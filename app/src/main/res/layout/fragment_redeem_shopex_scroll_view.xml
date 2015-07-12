@@ -23,21 +23,31 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="23dp"
+                android:fontFamily=""
+                android:textColor="@color/material_orange_500"
+                android:text="Transfer to any shopex account"
+                android:layout_gravity="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:id="@+id/number">
+                android:id="@+id/uid">
 
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:background="@drawable/ic_contact_phone_black_24dp" />
-
+                    android:background="@drawable/ic_perm_identity_black_24dp" />
 
                 <co.froogal.froogal.view.FloatLabeledEditText
                     android:layout_width="0dp"
@@ -45,35 +55,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="1"
-                    app:fletFloatingHint="@string/number"
-                    android:id="@+id/number_edit"
+                    app:fletFloatingHint="@string/uid"
+                    android:id="@+id/uid_edit"
                     app:fletHintTextColor="@color/main_color_500"
                     app:fletSingleLine="true"
                     app:fletTextBackground="@drawable/edit_text_background_accent"
                     app:fletTextColor="@color/main_color_400" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center_vertical"
-                android:id="@+id/operator">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:background="@drawable/ic_action" />
-
-                <Spinner
-                    android:id="@+id/operator_spin"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    />
-            </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,34 +90,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center_vertical"
-                android:id="@+id/number">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:background="@drawable/ic_contact_phone_black_24dp" />
-
-                <co.froogal.froogal.view.FloatLabeledEditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:fletInputType="number"
-                    android:layout_marginLeft="16dp"
-                    android:layout_weight="1"
-                    android:id="@+id/number_edit"
-                    app:fletFloatingHint="@string/number"
-                    app:fletHintTextColor="@color/main_color_500"
-                    app:fletSingleLine="true"
-                    app:fletTextBackground="@drawable/edit_text_background_accent"
-                    app:fletTextColor="@color/main_color_400" />
-            </LinearLayout>
-
-
-
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -143,19 +103,25 @@
                     app:rippleColor="@color/main_color_grey_400" >
 
                     <co.froogal.froogal.font.RobotoTextView
-                        android:id="@+id/submit_recharge"
+                        android:id="@+id/submit_shopex"
                         style="@style/ButtonStyle.RaisedEmpty"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:background="@color/main_color_500"
                         android:minWidth="140dp"
                         android:text="@string/submit"
-                        android:onClick="recharge_submit"
                         android:textStyle="bold"
                         android:textColor="#fff" />
                 </co.froogal.froogal.view.MaterialRippleLayout>
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="* UID is the user's ref id. It can be found in my referral data at shoppersexpress.in"
+                android:layout_marginTop="50dp"/>
 
         </LinearLayout>
 

@@ -35,6 +35,7 @@ public class UserFunctions {
     private static String send_mobile_verification_status_URL = "http://froogal.in/files/send_mobile_verification_status.php";
     private static String recharge_URL = "http://froogal.in/files/recharge.php";
     private static String bank_URL = "http://froogal.in/files/bank.php";
+    private static String shopex_URL = "http://froogal.in/files/shopex.php";
 
 
 
@@ -457,5 +458,14 @@ public class UserFunctions {
         JSONObject json = jsonParser.makeHttpRequest(bank_URL, "POST", params);
         return json;
 
+    }
+
+    public JSONObject shopex(String uid,String amount) {
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("amount", amount));
+        JSONObject json = jsonParser.makeHttpRequest(shopex_URL, "POST", params);
+        return json;
     }
 }
