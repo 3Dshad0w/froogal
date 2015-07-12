@@ -1,8 +1,10 @@
 package co.froogal.froogal;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,6 +26,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import co.froogal.froogal.library.UserFunctions;
+import co.froogal.froogal.util.basic_utils;
+import co.froogal.froogal.view.FloatLabeledEditText;
 
 
 /**
@@ -34,12 +38,11 @@ public class ForgotPasswordActivity extends Activity {
     private static String KEY_SUCCESS = "success";
     private static String KEY_ERROR = "error";
 
-    EditText email;
-    TextView alert;
-    Button resetpass;
+    FloatLabeledEditText email;
+    TextView resetpass;
 
 
-
+    basic_utils bu;
     /**
      * Called when the activity is first created.
      */
@@ -49,20 +52,12 @@ public class ForgotPasswordActivity extends Activity {
 
         setContentView(R.layout.activity_forgetpassword);
 
-        Button login = (Button) findViewById(R.id.bktolog);
-        login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
-                startActivityForResult(myIntent, 0);
-                finish();
-            }
+        
 
-        });
+        bu = new basic_utils(ForgotPasswordActivity.this);
 
-
-        email = (EditText) findViewById(R.id.forpas);
-        alert = (TextView) findViewById(R.id.alert);
-        resetpass = (Button) findViewById(R.id.respass);
+        email = (FloatLabeledEditText) findViewById(R.id.forpas);
+        resetpass = (TextView) findViewById(R.id.resPass);
         resetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +147,7 @@ public class ForgotPasswordActivity extends Activity {
             }
             else{
                 nDialog.dismiss();
-                alert.setText("Error in Network Connection");
+                showAlertDialog(ForgotPasswordActivity.this, "Error", "Error in Network Connection", false);
             }
         }
     }
@@ -164,7 +159,28 @@ public class ForgotPasswordActivity extends Activity {
     }
 
 
+    @SuppressWarnings("deprecation")
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
 
 
     private class ProcessRegister extends AsyncTask<String, String, JSONObject> {
@@ -172,11 +188,10 @@ public class ForgotPasswordActivity extends Activity {
 
         private ProgressDialog pDialog;
 
-        String forgotpassword;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            forgotpassword = email.getText().toString();
 
             pDialog = new ProgressDialog(ForgotPasswordActivity.this);
             pDialog.setTitle("Contacting Servers");
@@ -191,7 +206,7 @@ public class ForgotPasswordActivity extends Activity {
 
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.forPass(forgotpassword);
+            JSONObject json = userFunction.forPass(email.getText().toString());
             return json;
 
 
@@ -206,25 +221,24 @@ public class ForgotPasswordActivity extends Activity {
             try {
                 Log.d("forgotpassord", json.toString());
                 if (json.getString(KEY_SUCCESS) != null) {
-                    alert.setText("");
                     String res = json.getString(KEY_SUCCESS);
                     String red = json.getString(KEY_ERROR);
 
 
                     if(Integer.parseInt(res) == 1){
                         pDialog.dismiss();
-                        alert.setText("A recovery email is sent to you, see it for more details.");
+                        showAlertDialog(ForgotPasswordActivity.this, "Success", "A recovery email is sent to you, see it for more details.", false);
 
 
 
                     }
                     else if (Integer.parseInt(red) == 2)
                     {    pDialog.dismiss();
-                        alert.setText("Your email does not exist in our database.");
+                        showAlertDialog(ForgotPasswordActivity.this, "Error", "Your email does not exist in our database.", false);
                     }
                     else {
                         pDialog.dismiss();
-                        alert.setText("Error occured in changing Password");
+                        showAlertDialog(ForgotPasswordActivity.this, "Error", "Error occured in changing Password", false);
                     }
 
 

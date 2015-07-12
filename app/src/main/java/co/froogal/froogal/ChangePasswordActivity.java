@@ -2,8 +2,10 @@ package co.froogal.froogal;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -11,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +22,8 @@ import android.widget.TextView;
 
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.services.location_service;
+import co.froogal.froogal.util.basic_utils;
+import co.froogal.froogal.view.FloatLabeledEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,11 +41,11 @@ public class ChangePasswordActivity extends Activity {
 
 
 
-    EditText newpass;
-    TextView alert;
-    Button changepass;
-    Button cancel;
+    FloatLabeledEditText newpass;
+    FloatLabeledEditText oldpass;
+    TextView changePass;
 
+    basic_utils bu;
 
 
     /**
@@ -52,30 +57,67 @@ public class ChangePasswordActivity extends Activity {
 
         setContentView(R.layout.activity_changepassword);
 
-        cancel = (Button) findViewById(R.id.btcancel);
-        cancel.setOnClickListener(new View.OnClickListener(){
-        public void onClick(View arg0){
-
-                Intent login = new Intent(getApplicationContext(), MainActivity.class);
-
-                startActivity(login);
-                finish();
-            }
-
-        });
 
 
+        bu = new basic_utils(ChangePasswordActivity.this);
+        newpass = (FloatLabeledEditText) findViewById(R.id.newpword);
+        oldpass = (FloatLabeledEditText) findViewById(R.id.oldpword);
+        changePass = (TextView) findViewById(R.id.changePass);
 
-        newpass = (EditText) findViewById(R.id.newpass);
-        alert = (TextView) findViewById(R.id.alertpass);
-        changepass = (Button) findViewById(R.id.btchangepass);
-
-        changepass.setOnClickListener(new View.OnClickListener() {
+        changePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NetAsync(view);
+
+
+                clearErrors();
+
+                boolean cancel = false;
+                View focusView = null;
+
+                // Store values at the time of the login attempt.
+                String moldpass = oldpass.getText().toString();
+                String mnewpass = newpass.getText().toString();
+
+                if (TextUtils.isEmpty(moldpass)) {
+                    oldpass.setError(getString(R.string.error_field_required));
+                    focusView = oldpass;
+                    cancel = true;
+                } else if (moldpass.length() < 4) {
+                    oldpass.setError(getString(R.string.error_invalid_password));
+                    focusView = oldpass;
+                    cancel = true;
+                }
+
+                if (TextUtils.isEmpty(mnewpass)) {
+                    newpass.setError(getString(R.string.error_field_required));
+                    focusView = newpass;
+                    cancel = true;
+                } else if (mnewpass.length() < 4) {
+                    newpass.setError(getString(R.string.error_invalid_password));
+                    focusView = newpass;
+                    cancel = true;
+                }
+
+
+
+                if (cancel) {
+                    // There was an error; don't attempt login and focus the first
+                    // form field with an error.
+                    focusView.requestFocus();
+                } else {
+                    // Show a progress spinner, and kick off a background task to
+                    // perform the user login attempt.
+                    NetAsync(view);
+
+                }
+
             }
         });}
+
+    private void clearErrors() {
+        oldpass.setError(null);
+        newpass.setError(null);
+    }
 
     private class NetCheck extends AsyncTask<String,String,Boolean>
     {
@@ -120,11 +162,11 @@ public class ChangePasswordActivity extends Activity {
 
             if(th == true){
                 nDialog.dismiss();
-                new ProcessRegister().execute();
+                new ProcessChangePassword().execute();
             }
             else{
                 nDialog.dismiss();
-                alert.setText("Error in Network Connection");
+
             }
         }
     }
@@ -136,22 +178,16 @@ public class ChangePasswordActivity extends Activity {
     }
 
 
-    private class ProcessRegister extends AsyncTask<String, String, JSONObject> {
+    private class ProcessChangePassword extends AsyncTask<String, String, JSONObject> {
 
 
         private ProgressDialog pDialog;
 
-        String newpas,email;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPreferences", 0); // 0 - for private mode
 
-            email = pref.getString("email", null);
-
-
-
-            newpas = newpass.getText().toString();
 
             pDialog = new ProgressDialog(ChangePasswordActivity.this);
             pDialog.setTitle("Contacting Servers");
@@ -166,7 +202,7 @@ public class ChangePasswordActivity extends Activity {
 
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.chgPass(newpas, email);
+            JSONObject json = userFunction.chgPass(oldpass.getTextString(), newpass.getTextString(), bu.get_defaults("uid"));
             Log.d("Button", "Register");
             return json;
 
@@ -179,7 +215,6 @@ public class ChangePasswordActivity extends Activity {
 
             try {
                 if (json.getString(KEY_SUCCESS) != null) {
-                    alert.setText("");
                     String res = json.getString(KEY_SUCCESS);
                     String red = json.getString(KEY_ERROR);
 
@@ -189,15 +224,17 @@ public class ChangePasswordActivity extends Activity {
                          * Dismiss the process dialog
                          **/
                         pDialog.dismiss();
-                        alert.setText("Your Password is successfully changed.");
+                        showAlertDialog(ChangePasswordActivity.this, "Success", "Your Password is successfully changed.", false);
 
 
                     } else if (Integer.parseInt(red) == 2) {
                         pDialog.dismiss();
-                        alert.setText("Invalid old Password.");
-                    } else {
+                        showAlertDialog(ChangePasswordActivity.this, "Error", "Invalid old Password.", false);
+
+                    } else if (Integer.parseInt(red) == 1) {
                         pDialog.dismiss();
-                        alert.setText("Error occured in changing Password.");
+                        showAlertDialog(ChangePasswordActivity.this, "Success", "Error occured in changing Password.", false);
+
                     }
 
 
@@ -211,7 +248,34 @@ public class ChangePasswordActivity extends Activity {
         }}
     public void NetAsync(View view){
         new NetCheck().execute();
-    }}
+    }
+
+
+    @SuppressWarnings("deprecation")
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+
+}
 
 
 
