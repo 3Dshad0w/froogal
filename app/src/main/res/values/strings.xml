@@ -13,6 +13,14 @@
     <string name="amount">Amount</string>
     <string name="number">Number</string>
     <string name="operator">Operator</string>
+    <string name="account_name">Account Name</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="account_number">Account Number</string>
+    <string name="uid">UID</string>
+
+
+
 
 
 
@@ -86,7 +94,7 @@
     <string name="drawer_title_orders">Orders</string>
     <string name="drawer_title_rewardpoints">Reward Points</string>
     <string name="drawer_title_redeem">Redeem</string>
-    <string name="drawer_title_invite">Invite</string>
+    <string name="drawer_title_invite">Invite and Share</string>
     <string name="drawer_title_editprofile">Edit Profile</string>
     <string name="drawer_title_aboutus">About Us</string>
     <string name="drawer_title_logout">Logout</string>

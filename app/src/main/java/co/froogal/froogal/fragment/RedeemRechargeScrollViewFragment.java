@@ -33,6 +33,7 @@ import java.util.List;
 
 import co.froogal.froogal.MainActivity;
 import co.froogal.froogal.R;
+import co.froogal.froogal.RewardsActivity;
 import co.froogal.froogal.adapter.RewardInfo;
 import co.froogal.froogal.font.RobotoTextView;
 import co.froogal.froogal.library.NotifyingScrollView;
@@ -191,7 +192,7 @@ public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
                     focusView = amount;
                     cancel = true;
                 }
-                if(Integer.valueOf(amount_text) > 10) {
+                if(Integer.valueOf(amount_text) < 10) {
                     amount.setError("Amount should be greater than 10");
                     focusView = amount;
                     cancel = true;
@@ -231,7 +232,7 @@ public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
 
             pDialog = new ProgressDialog(getActivity());
             pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Logging in ...");
+            pDialog.setMessage("Fueling your mobile ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -241,13 +242,44 @@ public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.recharge(number_text, operator_text, amount_text);
+            JSONObject json = userFunction.recharge(bu.get_defaults("uid"),number_text, operator_text, amount_text);
             return json;
         }
 
         @Override
         protected void onPostExecute(JSONObject json) {
+            Log.d(TAG,json.toString());
             pDialog.dismiss();
+            try {
+                if (json.getString("success") != null) {
+                    String res = json.getString("success");
+                    if (Integer.parseInt(res) == 1) {
+                        showAlertDialog(getActivity(), "Success", "Your mobile has been recharged !");
+                    } else {
+                        if (Integer.parseInt(json.getString("error")) == 1) {
+                            showAlertDialog(getActivity(), "Error", "Insufficient balance. Please refresh.");
+                        }
+                        else if (Integer.parseInt(json.getString("error")) == 3)
+                        {
+                            // Start the service to get updated status
+
+                            showAlertDialog(getActivity(), "Patience", "Your request is being processed. Pleas wait !");
+                            Intent i = new Intent(getActivity(), RewardsActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            getActivity().finish();
+
+                        } else {
+                            Log.d(TAG,"2");
+                            showAlertDialog(getActivity(), "Error", json.getJSONObject("result").getString("error"));
+                        }
+                    }
+                } else {
+                    showAlertDialog(getActivity(), "Error", "Server Busy !");
+                }
+            } catch (Exception e) {
+                Log.d(TAG, e.toString());
+            }
         }
     }
 
@@ -257,7 +289,7 @@ public class RedeemRechargeScrollViewFragment extends ScrollViewFragment {
     }
 
     @SuppressWarnings("deprecation")
-    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+    public void showAlertDialog(Context context, String title, String message) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);

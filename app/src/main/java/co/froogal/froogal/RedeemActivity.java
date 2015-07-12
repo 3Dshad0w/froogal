@@ -13,7 +13,9 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import co.froogal.froogal.fragment.RedeemBankScrollViewFragment;
 import co.froogal.froogal.fragment.RedeemRechargeScrollViewFragment;
+import co.froogal.froogal.fragment.RedeemShopexScrollViewFragment;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
@@ -130,11 +132,16 @@ public class RedeemActivity extends ParallaxViewPagerBaseActivity {
         public Fragment getItem(int position) {
             Fragment fragment;
 
-            if(position ==  numFragments){
+            if(position ==  0){
                 return RedeemRechargeScrollViewFragment.newInstance(position);
             }
-            fragment = RedeemRechargeScrollViewFragment.newInstance(position);
-            return fragment;
+            else if(position == 1)
+            {
+                return RedeemBankScrollViewFragment.newInstance(position);
+            }
+            else{
+                return RedeemShopexScrollViewFragment.newInstance(position);
+            }
         }
 
         private int[] imageResId = {
