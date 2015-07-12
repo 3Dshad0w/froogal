@@ -36,15 +36,13 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <com.facebook.share.widget.ShareButton
-                android:layout_gravity="center"
+             <Button
+                android:id="@+id/share_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="50sp"
-                android:minHeight="50dp"
-                android:minWidth="250dp"
-                android:id="@+id/google_share"
-                 />
+                android:text="Share on Google+"
+                />
+
         </LinearLayout>
 
         <LinearLayout
