@@ -8,7 +8,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
-
+import java.io.IOException;
+import java.net.URL;
+import com.google.android.gms.plus.model.people.Person;
+import java.io.IOException;
+import java.net.URL;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 
@@ -37,8 +41,10 @@ public class InviteActivity extends ActionBarActivity {
                 .build();
 
         // fb share button
-        ShareButton shareButton = (ShareButton)findViewById(R.id.fb_share);
+        ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share);
         shareButton.setShareContent(linkContent);
+
+
     }
 
 
@@ -52,4 +58,5 @@ public class InviteActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

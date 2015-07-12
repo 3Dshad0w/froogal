@@ -75,6 +75,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     private static final int RC_SIGN_IN = 0;
     private GoogleApiClient google_api_client;
     private boolean mIntentInProgress;
+    private boolean mIsResolving = false;
+    private boolean mShouldResolve = false;
     private boolean sign_in_clicked;
     private com.google.android.gms.common.SignInButton google_sign_in;
     protected Location currentLocation;
@@ -308,8 +310,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.google_login && !google_api_client.isConnecting()) {
-                    sign_in_clicked = true;
-                    google_api_client.connect();
+                    onSignInClicked();
+                    sign_in_clicked =true;
                 }
             }
 
@@ -372,6 +374,12 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
         });
     }
 
+    private void onSignInClicked() {
+        // User clicked the sign-in button, so begin the sign-in process and automatically
+        // attempt to resolve any errors that occur.
+        mShouldResolve = true;
+        google_api_client.connect();
+    }
 
     protected void createLocationRequest() {
 
@@ -433,8 +441,17 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     protected void onStart()
     {
         super.onStart();
+        google_api_client.connect();
     }
 
+
+    //googl+ logout
+    /*
+      if (mGoogleApiClient.isConnected()) {
+        Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+        mGoogleApiClient.disconnect();
+    }
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -481,7 +498,6 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     @Override
     public void onConnected(Bundle bundle) {
 
-
         if (currentLocation == null) {
             currentLocation = LocationServices.FusedLocationApi.getLastLocation(google_api_client);
         }
@@ -496,7 +512,8 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
             bu.set_defaults("longitude",longitude);
 
         }
-        if(sign_in_clicked) {
+
+        if(mShouldResolve) {
 
             // Retrieving additional information
 
@@ -557,7 +574,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
                 Log.d("bitch", "here");
             }
         }
-
+        mShouldResolve = false;
     }
 
     // Alert Dialogs
@@ -593,32 +610,45 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        if (!mIntentInProgress) {
-            if (sign_in_clicked && connectionResult.hasResolution()) {
-                // The user has already clicked 'sign-in' so we attempt to resolve all
-                // errors until the user is signed in, or they cancel.
-                try{
+    public void onConnectionFailed(ConnectionResult connectionResult)
+    {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+
+        if (!mIsResolving && mShouldResolve) {
+            if (connectionResult.hasResolution()) {
+                try {
                     connectionResult.startResolutionForResult(this, RC_SIGN_IN);
-                    mIntentInProgress = true;
+                    mIsResolving = true;
                 } catch (IntentSender.SendIntentException e) {
-                    // The intent was canceled before it was sent.  Return to the default
-                    // state and attempt to connect to get an updated ConnectionResult.
-                    mIntentInProgress = false;
+                    Log.e(TAG, "Could not resolve ConnectionResult.", e);
+                    mIsResolving = false;
                     google_api_client.connect();
                 }
+            } else {
+                // Could not resolve the connection result, show the user an
+                // error dialog.
+                show_alert_dialog(this, "Error", connectionResult.toString());
             }
+        } else {
+            // Show the signed-out UI
+            Log.d(TAG,"nothing");
         }
 
     }
 
+
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+        super.onActivityResult(requestCode, responseCode, intent);
+        Log.d(TAG, "onActivityResult:" + requestCode + ":" + responseCode + ":" + intent);
+
         if (requestCode == RC_SIGN_IN) {
-            mIntentInProgress = false;
-            sign_in_clicked = false;
-            if (!google_api_client.isConnecting()) {
-                google_api_client.connect();
+            // If the error resolution was not successful we should not resolve further.
+            if (responseCode != RESULT_OK) {
+                mShouldResolve = false;
             }
+
+            mIsResolving = false;
+            google_api_client.connect();
         }
         else {
             callbackManager.onActivityResult(requestCode,responseCode, intent);
