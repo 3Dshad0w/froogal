@@ -271,6 +271,12 @@
             android:label="Scan QR code"
             android:theme="@style/AppTheme.Overlay" >
         </activity>
+
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider807684845967248"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
     </application>
+
 
 </manifest>

@@ -33,7 +33,7 @@ public class UserFunctions {
     private static String save_google_user_data_to_server_URL = "http://froogal.in/files/save_google_user_data_to_server.php";
     private static String save_facebook_user_data_to_server_URL = "http://froogal.in/files/save_facebook_user_data_to_server.php";
     private static String send_mobile_verification_status_URL = "http://froogal.in/files/send_mobile_verification_status.php";
-    private static String recharge_URL = "http://froogal.in/files/recharge.php";
+    private static String recharge_URL = "http://froogal.in/files/rechargemobile.php";
     private static String bank_URL = "http://froogal.in/files/bank.php";
     private static String shopex_URL = "http://froogal.in/files/shopex.php";
 
@@ -404,17 +404,12 @@ public class UserFunctions {
         return json;
     }
 
-    public JSONObject recharge(String number, String operator, String amount) {
-        String myjoloappkey = "662214997158655";
-        String uniqueID = UUID.randomUUID().toString();
+    public JSONObject recharge(String userID,String number, String operator, String amount) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("mode", "0"));
-        params.add(new BasicNameValuePair("userid", "shopex"));
-        params.add(new BasicNameValuePair("key", myjoloappkey));
+        params.add(new BasicNameValuePair("userID",userID));
         params.add(new BasicNameValuePair("operator", operator));
-        params.add(new BasicNameValuePair("service", number));
+        params.add(new BasicNameValuePair("number", number));
         params.add(new BasicNameValuePair("amount", amount));
-        params.add(new BasicNameValuePair("orderid", uniqueID));
         JSONObject json = jsonParser.makeHttpRequest(recharge_URL, "POST", params);
         return json;
     }
