@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Email:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/emailEditTextDialogUserInput"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:id="@+id/emailLayout"
+        android:layout_marginTop="5dp">
 
-        <requestFocus />
+        <co.froogal.froogal.font.FontelloTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/fontello_user"
+            android:textColor="@color/main_color_grey_600"
+            android:textSize="16dp"
+            tools:ignore="SpUsage" />
 
-    </EditText>
+        <co.froogal.froogal.view.FloatLabeledEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            app:fletFloatingHint="@string/emailHint"
+            android:id="@+id/emailEditTextDialogUserInput"
+            app:fletHintTextColor="@color/main_color_500"
+            app:fletSingleLine="true"
+            app:fletInputType="textEmailAddress"
+            app:fletTextBackground="@drawable/edit_text_background_accent"
+            app:fletTextColor="@color/main_color_400" />
+    </LinearLayout>
+
+
+
+
 
 </LinearLayout>

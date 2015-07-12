@@ -396,7 +396,7 @@ public class LoginActivity extends ActionBarActivity implements GoogleApiClient.
 				// set prompts.xml to alertdialog builder
 				alertDialogBuilder.setView(promptsView);
 
-				final EditText userInput = (EditText) promptsView
+				final FloatLabeledEditText userInput = (FloatLabeledEditText) promptsView
 						.findViewById(R.id.emailEditTextDialogUserInput);
 
 				// set dialog message

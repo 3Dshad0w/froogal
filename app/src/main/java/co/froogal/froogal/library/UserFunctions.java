@@ -463,4 +463,13 @@ public class UserFunctions {
         JSONObject json = jsonParser.makeHttpRequest(shopex_URL, "POST", params);
         return json;
     }
+
+    public JSONObject getRewardsSpentList(String uid) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("userID", uid));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getRewardsSpentList.php", "GET", params);
+        Log.d("infunctionregREAURANT2", json.toString());
+        return json;
+    }
 }

@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/lay"
-    android:background="@drawable/abc_item_background_holo_light">
+    android:background="@drawable/abc_item_background_holo_light"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
 
-    <TextView
+    <co.froogal.froogal.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Order ID"
         android:id="@+id/orderID"
         android:layout_weight="1.4"
-        android:gravity="center" />
+        android:gravity="center"
+        app:typeface="robotoLight"/>
 
-    <TextView
+    <co.froogal.froogal.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Description"
         android:id="@+id/description"
         android:layout_weight="0.9"
-        android:gravity="center" />
+        android:gravity="center"
+        app:typeface="robotoLight"/>
 
-    <TextView
+    <co.froogal.froogal.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Rewards"
         android:id="@+id/amount"
         android:layout_weight="1.3"
-        android:gravity="center" />
+        android:gravity="center"
+        app:typeface="robotoLight"/>
 
 </LinearLayout>

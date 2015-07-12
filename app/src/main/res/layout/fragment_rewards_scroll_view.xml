@@ -14,9 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:divider="@drawable/horizontal_divider"
-        android:showDividers="middle"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp">
+        android:showDividers="middle">
 
         <include layout="@layout/header_placeholder_temp"/>
 

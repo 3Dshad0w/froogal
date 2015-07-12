@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lay"
+    android:background="@drawable/abc_list_pressed_holo_light"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+
+    <co.froogal.froogal.font.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="ID"
+        android:id="@+id/id"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        app:typeface="robotoBold" />
+
+    <co.froogal.froogal.font.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Type"
+        android:id="@+id/type"
+        android:layout_weight="1"
+        android:gravity="center"
+        app:typeface="robotoBold" />
+
+    <co.froogal.froogal.font.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Amount"
+        android:id="@+id/amount"
+        android:layout_weight="1"
+        android:gravity="center"
+        app:typeface="robotoBold" />
+
+    <co.froogal.froogal.font.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Status"
+        android:id="@+id/status"
+        android:layout_weight="1"
+        android:gravity="center"
+        app:typeface="robotoBold" />
+</LinearLayout>
