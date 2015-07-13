@@ -472,4 +472,13 @@ public class UserFunctions {
         Log.d("infunctionregREAURANT2", json.toString());
         return json;
     }
+
+    public JSONObject getOffers(String resID) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair("resID", resID));
+        JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getOffers.php", "GET", params);
+        Log.d("infunctionregREAURANT2", json.toString());
+        return json;
+    }
 }
