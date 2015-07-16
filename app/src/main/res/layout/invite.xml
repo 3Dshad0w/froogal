@@ -4,7 +4,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -13,48 +15,143 @@
         android:layout_centerInParent="true">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_weight="3.0"
+            android:background="#F8B9FE"
+            android:gravity="top">
 
-            <com.facebook.share.widget.ShareButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="50dp"
-                android:textSize="20sp"
-                android:drawableLeft="@drawable/facebook_logo_32"
-                android:minWidth="250dp"
-                android:id="@+id/fb_share"/>
+                android:text="Your Refferal Code is"
+                android:textStyle="bold"
+                android:paddingTop="25dp"
+                android:textColor="@color/background_material_dark"
+                android:layout_gravity="center"
+                android:textSize="25sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/referral_rectangle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/background_material_dark"
+                    android:text="FGTVSE56"
+                    android:textStyle="bold"
+                    android:textSize="25sp">
+                </TextView>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/down_invite"
+            android:background="#F8B9FE"
             android:gravity="center">
 
-             <Button
-                android:id="@+id/share_button"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:animateLayoutChanges="true"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Share on Google+"
-                />
+                android:background="@drawable/referral_zigzag">
+            </LinearLayout>
+
+            <LinearLayout
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <com.facebook.share.widget.ShareButton
+                    android:id="@+id/fb_share"
+                    android:layout_width="wrap_content"
+                    android:background="#3B5998"
+                    android:paddingLeft="15dp"
+                    android:minHeight="50dp"
+                    android:minWidth="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    android:drawableLeft="@drawable/facebook_logo_32"
+                    android:textStyle="bold"
+                    android:textColor="@color/cpb_white"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/share_button_t"
+                    android:layout_width="wrap_content"
+                    android:background="#FFB69AE6"
+                    android:paddingLeft="15dp"
+                    android:minHeight="50dp"
+                    android:minWidth="250dp"
+                    android:drawableLeft="@drawable/twitter_social_outlined_logo_64"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    android:textStyle="bold"
+                    android:textColor="@color/cpb_white"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                    <Button
+                    android:id="@+id/share_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:minWidth="250dp"
+                    android:paddingLeft="15dp"
+                    android:drawableLeft="@drawable/google_plus_social_logotype_64"
+                    android:background="#FFDD4D3B"
+                    android:text="Share"
+                    android:textStyle="bold"
+                    android:textColor="@color/cpb_white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="* Refer and get 10 rewards point for each friend."
+                    />
+            </LinearLayout>
+
 
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-        </LinearLayout>
-
     </LinearLayout>
-
 </RelativeLayout>
