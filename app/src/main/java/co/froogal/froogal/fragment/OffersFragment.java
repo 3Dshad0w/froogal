@@ -58,7 +58,7 @@ public class OffersFragment extends RecyclerViewFragment {
 
         View view = inflater.inflate(R.layout.fragment_offers_view, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        new ProcessReviews().execute();
+        new ProcessOffers().execute();
         return view;
     }
 
@@ -77,7 +77,7 @@ public class OffersFragment extends RecyclerViewFragment {
         return list;
     }
 
-    private class ProcessReviews extends AsyncTask<String, String, JSONObject> {
+    private class ProcessOffers extends AsyncTask<String, String, JSONObject> {
 
 
         private ProgressDialog pDialog;
@@ -138,7 +138,7 @@ public class OffersFragment extends RecyclerViewFragment {
                         ci.buy = offerJson.getString("buy");
                         ci.get = offerJson.getString("get");
                         ci.discount = null;
-                        ci.minBill = null;
+                        ci.productID = null;
                         ci.rewardPerecentage = null;
                         ci.loyaltyCardID = null;
                         ci.resID = ResDetailsActivity.resID;
@@ -146,7 +146,7 @@ public class OffersFragment extends RecyclerViewFragment {
                     }
                     else if(ci.type.equals("discount")){
                         ci.discount = offerJson.getString("discount");
-                        ci.minBill = offerJson.getString("minBill");
+                        ci.productID = offerJson.getString("productID");
                         ci.buy = null;
                         ci.get = null;
                         ci.rewardPerecentage = null;
@@ -156,7 +156,7 @@ public class OffersFragment extends RecyclerViewFragment {
                     }
                     else if(ci.type.equals("rewards")){
                         ci.discount = null;
-                        ci.minBill = null;
+                        ci.productID = null;
                         ci.buy = null;
                         ci.get = null;
                         ci.rewardPerecentage = offerJson.getString("rewardsPercentage");
@@ -166,7 +166,7 @@ public class OffersFragment extends RecyclerViewFragment {
                     }
                     else if(ci.type.equals("loyaltyCard")){
                         ci.discount = null;
-                        ci.minBill = null;
+                        ci.productID = null;
                         ci.buy = null;
                         ci.get = null;
                         ci.rewardPerecentage = null;

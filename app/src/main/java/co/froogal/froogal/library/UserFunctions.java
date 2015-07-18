@@ -445,7 +445,8 @@ public class UserFunctions {
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("account_name", account_name));
-        params.add(new BasicNameValuePair("account_number", account_number));
+        params.add(new BasicNameValuePair("account_numb" +
+                "er", account_number));
         params.add(new BasicNameValuePair("bank_name", bank_name));
         params.add(new BasicNameValuePair("ifsc_code", ifsc_code));
         params.add(new BasicNameValuePair("number", number));

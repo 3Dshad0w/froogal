@@ -9,7 +9,7 @@ public class OfferInfo {
     public String buy;
     public String get;
     public String discount;
-    public String minBill;
+    public String productID;
     public String rewardPerecentage;
     public String loyaltyCardID;
     public String resID;

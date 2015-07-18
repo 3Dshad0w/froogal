@@ -684,7 +684,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                     listFragment.updateList(json.getJSONObject("restaurants"));//
                 }
                 else{
-                    listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
+                        listFragment = locationListViewFragment.newInstance(json.getJSONObject("restaurants"));
                 }
                 // Remove all markers before
                 map.clear();
