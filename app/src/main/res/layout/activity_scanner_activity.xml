@@ -6,11 +6,14 @@ android:layout_height="match_parent">
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <fragment android:name="co.froogal.froogal.fragment.SimpleScannerFragment"
+
+        <fragment
+            android:name="co.froogal.froogal.fragment.SimpleScannerFragment"
             android:id="@+id/scanner_fragment"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dip"/>
+
     </LinearLayout>
 
     <TextView

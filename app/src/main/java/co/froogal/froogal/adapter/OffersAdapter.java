@@ -81,27 +81,36 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 
-        if (position > 1) {
+        if (position > 0) {
 
             if(OfferList.get(position-1).type.equals("bogo")){
                 bogoOfferViewHolder bogoOfferViewHolder = (bogoOfferViewHolder) viewHolder;
                 OfferInfo ci = OfferList.get(position-1);
                 String text = "Buy "+ ci.buy + " Get" + ci.get;
                 bogoOfferViewHolder.offer.setText(text);
+                bogoOfferViewHolder.marker.setText("B");
+                bogoOfferViewHolder.marker.setBackgroundResource(R.drawable.offer_card_round_border_bogo);
+                bogoOfferViewHolder.topbar.setBackgroundResource(R.color.cpb_red);
 
             }
             else if(OfferList.get(position-1).type.equals("rewards")){
                 rewardOfferViewHolder rewardsOfferViewHolder = (rewardOfferViewHolder) viewHolder;
                 OfferInfo ci = OfferList.get(position-1);
-                String text = "Get " + ci.rewardPerecentage + "On Your Bill";
+                String text = "Get " + ci.rewardPerecentage + " on Your Bill";
                 rewardsOfferViewHolder.offer.setText(text);
+                rewardsOfferViewHolder.marker.setText("R");
+                rewardsOfferViewHolder.marker.setBackgroundResource(R.drawable.offer_card_round_border_rewards);
+                rewardsOfferViewHolder.topbar.setBackgroundResource(R.color.cpb_green);
 
             }
             else if(OfferList.get(position-1).type.equals("discount")){
                 discountOfferViewHolder discountOfferViewHolder = (discountOfferViewHolder) viewHolder;
                 OfferInfo ci = OfferList.get(position-1);
-                String text = "Get " + ci.discount + " discount  On "+ ci.productID;
+                String text = "Get " + ci.discount + " discount  on "+ ci.productID;
                 discountOfferViewHolder.offer.setText(text);
+                discountOfferViewHolder.marker.setText("D");
+                discountOfferViewHolder.marker.setBackgroundResource(R.drawable.offer_card_round_border_discount);
+                discountOfferViewHolder.topbar.setBackgroundResource(R.color.cpb_blue);
 
             }
             else if(OfferList.get(position-1).type.equals("loyaltyCard")){
@@ -110,6 +119,10 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 OfferInfo ci = OfferList.get(position-1);
                 String text = ci.loyaltyCardID;
                 loyaltyCardOfferViewHolder.offer.setText(text);
+                loyaltyCardOfferViewHolder.marker.setText("L");
+                loyaltyCardOfferViewHolder.marker.setBackgroundResource(R.drawable.offer_card_round_border_loyalty);
+                loyaltyCardOfferViewHolder.topbar.setBackgroundResource(R.color.material_yellow_500);
+
             }
 
 
@@ -156,11 +169,14 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class bogoOfferViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView offer;
+        protected  TextView marker;
+        protected View topbar;
 
         public bogoOfferViewHolder(View v) {
             super(v);
             offer =  (TextView) v.findViewById(R.id.OfferTextView);
-
+            marker =  (TextView) v.findViewById(R.id.marker);
+            topbar =  (View) v.findViewById(R.id.topbar);
             //left.setOnClickListener(RestaurantAdapter.this);
 
 
@@ -172,10 +188,14 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class discountOfferViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView offer;
+        protected  TextView marker;
+        protected View topbar;
 
         public discountOfferViewHolder(View v) {
             super(v);
             offer =  (TextView) v.findViewById(R.id.OfferTextView);
+            marker =  (TextView) v.findViewById(R.id.marker);
+            topbar =  (View) v.findViewById(R.id.topbar);
             //left.setOnClickListener(RestaurantAdapter.this);
 
 
@@ -187,11 +207,14 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class rewardOfferViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView offer;
+        protected  TextView marker;
+        protected View topbar;
 
         public rewardOfferViewHolder(View v) {
             super(v);
             offer =  (TextView) v.findViewById(R.id.OfferTextView);
-
+            marker =  (TextView) v.findViewById(R.id.marker);
+            topbar =  (View) v.findViewById(R.id.topbar);
             //left.setOnClickListener(RestaurantAdapter.this);
 
 
@@ -202,11 +225,14 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class loyaltyOfferViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView offer;
+        protected  TextView marker;
+        protected View topbar;
 
         public loyaltyOfferViewHolder(View v) {
             super(v);
             offer =  (TextView) v.findViewById(R.id.OfferTextView);
-
+            marker =  (TextView) v.findViewById(R.id.marker);
+            topbar =  (View) v.findViewById(R.id.topbar);
             //left.setOnClickListener(RestaurantAdapter.this);
 
 

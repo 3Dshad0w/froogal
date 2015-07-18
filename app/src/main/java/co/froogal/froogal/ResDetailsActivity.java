@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import co.froogal.froogal.fragment.AboutScrollViewFragment;
 import co.froogal.froogal.fragment.MenuListViewFragment;
+import co.froogal.froogal.fragment.OffersFragment;
 import co.froogal.froogal.fragment.OffersViewFragment;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
@@ -235,7 +236,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
             Fragment fragment;
             switch (position) {
                 case 0:
-                    fragment = OffersViewFragment.newInstance(0);
+                    fragment = OffersFragment.newInstance(0);
                     break;
 
                 case 1:
