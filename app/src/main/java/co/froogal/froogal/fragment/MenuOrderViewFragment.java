@@ -222,7 +222,10 @@ public class MenuOrderViewFragment extends ListViewFragment {
             holder.size.setText(product.size);
             holder.type.setText(product.type);
             holder.description.setText(product.description);
-            if(product.rating == null) {
+                Log.d(TAG,product.rating.toString());
+
+
+            if(product.rating.equals("null")) {
                 holder.ratingBar.setVisibility(View.INVISIBLE);
             }
             else if (Float.parseFloat(product.rating) >= 0.0f){

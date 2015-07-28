@@ -145,16 +145,18 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 reviewViewHolder.title.setText(ci.title);
                 reviewViewHolder.description.setText(ci.description);
                 reviewViewHolder.ratingbar.setRating(Float.parseFloat(ci.rating));
-                if(cii.uid.equals(ci.uid)){
-                    reviewViewHolder.editReview.setVisibility(View.VISIBLE);
-                    reviewViewHolder.editReview.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                if (isReviewPresent.equals("1")) {
+                    if (cii.uid.equals(ci.uid)) {
+                        reviewViewHolder.editReview.setVisibility(View.VISIBLE);
+                        reviewViewHolder.editReview.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                            showEditPopupWindow(v.getRootView(), v.getContext(), Float.valueOf(cii.rating), cii.title, cii.description);
-                        }
-                    });
+                                showEditPopupWindow(v.getRootView(), v.getContext(), Float.valueOf(cii.rating), cii.title, cii.description);
+                            }
+                        });
 
+                    }
                 }
             /*restaurantViewHolder.resName.setOnClickListener(new View.OnClickListener() {
                 @Override

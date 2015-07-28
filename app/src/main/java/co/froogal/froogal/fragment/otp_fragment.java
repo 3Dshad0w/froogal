@@ -263,7 +263,7 @@ public class otp_fragment extends Fragment {
         protected JSONObject doInBackground(String... args) {
 
             UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.send_mobile_verification_status(bu.get_defaults("uid"), edit_Text.getText().toString(), "yes");
+            JSONObject json = userFunction.send_mobile_verification_status(bu.get_defaults("uid"), number, "yes");
             return json;
 
         }

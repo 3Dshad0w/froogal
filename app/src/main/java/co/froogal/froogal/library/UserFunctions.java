@@ -36,6 +36,8 @@ public class UserFunctions {
     private static String recharge_URL = "http://froogal.in/files/rechargemobile.php";
     private static String bank_URL = "http://froogal.in/files/bank.php";
     private static String shopex_URL = "http://froogal.in/files/shopex.php";
+    private static String waiterURL = "http://froogal.herokuapp.com";
+    
 
 
 
@@ -58,7 +60,6 @@ public class UserFunctions {
     public JSONObject send_mobile_verification_status(String uid, String number, String status) {
 
         // Building Parameters
-        Log.d(TAG, "send_mobile");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userID", uid));
         params.add(new BasicNameValuePair("mobile", number));
@@ -480,6 +481,19 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("resID", resID));
         JSONObject json = jsonParser.makeHttpRequest("http://froogal.in/files/getOffers.php", "GET", params);
         Log.d("infunctionregREAURANT2", json.toString());
+        return json;
+    }
+
+    public JSONObject call_waiter(String uid,String restaurant_id,String status,String fname,String datetime)
+    {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("restaurant_id", restaurant_id));
+        params.add(new BasicNameValuePair("status", status));
+        params.add(new BasicNameValuePair("name", fname));
+        params.add(new BasicNameValuePair("datetime", datetime));
+        JSONObject json = jsonParser.makeHttpRequest(waiterURL, "POST", params);
+        Log.d("Call_Waiter",json.toString());
         return json;
     }
 }
