@@ -158,8 +158,6 @@
     <orderEntry type="library" exported="" name="play-services-fitness-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-7.5.0" level="project" />
-    <orderEntry type="library" exported="" name="listviewanimations_lib-core_3.1.0" level="project" />
-    <orderEntry type="library" exported="" name="listviewanimations_lib-manipulation_3.1.0" level="project" />
     <orderEntry type="library" exported="" name="twitter-core-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="facebook-android-sdk-4.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-wearable-7.5.0" level="project" />

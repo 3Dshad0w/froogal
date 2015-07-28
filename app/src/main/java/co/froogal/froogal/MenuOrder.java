@@ -1,6 +1,9 @@
 package co.froogal.froogal;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -21,6 +24,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import co.froogal.froogal.fragment.MenuFinalOrderViewFragment;
@@ -28,6 +33,7 @@ import co.froogal.froogal.fragment.MenuOrderViewFragment;
 import co.froogal.froogal.library.UserFunctions;
 import co.froogal.froogal.slidingTab.SlidingTabLayout;
 import co.froogal.froogal.util.basic_utils;
+import co.froogal.froogal.view.FloatLabeledEditText;
 import co.froogal.froogal.view.ParallaxFragmentPagerAdapter;
 import co.froogal.froogal.view.ParallaxViewPagerBaseActivity;
 
@@ -46,8 +52,10 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
     public static JSONObject menuJson = null;
     public static String resID = "0";
     public  static  String userID;
-    basic_utils bu = new basic_utils(this);
+    private UserFunctions uf;
+    private basic_utils bu;
     ImageView closeDeal;
+    ImageView callwaiter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,9 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
         resID = "1";
         Intent i = getIntent();
         resID = i.getStringExtra("res_ID");
+
+        bu = new basic_utils(this);
+        uf = new UserFunctions();
 
         new ProcessMenu().execute();
 
@@ -68,11 +79,18 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
         mTopImage = (ImageView) findViewById(R.id.userImage);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mNavigBar = (SlidingTabLayout) findViewById(R.id.navig_tab);
+        callwaiter = (ImageView) findViewById(R.id.call);
         closeDeal = (ImageView) findViewById(R.id.closeDeal);
         mHeader = findViewById(R.id.header);
         SpannableString s = new SpannableString("Restaurant Name");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
 
+        callwaiter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new process_call_waiter().execute();
+            }
+        });
         s.setSpan(myfont, 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -103,11 +121,6 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
             mTopImage.setTranslationY(savedInstanceState.getFloat(IMAGE_TRANSLATION_Y));
             mHeader.setTranslationY(savedInstanceState.getFloat(HEADER_TRANSLATION_Y));
         }
-
-
-
-
-
 
     }
 
@@ -188,10 +201,69 @@ public class MenuOrder extends ParallaxViewPagerBaseActivity {
             countTextView.setText("0");
             bottom.setVisibility(View.INVISIBLE);
         }
+    }
 
+    private class process_call_waiter extends AsyncTask<String, String, JSONObject> {
 
+        private ProgressDialog pDialog;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MenuOrder.this);
+            pDialog.setTitle("Contacting Servers !");
+            pDialog.setMessage("Calling restaurant !!!");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
 
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentDateandTime = sdf.format(new Date());
+
+            JSONObject json = uf.call_waiter(bu.get_defaults("uid"),resID,"open",bu.get_defaults("fname"),currentDateandTime);
+            
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                if (json.getString("success") != null) {
+                    String res = json.getString("success");
+                    if(Integer.parseInt(res) == 1){
+
+                        pDialog.setMessage("Called Waiter !");
+                        pDialog.setTitle("He is pleased to server you !!");
+                        pDialog.dismiss();
+                        show_alert_dialog(MenuOrder.this, "Success","He is pleased to server you !!");
+                    }
+                    else
+                    {
+                        pDialog.dismiss();
+                        show_alert_dialog(MenuOrder.this, "Error",json.getJSONObject("message").toString());
+                    }
+                }
+            } catch (Exception e) {
+                show_alert_dialog(MenuOrder.this, "Server Error", "Please try again later!");
+            }
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public void show_alert_dialog(Context context, String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alertDialog.show();
     }
 
 

@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.twitter.sdk.android.core.models.User;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,12 +45,15 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
     private ImageView favourite;
     private ImageView call;
     private ImageView directions;
-
+    private ProgressDialog normal_dialog;
     public static String resID = "0";
     public static String isFav = "0";
     public static String res_latitude;
+    private String status="open";
+    private UserFunctions uf;
+    private basic_utils bu;
     public static String res_longitude;
-    basic_utils bu;
+    private JSONObject json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,8 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
         res_longitude = intent.getStringExtra("res_longitude");
         isFav = intent.getStringExtra("isFav");
         Log.d("isFav", isFav);
+        uf = new UserFunctions();
+        bu = new basic_utils(this);
         Button checkin = (Button) findViewById(R.id.checkInButton);
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +114,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
             mActionBarBackgroundDrawable.setCallback(mDrawableCallback);
         } else {
 
+
             getSupportActionBar().setBackgroundDrawable(mActionBarBackgroundDrawable);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -119,9 +127,7 @@ public class ResDetailsActivity extends ParallaxViewPagerBaseActivity {
 
         setupAdapter();
 
-
     }
-
 
     private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
         @Override

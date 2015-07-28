@@ -52,6 +52,7 @@ public class JSONParser {
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
+                Log.d("Waiter1",is.toString());
 
             }
             else if(method == "GET"){
@@ -88,6 +89,7 @@ public class JSONParser {
             }
             is.close();
             json = sb.toString();
+            Log.d("Waiter",json.toString());
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result here1" + e.toString());
         }

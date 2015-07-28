@@ -586,6 +586,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
 
     }
 
+
+
     // For default
     private class ProcessRestaurants extends AsyncTask<String, String, JSONObject> {
 

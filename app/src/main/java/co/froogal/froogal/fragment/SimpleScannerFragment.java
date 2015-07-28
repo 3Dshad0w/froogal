@@ -77,8 +77,7 @@ public class SimpleScannerFragment extends Fragment implements ZBarScannerView.R
         if(value.equals(i.getStringExtra("res_ID")))
         {
             float[] results = new float[1];
-            results[0] = 100;
-        //    Location.distanceBetween(Double.valueOf(scanner_activity.res_latitude), Double.valueOf(scanner_activity.res_longitude), Double.valueOf(latitude), Double.valueOf(longitude), results);
+            Location.distanceBetween(Double.valueOf(scanner_activity.res_latitude), Double.valueOf(scanner_activity.res_longitude), Double.valueOf(latitude), Double.valueOf(longitude), results);
             if(results[0] > 100.00)
             {
                 Intent intent =  new Intent(getActivity(),MenuOrder.class);
