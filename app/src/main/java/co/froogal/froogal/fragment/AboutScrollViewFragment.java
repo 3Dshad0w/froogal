@@ -38,6 +38,7 @@ public class AboutScrollViewFragment extends ScrollViewFragment {
 
     public AboutScrollViewFragment() {}
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
