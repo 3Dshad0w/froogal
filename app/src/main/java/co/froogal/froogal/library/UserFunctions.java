@@ -37,10 +37,8 @@ public class UserFunctions {
     private static String bank_URL = "http://froogal.in/files/bank.php";
     private static String shopex_URL = "http://froogal.in/files/shopex.php";
     private static String waiterURL = "http://froogal.herokuapp.com";
+    private static String getcodeURL = "http://froogal.in/files/getcode.php";
     
-
-
-
 
     private static String login_tag = "login";
     private static String register_tag = "register";
@@ -147,7 +145,7 @@ public class UserFunctions {
     /**
      * Function to  Register
      */
-    public JSONObject registerUser(String fname, String lname, String email, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token) {
+    public JSONObject registerUser(String fname, String lname, String email, String password, String registered_at, String registered_through, String imei, String ip_address, String image_url, String longitude, String latitude, String gcm_token,String code) {
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
@@ -163,6 +161,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("registered_at", registered_at));
         params.add(new BasicNameValuePair("image_url", image_url));
         params.add(new BasicNameValuePair("gcm_token", gcm_token));
+        params.add(new BasicNameValuePair("code", code));
         params.add(new BasicNameValuePair("special_id", null));
         JSONObject json = jsonParser.makeHttpRequest(registerURL, "POST", params);
         Log.d("infunctionreg", json.toString());
@@ -494,6 +493,15 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("datetime", datetime));
         JSONObject json = jsonParser.makeHttpRequest(waiterURL, "POST", params);
         Log.d("Call_Waiter",json.toString());
+        return json;
+    }
+
+    public JSONObject get_code(String uid)
+    {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("uid",uid));
+        JSONObject json = jsonParser.makeHttpRequest(getcodeURL, "POST", params);
+        Log.d("Get code",json.toString());
         return json;
     }
 }

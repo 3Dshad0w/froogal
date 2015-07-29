@@ -65,6 +65,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/names"
     android:orientation="horizontal">
+
     <co.froogal.froogal.view.FloatLabeledEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,6 +123,18 @@
         app:fletTextBackground="@drawable/edit_text_background_accent"
         app:fletTextColor="@color/main_color_400"/>
 
+        <co.froogal.froogal.view.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fletFloatingHint="Referral Code"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/code"
+            app:fletPassword="true"
+            app:fletHintTextColor="@color/main_color_500"
+            app:fletSingleLine="true"
+            app:fletTextBackground="@drawable/edit_text_background_accent"
+            app:fletTextColor="@color/main_color_400"/>
 
     <LinearLayout
         android:layout_width="fill_parent"

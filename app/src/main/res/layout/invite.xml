@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/background_material_dark"
-                    android:text="FGTVSE56"
+                    android:id="@+id/ref_code"
                     android:textStyle="bold"
                     android:textSize="25sp">
                 </TextView>

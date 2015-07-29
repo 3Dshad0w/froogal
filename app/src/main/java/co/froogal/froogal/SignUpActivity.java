@@ -128,6 +128,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
     FloatLabeledEditText inputLastName;
     FloatLabeledEditText inputMobile;
     FloatLabeledEditText inputEmail;
+    FloatLabeledEditText inputCode;
     FloatLabeledEditText inputPassword;
     TextView btnRegister;
     SharedPreferences sharedpreferences;
@@ -136,6 +137,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
     String image_url="";
     String ip_address="";
     String imei="";
+    String code = "";
     String registered_at = "";
     String registered_through = "s";
     String latitude = "";
@@ -173,6 +175,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
         inputFirstName = (FloatLabeledEditText) findViewById(R.id.fname);
         inputLastName = (FloatLabeledEditText) findViewById(R.id.lname);
         inputEmail = (FloatLabeledEditText) findViewById(R.id.email);
+        inputCode = (FloatLabeledEditText) findViewById(R.id.code);
         inputPassword = (FloatLabeledEditText) findViewById(R.id.pword);
         btnRegister = (TextView) findViewById(R.id.register);
 
@@ -353,6 +356,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
                 String mFirstName = inputFirstName.getText().toString();
                 String mLastName = inputLastName.getText().toString();
                 String mPassword = inputPassword.getText().toString();
+                String mCode = inputCode.getText().toString();
 
 
 
@@ -884,6 +888,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
             lname = inputLastName.getText().toString();
             email = inputEmail.getText().toString();
             password = inputPassword.getText().toString();
+            code = inputCode.getText().toString();
             pDialog = new ProgressDialog(SignUpActivity.this);
             pDialog.setTitle("Contacting Servers");
             pDialog.setMessage("Registering ...");
@@ -917,7 +922,7 @@ public class SignUpActivity extends ActionBarActivity implements GoogleApiClient
             ip_address = bu.get_defaults("ip_address");
             gcm_token = bu.get_defaults("gcm_token");
             image_url = "";
-            JSONObject json = userFunction.registerUser(fname, lname, email,password, registered_at, registered_through, imei, ip_address, image_url, longitude, latitude, gcm_token);
+            JSONObject json = userFunction.registerUser(fname, lname, email,password, registered_at, registered_through, imei, ip_address, image_url, longitude, latitude, gcm_token,code);
             Log.d("json", json.toString());
             return json;
 
