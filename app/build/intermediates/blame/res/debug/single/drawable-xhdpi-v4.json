@@ -220,12 +220,12 @@
         "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/drawable-xhdpi-v4/messenger_bubble_small_white.png"
     },
     {
-        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_phone_android_black_24dp.png",
-        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-xhdpi/ic_phone_android_black_24dp.png"
-    },
-    {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_call_white_24dp.png",
         "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-xhdpi/ic_call_white_24dp.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_phone_android_black_24dp.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-xhdpi/ic_phone_android_black_24dp.png"
     },
     {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/cast_ic_notification_on.png",
@@ -300,12 +300,12 @@
         "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/drawable-xhdpi/common_signin_btn_icon_focus_light.9.png"
     },
     {
-        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_plusone_tall_off_client.png",
-        "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/drawable-xhdpi/ic_plusone_tall_off_client.png"
-    },
-    {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_launcher.png",
         "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_plusone_tall_off_client.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/drawable-xhdpi/ic_plusone_tall_off_client.png"
     },
     {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png",
@@ -406,6 +406,10 @@
     {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_media_route_on_0_mono_dark.png",
         "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/res/drawable-xhdpi-v4/ic_media_route_on_0_mono_dark.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/respos_splash.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-xhdpi/respos_splash.png"
     },
     {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_action_locate.png",

@@ -397,8 +397,8 @@ public final class R {
 		public static final int dgts__logo_name = 0x7f020078;
 		public static final int dgts__spinner_dark = 0x7f020079;
 		public static final int dgts__spinner_light = 0x7f02007a;
-		public static final int progress_dark = 0x7f0200e3;
-		public static final int progress_light = 0x7f0200e4;
+		public static final int progress_dark = 0x7f0200e2;
+		public static final int progress_light = 0x7f0200e3;
 		public static final int tw__ic_logo_default = 0x7f0200fd;
 		public static final int tw__login_btn = 0x7f020104;
 		public static final int tw__login_btn_default = 0x7f020105;

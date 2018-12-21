@@ -60,7 +60,7 @@ public class ImageAdapter extends BaseAdapter {
     // references to our images
     private Integer[] mThumbIds = {
             R.drawable.restaurantimage, R.drawable.splash_screen_background,
-            R.drawable.froogal_splash, R.drawable.ic_launcher,
+            R.drawable.respos_splash, R.drawable.ic_launcher,
             R.drawable.background_small,  R.drawable.restaurantimage, R.drawable.splash_screen_background
     };
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/screen">
+    android:background="@android:color/black">
 <!--
     <co.froogal.froogal.view.kbv.KenBurnsView
         android:id="@+id/ken_burns_images"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/froogal_splash"
+        android:src="@drawable/respos_splash"
         android:alpha="0.0"
         android:padding="10dp"
         android:layout_margin="40dp" />
@@ -32,9 +32,9 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
 
         <LinearLayout
             android:layout_width="fill_parent"

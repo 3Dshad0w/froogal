@@ -96,12 +96,12 @@
         "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-hdpi/ic_launcher.png"
     },
     {
-        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png",
-        "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-hdpi/abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/edit_text_background_accent.9.png",
         "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-hdpi/edit_text_background_accent.9.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-hdpi/abc_list_selector_disabled_holo_light.9.png"
     },
     {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_plusone_small_off_client.png",

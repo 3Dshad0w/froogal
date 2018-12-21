@@ -220,10 +220,6 @@
         "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/drawable-xxhdpi/common_signin_btn_icon_disabled_light.9.png"
     },
     {
-        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/froogal_splash.png",
-        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-xxhdpi/froogal_splash.png"
-    },
-    {
         "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/tw__ic_retweet_dark.png",
         "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.0/res/drawable-xxhdpi-v4/tw__ic_retweet_dark.png"
     },

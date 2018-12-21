@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/akhil/github/respos/zbar/build/intermediates/res/merged/debug/layout/merge_camera_preview_view_finder.xml",
+        "source": "/home/akhil/github/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/layout/merge_camera_preview_view_finder.xml"
+    },
+    {
         "merged": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/res/merged/debug/layout/merge_camera_preview_view_finder.xml",
         "source": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/layout/merge_camera_preview_view_finder.xml"
     }

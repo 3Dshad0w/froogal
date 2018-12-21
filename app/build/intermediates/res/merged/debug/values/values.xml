@@ -764,7 +764,7 @@
     <string name="cast_notification_disconnect">Disconnect</string>
     <string name="cd_background_image">background image</string>
     <string name="cd_main_image">main image</string>
-    <string name="com.crashlytics.android.build_id" ns2:ignore="UnusedResources,TypographyDashes" translatable="false">85d698b9-ad8a-46ec-aecb-f070e288901f</string>
+    <string name="com.crashlytics.android.build_id" ns2:ignore="UnusedResources,TypographyDashes" translatable="false">96d7fb07-a023-456b-aa45-ad27c203c5bf</string>
     <string name="com_facebook_image_download_unknown_error">Unexpected error while downloading an image.</string>
     <string name="com_facebook_internet_permission_error_message">WebView login requires INTERNET permission</string>
     <string name="com_facebook_internet_permission_error_title">AndroidManifest Error</string>
