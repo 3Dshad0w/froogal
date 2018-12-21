@@ -4,7 +4,7 @@
     android:id="@+id/parent_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ResDetailsActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/userImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/imageview_height"
                 android:background="@drawable/background_small"
@@ -40,14 +40,17 @@
                     android:layout_gravity="top|left"
                     android:background="#ff38ff00"/>
 
-                <TextView
+                <co.circe.respos.font.RobotoTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="4.5"
                     android:id="@+id/textView"
                     android:layout_centerInParent="true"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/main_color_grey_700"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight"/>
             </RelativeLayout>
 
         </FrameLayout>
@@ -56,68 +59,72 @@
             android:layout_height="@dimen/tab_height"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
-            android:background="#ff232323">
+            android:background="@color/main_color_500"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_left"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_border_main_unselected"
+                android:src="@drawable/ic_call_white_24dp"
+                android:scaleType="center"
                 android:id="@+id/call"
-                android:layout_weight="1"
-                android:text="call"
-                android:textSize="8sp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:background="@android:drawable/sym_action_call"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="15dp" />
+                android:clickable="true"
+                android:layout_weight="3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_left"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_border_main_unselected"
+                android:src="@drawable/ic_directions_white_24dp"
+                android:scaleType="center"
                 android:id="@+id/directions"
-                android:layout_weight="1"
-                android:text="call"
-                android:textSize="8sp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:background="@android:drawable/ic_menu_directions"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp" />
+                android:clickable="true"
+                android:layout_weight="3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rating"
-                android:layout_weight="1"
-                android:text="call"
-                android:textSize="8sp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:background="@android:drawable/star_on"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_left"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_border_main_unselected"
+                android:src="@drawable/ic_favorite_white_24dp"
+                android:scaleType="center"
                 android:id="@+id/favourite"
-                android:layout_weight="1"
-                android:text="call"
-                android:textSize="8sp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:background="@android:drawable/presence_away"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp" />
+                android:clickable="true"
+                android:onClick="favourite"
+                android:layout_weight="3"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/checkInButton"
+                android:text="Check In"
+                android:layout_weight="2"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/cpb_white"
+                android:background="@color/material_blue_500"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
 
         </LinearLayout>
 
-        <co.froogal.froogal.slidingTab.SlidingTabLayout
+        <co.circe.respos.slidingTab.SlidingTabLayout
             android:id="@+id/navig_tab"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
@@ -131,4 +138,3 @@
 
 </RelativeLayout>
 
-<!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/activity_resdetails.xml -->

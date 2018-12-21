@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.froogal.froogal" >
+    package="co.circe.respos" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -27,7 +27,7 @@
     <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
 
     <application
-        android:name=".MainApplication"
+        android:name="co.circe.respos.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -39,12 +39,12 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="co.froogal.froogal" />
+                <category android:name="co.circe.respos" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".MyGcmListenerService"
+            android:name="co.circe.respos.MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -53,7 +53,7 @@
         <!-- [END gcm_listener] -->
         <!-- [START instanceId_listener] -->
         <service
-            android:name=".services.MyInstanceIDListenerService"
+            android:name="co.circe.respos.services.MyInstanceIDListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
@@ -61,7 +61,7 @@
         </service>
         <!-- [END instanceId_listener] -->
         <service
-            android:name=".services.registration_intent_service"
+            android:name="co.circe.respos.services.registration_intent_service"
             android:exported="false" >
         </service>
 
@@ -70,7 +70,7 @@
             android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBSPkvWl-iWy8PWiIsRGX441iE_TufiZb8" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -82,7 +82,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".SplashScreensActivity"
+            android:name="co.circe.respos.SplashScreensActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -92,125 +92,125 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".loyaltyActivity"
+            android:name="co.circe.respos.loyaltyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name="co.circe.respos.SignUpActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".SplashScreensActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/DefaultTheme" >
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.SplashScreensActivity" />
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name"
-            android:parentActivityName=".SplashScreensActivity"
+            android:parentActivityName="co.circe.respos.SplashScreensActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.SplashScreensActivity" />
+                android:value="co.circe.respos.SplashScreensActivity" />
         </activity>
         <activity
-            android:name=".AboutUSActivity"
+            android:name="co.circe.respos.LoginActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="co.circe.respos.SplashScreensActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.SplashScreensActivity" />
         </activity>
         <activity
-            android:name=".EditProfileActivity"
+            android:name="co.circe.respos.AboutUSActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="co.circe.respos.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.MainActivity" />
         </activity>
         <activity
-            android:name=".RewardsActivity"
+            android:name="co.circe.respos.EditProfileActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="co.circe.respos.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.MainActivity" />
         </activity>
         <activity
-            android:name=".RedeemActivity"
+            android:name="co.circe.respos.RewardsActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="co.circe.respos.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.MainActivity" />
         </activity>
         <activity
-            android:name=".OrdersActivity"
+            android:name="co.circe.respos.RedeemActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="co.circe.respos.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.MainActivity" />
         </activity>
         <activity
-            android:name=".InviteActivity"
+            android:name="co.circe.respos.OrdersActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="co.circe.respos.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="Froogal"
+            android:name="co.circe.respos.InviteActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.MainActivity"
+            android:label="respos"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name="co.circe.respos.ForgotPasswordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name="co.circe.respos.ChangePasswordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ResDetailsActivity"
+            android:name="co.circe.respos.ResDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -219,55 +219,55 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.MainActivity" />
+                android:value="co.circe.respos.MainActivity" />
         </activity>
         <activity
-            android:name=".MenuOrder"
+            android:name="co.circe.respos.MenuOrder"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:parentActivityName=".ResDetailsActivity"
+            android:parentActivityName="co.circe.respos.ResDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.ResDetailsActivity" />
+                android:value="co.circe.respos.ResDetailsActivity" />
         </activity>
         <activity
-            android:name=".view.RestaurantImagesStaggeredView"
+            android:name="co.circe.respos.view.RestaurantImagesStaggeredView"
             android:label="@string/app_name"
-            android:parentActivityName=".ResDetailsActivity"
+            android:parentActivityName="co.circe.respos.ResDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultTheme" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.ResDetailsActivity" />
+                android:value="co.circe.respos.ResDetailsActivity" />
         </activity>
         <activity
-            android:name=".gcm_activity"
+            android:name="co.circe.respos.gcm_activity"
             android:label="@string/title_activity_gcm_activity"
             android:screenOrientation="portrait" >
         </activity>
 
         <service
-            android:name=".services.location_service"
+            android:name="co.circe.respos.services.location_service"
             android:exported="false" >
         </service>
 
         <activity
-            android:name=".otp_activity"
-            android:label="Froogal"
-            android:parentActivityName=".LoginActivity"
+            android:name="co.circe.respos.otp_activity"
+            android:label="respos"
+            android:parentActivityName="co.circe.respos.LoginActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.froogal.froogal.LoginActivity" />
+                android:value="co.circe.respos.LoginActivity" />
         </activity>
         <activity
-            android:name=".scanner_activity"
+            android:name="co.circe.respos.scanner_activity"
             android:label="Scan QR code"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

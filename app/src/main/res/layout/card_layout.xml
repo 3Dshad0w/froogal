@@ -101,7 +101,7 @@
                     android:layout_height="30dp"
                     android:background="#ff38ff00"/>
 
-                <co.froogal.froogal.font.RobotoTextView
+                <co.circe.respos.font.RobotoTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"

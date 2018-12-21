@@ -27,7 +27,7 @@
                 android:onClick="onClick"
                 android:text="CLEAR" />
 
-            <co.froogal.froogal.view.FloatLabeledEditText
+            <co.circe.respos.view.FloatLabeledEditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"

@@ -2,249 +2,361 @@
 <items version="2" >
 
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-26ff516ab8074ff1987cf79f04eb5aa728dcb857.jar" />
+        sha1="ccebde0751b6bb647deceb712da1190ccacf16c9">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/me.dm7.barcodescanner-core-1.7.2_b308f61d42489f0bb73629cf7c56912f58b8dae5/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/libs/nineoldandroids-2.4.0.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/nineoldandroids-2.4.0-d7495fa390c97a306831fdc0bdd6c782c7b1e715.jar" />
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-panorama-7.5.0_1a3c8d8692edd70916a5343fb8f93d802cd929ef/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/me.dm7.barcodescanner/zbar/1.7.2/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-c90c647668060e345fe45d830abb948a3669d4e2.jar" />
+        sha1="7c025bb660cbd12955a3cac9d215f20a4819a82f">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/me.dm7.barcodescanner-zbar-1.7.2_db6c7ebbd101709b89a8674a2bc04f28245ca5e4/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-cdcac52e29d3437ec8004b45526e457681bec16c.jar" />
+        sha1="73e3dcd1c6363340af17e78967e6ed27d585d52d">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-tweet-ui-1.3.0_e89af43b6f72d311da86ed40a5fc9bf60bfe07ea/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/libs/listviewanimations_lib-manipulation_3.1.0.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/me.dm7.barcodescanner/zbar/1.7.2/jars/libs/zbar.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="63737e512fcd9e0ebe9bcd0bb375c2dded74116f">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-manipulation_3.1.0-38a248213414ee49a26bb74ec73eca766c28e0df.jar" />
+        sha1="7bbdf7ba57a8a157c0cad51e455609c70887812e">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/zbar_db6273e5b7a49f938a68d068eea515fb0d5507a3/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-88da110498a334d2d141acc6dc6eee10626be782.jar" />
+        sha1="ab9b1ac87a2f6bf8f58c97285b54033424783e39">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ab477f67bf8787c14111695176b86d84336621f3/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/libs/universal-image-loader-1.9.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.3-c9dad06955decd364314949677923d459dc1c39a.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-0dedac14f74df442c65b021058b487e88aadda3d.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-664915e9a79cea7d2546e57b6855c134c4985ba3.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
         sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-cf21835347a88be010f47ad26c4613f9e247addc.jar" />
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-nearby-7.5.0_1395b25a13b976ad939877576160bb2a512a3cd6/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_9de1d0615060c9b15f952c2f630f431c5712908b/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appinvite-7.5.0_e5bb6426628a07d6c6d6e96a8af2001b03ee6835/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-7.5.0_a39a59327bdffdb51b957e48a2e9e4e3e52d9067/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/libs/universal-image-loader-1.9.3.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/2/universal-image-loader-1.9.3_7a3bb8cef21e658d36002d9597f7bc2022e356ab/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.0.0_45c83c28136ece448773108ff5c68e76af80fc47/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-wallet-7.5.0_fd5a7e1924ff78ce64988fd2b0791c36b31eac9a/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="f7dc6b43d7c7f3d94e98531aef88269f9ed2a37b">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/io.fabric.sdk.android-fabric-1.3.4_ebacd2b543106c22df8d237bf9d6670ffb3de02e/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.6.1/efb0a36546aa8857ab8df358b106c1817e03cbee/retrofit-1.6.1.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="efb0a36546aa8857ab8df358b106c1817e03cbee">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-1.6.1_f2cbb34117904665b8572da7d7f3827e17646c51/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gcm-7.5.0_01db0cf34abe397629613671714f8601cbd929bb/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter/1.6.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="2bd26de12f5ea29d4cabc6e84045de04cb615680">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-twitter-1.6.0_ecba2a6fb88e88614dbb43497f743d35cb884b28/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/libs/listviewanimations_lib-core-slh_3.1.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="a4fe703aabd23e8c287c90396514418119109dd1">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/2/listviewanimations_lib-core-slh_3.1.0_dfa47a802d587ae3e027600a1fe2884eaac83244/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="8218789edb56bdcfff7da48e892b37460fc707e2">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.etsy.android.grid-library-1.0.5_30c23e2b1e907cbdbc11b1e1e3acb93ad35ba767/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.2.0_23152bd98bfd5b8d0857ab08e446f4a3c168b27b/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-plus-7.5.0_b0d0ead5b2e1794379ffb24cca00f7017f11ca89/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="c2d5915a039cfbc8e6666719622a0b9e6bdd9f1e">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5f10aaed5659546e6e19c5b80c1a65cfff99fa0d/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.6.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="85dbcb10f2e04aa08bcd7b4405e4a7fec615760d">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.digits.sdk.android-digits-1.6.0_88bb4f613290aa8c7685ef78795dbedfab2f76d6/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-analytics-7.5.0_27092938e906ae2d59b20307ac57fca88b05b4e6/classes.dex" />
     </item>
     <item
         jar="/home/akhil/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
-        jumboMode="false"
+        jumboMode="true"
         revision="22.0.1"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-e3d4726104117ebf2e444f59072e7b5a5e5b6fc5.jar" />
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.2.0_e3d4726104117ebf2e444f59072e7b5a5e5b6fc5/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="a78183f30e769a98ab4820794f597763088d3065">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-af1ae6016b2bbb696009e9671b49d22a46a0e23e.jar" />
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.2.4_2dbd3b9a8137f7c180bb36389d4270dd26dba836/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-976c46c83450458e370cd67468f5b90918941a15.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-f1de09df9b35fd053b293021221c016231203fcb.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-acd08a802bc7fc6196533472ce05b4b73ae37a18.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-a7966bfc61f3b13f238da050a460216cff570d3c.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d405025c600055237c171a0bbabaa49d69696573">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-e909a142456e572e6dea6a21eab5e0eef7090a07.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-71a2b78ddeb4ddb9aaf1c6eb267dc94a0ba35a0d.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-21bbe40aa8981bae3605bd849822c19f5df9dad8.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-3c6a3ad3c15878aa6e40bcfc2bf93d1e796a1314.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-0fbef01c93ae868c84dd557e12b2852bdc0ae6a9.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-756508957ad3f66a227d9b84bed2c4496d819436.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-54e19fa544e4a72f6057ffae9ca5299718aad34c.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-a7ff8129b0725cbe26b2db471b07f662ccaa5920.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/libs/listviewanimations_lib-core-slh_3.1.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a4fe703aabd23e8c287c90396514418119109dd1">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-core-slh_3.1.0-5909d5fef5ea83d63911927c2cca9cc5c266f3a9.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-08bf0353cd1b00dafad322cf28afcedff39dd14b.jar" />
-    </item>
-    <item
-        jar="/home/akhil/.gradle/caches/modules-2/files-2.1/com.flaviofaria/kenburnsview/1.0.5/58cecc918f04423f77dd1853c40c72fb3fb1c71a/kenburnsview-1.0.5.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="58cecc918f04423f77dd1853c40c72fb3fb1c71a">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/kenburnsview-1.0.5-9d944c674a103f2f579ab6008b89d4ebb65ef3d0.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.jpardogo.materialtabstrip/library/1.0.6/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="15ebf37e2dc7047e993afdfb308610e171bcea1b">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-5a6c2afb9736ae33f3adf2759398d8c47e34f68a.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-e1ce1d7a2363bdbdba594bcb96812cbe0295e730.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/libs/listviewanimations_lib-core_3.1.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f3f9629b068554d8513a2aaf34418171bf430851">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-core_3.1.0-135fd39eed642abc8f3702f99a126a401ec99270.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-26f31f2a7ab69d8173d8d9fe5da6917e554157ec.jar" />
-    </item>
-    <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
         sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-f35920386a7446bbb6d32e7b388e1cb8c6c7f9a3.jar" />
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-drive-7.5.0_0fedcd12385b2de60d1aee982c23ac23a1431322/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-1ac0b668253c4992fd8dc7030a176f2a5994fe3d.jar" />
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-location-7.5.0_b68f7bc91e2706ce92ac6386cc09878fc5bedf1f/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/libs/listviewanimations_lib-manipulation_3.1.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="63737e512fcd9e0ebe9bcd0bb375c2dded74116f">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/2/listviewanimations_lib-manipulation_3.1.0_a2d4ad0523b7b02c0228e81ce131b0ae07245fc6/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-cast-7.5.0_98547691c9298b7b429562716b9ad57ac7d51e3d/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appstate-7.5.0_4f79b4f1741fea43d60d833d53ed0b1c72af1ff6/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-safetynet-7.5.0_5c2d88e397c775d409f0ee28dba80adb73ed38b1/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-22.2.0_198ef805e26a30245a64f6277fefe4aef73a5145/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/libs/nineoldandroids-2.4.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/2/nineoldandroids-2.4.0_bfdbeaebce0fbe31bef49c5c941bb004c9113f85/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-identity-7.5.0_6fdd5fdac9d243c8de56b035d8808077919ae355/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-android-1.2.0_8885d8ad478636b584b6e83b5ef73055ce623b52/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-games-7.5.0_14f921cb34f3f5a6a9450f9776e59693e78c82a3/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-fitness-7.5.0_bbd19a8a9a01a63a960f0acd39c22f8370110d8f/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="a9f5c30c22dc9a623078f85000c787cd191aa35f">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-twitter-core-1.4.0_8363a186727d61ea77fead504be426b9e3097f9c/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.2.0_762a4f983c0a19c603564b1bc5175e1438688c1d/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-wearable-7.5.0_a9f15c0f108c223776ee1300936c1e83c94e61f9/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
         sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-954e272a408ceaaceca43936c5415b4a8d0e3d28.jar" />
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-7.5.0_5779894211fb6f577a900eda0df394caa335111d/classes.dex" />
     </item>
     <item
-        jar="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
-        jumboMode="false"
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
-        <dex dex="/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/pre-dexed/debug/classes-beec83907b1201de279aaa2506df76a067ef658a.jar" />
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-mediarouter-v7-22.0.0_1f70d92d5188a597276b5d7373afaaadf7fed5a4/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-multidex-1.0.1_0b93f109dddab81377bd1062b874e0463b1aafa1/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-composer/0.8.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="157015930713d0411b69a76606f306c9a2c11af3">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.twitter.sdk.android-tweet-composer-0.8.0_eddb37dc94ff6956ab981e54e79c546ed94c092d/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-7.5.0_779315c95011c22ff87218b574bcd045fceeeb99/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/libs/listviewanimations_lib-core_3.1.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="f3f9629b068554d8513a2aaf34418171bf430851">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/2/listviewanimations_lib-core_3.1.0_c092eabdcf1ef4dd460e75108233b6e7839bbe54/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-22.2.0_f15bca43e845ba42b48e7873d5512064cd43bf59/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-7.5.0_eb92789a6552e1564bf76ca3f7bb9c4e667ad92d/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-22.2.0_7f81d424b692a3b6ce769f3e9706b25e7123e926/classes.dex" />
+    </item>
+    <item
+        jar="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="a78bfd2ec508b123ee7c03f4006ba7996ef9a8dc">
+        <dex dex="/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.facebook.android-facebook-android-sdk-4.1.0_cb7316c17bf4c4f721972b508fc93a9ddebb3b6c/classes.dex" />
     </item>
 
 </items>

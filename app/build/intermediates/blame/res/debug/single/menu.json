@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/menu/menu_gcm_activity.xml",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/menu/menu_gcm_activity.xml"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/menu/menu_reward.xml",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/menu/menu_reward.xml"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/menu/menu_otp_activity.xml",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/menu/menu_otp_activity.xml"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/menu/menu_main.xml"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/menu/menu_redeem.xml",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/menu/menu_redeem.xml"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/menu/menu_scanner_activity.xml",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/menu/menu_scanner_activity.xml"
+    }
+]

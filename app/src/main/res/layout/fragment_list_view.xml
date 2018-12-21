@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:layout_marginBottom="60dp"
-    tools:context="co.froogal.froogal.view.ListViewFragment">
+    tools:context="co.circe.respos.view.ListViewFragment">
 
 </ListView>

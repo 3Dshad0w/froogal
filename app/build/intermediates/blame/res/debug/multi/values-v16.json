@@ -1,0 +1,28 @@
+[
+    {
+        "outputFile": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/values-v16/values-v16.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 12,
+                    "endOffset": 305
+                },
+                "from": {
+                    "file": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.3.0/res/values-v16/values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 245,
+                        "endLine": 8,
+                        "endColumn": 12,
+                        "endOffset": 495
+                    }
+                }
+            }
+        ]
+    }
+]

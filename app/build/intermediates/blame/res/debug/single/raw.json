@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/raw/tw__cacerts",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.4.0/res/raw/tw__cacerts"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/raw/gtm_analytics",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/res/raw/gtm_analytics"
+    }
+]

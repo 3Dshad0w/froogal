@@ -5,4 +5,4 @@
     android:paddingBottom="3dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:singleLine="true"/><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/listview.xml -->
+    android:singleLine="true"/>

@@ -40,7 +40,7 @@
                     android:layout_gravity="top|left"
                     android:background="#ff38ff00"/>
 
-                <co.froogal.froogal.font.RobotoTextView
+                <co.circe.respos.font.RobotoTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -124,7 +124,7 @@
 
         </LinearLayout>
 
-        <co.froogal.froogal.slidingTab.SlidingTabLayout
+        <co.circe.respos.slidingTab.SlidingTabLayout
             android:id="@+id/navig_tab"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"

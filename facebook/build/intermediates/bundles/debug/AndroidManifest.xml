@@ -22,7 +22,7 @@
     package="com.facebook" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="22" />
 
     <application />

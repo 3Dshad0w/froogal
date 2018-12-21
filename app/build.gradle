@@ -18,11 +18,13 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "co.froogal.froogal"
-        minSdkVersion 14
+        applicationId "co.circe.respos"
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+
     }
     buildTypes {
         release {

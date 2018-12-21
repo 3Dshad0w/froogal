@@ -7,4 +7,3 @@
     android:background="@color/main_color_500"
     app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
     app:theme="@style/AppTheme.Title" />
-<!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/toolbar.xml -->

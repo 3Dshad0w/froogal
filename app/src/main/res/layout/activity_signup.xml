@@ -65,8 +65,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/names"
     android:orientation="horizontal">
-
-    <co.froogal.froogal.view.FloatLabeledEditText
+    <co.circe.respos.view.FloatLabeledEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fletFloatingHint="First Name"
@@ -80,7 +79,7 @@
         android:layout_weight="1"
         android:layout_marginRight="5dp" />
 
-    <co.froogal.froogal.view.FloatLabeledEditText
+    <co.circe.respos.view.FloatLabeledEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fletFloatingHint="Last Name"
@@ -95,7 +94,7 @@
         android:layout_marginLeft="5dp" />
 
 </LinearLayout>
-    <co.froogal.froogal.view.FloatLabeledEditText
+    <co.circe.respos.view.FloatLabeledEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fletFloatingHint="Email"
@@ -110,7 +109,7 @@
 
 
 
-    <co.froogal.froogal.view.FloatLabeledEditText
+    <co.circe.respos.view.FloatLabeledEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fletFloatingHint="Password"
@@ -123,18 +122,6 @@
         app:fletTextBackground="@drawable/edit_text_background_accent"
         app:fletTextColor="@color/main_color_400"/>
 
-        <co.froogal.froogal.view.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:fletFloatingHint="Referral Code"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/code"
-            app:fletPassword="true"
-            app:fletHintTextColor="@color/main_color_500"
-            app:fletSingleLine="true"
-            app:fletTextBackground="@drawable/edit_text_background_accent"
-            app:fletTextColor="@color/main_color_400"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -143,14 +130,14 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/registerLayout">
 
-        <co.froogal.froogal.view.MaterialRippleLayout
+        <co.circe.respos.view.MaterialRippleLayout
             style="@style/RippleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             app:rippleColor="@color/main_color_grey_400" >
 
-            <co.froogal.froogal.font.RobotoTextView
+            <co.circe.respos.font.RobotoTextView
                 android:id="@+id/register"
                 style="@style/ButtonStyle.RaisedEmpty"
                 android:layout_width="fill_parent"
@@ -160,7 +147,7 @@
                 android:minWidth="140dp"
                 android:text="@string/login"
                 android:textColor="#fff" />
-        </co.froogal.froogal.view.MaterialRippleLayout>
+        </co.circe.respos.view.MaterialRippleLayout>
 
 
     </LinearLayout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/maps"
-        tools:context="co.froogal.froogal.MapsActivity"
+        tools:context="co.circe.respos.MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" >
     </fragment>
 

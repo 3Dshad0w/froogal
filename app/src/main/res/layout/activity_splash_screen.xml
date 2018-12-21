@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp">
-            <co.froogal.froogal.view.MaterialRippleLayout
+            <co.circe.respos.view.MaterialRippleLayout
                 style="@style/RippleStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 android:layout_marginLeft="3dp"
                 android:layout_gravity="center_horizontal">
 
-                <co.froogal.froogal.font.RobotoTextView
+                <co.circe.respos.font.RobotoTextView
                     android:id="@+id/LoginButton"
                     style="@style/ButtonStyle.RaisedEmpty"
                     android:layout_width="fill_parent"
@@ -59,7 +59,7 @@
                     android:alpha="0.0"
                     android:text="@string/login"
                     android:textColor="@color/main_color_500" />
-            </co.froogal.froogal.view.MaterialRippleLayout>
+            </co.circe.respos.view.MaterialRippleLayout>
 
         </LinearLayout>
         <LinearLayout
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp">
-            <co.froogal.froogal.view.MaterialRippleLayout
+            <co.circe.respos.view.MaterialRippleLayout
                 style="@style/RippleStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_gravity="center_horizontal">
 
-                <co.froogal.froogal.font.RobotoTextView
+                <co.circe.respos.font.RobotoTextView
                     android:id="@+id/RegisterButton"
                     style="@style/ButtonStyle.RaisedEmpty"
                     android:layout_width="fill_parent"
@@ -85,7 +85,7 @@
                     android:background="@color/cpb_white"
                     android:text="REGISTER"
                     android:textColor="@color/main_color_500"/>
-            </co.froogal.froogal.view.MaterialRippleLayout>
+            </co.circe.respos.view.MaterialRippleLayout>
         </LinearLayout>
     </LinearLayout>
 

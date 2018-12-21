@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="co.circe.respos"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-library android:name="com.google.android.maps" />
+
+    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
+    <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        name="co.circe.respos.MainApplication"
+        android:name="com.android.tools.fd.runtime.BootstrapApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="co.circe.respos" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="co.circe.respos.MyGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <!-- [END gcm_listener] -->
+        <!-- [START instanceId_listener] -->
+        <service
+            android:name="co.circe.respos.services.MyInstanceIDListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <!-- [END instanceId_listener] -->
+        <service
+            android:name="co.circe.respos.services.registration_intent_service"
+            android:exported="false" >
+        </service>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBSPkvWl-iWy8PWiIsRGX441iE_TufiZb8" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="co.circe.respos.SplashScreensActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="co.circe.respos.loyaltyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+        </activity>
+        <activity
+            android:name="co.circe.respos.SignUpActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.SplashScreensActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.SplashScreensActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.LoginActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.SplashScreensActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.SplashScreensActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.AboutUSActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.EditProfileActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.RewardsActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.RedeemActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.OrdersActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.InviteActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.MainActivity"
+            android:label="respos"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="co.circe.respos.ForgotPasswordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="co.circe.respos.ChangePasswordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="co.circe.respos.ResDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.MainActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.MenuOrder"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.ResDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.ResDetailsActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.view.RestaurantImagesStaggeredView"
+            android:label="@string/app_name"
+            android:parentActivityName="co.circe.respos.ResDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultTheme" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.ResDetailsActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.gcm_activity"
+            android:label="@string/title_activity_gcm_activity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service
+            android:name="co.circe.respos.services.location_service"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name="co.circe.respos.otp_activity"
+            android:label="respos"
+            android:parentActivityName="co.circe.respos.LoginActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.circe.respos.LoginActivity" />
+        </activity>
+        <activity
+            android:name="co.circe.respos.scanner_activity"
+            android:label="Scan QR code"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider807684845967248"
+            android:exported="true" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="a522501cb0d6be744187c39e37f957ddd9116ab6" />
+
+        <activity
+            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+        <activity
+            android:name="com.twitter.sdk.android.core.identity.ShareEmailActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:icon="@drawable/tw__transparent"
+            android:label="@string/kit_name" />
+        <activity
+            android:name="com.digits.sdk.android.PhoneNumberActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.ConfirmationCodeActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.LoginCodeActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.PinCodeActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.FailureActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.digits.sdk.android" />
+        <activity
+            android:name="com.digits.sdk.android.ContactsActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+        <activity
+            android:name="com.digits.sdk.android.PhoneNumberActionBarActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.ConfirmationCodeActionBarActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.LoginCodeActionBarActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.digits.sdk.android.FailureActionBarActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.digits.sdk.android" />
+        <activity
+            android:name="com.digits.sdk.android.ContactsActionBarActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+        <activity
+            android:name="com.digits.sdk.android.PinCodeActionBarActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.digits.sdk.android"
+            android:windowSoftInputMode="stateVisible" />
+
+        <service
+            android:name="com.digits.sdk.android.ContactsUploadService"
+            android:enabled="true"
+            android:exported="false" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
+            android:theme="@style/Theme.IAPTheme" />
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
+        <receiver
+            android:name="com.google.android.gms.wallet.EnableWalletOptimizationReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.wallet.ENABLE_WALLET_OPTIMIZATION" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

@@ -2,4 +2,3 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_view"
     style="@style/ListViewStyle" />
-<!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/list_view.xml -->

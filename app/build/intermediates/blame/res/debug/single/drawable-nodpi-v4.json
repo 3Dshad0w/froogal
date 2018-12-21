@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/myicon.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/myicon.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/zigzag_moustache_outline_64.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/zigzag_moustache_outline_64.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/background_small.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/background_small.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/ic_stat_gcm.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/ic_stat_gcm.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/default_image.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/default_image.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/zigzag_moustache_outline_128.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/zigzag_moustache_outline_128.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/restaurantimage.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/restaurantimage.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/splash_screen_background.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/splash_screen_background.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/screen.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/screen.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/twitter_social_outlined_logo_64.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/twitter_social_outlined_logo_64.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/sharequote.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/sharequote.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/fb.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/fb.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/google_plus_social_logotype_32.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/google_plus_social_logotype_32.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/share.jpg",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/share.jpg"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/google_plus_social_logotype_64.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/google_plus_social_logotype_64.png"
+    },
+    {
+        "merged": "/home/akhil/AndroidStudioProjects/respos/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/zigzag_moustache_outline_32.png",
+        "source": "/home/akhil/AndroidStudioProjects/respos/app/src/main/res/drawable-nodpi/zigzag_moustache_outline_32.png"
+    }
+]

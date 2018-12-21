@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,7 +36,8 @@
                 android:layout_weight="2"
                 android:orientation="vertical"
                 android:paddingLeft="5dp"
-                android:id="@+id/details">
+                android:id="@+id/details"
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -60,25 +61,25 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
-                        android:id="@+id/imageView2"
-                        android:background="#ff02ff02"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:id="@+id/offerIndicator"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_indicator_green" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Offers / "
+                        android:text=" Offers | "
                         android:id="@+id/textView8" />
 
                     <ImageView
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
-                        android:id="@+id/imageView3"
-                        android:background="#ff02fd02"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:id="@+id/rewardIndicator"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_indicator_green" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -90,23 +91,29 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <RelativeLayout
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginTop="12dp"
-                android:background="#ff01ff00">
+                android:layout_marginTop="12dp">
 
-                <TextView
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="#ff38ff00"/>
+
+                <co.circe.respos.font.RobotoTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="4.5"
-                    android:id="@+id/textView10"
-                    android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="5dp" />
-            </LinearLayout>
+                    android:id="@+id/ratingTextView"
+                    android:layout_centerInParent="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/main_color_grey_700"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -117,47 +124,57 @@
             android:paddingBottom="1dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/call"
                 android:layout_weight="1"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:src="@android:drawable/ic_menu_call"
+                android:background="@drawable/round_border"
+                android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="25dp"
+                android:scaleType="center"
+                android:clickable="true" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/directions"
+                android:layout_weight="1"
                 android:text="call"
                 android:textSize="8sp"
-                android:focusable = "false"
-                android:focusableInTouchMode = "false"
-                android:background="@android:drawable/ic_menu_call" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton3"
-                android:layout_weight="1"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:src="@android:drawable/ic_menu_directions"
+                android:background="@drawable/round_border"
+                android:layout_gravity="center"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:text="1.5 KM"
-                android:textSize="8sp"
-                android:focusable = "false"
-                android:focusableInTouchMode = "false"
-                android:background="@android:drawable/ic_menu_directions" />
+                android:scaleType="center"
+                android:clickable="true" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/favourite"
                 android:layout_weight="1"
+                android:text="call"
+                android:textSize="8sp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:src="@android:drawable/star_on"
+                android:background="@drawable/round_border"
+                android:layout_gravity="center"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="50dp"
-                android:text="FAV"
-                android:textSize="8sp"
-                android:focusable = "false"
-                android:focusableInTouchMode = "false"
-                android:background="@android:drawable/btn_star_big_on" />
+                android:scaleType="center"
+                android:clickable="true" />
         </LinearLayout>
 
     </LinearLayout>
 
 
 
-</android.support.v7.widget.CardView><!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/layout/card_layout.xml -->
+</android.support.v7.widget.CardView>

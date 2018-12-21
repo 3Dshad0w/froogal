@@ -63,7 +63,7 @@
             android:id="@+id/emailLayout"
             android:layout_marginTop="5dp">
 
-            <co.froogal.froogal.font.FontelloTextView
+            <co.circe.respos.font.FontelloTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -72,7 +72,7 @@
                 android:textSize="16dp"
                 tools:ignore="SpUsage" />
 
-            <co.froogal.froogal.view.FloatLabeledEditText
+            <co.circe.respos.view.FloatLabeledEditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -93,7 +93,7 @@
             android:gravity="center_vertical"
             android:id="@+id/passwordLayout">
 
-            <co.froogal.froogal.font.FontelloTextView
+            <co.circe.respos.font.FontelloTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -102,7 +102,7 @@
                 android:textSize="16dp"
                 tools:ignore="SpUsage" />
 
-            <co.froogal.froogal.view.FloatLabeledEditText
+            <co.circe.respos.view.FloatLabeledEditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -122,14 +122,14 @@
             android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal">
 
-            <co.froogal.froogal.view.MaterialRippleLayout
+            <co.circe.respos.view.MaterialRippleLayout
                 style="@style/RippleStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
                 app:rippleColor="@color/main_color_grey_400" >
 
-                <co.froogal.froogal.font.RobotoTextView
+                <co.circe.respos.font.RobotoTextView
                     android:id="@+id/login"
                     style="@style/ButtonStyle.RaisedEmpty"
                     android:layout_width="fill_parent"
@@ -139,12 +139,12 @@
                     android:minWidth="140dp"
                     android:text="@string/login"
                     android:textColor="#fff" />
-            </co.froogal.froogal.view.MaterialRippleLayout>
+            </co.circe.respos.view.MaterialRippleLayout>
 
 
         </LinearLayout>
 
-        <co.froogal.froogal.view.MaterialRippleLayout
+        <co.circe.respos.view.MaterialRippleLayout
             style="@style/RippleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
             android:layout_marginTop="10dp"
             app:rippleColor="@color/main_color_grey_400" >
 
-            <co.froogal.froogal.font.RobotoTextView
+            <co.circe.respos.font.RobotoTextView
                 android:id="@+id/passres"
                 style="@style/ButtonStyle.RaisedEmpty"
                 android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                 android:text="FORGOT PASSWORD?"
                 android:textSize="10sp"
                 android:textColor="@color/main_color_500" />
-        </co.froogal.froogal.view.MaterialRippleLayout>
+        </co.circe.respos.view.MaterialRippleLayout>
 
     </LinearLayout>
 

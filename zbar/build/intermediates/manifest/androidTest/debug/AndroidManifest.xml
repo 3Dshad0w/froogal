@@ -3,7 +3,7 @@
     package="me.dm7.barcodescanner.zbar.test" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="22" />
 
     <instrumentation

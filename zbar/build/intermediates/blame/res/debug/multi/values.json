@@ -1,0 +1,102 @@
+[
+    {
+        "outputFile": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/res/merged/debug/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 53,
+                    "endOffset": 104
+                },
+                "from": {
+                    "file": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/values/values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endColumn": 53,
+                        "endOffset": 240
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 109,
+                    "endColumn": 52,
+                    "endOffset": 157
+                },
+                "from": {
+                    "file": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/values/values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 245,
+                        "endColumn": 52,
+                        "endOffset": 293
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 162,
+                    "endColumn": 51,
+                    "endOffset": 209
+                },
+                "from": {
+                    "file": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/values/values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 298,
+                        "endColumn": 51,
+                        "endOffset": 345
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 214,
+                    "endColumn": 57,
+                    "endOffset": 267
+                },
+                "from": {
+                    "file": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/values/values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 487,
+                        "endColumn": 57,
+                        "endOffset": 540
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 272,
+                    "endColumn": 55,
+                    "endOffset": 323
+                },
+                "from": {
+                    "file": "/home/akhil/AndroidStudioProjects/respos/zbar/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.7.2/res/values/values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 545,
+                        "endColumn": 55,
+                        "endOffset": 596
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values-v11/values-v11.xml -->
-    <eat-comment/>
     <style name="Base.TextAppearance.AppCompat.Inverse">
         <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
         <item name="android:textColorHint">?android:attr/textColorHintInverse</item>
@@ -58,6 +56,9 @@
         <item name="android:background">@drawable/abc_spinner_mtrl_am_alpha</item>
         <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
         <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
+    </style>
+    <style name="Digits_default" parent="@android:style/Theme.Holo.Light">
+        <item name="dgts__accentColor">@color/dgts__default_accent</item>
     </style>
     <style name="Platform.AppCompat" parent="Platform.V11.AppCompat"/>
     <style name="Platform.AppCompat.Light" parent="Platform.V11.AppCompat.Light"/>

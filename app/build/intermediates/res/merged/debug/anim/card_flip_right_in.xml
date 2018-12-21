@@ -22,4 +22,3 @@
         android:startOffset="@integer/card_flip_time_half"
         android:duration="1" />
 </set>
-<!-- From: file:/home/akhil/AndroidStudioProjects/froogal/app/src/main/res/anim/card_flip_right_in.xml -->
